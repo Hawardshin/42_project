@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 13:43:14 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/06 14:32:02 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/06 18:48:48 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/06 18:56:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
-int	ft_isascii(int c)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	return (0 <= c && c <= 127);
+
 }
