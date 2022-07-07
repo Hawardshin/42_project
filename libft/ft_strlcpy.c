@@ -1,49 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 18:48:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 10:47:39 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/07 15:30:30 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/07 16:00:10 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char		*d;
-	const char	*s;
+	size_t	i;
 
-	d = dst;
-	s = src;
-	while (n--)
+	i = 0;
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (i + 1 < dstsize)
 	{
-		*d++ = *s++;
+		if (src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		else
+			break ;
 	}
-	return (dst);
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
-// #include<stdio.h>
 
+// #include<stdio.h>
 // #include<string.h>
+
 // int main()
 // {
-// 	char arr1[100];
-// 	char arr2[100];
-// 	memcpy(arr1,"hi I am joushin",0);
+// 	char dst1[100]={'a'};
+// 	char dst2[100]={'a'};
+// 	size_t len1 = strlcpy(dst1, "this is joushin",0);
 // 	for (int i = 0; i < 100; i++)
 // 	{
-// 		printf("%d ",arr1[i]);
+// 		printf("%d ",dst1[i]);
 // 	}
+// 	printf("\n\nlen ::::::: %zu\n\n",len1);
 // 	printf("\n---------------after------------------\n");
 // 	printf("\n---------------after------------------\n");
 // 	printf("\n---------------after------------------\n");
 // 	printf("\n---------------after------------------\n");
-// 	ft_memcpy(arr2,"hi I am joushin",0);
+// 	size_t len2 = ft_strlcpy(dst2, "this is joushin",0);
 // 	for (int i = 0; i < 100; i++)
 // 	{
-// 		printf("%d ",arr2[i]);
+// 		printf("%d ",dst2[i]);
 // 	}
+// 	printf("\n\nlen ::::::: %zu\n\n",len2);
 // }

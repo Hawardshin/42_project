@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:38:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/06 18:56:38 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/07 13:09:15 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char	*po;
+	unsigned char	*p;
 	size_t			i;
 
 	i = 0;
-	po = b;
+	p = b;
 	while (i < len)
 	{
-		po[i] = c;
+		p[i] = c;
 		i++;
 	}
 	return (b);
