@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 13:52:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 17:44:41 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/07 18:08:23 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/07 18:09:00 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_tolower(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }

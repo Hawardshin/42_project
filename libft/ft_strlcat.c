@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:54:49 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 17:02:24 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/07 17:41:20 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (ft_strlen(src)+ dstsize);
 }
 
-#include<stdio.h>
+// #include<stdio.h>
 
-#include<string.h>
-int main()
-{
-	char d1[15] = "abcdefghi";
-	char d2[15] = "abcdefghi";
-	printf("%zu:::::\n\n",strlcat(d1,"ABCD",1));
-	printf("%s:::::\n\n",d1);
-	printf("%zu:::::\n\n",strlcat(d2,"KKKKKK",1000));
-	printf("%s:::::\n\n",d1);
-	printf("\n---------------after------------------\n");
-	printf("\n---------------after------------------\n");
-	printf("\n---------------after------------------\n");
-	printf("\n---------------after------------------\n");
-	char dd1[15] = "abcdefghi";
-	char dd2[15] = "abcdefghi";
-	printf("%zu:::::::\n\n",ft_strlcat(dd1,"ABCD",1));
-	printf("%s:::::::\n\n",dd1);
-	printf("%zu:::::::\n\n",ft_strlcat(dd2,"KKKKKK",1000));
-	printf("%s:::::::\n\n",dd2);
-}
+// #include<string.h>
+// int main()
+// {
+// 	char d1[15] = "abcdefghi";
+// 	char d2[15] = "abcdefghi";
+// 	printf("%zu:::::\n\n",strlcat(d1,"ABCD",1));
+// 	printf("%s:::::\n\n",d1);
+// 	printf("%zu:::::\n\n",strlcat(d2,"KKKKKK",15));
+// 	printf("%s:::::\n\n",d1);
+// 	printf("\n---------------after------------------\n");
+// 	printf("\n---------------after------------------\n");
+// 	printf("\n---------------after------------------\n");
+// 	printf("\n---------------after------------------\n");
+// 	char dd1[15] = "abcdefghi";
+// 	char dd2[15] = "abcdefghi";
+// 	printf("%zu:::::::\n\n",ft_strlcat(dd1,"ABCD",1));
+// 	printf("%s:::::::\n\n",dd1);
+// 	printf("%zu:::::::\n\n",ft_strlcat(dd2,"KKKKKK",1000));
+// 	printf("%s:::::::\n\n",dd2);
+// }
