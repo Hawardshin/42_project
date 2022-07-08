@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:41:28 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 21:06:52 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/08 16:03:54 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t		i;
-	const char	*str;
+	size_t				i;
+	const unsigned char	*str;
 
 	str = s;
 	i = 0;

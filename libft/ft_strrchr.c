@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:22:28 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 18:31:18 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/08 15:44:49 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ char	*ft_strrchr(const char *s, int c)
 	int	i;
 
 	i = ft_strlen(s);
+	if (c == s[i])
+		return ((char *) &s[i]);
 	while (i)
 	{
-		if (c == s[i])
-			return ((char *)(s + i));
 		i--;
+		if (c == s[i])
+			return ((char *) &s[i]);
 	}
 	return (0);
 }

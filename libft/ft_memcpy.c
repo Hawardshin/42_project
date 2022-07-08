@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:48:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 10:47:39 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/08 15:55:20 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	d = dst;
 	s = src;
+	if (dst == src)
+		return (dst);
 	while (n--)
-	{
 		*d++ = *s++;
-	}
 	return (dst);
 }
 // #include<stdio.h>

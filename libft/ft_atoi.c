@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 11:28:26 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/08 13:43:48 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/08 16:20:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	result;
+	int					sign;
+	unsigned long long	result;
 
 	sign = 1;
 	result = 0;
@@ -32,7 +32,12 @@ int	ft_atoi(const char *str)
 		result = result * 10 + *str - '0';
 		str++;
 	}
-	return (sign * result);
+	if (result > 9223372036854775807 && sign == -1)
+		return (0);
+	else if (result > 9223372036854775807)
+		return (-1);
+	else
+		return ((int)sign * result);
 }
 
 // #include<stdio.h>
