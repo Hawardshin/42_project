@@ -2,6 +2,7 @@
 	"files.associations": {
 		"libft.h": "c",
 		"__locale": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"locale": "c"
 	}
 }
