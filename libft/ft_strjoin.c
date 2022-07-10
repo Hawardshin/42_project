@@ -7,6 +7,8 @@ char	*ft_strjoin(char const *s1, char *const *s2)
 	char	*retstr;
 	size_t 	i;
 
+	if (!s1 || !s2)
+		return (0);
 	i = 0;
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
