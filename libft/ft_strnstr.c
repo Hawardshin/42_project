@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:19:22 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/08 11:27:56 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 08:29:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	ni;
 
 	i = 0;
-	if (!ft_strlen(needle) || !needle[0])
+	if (!needle[0])
 		return ((char *)haystack);
 	while (haystack[i] && i < len)
 	{

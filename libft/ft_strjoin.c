@@ -1,31 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/11 08:14:24 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 08:20:31 by joushin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char *const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t 	len1;
-	size_t	len2;
 	char	*retstr;
-	size_t 	i;
+	size_t	i;
+	size_t	j;
 
 	if (!s1 || !s2)
 		return (0);
 	i = 0;
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	retstr = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	retstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!retstr)
 		return (0);
-	while (i < len1)
+	while (i < ft_strlen(s1))
 	{
 		retstr[i] = s1[i];
 		i++;
 	}
-	i = 0;
-	while (i < len2)
+	j = 0;
+	while (i < ft_strlen(s2))
 	{
-		retstr[len1 + i] = s2[i];
-		i++;
+		retstr[i + j] = s2[j];
+		j++;
 	}
-	retstr[len1 +len2] = '\0';
+	retstr[i + j] = '\0';
 	return (retstr);
 }

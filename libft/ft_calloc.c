@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:47:02 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/08 14:34:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 07:08:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*result;
 
-	result = (void *)malloc(count * size);
+	result = (void *)malloc(size * count);
 	if (!result)
 		return (0);
-	ft_bzero(result, count * size);
+	ft_bzero(result, size * count);
 	return (result);
 }

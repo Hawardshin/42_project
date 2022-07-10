@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/11 07:10:23 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 07:19:55 by joushin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include"libft.h"
 
-#include<stdio.h>
 static int	check_len(int n)
 {
 	int	len;
@@ -21,6 +31,7 @@ char	*ft_itoa(int n)
 {
 	int		len;
 	char	*retstr;
+
 	len = check_len(n);
 	retstr = (char *)malloc(sizeof(char) * len + 1);
 	if (!retstr)
@@ -40,11 +51,18 @@ char	*ft_itoa(int n)
 		n = n / 10;
 		len--;
 	}
-	retstr[len] = n + '0';
+	if (retstr[len] != '-')
+		retstr[len] = n + '0';
 	return (retstr);
 }
 // #include<stdio.h>
 // int main()
 // {
-// 	printf("%s",ft_itoa(0));
+// 	printf("%s\n",ft_itoa(0));
+// 	printf("%s\n",ft_itoa(0));
+// 	printf("%s\n",ft_itoa(-1));
+// 	printf("%s\n",ft_itoa(-1000));
+// 	printf("%s\n",ft_itoa(-23233));
+// 	printf("%s\n",ft_itoa(1));
+// 	printf("%s\n",ft_itoa(109));
 // }

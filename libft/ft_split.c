@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/11 07:35:17 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 07:36:16 by joushin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include"libft.h"
-
 
 static int	len_count(char *str, char c)
 {
@@ -59,7 +69,7 @@ char	**ft_split(char const *str, char c)
 		k = 0;
 		result[i] = malloc(sizeof(char) * (len_into(str, c) + 1));
 		if (!result[i])
-			return (all_free(i,result));
+			return (all_free(i, result));
 		while (*str && *str != c)
 			result[i][k++] = *str++;
 		result[i][k] = '\0';
