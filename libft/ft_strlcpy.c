@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:30:30 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 08:22:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 08:41:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	dst[i] = '\0';
 	return (ft_strlen(src));
-}
+}z
 
 // #include<stdio.h>
 // #include<string.h>
