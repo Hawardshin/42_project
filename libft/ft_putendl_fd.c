@@ -3,6 +3,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n',fd);
 }
@@ -15,9 +17,9 @@ int main()
 {
 	ft_putendl_fd("hi my name is joushin", 1);
 
-	printf("\n---------------after------------------\n");
-	printf("\n---------------after------------------\n");
-	printf("\n---------------after------------------\n");
-	printf("\n---------------after------------------\n");
+	// printf("\n---------------after------------------\n");
+	// printf("\n---------------after------------------\n");
+	// printf("\n---------------after------------------\n");
+	// printf("\n---------------after------------------\n");
 
 }
