@@ -32,14 +32,14 @@ static int	len_into(char *str, char c)
 	return (i);
 }
 
-static void	all_free(int i, char **result)
+static char	**all_free(int i, char **result)
 {
-	while (i >= 0)
+	while (--i >= 0)
 	{
 		free(result[i]);
-		i--;
 	}
 	free(result);
+	return (0);
 }
 
 char	**ft_split(char const *str, char c)
@@ -59,10 +59,7 @@ char	**ft_split(char const *str, char c)
 		k = 0;
 		result[i] = malloc(sizeof(char) * (len_into(str, c) + 1));
 		if (!result[i])
-		{
-			all_free(i,result);
-			return (0);
-		}
+			return (all_free(i,result));
 		while (*str && *str != c)
 			result[i][k++] = *str++;
 		result[i][k] = '\0';
