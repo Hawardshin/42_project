@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 12:25:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:09:10 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 10:56:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"libft.h"
 
 int	ft_isalpha(int c)
 {

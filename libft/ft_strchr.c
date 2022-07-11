@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:10:31 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 08:13:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 11:18:13 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strchr(const char *str, int c)
 {

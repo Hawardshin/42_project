@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/11 10:40:54 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 11:33:49 by joushin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include"libft.h"
 
-static int check_in(char a,char *set)
+static int	check_in(char a, char const *set)
 {
 	int	i;
 
@@ -25,12 +37,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	start = 0;
 	i = 0;
-	end =ft_strlen(s1) - 1;
+	if (!s1)
+		return (0);
+	if (!set)
+		return ((char *) s1);
+	end = ft_strlen(s1) - 1;
 	while (s1[start] && check_in(s1[start], set))
 		start++;
-	while (s1[end] && check_in(s1[end],set) && start <= end)
+	while (s1[end] && check_in(s1[end], set) && start <= end)
 		end--;
-	ret = malloc(sizeof(char) * (end - start + 2));
+	ret = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (!ret)
 		return (0);
 	while (start <= end)

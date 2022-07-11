@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 12:25:26 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:09:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 10:55:58 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	ft_isalnum(int c)
 {
-	return (('0' <= c && c <= '9') || ('a' <= c && c <= 'z')
-		|| ('A' <= c && c <= 'Z'));
+	return (ft_isdigit(c) || ft_isalpha(c));
 }

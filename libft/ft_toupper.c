@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:01:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/08 09:07:32 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 11:07:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"libft.h"
 
 int	ft_toupper(int c)
 {

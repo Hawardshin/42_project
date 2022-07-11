@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:51:56 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:10:06 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 11:25:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"libft.h"
 
 int	ft_isprint(int c)
 {

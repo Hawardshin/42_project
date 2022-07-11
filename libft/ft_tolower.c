@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:08:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/07 18:09:00 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 11:07:12 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"libft.h"
 
 int	ft_tolower(int c)
 {
