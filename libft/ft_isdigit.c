@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:40:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:10:00 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 12:08:15 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"libft.h"
 
 int	ft_isdigit(int c)
 {

@@ -6,11 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:43:14 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:09:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 12:08:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"libft.h"
 
 int	ft_isascii(int c)
 {
