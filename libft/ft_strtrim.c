@@ -6,10 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 10:40:54 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 11:33:49 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 13:17:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include"libft.h"
 
@@ -26,7 +25,6 @@ static int	check_in(char a, char const *set)
 	}
 	return (0);
 }
-
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
