@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:10:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:19:55 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 22:24:25 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ char	*ft_itoa(int n)
 		retstr[len] = n + '0';
 	return (retstr);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	printf("%s\n",ft_itoa(0));
-// 	printf("%s\n",ft_itoa(0));
-// 	printf("%s\n",ft_itoa(-1));
-// 	printf("%s\n",ft_itoa(-1000));
-// 	printf("%s\n",ft_itoa(-23233));
-// 	printf("%s\n",ft_itoa(1));
-// 	printf("%s\n",ft_itoa(109));
-// }
+#include<stdio.h>
+int main()
+{
+	printf("%s\n",ft_itoa(0));
+	printf("%s\n",ft_itoa(0));
+	printf("%s\n",ft_itoa(-1));
+	printf("%s\n",ft_itoa(-1000));
+	printf("%s\n",ft_itoa(-23233));
+	printf("%s\n",ft_itoa(1));
+	printf("%s\n",ft_itoa(42));
+}

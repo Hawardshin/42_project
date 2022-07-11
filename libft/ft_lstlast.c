@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:04:55 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 15:35:01 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 20:51:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst -> next != NULL)
+	if (lst)
 	{
-		lst = lst -> next;
+		while (lst -> next != NULL)
+		{
+			lst = lst -> next;
+		}
 	}
 	return (lst);
 }

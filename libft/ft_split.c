@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:35:17 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 13:36:48 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 22:19:22 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	len_count(char const *str, char c)
 		i++;
 	while (str[i])
 	{
-		while (str[i] && str[i] == c)
+		while (str[i] && str[i] != c)
 			i++;
 		count++;
-		while (str[i] && str[i] != c)
+		while (str[i] && str[i] == c)
 			i++;
 	}
 	return (count);

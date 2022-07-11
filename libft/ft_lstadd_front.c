@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 14:23:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 14:48:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 20:50:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (!lst || !new)
+	if (lst && new)
 	{
 		new -> next = *lst;
 		*lst = new;

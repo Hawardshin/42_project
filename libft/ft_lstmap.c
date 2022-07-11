@@ -6,47 +6,33 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:24:53 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 16:53:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/11 21:35:08 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_list	*del_all(int now, t_list *start_lst, void (*del)(void *))
-{
-	t_list	*tmp;
-
-	while (now)
-	{
-		tmp = start_lst;
-		start_lst = start_lst -> next;
-		del(tmp);
-		free(tmp);
-		now--;
-	}
-	return (NULL);
-}
-
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		l_len;
-	int		i;
-	t_list	*start_lst;
+	t_list	*new_node;
+	t_list	*head;
 
-	start_lst = lst;
-	i = 0;
-	if (lst && f && del)
+	if (lst && f)
 	{
-		l_len = ft_lstsize(lst);
-		while (i < l_len)
+		new_node = NULL;
+		head = new_node;
+		while (lst)
 		{
-			lst = (t_list *)malloc(sizeof(t_list));
-			if (!lst)
-				return (del_all(l_len, start_lst, del));
-			lst = f(lst);
-			lst = lst -> next;
-			i++;
+			new_node = ft_lstnew(f(lst->content));
+			if (!new_node)
+			{
+				ft_lstclear(&head, del);
+				return (NULL);
+			}
+			ft_lstadd_back(&head, new_node);
+			lst = lst-> next;
 		}
+		return (head);
 	}
 	return (NULL);
 }
