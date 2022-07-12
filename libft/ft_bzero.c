@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:03:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:03:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/12 10:22:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,3 @@ void	ft_bzero(void *s, size_t n)
 	while (i < n)
 		ptr[i++] = 0;
 }
-
-// #include<string.h>
-// #include<stdio.h>
-// int main()
-// {
-// 	char arr1[100];
-// 	char arr2[100];
-// 	bzero(arr1,100);
-// 	for (int i= 0; i < 100; i++)
-// 	{
-// 		printf("%d ",arr1[i]);
-// 	}
-// 	printf("\n------------after-------------\n");
-// 	ft_bzero(arr2,100);
-// 	for (int i= 0; i < 100; i++)
-// 	{
-// 		printf("%d ",arr2[i]);
-// 	}
-// }

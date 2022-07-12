@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:09:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:30:18 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/12 11:20:14 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-
-// #include<stdio.h>
-// #include<string.h>
-// int main()
-// {
-// 	printf("result ::: %d\n\n\n",memcmp("abcde","abcdef",100));
-// 	printf("\n---------------after------------------\n");
-// 	printf("\n---------------after------------------\n");
-// 	printf("\n---------------after------------------\n");
-// 	printf("\n---------------after------------------\n");
-// 	printf("result ::: %d\n\n\n",ft_memcmp("abcde","abcdef",100));
-// }

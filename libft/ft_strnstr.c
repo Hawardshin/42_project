@@ -34,24 +34,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (0);
 }
-
-// #include<stdio.h>
-// #include<string.h>
-// int main()
-// {
-// 	printf("result:%s\n",strnstr("abcdefabbccddee","abb",3));
-// 	printf("result:%s\n",strnstr("abcdefabbccddee","abb",100));
-// 	printf("result:%s\n",strnstr("abcdefabbccddee","abb",7));
-// 	printf("result:%s\n",strnstr("abcdefabbccddee","abb",9));
-// 	printf("result:%s\n",strnstr("abcdefabbccddee","",3));//NULL 인경우?
-// 	printf("\n---------------after------------------\n");
-// 	printf("\n---------------after------------------\n");
-// 	printf("\n---------------after------------------\n");
-// 	printf("\n---------------after------------------\n");
-// 	printf("result:%s\n",ft_strnstr("abcdefabbccddee","abb",3));
-// 	printf("result:%s\n",ft_strnstr("abcdefabbccddee","abb",100));
-// 	printf("result:%s\n",ft_strnstr("abcdefabbccddee","abb",7));
-// 	printf("result:%s\n",ft_strnstr("abcdefabbccddee","abb",9));
-// 	printf("result:%s\n",ft_strnstr("abcdefabbccddee","",3));//NULL 인경우?
-
-// }neddle이 haystack을

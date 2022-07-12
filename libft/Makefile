@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/08 14:46:10 by joushin           #+#    #+#              #
-#    Updated: 2022/07/11 22:09:30 by joushin          ###   ########.fr        #
+#    Updated: 2022/07/12 14:09:43 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
-re : fclean all
+re :
+	make fclean
+	make all
 
 .PHONY = all clean fclean re bouns

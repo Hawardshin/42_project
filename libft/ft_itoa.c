@@ -6,22 +6,25 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:10:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 22:24:25 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/12 10:31:45 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-static int	check_len(int n)
+static int	check_len(long long num)
 {
 	int	len;
 
-	len = 0;
-	if (n <= 0)
-		len++;
-	while (n != 0)
+	len = 1;
+	if (num < 0)
 	{
-		n = n / 10;
+		len++;
+		num *= -1;
+	}
+	while (num > 9)
+	{
+		num = num / 10;
 		len++;
 	}
 	return (len);
@@ -29,40 +32,29 @@ static int	check_len(int n)
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*retstr;
+	int			len;
+	char		*retstr;
+	long long	num;
 
-	len = check_len(n);
-	retstr = (char *)malloc(sizeof(char) * len + 1);
+	num = n;
+	len = check_len(num);
+	retstr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!retstr)
 		return (0);
 	retstr[len] = '\0';
 	len--;
-	if (n < 0)
+	if (num < 0)
 	{
 		retstr[0] = '-';
-		retstr[len] = -1 * (n % 10) + '0';
-		n = (n / 10) * -1;
-		len--;
+		num = num * -1;
 	}
-	while (n >= 10)
+	if (num == 0)
+		retstr[0] = '0';
+	while (num)
 	{
-		retstr[len] = n % 10 + '0';
-		n = n / 10;
+		retstr[len] = num % 10 + '0';
+		num = num / 10;
 		len--;
 	}
-	if (retstr[len] != '-')
-		retstr[len] = n + '0';
 	return (retstr);
-}
-#include<stdio.h>
-int main()
-{
-	printf("%s\n",ft_itoa(0));
-	printf("%s\n",ft_itoa(0));
-	printf("%s\n",ft_itoa(-1));
-	printf("%s\n",ft_itoa(-1000));
-	printf("%s\n",ft_itoa(-23233));
-	printf("%s\n",ft_itoa(1));
-	printf("%s\n",ft_itoa(42));
 }

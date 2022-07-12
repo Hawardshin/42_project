@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:38:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:34:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/12 12:17:54 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,3 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
-
-// #include<stdio.h>
-// #include<string.h>
-// int main()
-// {
-// 	char arr[100];
-// 	memset(arr,'a',10);
-// 	for (int i = 0; i < 100; i++)
-// 	{
-// 		printf("%d " ,arr[i]);
-// 	}
-// 	char arr1[100];
-// 	ft_memset(arr1,'a',10);
-// 	printf("\n------------------------after_--------------------\n");
-// 	for (int i = 0;i < 100; i++)
-// 	{
-// 		printf("%d ",arr1[i]);
-// 	}
-// 	return (0);
-// }
