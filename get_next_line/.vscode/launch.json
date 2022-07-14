@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": true,
+      "externalConsole": false,
+      "cwd": "/Users/joushin/Desktop/42_project/get_next_line",
+      "program": "/Users/joushin/Desktop/42_project/get_next_line/build/Debug/outDebug",
+      "MIMode": "gdb"
+    }
+  ]
+}
