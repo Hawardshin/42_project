@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/15 12:16:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/15 15:14:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,19 @@ char	*get_next_line(int fd)
 	char		*ret_line;
 	int			i;
 	int			tmp;
-	printf("aa\n");
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	 if (!backup && !backup[idx] && check_new_line(backup, idx) >= 0)
+	printf("backup :::%s\n",backup);
+	if (backup)
+		printf("backup dix\n\n");
+	 if (fd < 0 || BUFFER_SIZE <= 0)
+	 	return (NULL);
+	printf("zz\n\n");
+	 if (backup && !backup[idx] && check_new_line(backup, idx) >= 0)
 	 {
+		//printf("iiiiii");
 	 	i = 0;
 	 	tmp = idx;
 	 	idx = check_new_line(backup, tmp);
-		printf("tmp :: %d idx ::%d",tmp,idx);
+		//printf("tmp :: %d idx ::%d",tmp,idx);
 	 	ret_line = (char *)malloc(sizeof(char) * (idx - tmp + 1));
 	 	if (!ret_line)
 			return (NULL);
@@ -105,8 +109,11 @@ char	*get_next_line(int fd)
 	 	ret_line[i] = '\0';
 	 	return (ret_line);
 	 }
+	 printf("aaa");
+
 	backup = ft_read_line(fd, idx, backup);
-	printf("%s",backup);
+	//printf("%s",backup);
+	//printf("%p",backup);
 	ret_line = ft_get_line(backup);
 	idx = check_new_line(backup, 0);
 	return (ret_line);
@@ -121,11 +128,17 @@ int	main(void)
   //atest.txt 를 읽음
   fd = open("./atest.txt", O_RDONLY);
   char *result;
-  while (result)
+  while (1)
   {
 	  result = get_next_line(fd);
-	  printf("%s",result);
+	  if (!result)
+	  {
+			printf("malloc no\n");
+			return (0);
+	  }
+	  printf("%s", result);
 	  printf("%p",result);
+	  free(result);
   }
   return (0);
 }
