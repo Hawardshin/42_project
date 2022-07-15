@@ -2,12 +2,21 @@
 #include <fcntl.h>
 #include<unistd.h>
 
+static u_int32_t coud_()
+{
+	static int a = 1;
+	//이거랑
+	a++;
+	return a;
+}
+
+
 int main()
 {
-	int fd = open("./test.txt", O_RDONLY);
-	for (int i=0; i < 10; i++)
-	{
-		char buff[10];
-		printf("%d : %zd ", i, read(2, buff, 10));
-	}
+//	static int a = 1;
+//	printf("%d",a);
+	printf("%d",coud_());
+	printf("%d",coud_());
+//	a = 5;
+//	printf("%d",a);
 }

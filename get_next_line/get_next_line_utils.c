@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:41 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/14 17:46:06 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/15 12:02:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*result;
-	size_t	len;
-
-	len = ft_strlen(s1);
-	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (!result)
-		return (0);
-	ft_strlcpy(result, s1, len + 1);
-	return (result);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -56,7 +43,20 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s1)
+{
+	char	*result;
+	size_t	len;
+
+	len = ft_strlen(s1);
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (!result)
+		return (0);
+	ft_strlcpy(result, s1, len + 1);
+	return (result);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*retstr;
 	size_t	i;
@@ -67,7 +67,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	retstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!retstr)
+	{
+		free(s1);
 		return (0);
+	}
 	while (s1[i])
 	{
 		retstr[i] = s1[i];

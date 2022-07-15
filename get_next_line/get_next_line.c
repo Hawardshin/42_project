@@ -6,71 +6,110 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/14 17:50:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/15 12:16:33 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int	chk_new_line(char *buf)
+#include<stdio.h>
+int	check_new_line(char *buf,int idx)
 {
-	int	i;
-
-	i = 0;
-	while (buf[i])
+	while (buf[idx])
 	{
-		if (buf[i] == '\n')
-			return (i);
-		i++;
+		if (buf[idx] == '\n')
+		{
+			return (idx + 1);
+		}
+		idx++;
 	}
 	return (-1);
 }
 
-char	*ft_read_line(int fd, char *buff, char *backup)
+char	*ft_read_line(int fd, int idx,char *backup)
 {
-	int 	read_size;
-	char	*ret;
+	char	buff[BUFFER_SIZE + 1];//read에서 사용할 버퍼
+	int		read_size;
+	char	*to_read;
 	int		l_size;
 
-	ret = NULL;
+	to_read = backup;
 	while (1)
 	{
 		read_size = read(fd, buff, BUFFER_SIZE);
-		//read함수가 오류가 발생했다. ex) fd 값 틀림.
-		if (read_size < 0)
+		if (read_size < 0) //read함수가 오류가 발생했다. ex fd 값 틀림.
 			return (NULL);
-		if (read_size < BUFFER_SIZE)
-		{
-			if (!ret)
-				ret = ft_strdup(buff);
-			else
-				ret = ft_strjoin(ret, buff);
-			return (ret);
-		}
-		//만약 개행이 존재하지 않는다. -> 이 문자열과 다른 문자열을 개행이 나올때까지 합친다.
-		l_size = chk_new_line(buff);
-		if (l_size == -1)
-			return (NULL);
+		if (read_size == 0)
+			return (to_read);
+		if (!to_read)
+			to_read = ft_strdup(buff);
 		else
+			to_read = ft_strjoin(to_read, buff);
+		if (read_size < BUFFER_SIZE)
+			return (to_read);
+		//만약 개행이 존재하지 않는다. 이 문자열과 다른 문자열을 개행이 나올때까지 합친다.
+			l_size = check_new_line(buff, idx);
+		if (l_size != -1)
 		{
-			if (!ret)
-				ret = ft_strdup(buff);//널가드 안하는 이유 리턴 ret해주기 때문
+			if (!to_read)
+				to_read = ft_strdup(buff); //널가드 안하는 이유 리턴 ret해주기 때문
 			else
-				ret = ft_strjoin(ret, buff);//널가드 안하는 이유 리턴 ret해주기 때문.
-			return (ret);
+				to_read = ft_strjoin(to_read, buff); //널가드 안하는 이유 리턴 ret해주기 때문.
+			return (to_read);
 		}
 	}
 }
 
+char	*ft_get_line(char *str)
+{
+	int		idx;
+	char	*ret_line;
+	int		i;
+
+	i = 0;
+	idx = check_new_line(str, 0);
+	if (idx == -1)//이 경우는 아에 개행이 없는 경우이다.이 경우는 버퍼를 프리해줘야 한다?
+		return (ft_strdup(str));
+	ret_line = (char *)malloc(sizeof(char) * (idx));
+	if (!ret_line)
+		return (NULL);
+	while (i < idx)
+	{
+		ret_line[i] = str[i];
+		i++;
+	}
+	return (ret_line);
+}
+
+// read로 개행이 나올때까지 읽는다.
 char	*get_next_line(int fd)
 {
-
-	char		buff[BUFFER_SIZE + 1];//read에서 사용할 버퍼
 	static int	idx;//현재 위치
+	static char	*backup;
+	char		*ret_line;
+	int			i;
+	int			tmp;
+	printf("aa\n");
 	if (fd < 0 || BUFFER_SIZE <= 0)
-    	return (NULL);
-	if (!buff)
 		return (NULL);
+	 if (!backup && !backup[idx] && check_new_line(backup, idx) >= 0)
+	 {
+	 	i = 0;
+	 	tmp = idx;
+	 	idx = check_new_line(backup, tmp);
+		printf("tmp :: %d idx ::%d",tmp,idx);
+	 	ret_line = (char *)malloc(sizeof(char) * (idx - tmp + 1));
+	 	if (!ret_line)
+			return (NULL);
+	 	while (tmp < idx)
+	 		ret_line[i++] = backup[tmp++];
+	 	ret_line[i] = '\0';
+	 	return (ret_line);
+	 }
+	backup = ft_read_line(fd, idx, backup);
+	printf("%s",backup);
+	ret_line = ft_get_line(backup);
+	idx = check_new_line(backup, 0);
+	return (ret_line);
 }
 
 #include <fcntl.h>
