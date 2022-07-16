@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:41 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/15 17:00:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/16 15:58:15 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	d = dst;
+	s = src;
+	if (d < s)
+	{
+		while (len--)
+			*d++ = *s++;
+	}
+	else if (d > s)
+	{
+		while (len--)
+		{
+			d[len] = s[len];
+		}
+	}
+	return (dst);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -55,6 +77,7 @@ char	*ft_strdup(const char *s1)
 	ft_strlcpy(result, s1, len + 1);
 	return (result);
 }
+//s1이나 s2가 널인경우가 있는가?
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -62,8 +85,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (0);
 	i = 0;
 	retstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!retstr)
@@ -82,7 +103,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		retstr[i + j] = s2[j];
 		j++;
 	}
-	free(s1);//s1을 free해준다.혹시라도 동적할당되지 않은 친구가 들어오는 경우가 있는가?
+	free(s1);
 	retstr[i + j] = '\0';
 	return (retstr);
 }
