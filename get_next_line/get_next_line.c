@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/17 10:47:22 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/17 11:09:03 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ char	*ft_get_line(char **str)
 	if (l == 0)//이건 아에 끝날떄 코드이다.
 	{
 		//printf("ll:%s\n",*str);
-		ret_line = ft_strdup(*str);
+		if ((**str))
+			ret_line = ft_strdup(*str);
+		else
+			ret_line = NULL;
 		free(*str);
 		*str = NULL;
 		return (ret_line);
@@ -111,35 +114,35 @@ char	*get_next_line(int fd)
 	return (ret_line);
 }
 
-// #include <fcntl.h>
-// #include <stdio.h>
+#include <fcntl.h>
+#include <stdio.h>
 
-// int	main(void)
-// {
-//   int fd;
-//   //atest.txt 를 읽음
-//   //fd = open("./atest.txt", O_RDONLY);
-//   //fd= open("./1chartest.txt",O_RDONLY);
-//  fd= open("./newline.txt",O_RDONLY);
-//   char *result ;
-//   int i =0;
-//   while (1)
-//   {
-// 	  result = get_next_line(fd);
-// 	  if (!result)
-// 	  {
-// 			printf("malloc no\n");
-// 			return (0);
-// 	  }
-// 	  printf("\n------first:%d------\n",i);
-// 	  printf("%s", result);
-// 	//   printf("%p\n",result);
-// 	  //free(result);
-// 	  printf("-----end : %d----\n",i);
-// 	  i++;
-//   }
-//   return (0);
-// }
-// /*read를 실패한다.
-// */
-// //
+int	main(void)
+{
+  int fd;
+  //atest.txt 를 읽음
+  //fd = open("./atest.txt", O_RDONLY);
+  //fd= open("./1chartest.txt",O_RDONLY);
+ //fd= open("./newline.txt",O_RDONLY);
+  char *result ;
+  int i =0;
+  while (1)
+  {
+	  result = get_next_line(fd);
+	  if (!result)
+	  {
+			printf("malloc no\n");
+			return (0);
+	  }
+	  printf("\n------first:%d------\n",i);
+	  printf("%s", result);
+	//   printf("%p\n",result);
+	  //free(result);
+	  printf("-----end : %d----\n",i);
+	  i++;
+  }
+  return (0);
+}
+/*read를 실패한다.
+*/
+//
