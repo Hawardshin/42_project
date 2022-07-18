@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 10:52:14 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/18 11:32:13 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/18 13:17:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ int	check_new_line(char *buf)
 	int	idx;
 
 	idx = 0;
-	while (buf[idx])
+	if (buf)
 	{
-		if (buf[idx] == '\n')
-			return (idx + 1);
-		idx++;
+		while (buf[idx])
+		{
+			if (buf[idx] == '\n')
+				return (idx + 1);
+			idx++;
+		}
 	}
 	return (0);
 }
@@ -30,27 +33,26 @@ char	*ft_read_line(int fd, char *backup)
 {
 	char	buff[BUFFER_SIZE + 1];
 	ssize_t	read_size;
-	char	*to_read;
 
-	to_read = backup;
+	buff[0] = '\0';
 	while (!check_new_line(buff))
 	{
 		read_size = read(fd, buff, BUFFER_SIZE);
 		if (read_size == 0)
-			return (to_read);
-		if (read_size < 0 || !buff[0])
+			return (backup);
+		if (read_size < 0)
 		{
 			if (backup)
 				free(backup);
 			return (NULL);
 		}
 		buff[read_size] = '\0';
-		if (!to_read)
-			to_read = ft_strdup(buff);
+		if (!backup)
+			backup = ft_strdup(buff);
 		else
-			to_read = ft_strjoin(to_read, buff);
+			backup = ft_strjoin(backup, buff);
 	}
-	return (to_read);
+	return (backup);
 }
 
 char	*ft_get_line(char **str)
@@ -91,7 +93,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!check_new_line(backup[fd]))
 	{
-		if ((backup[fd][0]))
+		if (*(backup[fd]))
 			ret_line = ft_strdup(backup[fd]);
 		else
 			ret_line = NULL;
@@ -100,7 +102,7 @@ char	*get_next_line(int fd)
 		return (ret_line);
 	}
 	ret_line = ft_get_line(&backup[fd]);
-	if (ret_line == NULL)
-		return (NULL);
+	if (!ret_line)
+		free(backup);
 	return (ret_line);
 }

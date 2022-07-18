@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 10:54:15 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/18 11:06:35 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/18 13:17:55 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BOUNS_H
-# define GET_NEXT_LINE_BOUNS_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
