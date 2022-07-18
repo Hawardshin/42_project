@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/17 11:27:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/18 10:38:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_read_line(int fd, char *backup)
 	while (!check_new_line(buff))
 	{
 		read_size = read(fd, buff, BUFFER_SIZE);
+		if (read_size == 0)
+			return (to_read);
 		if (read_size < 0 || !buff[0])
 		{
 			if (backup)
@@ -43,8 +45,6 @@ char	*ft_read_line(int fd, char *backup)
 			return (NULL);
 		}
 		buff[read_size] = '\0';
-		if (read_size == 0)
-			return (to_read);
 		if (!to_read)
 			to_read = ft_strdup(buff);
 		else
@@ -108,32 +108,33 @@ char	*get_next_line(int fd)
 // #include <fcntl.h>
 // #include <stdio.h>
 
-// int	main(void)
-// {
-//   int fd;
-//   //atest.txt 를 읽음
-//   //fd = open("./atest.txt", O_RDONLY);
-//   //fd= open("./1chartest.txt",O_RDONLY);
-//  //fd= open("./newline.txt",O_RDONLY);
-//   char *result ;
-//   int i =0;
-//   while (1)
-//   {
-// 	  result = get_next_line(fd);
-// 	  if (!result)
-// 	  {
-// 			printf("malloc no\n");
-// 			return (0);
-// 	  }
-// 	  printf("\n------first:%d------\n",i);
-// 	  printf("%s", result);
-// 	//   printf("%p\n",result);
-// 	  //free(result);
-// 	  printf("-----end : %d----\n",i);
-// 	  i++;
-//   }
-//   return (0);
-// }
-// /*read를 실패한다.
-// */
-// //
+//int	main(void)
+//{
+//  int fd;
+//  //atest.txt 를 읽음
+//  //fd = open("./atest.txt", O_RDONLY);
+//  //fd= open("./1chartest.txt",O_RDONLY);
+// //fd= open("./newline.txt",O_RDONLY);
+// fd= open("./41_with_nl",O_RDONLY);
+//  char *result ;
+//  int i =0;
+//  while (1)
+//  {
+//	  result = get_next_line(fd);
+//	  if (!result)
+//	  {
+//			printf("malloc no\n");
+//			return (0);
+//	  }
+//	  printf("\n------first:%d------\n",i);
+//	  printf("%s", result);
+//	//   printf("%p\n",result);
+//	  //free(result);
+//	  printf("-----end : %d----\n",i);
+//	  i++;
+//  }
+//  return (0);
+//}
+/*read를 실패한다.
+*/
+//

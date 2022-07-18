@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:41 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/17 11:22:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/18 10:41:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*ft_strdup(const char *s1)
 	ft_strlcpy(result, s1, len + 1);
 	return (result);
 }
-//s1이나 s2가 널인경우가 있는가?
 
 char	*ft_strjoin(char *s1, char *s2)
 {
