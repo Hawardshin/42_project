@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:56 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/17 11:09:58 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/18 10:53:38 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,5 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 size_t	ft_strlen(const char *str);
-
-// # elif BUFFER_SIZE < 0
-// #error
 
 #endif

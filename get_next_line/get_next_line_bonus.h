@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/17 11:13:51 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/17 11:13:59 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/18 10:54:15 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/18 11:06:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include<stdio.h>
-// #include <fcntl.h>
-// #include<unistd.h>
+#ifndef GET_NEXT_LINE_BOUNS_H
+# define GET_NEXT_LINE_BOUNS_H
 
-// static u_int32_t coud_()
-// {
-// 	static int a = 1;
-// 	//이거랑
-// 	a++;
-// 	return a;
-// }
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-// int main()
-// {
-// //	static int a = 1;
-// //	printf("%d",a);
-// 	printf("%d",coud_());
-// 	printf("%d",coud_());
-// //	a = 5;
-// //	printf("%d",a);
-// }
+# define OPEN_FD_MAX 49152
+
+# include <unistd.h>
+# include <stdlib.h>
+
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(const char *s1);
+void	*ft_memmove(void *dst, const void *src, size_t len);
+size_t	ft_strlen(const char *str);
+
+#endif
