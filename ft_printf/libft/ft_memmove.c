@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/19 16:04:02 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/07 10:55:46 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/12 12:16:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *args, ...)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
+	unsigned char		*d;
+	const unsigned char	*s;
 
+	d = dst;
+	s = src;
+	if (d < s)
+	{
+		while (len--)
+			*d++ = *s++;
+	}
+	else if (d > s)
+	{
+		while (len--)
+		{
+			d[len] = s[len];
+		}
+	}
+	return (dst);
 }

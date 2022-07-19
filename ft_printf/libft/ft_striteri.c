@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/19 16:04:02 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/11 08:14:03 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 08:14:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *args, ...)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
+	unsigned int	i;
+	unsigned int	slen;
 
+	if (s && f)
+	{
+		slen = ft_strlen(s);
+		i = 0;
+		while (i < slen)
+		{
+			f(i, &s[i]);
+			i++;
+		}
+	}
 }

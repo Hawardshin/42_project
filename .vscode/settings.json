@@ -3,6 +3,9 @@
 		"libft.h": "c",
 		"__locale": "c",
 		"string.h": "c",
-		"locale": "c"
+		"locale": "c",
+		"queue": "cpp",
+		"ios": "cpp",
+		"ft_printf.h": "c"
 	}
 }

@@ -1,19 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/19 16:04:02 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/08 09:19:22 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/19 14:06:13 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "ft_printf.h"
+#include"libft.h"
 
-int	ft_printf(const char *args, ...)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
+	size_t	i;
+	size_t	ni;
 
+	i = 0;
+	if (!needle[0])
+		return ((char *)haystack);
+	while (haystack[i] && i < len)
+	{
+		ni = 0;
+		while (haystack[i + ni] && haystack[i + ni] == needle[ni]
+			&& i + ni < len)
+		{
+			ni++;
+			if (!needle[ni])
+				return ((char *)&haystack[i]);
+		}
+		i++;
+	}
+	return (0);
 }
+

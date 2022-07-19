@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/19 16:04:02 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/11 06:47:50 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 11:53:29 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *args, ...)
+static void	nbr_recur(long long n, int fd)
 {
+	if (n > 9)
+		nbr_recur(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
+}
 
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nb *= -1;
+	}
+	nbr_recur(nb, fd);
 }

@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/19 16:04:02 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/07 18:22:28 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/11 21:55:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "ft_printf.h"
+#include"libft.h"
 
-int	ft_printf(const char *args, ...)
+char	*ft_strrchr(const char *s, int c)
 {
+	int	i;
 
+	i = ft_strlen(s);
+	if ((char)c == s[i])
+		return ((char *) &s[i]);
+	while (i)
+	{
+		i--;
+		if ((char)c == s[i])
+			return ((char *) &s[i]);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/08 14:46:10 by joushin           #+#    #+#              #
-#    Updated: 2022/07/19 14:31:22 by joushin          ###   ########.fr        #
+#    Updated: 2022/07/12 14:09:43 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,4 +69,4 @@ re :
 	make fclean
 	make all
 
-.PHONY : all clean fclean re bouns
+.PHONY = all clean fclean re bouns
