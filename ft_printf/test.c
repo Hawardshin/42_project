@@ -7,7 +7,8 @@ int main()
     // printf("%%");
     //char arr[100] ={'a',0};
     //printf("%d", printf("%s",NULL));
-    printf("✊");
+    //printf("✊");
+    printf("%u",-1);
 }
 
 
