@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/20 10:31:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/20 17:27:59 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include<stdio.h>
 
-void	init_fuc_pointer(void (*fuc[256])(va_list ap))
+void	init_fuc_pointer(int (*fuc[256])(va_list ap))
 {
 	ft_memset(fuc, 0, 256);
 	fuc['d'] = print_dec_int;
@@ -26,6 +26,7 @@ void	init_fuc_pointer(void (*fuc[256])(va_list ap))
 	fuc['u'] = print_unsigned_int;
 	fuc['x'] = print_hex_lower;
 	fuc['X'] = print_hex_upper;
+	fuc['%'] = print_persent;
 }
 
 // int	va_print(char a, va_list ap, void *fuc[256])
@@ -37,38 +38,41 @@ void	init_fuc_pointer(void (*fuc[256])(va_list ap))
 int	ft_printf(const char *args, ...)
 {
 	va_list	ap;
-	int		ret_count;
+	int		ret_cnt;
 	int		i;
-	void	(*fuc[256])(va_list ap);
+	int		(*fuc[256])(va_list ap);
+	int		cnt_tmp;
 
 	init_fuc_pointer(fuc);
-	i =0;
-	// ret_count = 0;
-	// if (!args)
-	// 	return (0);
-	// va_start(ap, args);
-	// while (*args && ret_count != -1)
-	// {
-	// 	if (*args == '%')
-	// 	{
-	// 		args++;
-	// 		if (*args == '%')
-	// 			write(1, args, 1);
-	// 		else
-	// 			va_print(*args,ap);
-	// 	}
-	// 	else
-	// 		write(1, args,1);
-	// 	args++;
-	// }
-	return (0);
+	i = 0;
+	ret_cnt = 0;
+	if (!args)
+		return (-1);
+	va_start(ap, args);
+	while (*args)
+	{
+		if (*args == '%')
+		{
+			args++;
+			cnt_tmp = fuc[(unsigned char)(*args)](ap);
+		}
+		else
+			cnt_tmp = write(1, args, 1);
+		if (cnt_tmp == -1)
+			break ;
+		ret_cnt += cnt_tmp;
+		args++;
+	}
+	va_end(ap);
+	if (cnt_tmp < 0)
+		return (-1);
+	return (ret_cnt);
 }
 
 int main()
 {
-	ft_printf("hi");
+	ft_printf("hi\n%%\n%d\n%d\n",1 ,2);
 }
-
 
 // #include <stdio.h>
 // int test(int *ar, int a, ...)

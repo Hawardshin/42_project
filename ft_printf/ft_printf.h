@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:01:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/20 10:09:35 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/20 16:40:03 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-void	print_dec_int(va_list ap);
-void	print_char(va_list ap);
-void	print_addr(va_list ap);
-void	print_str(va_list ap);
-void	print_unsigned_int(va_list ap);
-void	print_hex_lower(va_list ap);
-void	print_hex_upper(va_list ap);
+int		print_dec_int(va_list ap);
+int		print_char(va_list ap);
+int		print_addr(va_list ap);
+int		print_str(va_list ap);
+int		print_unsigned_int(va_list ap);
+int		print_hex_lower(va_list ap);
+int		print_hex_upper(va_list ap);
+char	*ft_lltoa(long long n);
+int		print_persent(va_list ap);
 
 #endif
