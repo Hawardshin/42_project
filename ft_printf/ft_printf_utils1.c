@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:39:26 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 14:29:20 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 16:45:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "./includes/ft_printf.h"
+#include "./includes/libft.h"
 
 int	print_dec_int(va_list ap)
 {
@@ -32,7 +32,7 @@ int	print_char(va_list ap)
 	return (ft_putchar_fd(va_arg(ap, int), 1));
 }
 
-int	print_addr(va_list ap)//수정필요..
+int	print_addr(va_list ap)
 {
 	void	*p;
 

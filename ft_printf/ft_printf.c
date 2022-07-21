@@ -6,18 +6,18 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 14:22:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 15:46:30 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "ft_printf.h"
-
+#include "./includes/ft_printf.h"
+#include "./includes/libft.h"
 #include<stdio.h>
 
-void	init_fuc_pointer(int (*fuc[256])(va_list ap))
+void	init_fuc_pointer(int (*fuc[256])(va_list ap), char *infuc)
 {
 	ft_memset(fuc, 0, 256);
+	ft_memset(infuc, 0, 256);
 	fuc['d'] = print_dec_int;
 	fuc['i'] = print_dec_int;
 	fuc['c'] = print_char;
@@ -27,32 +27,39 @@ void	init_fuc_pointer(int (*fuc[256])(va_list ap))
 	fuc['x'] = print_hex_lower;
 	fuc['X'] = print_hex_upper;
 	fuc['%'] = print_persent;
+	infuc['d'] = 1;
+	infuc['i'] = 1;
+	infuc['c'] = 1;
+	infuc['p'] = 1;
+	infuc['s'] = 1;
+	infuc['u'] = 1;
+	infuc['x'] = 1;
+	infuc['X'] = 1;
+	infuc['%'] = 1;
 }
-
-// int	va_print(char a, va_list ap, void *fuc[256])
-// {
-// 	int	*fut = fuc;
-// 	fut[a](ap);
-// }
 
 int	ft_printf(const char *args, ...)
 {
 	va_list	ap;
 	int		ret_cnt;
 	int		(*fuc[256])(va_list ap);
+	char	infuc[256];
 	int		cnt_tmp;
 
-	init_fuc_pointer(fuc);
+	init_fuc_pointer(fuc, infuc);
 	ret_cnt = 0;
 	if (!args)
 		return (-1);
 	va_start(ap, args);
 	while (*args)
 	{
-		if (*args == '%')
+		if ((unsigned char)(*args) == '%')
 		{
 			args++;
-			cnt_tmp = fuc[(unsigned char)(*args)](ap);
+			if (!infuc[(unsigned char)(*args)])
+				cnt_tmp = write(1, args, 1);
+			else
+				cnt_tmp = fuc[(unsigned char)(*args)](ap);
 		}
 		else
 			cnt_tmp = write(1, args, 1);
@@ -71,38 +78,40 @@ int	ft_printf(const char *args, ...)
 %c인자에 문자열을 넣어도 원본 printf에서는 컴파일이 안된다.
 
 */
-int main()
-{
-	int a = 999;
-	char *p1 = "a";
-	char **p2 = &p1;
-	char ***p3 = &p2;
-	// printf("%d\n", printf("%p\n",p1));
-	// printf("%d\n", printf("%p\n",p2));
-	// printf("%d\n", printf("%p\n",p3));
-	// printf("%d\n", printf("%p\n",&a));
-	// printf("%d\n", printf("%p\n",NULL));
-	printf("my len :: %d\n",ft_printf("my printf ::%d, %d, %d, %d, %d, %d \n",1000,0,-6,2147483647,-2147364748,2147364748));
-	printf("or len :: %d\n",printf("or printf ::%d, %d, %d, %d, %d, %d\n",1000,0,-6,2147483647,-2147364748,2147364748));
-	printf("my len :: %d\n",ft_printf("my printf ::%i, %i, %i, %i, %i ,%i\n",1000,-6,10,2147483647,-2147364748,2147364748));
-	printf("or len :: %d\n",printf("or printf ::%i, %i, %i, %i, %i ,%i\n",1000,0,10,2147483647,-2147364748,2147364748));
-	printf("my len :: %d\n",ft_printf("my printf ::%c %c %c %c %c %c\n",'a','a','\n','\0','0','l'));
-	printf("or len :: %d\n",printf("or printf ::%c %c %c %c %c %c\n",'a','a','\n','\0','0','l'));
-	printf("my len :: %d\n",ft_printf("my printf ::%p %p %p %p %p\n",p1,p2,p3,NULL,&a));
-	printf("or len :: %d\n",printf("or printf ::%p %p %p %p %p\n",p1,p2,p3,NULL,&a));
-	printf("my len :: %d\n",ft_printf("my printf ::%s %s %s %s\n","aaaaaaa","😎" ,"" ,NULL));
-	printf("or len :: %d\n",printf("or printf ::%s %s %s %s\n","aaaaaaa","😎" ,"" ,NULL));
-	printf("my len :: %d\n",ft_printf("my printf ::%u %u %u %u %u %u\n",1000,0,-6,2147483647,-2147364748,2147364748));
-	printf("or len :: %d\n",printf("or printf ::%u %u %u %u %u %u\n",1000,0,-6,2147483647,-2147364748,2147364748));
-	printf("my len :: %d\n",ft_printf("my printf ::%x %x %x %x %x %x %x\n",1000,0,100000,-12345,0,2147483647,2147364748));
-	printf("or len :: %d\n",printf("or printf ::%x %x %x %x %x %x %x\n",1000,0,100000,-12345,0,2147483647,2147364748));
-	printf("my len :: %d\n",ft_printf("my printf ::%X %X %X %X %X %X %X\n",1000,0,100000,-12345,0,2147483647,2147364748));
-	printf("or len :: %d\n",printf("or printf ::%X %X %X %X %X %X %X\n",1000,0,100000,-12345,0,2147483647,2147364748));
+//int main()
+//{
+	// int a = 999;
+	// char *p1 = "a";
+	// char **p2 = &p1;
+	// char ***p3 = &p2;
+	// // printf("%d\n", printf("%p\n",p1));
+	// // printf("%d\n", printf("%p\n",p2));
+	// // printf("%d\n", printf("%p\n",p3));
+	// // printf("%d\n", printf("%p\n",&a));
+	// // printf("%d\n", printf("%p\n",NULL));
+	// printf("my len :: %d\n",ft_printf("my printf ::%d, %d, %d, %d, %d, %d \n",1000,0,-6,2147483647,-2147364748,2147364748));
+	// printf("or len :: %d\n",printf("or printf ::%d, %d, %d, %d, %d, %d \n",1000,0,-6,2147483647,-2147364748,2147364748));
+	// printf("my len :: %d\n",ft_printf("my printf ::%i, %i, %i, %i, %i ,%i\n",1000,-6,10,2147483647,-2147364748,2147364748));
+	// printf("or len :: %d\n",printf("or printf ::%i, %i, %i, %i, %i ,%i\n",1000,-6,10,2147483647,-2147364748,2147364748));
+	// printf("my len :: %d\n",ft_printf("my printf ::%c %c %c %c %c %c\n",'a','a','\n','\0','0','l'));
+	// printf("or len :: %d\n",printf("or printf ::%c %c %c %c %c %c\n",'a','a','\n','\0','0','l'));
+	// printf("my len :: %d\n",ft_printf("my printf ::%p %p %p %p %p\n",p1,p2,p3,NULL,&a));
+	// printf("or len :: %d\n",printf("or printf ::%p %p %p %p %p\n",p1,p2,p3,NULL,&a));
+	// printf("my len :: %d\n",ft_printf("my printf ::%s %s %s %s\n","aaaaaaa","😎" ,"" ,NULL));
+	// printf("or len :: %d\n",printf("or printf ::%s %s %s %s\n","aaaaaaa","😎" ,"" ,NULL));
+	// printf("my len :: %d\n",ft_printf("my printf ::%u %u %u %u %u %u\n",1000,0,-6,2147483647,-2147364748,2147364748));
+	// printf("or len :: %d\n",printf("or printf ::%u %u %u %u %u %u\n",1000,0,-6,2147483647,-2147364748,2147364748));
+	// printf("my len :: %d\n",ft_printf("my printf ::%x %x %x %x %x %x %x\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	// printf("or len :: %d\n",printf("or printf ::%x %x %x %x %x %x %x\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	// printf("my len :: %d\n",ft_printf("my printf ::%X %X %X %X %X %X %X\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	// printf("or len :: %d\n",printf("or printf ::%X %X %X %X %X %X %X\n",1000,0,100000,-12345,0,2147483647,2147364748));
 	// printf("my len :: %d\n",ft_printf("my printf ::%%\n"));
 	// printf("or len :: %d\n",printf("or printf ::%%\n"));
-	// printf("my len :: %d\n",ft_printf("my printf ::%m\n"));
-	// printf("or len :: %d\n",printf("or printf ::%m\n"));
-}
+	// printf("my len :: %d\n",ft_printf("my printf ::%m aaa\n"));
+	// printf("or len :: %d\n",printf("or printf ::%m aaa\n"));
+	//ft_printf("% %s\n","aaaa");
+	//printf("% %s\n","aaa");
+//}
 
 // #include <stdio.h>
 // int test(int *ar, int a, ...)

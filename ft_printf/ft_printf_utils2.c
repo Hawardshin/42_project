@@ -6,11 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 10:02:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 14:30:25 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 16:53:03 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "./includes/ft_printf.h"
+#include "./includes/libft.h"
 
 static int	check_len(long long num)
 {
@@ -80,11 +81,11 @@ int	ft_putnbr_base(unsigned int nbr, char *base)
 
 int	ft_print_addr(void *addr)
 {
-	long long	ddr;
-	int			i;
-	char		memory[17];
+	unsigned long long	ddr;
+	int					i;
+	char				memory[17];
 
-	ddr = (long long)addr;
+	ddr = (unsigned long long)addr;
 	i = 0;
 	while (i < 16)
 	{

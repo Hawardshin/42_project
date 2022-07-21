@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:01:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 14:31:12 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 15:39:23 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		print_unsigned_int(va_list ap);
 int		print_hex_lower(va_list ap);
 int		print_hex_upper(va_list ap);
 
+int		ft_printf(const char *args, ...);
 char	*ft_lltoa(long long n);
 int		print_persent(va_list ap);
 int		ft_putnbr_base(unsigned int nbr, char *base);

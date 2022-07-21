@@ -1,4 +1,4 @@
-#include"ft_printf.h"
+//#include"ft_printf.h"
 #include <stdio.h>
 
 int main()
@@ -18,15 +18,15 @@ int main()
     // printf("len ::::::%d\n",ft_putnbr_base(-12345,"0123456789abcdef"));// -3039 5
     // printf("len ::::::%d\n",ft_putnbr_base(-1232323,"0123456789abcdef"));//-12cdc3 7
     // printf("len ::::::%d\n",ft_putnbr_base(-0,"0123456789abcdef"));//0 1
-    char *a = "ab";
-    char **p = &a;
-    char ***p3 = &p;
-    printf("\nlen ::::%d\n",printf("%p\n",NULL));
-    printf("\nlen ::::%d\n",printf("%p\n",a));
-    printf("\nlen ::::%d\n",printf("%p\n",p));
-    printf("\nlen ::::%d\n",printf("%p\n",p3));
-    printf("%zd",write(1, "a", 0));
-
+    // char *a = "ab";
+    // char **p = &a;
+    // char ***p3 = &p;
+    // printf("\nlen ::::%d\n",printf("%p\n",NULL));
+    // printf("\nlen ::::%d\n",printf("%p\n",a));
+    // printf("\nlen ::::%d\n",printf("%p\n",p));
+    // printf("\nlen ::::%d\n",printf("%p\n",p3));
+    // printf("%zd",write(1, "a", 0));
+    printf("% %");
 }
 
 
