@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_printf_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 09:19:22 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 17:28:57 by joushin          ###   ########.fr       */
+/*   Created: 2022/07/20 09:39:26 by joushin           #+#    #+#             */
+/*   Updated: 2022/07/21 17:33:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "./includes/ft_printf.h"
+#include "./includes/libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+int	print_char(va_list ap)
 {
-	size_t	i;
-	size_t	ni;
+	return (ft_putchar_fd(va_arg(ap, int), 1));
+}
 
-	i = 0;
-	if (!needle[0])
-		return ((char *)haystack);
-	while (haystack[i] && i < len)
+int	print_str(va_list ap)
+{
+	char	*str;
+
+	str = va_arg(ap, char *);
+	if (!str)
 	{
-		ni = 0;
-		while (haystack[i + ni] && haystack[i + ni] == needle[ni]
-			&& i + ni < len)
-		{
-			ni++;
-			if (!needle[ni])
-				return ((char *)&haystack[i]);
-		}
-		i++;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	return (0);
+	return (ft_putstr_fd(str, 1));
+}
+
+int	print_persent(va_list ap)
+{
+	(void)ap;
+	return (write(1, "%%", 1));
 }

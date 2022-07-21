@@ -6,14 +6,14 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 17:25:08 by joushin           #+#    #+#              #
-#    Updated: 2022/07/21 16:44:45 by joushin          ###   ########.fr        #
+#    Updated: 2022/07/21 17:33:57 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=cc
 CFLAGS= -Wall -Werror -Wextra
 
-SRCS = ft_printf.c ft_printf_utils1.c ft_printf_utils2.c
+SRCS = ft_printf.c ft_printstr_fuc.c ft_printf_utils.c ft_printnum_fuc.c
 OBJS= $(SRCS:.c=.o)
 
 INC = ./includes
