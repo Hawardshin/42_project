@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/20 17:27:59 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:22:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int	ft_printf(const char *args, ...)
 {
 	va_list	ap;
 	int		ret_cnt;
-	int		i;
 	int		(*fuc[256])(va_list ap);
 	int		cnt_tmp;
 
 	init_fuc_pointer(fuc);
-	i = 0;
 	ret_cnt = 0;
 	if (!args)
 		return (-1);
@@ -68,10 +66,42 @@ int	ft_printf(const char *args, ...)
 		return (-1);
 	return (ret_cnt);
 }
+/*
+%d하나만 있는 경우 우리 함수는 터진다. 하지만 원래 printf는 이걸 컴파일 자체가 불가능하게 만들었다.
+%c인자에 문자열을 넣어도 원본 printf에서는 컴파일이 안된다.
 
+*/
 int main()
 {
-	ft_printf("hi\n%%\n%d\n%d\n",1 ,2);
+	int a = 999;
+	char *p1 = "a";
+	char **p2 = &p1;
+	char ***p3 = &p2;
+	// printf("%d\n", printf("%p\n",p1));
+	// printf("%d\n", printf("%p\n",p2));
+	// printf("%d\n", printf("%p\n",p3));
+	// printf("%d\n", printf("%p\n",&a));
+	// printf("%d\n", printf("%p\n",NULL));
+	printf("my len :: %d\n",ft_printf("my printf ::%d, %d, %d, %d, %d, %d \n",1000,0,-6,2147483647,-2147364748,2147364748));
+	printf("or len :: %d\n",printf("or printf ::%d, %d, %d, %d, %d, %d\n",1000,0,-6,2147483647,-2147364748,2147364748));
+	printf("my len :: %d\n",ft_printf("my printf ::%i, %i, %i, %i, %i ,%i\n",1000,-6,10,2147483647,-2147364748,2147364748));
+	printf("or len :: %d\n",printf("or printf ::%i, %i, %i, %i, %i ,%i\n",1000,0,10,2147483647,-2147364748,2147364748));
+	printf("my len :: %d\n",ft_printf("my printf ::%c %c %c %c %c %c\n",'a','a','\n','\0','0','l'));
+	printf("or len :: %d\n",printf("or printf ::%c %c %c %c %c %c\n",'a','a','\n','\0','0','l'));
+	printf("my len :: %d\n",ft_printf("my printf ::%p %p %p %p %p\n",p1,p2,p3,NULL,&a));
+	printf("or len :: %d\n",printf("or printf ::%p %p %p %p %p\n",p1,p2,p3,NULL,&a));
+	printf("my len :: %d\n",ft_printf("my printf ::%s %s %s %s\n","aaaaaaa","😎" ,"" ,NULL));
+	printf("or len :: %d\n",printf("or printf ::%s %s %s %s\n","aaaaaaa","😎" ,"" ,NULL));
+	printf("my len :: %d\n",ft_printf("my printf ::%u %u %u %u %u %u\n",1000,0,-6,2147483647,-2147364748,2147364748));
+	printf("or len :: %d\n",printf("or printf ::%u %u %u %u %u %u\n",1000,0,-6,2147483647,-2147364748,2147364748));
+	printf("my len :: %d\n",ft_printf("my printf ::%x %x %x %x %x %x %x\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	printf("or len :: %d\n",printf("or printf ::%x %x %x %x %x %x %x\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	printf("my len :: %d\n",ft_printf("my printf ::%X %X %X %X %X %X %X\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	printf("or len :: %d\n",printf("or printf ::%X %X %X %X %X %X %X\n",1000,0,100000,-12345,0,2147483647,2147364748));
+	// printf("my len :: %d\n",ft_printf("my printf ::%%\n"));
+	// printf("or len :: %d\n",printf("or printf ::%%\n"));
+	// printf("my len :: %d\n",ft_printf("my printf ::%m\n"));
+	// printf("or len :: %d\n",printf("or printf ::%m\n"));
 }
 
 // #include <stdio.h>

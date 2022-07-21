@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 10:02:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/20 15:18:02 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:30:25 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,50 @@ char	*ft_lltoa(long long n)
 		len--;
 	}
 	return (retstr);
+}
+
+int	ft_putnbr_base(unsigned int nbr, char *base)
+{
+	int	ret_len;
+	int	tmp_len;
+
+	ret_len = 0;
+	if (nbr < 16)
+		return (write(1, &base[nbr], 1));
+	tmp_len = ft_putnbr_base(nbr / 16, base);
+	if (tmp_len == -1)
+		return (-1);
+	ret_len += tmp_len;
+	tmp_len = write(1, &base[nbr % 16], 1);
+	if (tmp_len == -1)
+		return (-1);
+	ret_len++;
+	return (ret_len);
+}
+
+int	ft_print_addr(void *addr)
+{
+	long long	ddr;
+	int			i;
+	char		memory[17];
+
+	ddr = (long long)addr;
+	i = 0;
+	while (i < 16)
+	{
+		memory[15 - i] = "0123456789abcdef"[ddr % 16];
+		ddr = ddr / 16;
+		i++;
+	}
+	memory[16] = '\0';
+	i = 0;
+	while (memory[i] == '0')
+		i++;
+	if (write(1, "0x", 2) < 0)
+		return (-1);
+	if (write(1, memory + i, 16 - i) < 0)
+		return (-1);
+	if (i == 16)
+		return (2 + write(1, "0", 1));
+	return (2 + 16 - i);
 }

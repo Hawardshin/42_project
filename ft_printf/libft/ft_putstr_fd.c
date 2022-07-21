@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 06:47:32 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/20 16:58:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/21 10:06:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
-	int	w_ret;
 
 	i = 0;
 	if (!s)
