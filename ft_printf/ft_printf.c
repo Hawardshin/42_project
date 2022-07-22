@@ -6,13 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:25:44 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 15:46:30 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/22 09:22:29 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
-#include "./includes/libft.h"
-#include<stdio.h>
+#include "ft_printf.h"
+#include "./libft/libft.h"
 
 void	init_fuc_pointer(int (*fuc[256])(va_list ap), char *infuc)
 {
@@ -53,20 +52,13 @@ int	ft_printf(const char *args, ...)
 	va_start(ap, args);
 	while (*args)
 	{
-		if ((unsigned char)(*args) == '%')
-		{
-			args++;
-			if (!infuc[(unsigned char)(*args)])
-				cnt_tmp = write(1, args, 1);
-			else
-				cnt_tmp = fuc[(unsigned char)(*args)](ap);
-		}
+		if ((unsigned char)(*args) == '%' && infuc[(unsigned char)(*(++args))])
+				cnt_tmp = fuc[(unsigned char)(*args++)](ap);
 		else
-			cnt_tmp = write(1, args, 1);
+			cnt_tmp = write(1, args++, 1);
 		if (cnt_tmp == -1)
 			break ;
 		ret_cnt += cnt_tmp;
-		args++;
 	}
 	va_end(ap);
 	if (cnt_tmp < 0)

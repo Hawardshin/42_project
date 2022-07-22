@@ -6,12 +6,11 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 10:02:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 17:54:30 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/22 09:18:59 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
-#include "./includes/libft.h"
+#include "./libft/libft.h"
 
 static int	check_len(long long num)
 {

@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:25:07 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 17:28:20 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/22 08:19:13 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
-#include "./includes/libft.h"
+#include "ft_printf.h"
+#include "./libft/libft.h"
 
 int	print_unsigned_int(va_list ap)
 {

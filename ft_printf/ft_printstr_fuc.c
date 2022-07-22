@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils1.c                                 :+:      :+:    :+:   */
+/*   ft_printstr_fuc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:39:26 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/21 17:33:19 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/22 08:19:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
-#include "./includes/libft.h"
+#include "ft_printf.h"
+#include "./libft/libft.h"
 
 int	print_char(va_list ap)
 {

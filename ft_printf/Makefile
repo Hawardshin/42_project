@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 17:25:08 by joushin           #+#    #+#              #
-#    Updated: 2022/07/21 17:33:57 by joushin          ###   ########.fr        #
+#    Updated: 2022/07/22 09:25:56 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,6 @@ CFLAGS= -Wall -Werror -Wextra
 SRCS = ft_printf.c ft_printstr_fuc.c ft_printf_utils.c ft_printnum_fuc.c
 OBJS= $(SRCS:.c=.o)
 
-INC = ./includes
-
 NAME=libftprintf.a
 
 AR = ar
@@ -26,7 +24,7 @@ ARFLAGS = -rcs
 RM= rm -rf
 
 %c : %o
-	$(CC) $(CFLAGS) $^ -o $@ -I $(INC)
+	$(CC) $(CFLAGS) $^ -o $@
 all: $(NAME)
 
 $(NAME): $(OBJS)
