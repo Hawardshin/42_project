@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/18 13:17:03 by joushin          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:19:15 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include <stdio.h>
 int	check_new_line(char *buf)
 {
 	int	idx;
@@ -89,6 +89,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	backup = ft_read_line(fd, backup);
+	printf("%s\n", backup);
 	if (!backup)
 		return (NULL);
 	if (!check_new_line(backup))
