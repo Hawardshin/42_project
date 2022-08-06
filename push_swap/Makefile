@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/06 19:32:25 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/06 19:41:39 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ NAME = push_swap
 RM= rm -rf
 
 %.o : %.c
-	$(CC) $(CFLAGS) $^ -o $@
-
+	@$(CC) $(CFLAGS) -o $@ -c $^
 all : $(NAME)
 
 $(NAME) : $(OBJS)
