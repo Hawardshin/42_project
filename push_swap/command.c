@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/06 16:49:24 by joushin          ###   ########.fr       */
+/*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
+/*   Updated: 2022/08/06 14:09:25 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_node
+t_node	*new_node(char a)
 {
-	int				num;
-	struct s_node	*next;
-	struct s_node	*bef;
-}t_node;
+	t_node	*new_lst;
 
-typedef struct s_stack
-{
-	t_node	*head;
-	t_node	*tail;
-}t_stack;
-
-#endif
+	new_lst = (t_node *)malloc(sizeof(t_node));
+	if (!new_lst)
+		return (new_lst);
+	new_lst -> num;
+}
+//노드 만드는데.
