@@ -6,13 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 12:25:00 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 13:49:04 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "./libft/libft.h"
-#include<stdio.h>///////
+
 void	ft_error(void)
 {
 	write(2, "Error\n", 6);
@@ -45,7 +45,24 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 	free(splited);
 }
 
-#include<stdio.h>
+//테스트용 함수
+void printstack(t_stack *stack_a)
+{
+	if (stack_a -> count == 0)
+	{
+		printf("NULL\ns");
+		return ;
+	}
+	printf("count :: %d\n",stack_a -> count);
+	t_node *tmp = (stack_a ->head);
+	while (tmp -> next != NULL)
+	{
+	 	printf("%d\n", tmp->num);
+		tmp = tmp -> next;
+	}
+	printf("%d", tmp->num);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -67,23 +84,14 @@ int	main(int argc, char **argv)
 	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
 	////
-	printf("count :: %d\n",stack_a -> count);
-	//printf("num :: %d\n",stack_a ->head ->num);
-	t_node *tmp = (stack_a ->head);
-	while (tmp -> next != NULL)
-	{
-	 	printf("%d\n", tmp->num);
-		tmp = tmp -> next;
-	}
-	printf("%d", tmp->num);
+
+	printstack(stack_a);
+	printstack(stack_b);
 	push_stack(stack_a, stack_b, 'b');
-	printf("count :: %d\n",stack_a -> count);
-	//printf("num :: %d\n",stack_a ->head ->num);
-	tmp = (stack_a ->head);
-	while (tmp -> next != NULL)
-	{
-	 	printf("%d\n", tmp->num);
-		tmp = tmp -> next;
-	}
-	printf("%d", tmp->num);
+	push_stack(stack_a, stack_b, 'b');
+	push_stack(stack_a, stack_b, 'b');
+	printf("::::a::::\n");
+	printstack(stack_a);
+	printf("::::b::::\n");
+	printstack(stack_b);
 }

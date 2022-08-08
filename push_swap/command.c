@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 12:06:22 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 13:49:04 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	push_stack(t_stack *a, t_stack *b, char s)
 	{
 	if (b -> count == 0)
 		return ;
-	tmp = stack_pop(a);
+	tmp = stack_pop(b);
 	stack_push(a,tmp);
 	write(1, "pa\n",3);
 	}//s == b
@@ -65,7 +65,8 @@ void	push_stack(t_stack *a, t_stack *b, char s)
 		if (a -> count == 0)
 			return ;
 		tmp = stack_pop(a);
-		stack_push(a,tmp);
-		write(1, "pa\n",3);
+		printf("kk : %d",tmp->num);
+		stack_push(b,tmp);
+		write(1, "pb\n",3);
 	}
 }

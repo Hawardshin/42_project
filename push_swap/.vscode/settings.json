@@ -29,6 +29,7 @@
     "**/.vscode/**"
   ],
   "files.associations": {
-    "ratio": "c"
+    "ratio": "c",
+    "stdio.h": "c"
   }
 }

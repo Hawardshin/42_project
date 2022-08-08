@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 12:02:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 13:49:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
+#include <stdio.h>/////
 typedef struct s_node
 {
 	int				num;
