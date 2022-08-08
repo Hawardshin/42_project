@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/06 19:12:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 10:47:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ int	chk_dup(int in, t_stack *stack_a)
 	while (now != NULL)
 	{
 		if (now -> num == in)
-		{
-			ft_mlstclear(&(stack_a -> head));
+		//{
+			//ft_mlstclear(&(stack_a -> head));
 			ft_error();
-		}
+		//}
 		else
 			now = now -> next;
 	}

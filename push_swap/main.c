@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/06 18:55:57 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 12:25:00 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 	free(tmp);
 	while (splited[i])
 	{
-
 		add_node(chk_dup(ft_atoi_c(splited[i]), stack_a), stack_a);
+		stack_a -> count++;
 		//printf("%d",(*stack_a) ->head ->num);
 		free(splited[i]);
 		i++;
@@ -49,18 +49,40 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
+	t_stack	*stack_b;//나중에 최적화 하기
+
 	stack_a = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack_a || argc  < 2)
+	if (!stack_a)
+		return (0);
+	stack_b = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack_b)
+		return (0);
+	if (argc  < 2)
 		return (0);
 	stack_a -> head = NULL;
 	stack_a -> tail = NULL;
+	stack_a -> count = 0;
+	stack_b -> head = NULL;
+	stack_b -> tail = NULL;
+	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
-	//
-	//printf("%d",stack_a ->head ->num);
+	////
+	printf("count :: %d\n",stack_a -> count);
+	//printf("num :: %d\n",stack_a ->head ->num);
 	t_node *tmp = (stack_a ->head);
 	while (tmp -> next != NULL)
 	{
-		printf("%d", tmp->num);
+	 	printf("%d\n", tmp->num);
+		tmp = tmp -> next;
+	}
+	printf("%d", tmp->num);
+	push_stack(stack_a, stack_b, 'b');
+	printf("count :: %d\n",stack_a -> count);
+	//printf("num :: %d\n",stack_a ->head ->num);
+	tmp = (stack_a ->head);
+	while (tmp -> next != NULL)
+	{
+	 	printf("%d\n", tmp->num);
 		tmp = tmp -> next;
 	}
 	printf("%d", tmp->num);

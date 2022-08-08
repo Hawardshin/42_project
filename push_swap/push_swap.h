@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/06 19:15:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 12:02:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_node
 
 typedef struct s_stack
 {
+	int		count;
 	t_node	*head;
 	t_node	*tail;
 }t_stack;
@@ -35,6 +36,11 @@ void	add_node(int data, t_stack *stack_a);
 int		ft_atoi_c(const char *str);
 void	ft_mlstclear(t_node **node);
 int		chk_dup(int in, t_stack *stack_a);
+
+//command.c
+void	stack_push(t_stack *s, t_node *new);
+t_node	*stack_pop(t_stack *s);
+void	push_stack(t_stack *a, t_stack *b, char s);
 
 //main.c
 void	ft_error(void);
