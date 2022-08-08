@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 13:49:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:58:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void printstack(t_stack *stack_a)
 
 int	main(int argc, char **argv)
 {
+	setvbuf(stdout, NULL, _IONBF, 0);/////printf write순서 맞추기
 	t_stack	*stack_a;
 	t_stack	*stack_b;//나중에 최적화 하기
 
@@ -90,8 +91,24 @@ int	main(int argc, char **argv)
 	push_stack(stack_a, stack_b, 'b');
 	push_stack(stack_a, stack_b, 'b');
 	push_stack(stack_a, stack_b, 'b');
-	printf("::::a::::\n");
+	printf("\n::::a::::\n");
 	printstack(stack_a);
-	printf("::::b::::\n");
+	printf("\n::::b::::\n");
+	printstack(stack_b);
+	swap_stack(stack_a, stack_b, 'C');
+	printf("\nafter swap\n::::a::::\n");
+	printstack(stack_a);
+	printf("\n::::b::::\n");
+	printstack(stack_b);
+	reverse_stack(stack_a, stack_b, 'C');
+	printf("\nafter reverse\n::::a::::\n");
+	printstack(stack_a);
+	printf("\n::::b::::\n");
+	printstack(stack_b);
+	rreverse_stack(stack_a, stack_b, 'C');
+	printf("\nafter rreverse\n::::a::::\n");
+	printstack(stack_a);
+	printf("\n::::b::::\n");
 	printstack(stack_b);
 }
+

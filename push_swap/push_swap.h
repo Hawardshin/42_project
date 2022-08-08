@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 13:49:19 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:42:04 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ void	ft_mlstclear(t_node **node);
 int		chk_dup(int in, t_stack *stack_a);
 
 //command.c
-void	stack_push(t_stack *s, t_node *new);
-t_node	*stack_pop(t_stack *s);
+void	push_front(t_stack *s, t_node *new);
+void	push_back(t_stack *s, t_node *new);
+t_node	*pop_front(t_stack *s);
+t_node	*pop_back(t_stack *s);
 void	push_stack(t_stack *a, t_stack *b, char s);
-
+void	swap_stack(t_stack *a, t_stack *b, char s);
+void	reverse_stack(t_stack *a, t_stack *b, char s);
+void	rreverse_stack(t_stack *a, t_stack *b, char s);
 //main.c
 void	ft_error(void);
 void	data_init(t_stack *stack_a, int argc, char **argv);
