@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 21:23:08 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/12 21:24:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,13 @@ void	div_stack(t_stack *a, t_stack *b)
 		sorting(a, b, 'b');
 		num++;
 	}
-	printf("\n----------------a---------\n");
-	printstack(a);
-	printf("\n----------------b---------\n");
-	printstack(b);
+	// printf("\n----------------a---------\n");
+	// printstack(a);
+	// printf("\n----------------b---------\n");
+	// printstack(b);
 	while (num <= pivot3)
 	{
-		printf("a\n");
+		// printf("a\n");
 		head_move = list_head_find(a, num, num);
 		tail_move = list_tail_find(a, num, num);
 		if (head_move == -1 || tail_move == -1)//디버깅용으로 만들어 놓은 보험

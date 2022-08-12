@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/11 16:53:05 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/12 21:48:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ char	*ft_all_join(int argc, char **argv)
 
 //head와 tail이 같은 상황에 대한 고려가 필요
 //new_node 동적 할당 실패했을 경우?
+// void	add_node(int data, t_stack *stack_a)
+// {
+// 	t_node	*new_node;
+
+// 	new_node = (t_node *)malloc(sizeof(t_node));
+// 	if (!new_node)
+// 		return ;
+// 	if (stack_a -> head == NULL)
+// 		stack_a -> head = new_node;
+// 	new_node -> num = data;
+// 	new_node -> bef = NULL;
+// 	new_node -> next = stack_a -> head;
+// 	stack_a -> head->bef = new_node;
+// 	if (stack_a -> tail == NULL)
+// 	{
+// 		stack_a -> tail = new_node;
+// 		stack_a -> tail ->next = NULL;
+// 	}
+// 	stack_a -> head = new_node;
+// }
 void	add_node(int data, t_stack *stack_a)
 {
 	t_node	*new_node;
@@ -52,19 +72,20 @@ void	add_node(int data, t_stack *stack_a)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		return ;
-	if (stack_a -> head == NULL)
-		stack_a -> head = new_node;
 	new_node -> num = data;
-	new_node -> bef = NULL;
-	new_node -> next = stack_a -> head;
-	stack_a -> head->bef = new_node;
-	if (stack_a -> tail == NULL)
+	new_node -> bef = stack_a ->tail;
+	if (stack_a -> tail != NULL)
+		stack_a -> tail -> next = new_node;
+	new_node -> next = NULL;
+	if (((stack_a) -> head) == NULL)
 	{
-		stack_a -> tail = new_node;
-		stack_a -> tail ->next = NULL;
+	//	printf("Aas");
+		stack_a -> head = new_node;
 	}
-	stack_a -> head = new_node;
+	//printf("b");
+	stack_a -> tail = new_node;
 }
+
 
 //atoi에서 - 하나 받거나 + 하나 받는거 터트려? 일단 난 잡자.
 int	ft_atoi_c(const char *str)
@@ -91,9 +112,9 @@ int	ft_atoi_c(const char *str)
 	}
 	if (*str)
 		ft_error();
-	if (result > 2147364748 && sign == -1)
+	if (result > 2147483648 && sign == -1)
 		ft_error();
-	else if (sign == 1 && result > 2147364747)
+	else if (sign == 1 && result > 2147483647)
 		ft_error();
 	return ((int)sign * result);
 }
