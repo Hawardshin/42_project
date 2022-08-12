@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 10:47:24 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:53:05 by haward           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ void	add_node(int data, t_stack *stack_a)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		return ;
-	new_node -> num = data;
-	new_node -> bef = stack_a ->tail;
-	if (stack_a -> tail != NULL)
-		stack_a -> tail -> next = new_node;
-	new_node -> next = NULL;
-	if (((stack_a) -> head) == NULL)
-	{
-	//	printf("Aas");
+	if (stack_a -> head == NULL)
 		stack_a -> head = new_node;
+	new_node -> num = data;
+	new_node -> bef = NULL;
+	new_node -> next = stack_a -> head;
+	stack_a -> head->bef = new_node;
+	if (stack_a -> tail == NULL)
+	{
+		stack_a -> tail = new_node;
+		stack_a -> tail ->next = NULL;
 	}
-	//printf("b");
-	stack_a -> tail = new_node;
+	stack_a -> head = new_node;
 }
 
 //atoi에서 - 하나 받거나 + 하나 받는거 터트려? 일단 난 잡자.

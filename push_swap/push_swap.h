@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 15:42:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:20:20 by haward           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 #include <stdio.h>/////
+
 typedef struct s_node
 {
 	int				num;

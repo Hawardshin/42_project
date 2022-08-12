@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 15:58:06 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:41:13 by haward           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	push_front(t_stack *s, t_node *new)
 {
-	// if (!s)
-	// 	return ;
+	 if (!s || !new)
+	 	return ;
 	if (s->count == 0)
 	{
 		s -> head = new;
@@ -33,6 +33,8 @@ void	push_front(t_stack *s, t_node *new)
 
 void	push_back(t_stack *s, t_node *new)
 {
+	if (!s || !new)
+		return ;
 	if (s -> count ==0)
 	{
 		s->head = new;
@@ -50,8 +52,8 @@ void	push_back(t_stack *s, t_node *new)
 
 t_node	*pop_front(t_stack *s)
 {
-	// if (!s || s -> count != 0)
-	// 	return (0);
+	 if (!s || s -> count == 0)
+	 	return (0);
 	t_node	*tmp;
 
 	tmp = s-> head;
@@ -68,8 +70,8 @@ t_node	*pop_front(t_stack *s)
 
 t_node	*pop_back(t_stack *s)//검증 필요
 {
-	// if (!s || s -> count != 0)
-	// 	return (0);
+	 if (!s || s -> count == 0) // count == 0일 때 하는게 맞겠지
+	 	return (0);
 	t_node	*tmp;
 
 	tmp = s-> tail;
@@ -198,6 +200,4 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 		rreverse_stack(a, b, 'A');
 		rreverse_stack(a, b, 'B');
 	}
-
-
 }

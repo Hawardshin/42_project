@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/08 15:58:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:14:28 by haward           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,41 @@ void	ft_error(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);
+}
+
+void	node_indexing(t_stack *a)
+{
+	int	i;
+	t_node	*node;
+	node = a -> head;
+	t_node	*tnode;
+	int	*tmp;
+	int cnt;// 가장 작은 친구가 1 가장 큰친구 count
+	tmp = malloc(sizeof(int) * (a->count + 1));
+	if (!tmp)
+		return ;
+	i = 0;
+	while (node !=NULL)
+	{
+		cnt = 1;
+		tnode = a -> head;
+		while (tnode != NULL)
+		{
+			if (node ->num > tnode ->num)
+				cnt++;
+			tnode = tnode -> next;
+		}
+		tmp[i] = cnt;
+		i++;
+		node = node -> next;
+	}
+	i = 0;
+	node = a->head;
+	while (node != NULL)
+	{
+		node -> num = tmp[i++];
+		node = node -> next;
+	}
 }
 
 //넣으면서 0부터 데이터 넣어주기.
@@ -43,14 +78,16 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 		i++;
 	}
 	free(splited);
+	node_indexing(stack_a);
 }
+
 
 //테스트용 함수
 void printstack(t_stack *stack_a)
 {
 	if (stack_a -> count == 0)
 	{
-		printf("NULL\ns");
+		printf("NULL\n");
 		return ;
 	}
 	printf("count :: %d\n",stack_a -> count);
