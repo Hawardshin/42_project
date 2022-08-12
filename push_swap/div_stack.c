@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 18:53:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/12 21:23:08 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	sorting(t_stack *a ,t_stack *b, char c)
 	len = is_sorted(stack, node ->num);//본인보다 작은 수들의 숫자
 	if (len == 0)
 		return ;
-	if (len < (stack -> count) / 2)
+//	if (len <= (stack -> count) / 2)
 		swap_for(len, a, b, c);
-	else
-		swap_rev(len, a, b, c);
+	//else
+	//	swap_rev(len, a, b, c);
 }
 
 void	div_stack(t_stack *a, t_stack *b)
@@ -159,12 +159,13 @@ void	div_stack(t_stack *a, t_stack *b)
 		sorting(a, b, 'b');
 		num++;
 	}
-	// printf("\n----------------a---------\n");
-	// printstack(a);
-	// printf("\n----------------b---------\n");
-	// printstack(b);
+	printf("\n----------------a---------\n");
+	printstack(a);
+	printf("\n----------------b---------\n");
+	printstack(b);
 	while (num <= pivot3)
 	{
+		printf("a\n");
 		head_move = list_head_find(a, num, num);
 		tail_move = list_tail_find(a, num, num);
 		if (head_move == -1 || tail_move == -1)//디버깅용으로 만들어 놓은 보험
@@ -176,6 +177,7 @@ void	div_stack(t_stack *a, t_stack *b)
 			go_head(a, b, head_move);
 		else
 			go_tail(a, b, tail_move);
+		//printf("%d\n",a->head->num);
 		push_stack(a, b, 'b');
 		num++;
 	}

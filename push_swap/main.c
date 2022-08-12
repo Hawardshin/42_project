@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 18:20:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/12 21:20:15 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 	stack_b = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack_b)
 		return (0);
-	if (argc  < 2)
+	if (argc < 2)
 		return (0);
 	stack_a -> head = NULL;
 	stack_a -> tail = NULL;

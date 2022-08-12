@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 11:49:25 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 11:49:25 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/12 21:02:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	merge_sort(long L, long long R)
 		arr[i] = tmp[i];
 	}
 }
-int main()
-{
+// int main()
+// {
 
-}
+// }
