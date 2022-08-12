@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 17:11:57 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/12 18:22:00 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	swap_for(int len, t_stack *a, t_stack *b, char c)
 	}
 }
 
-
 void	sorting(t_stack *a ,t_stack *b, char c)
 {
 	t_node	*node;
@@ -160,23 +159,24 @@ void	div_stack(t_stack *a, t_stack *b)
 		sorting(a, b, 'b');
 		num++;
 	}
+	// printf("\n----------------a---------\n");
+	// printstack(a);
+	// printf("\n----------------b---------\n");
+	// printstack(b);
 	while (num <= pivot3)
 	{
-		head_move = list_head_find(a, pivot1 + 1, pivot3);
-		tail_move = list_tail_find(a, pivot1 + 1, pivot3);
-		// printf("h_m%d\n",head_move);
-		// printf("t_m%d\n",tail_move);
-		// if (head_move == -1 || tail_move == -1)//디버깅용으로 만들어 놓은 보험
-		// {
-		// 	printf("ERRRORROROROROR\n\n");
-		// 	return ;
-		// }
+		head_move = list_head_find(a, num, num);
+		tail_move = list_tail_find(a, num, num);
+		if (head_move == -1 || tail_move == -1)//디버깅용으로 만들어 놓은 보험
+		{
+			printf("ERRRORROROROROR\n\n");
+			return ;
+		}
 		if (head_move <= tail_move)
 			go_head(a, b, head_move);
 		else
 			go_tail(a, b, tail_move);
 		push_stack(a, b, 'b');
-		sorting(a, b, 'b');
 		num++;
 	}
 	num = 0;
@@ -185,4 +185,5 @@ void	div_stack(t_stack *a, t_stack *b)
 		push_stack(a, b, 'a');
 		num++;
 	}
+	//sorting(a, b, 'a');
 }

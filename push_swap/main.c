@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 17:11:22 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/12 18:20:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int	main(int argc, char **argv)
 	// printstack(stack_a);
 	// printstack(stack_b);
 	div_stack(stack_a, stack_b);
-	// printstack(stack_a);
-	// printstack(stack_b);
+	printstack(stack_a);
+	printstack(stack_b);
 	// push_stack(stack_a, stack_b, 'b');
 	// push_stack(stack_a, stack_b, 'b');
 	// push_stack(stack_a, stack_b, 'b');
