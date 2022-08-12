@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/11 16:14:28 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/12 17:11:22 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ void printstack(t_stack *stack_a)
 	}
 	printf("count :: %d\n",stack_a -> count);
 	t_node *tmp = (stack_a ->head);
-	while (tmp -> next != NULL)
+	while (tmp != NULL)
 	{
 	 	printf("%d\n", tmp->num);
 		tmp = tmp -> next;
 	}
-	printf("%d", tmp->num);
 }
 
 int	main(int argc, char **argv)
@@ -121,31 +120,32 @@ int	main(int argc, char **argv)
 	stack_b -> tail = NULL;
 	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
-	////
-
-	printstack(stack_a);
-	printstack(stack_b);
-	push_stack(stack_a, stack_b, 'b');
-	push_stack(stack_a, stack_b, 'b');
-	push_stack(stack_a, stack_b, 'b');
-	printf("\n::::a::::\n");
-	printstack(stack_a);
-	printf("\n::::b::::\n");
-	printstack(stack_b);
-	swap_stack(stack_a, stack_b, 'C');
-	printf("\nafter swap\n::::a::::\n");
-	printstack(stack_a);
-	printf("\n::::b::::\n");
-	printstack(stack_b);
-	reverse_stack(stack_a, stack_b, 'C');
-	printf("\nafter reverse\n::::a::::\n");
-	printstack(stack_a);
-	printf("\n::::b::::\n");
-	printstack(stack_b);
-	rreverse_stack(stack_a, stack_b, 'C');
-	printf("\nafter rreverse\n::::a::::\n");
-	printstack(stack_a);
-	printf("\n::::b::::\n");
-	printstack(stack_b);
+	// printstack(stack_a);
+	// printstack(stack_b);
+	div_stack(stack_a, stack_b);
+	// printstack(stack_a);
+	// printstack(stack_b);
+	// push_stack(stack_a, stack_b, 'b');
+	// push_stack(stack_a, stack_b, 'b');
+	// push_stack(stack_a, stack_b, 'b');
+	// printf("\n::::a::::\n");
+	// printstack(stack_a);
+	// printf("\n::::b::::\n");
+	// printstack(stack_b);
+	// swap_stack(stack_a, stack_b, 'C');
+	// printf("\nafter swap\n::::a::::\n");
+	// printstack(stack_a);
+	// printf("\n::::b::::\n");
+	// printstack(stack_b);
+	// reverse_stack(stack_a, stack_b, 'C');
+	// printf("\nafter reverse\n::::a::::\n");
+	// printstack(stack_a);
+	// printf("\n::::b::::\n");
+	// printstack(stack_b);
+	// rreverse_stack(stack_a, stack_b, 'C');
+	// printf("\nafter rreverse\n::::a::::\n");
+	// printstack(stack_a);
+	// printf("\n::::b::::\n");
+	// printstack(stack_b);
 }
 

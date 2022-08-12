@@ -30,6 +30,12 @@
   ],
   "files.associations": {
     "ratio": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "__bit_reference": "c",
+    "algorithm": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "unordered_map": "c",
+    "cstdio": "c"
   }
 }

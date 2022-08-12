@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/11 16:20:20 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/12 13:26:12 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,12 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s);
 //main.c
 void	ft_error(void);
 void	data_init(t_stack *stack_a, int argc, char **argv);
+
+//list.c
+int	list_head_find(t_stack *a, int start, int end);
+int	list_tail_find(t_stack *a, int start, int end);
+
+//div_stack.c
+void	div_stack(t_stack *a, t_stack *b);
 
 #endif

@@ -6,14 +6,14 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/08 11:36:23 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/12 13:27:12 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = push_swap_utils.c main.c command.c
+SRCS = push_swap_utils.c main.c command.c div_stack.c list.c
 
 OBJS= $(SRCS:.c=.o)
 
