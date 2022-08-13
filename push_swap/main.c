@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 21:57:23 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/13 18:03:01 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	node_indexing(t_stack *a)
 		node -> num = tmp[i++];
 		node = node -> next;
 	}
+	free(tmp);
 }
 
 //넣으면서 0부터 데이터 넣어주기.
@@ -120,9 +121,12 @@ int	main(int argc, char **argv)
 	stack_b -> tail = NULL;
 	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
-	printstack(stack_a);
-	printstack(stack_b);
-	//div_stack(stack_a, stack_b);
+	// printstack(stack_a);
+	// printstack(stack_b);
+	div_stack(stack_a, stack_b);
+	sort_start(stack_a, stack_b);
+	// printstack(stack_a);
+	// printstack(stack_b);
 	// printstack(stack_a);
 	// printstack(stack_b);
 	// push_stack(stack_a, stack_b, 'b');

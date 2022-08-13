@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 17:45:52 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/13 17:12:45 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 typedef struct s_node
 {
 	int				num;
+	int				ascore;
+	int				bscore;
 	struct s_node	*next;
 	struct s_node	*bef;
 }t_node;
@@ -57,5 +59,14 @@ int	list_tail_find(t_stack *a, int start, int end);
 
 //div_stack.c
 void	div_stack(t_stack *a, t_stack *b);
+void	go_head(t_stack	*a, t_stack *b, int idx, char c);
+void	go_tail(t_stack *a, t_stack *b, int idx, char c);
+
+//chk.c
+void	two_argv(t_stack *a, t_stack *b);
+void	three_argv(t_stack *a, t_stack *b);
+
+//sort.c
+void	sort_start(t_stack *a, t_stack *b);
 
 #endif

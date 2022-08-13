@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/11 14:41:13 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/13 17:38:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	push_stack(t_stack *a, t_stack *b, char s)
 
 	if (s == 'a')//pa
 	{
-	if (b -> count == 0)
-		return ;
-	tmp = pop_front(b);
-	push_front(a,tmp);
-	write(1, "pa\n",3);
+		if (b -> count == 0)
+			return ;
+		tmp = pop_front(b);
+		push_front(a,tmp);
+		write(1, "pa\n",3);
 	}//s == b
 	else//pb
 	{
@@ -113,7 +113,7 @@ void	push_stack(t_stack *a, t_stack *b, char s)
 }
 
 
-//비어있을 때 생각해야하는가?? 아직 안 함
+//비어있을 때 생각해야하는가?? 했다.
 void	swap_stack(t_stack *a, t_stack *b, char s)
 {
 	t_node	*tmp1;
@@ -121,6 +121,8 @@ void	swap_stack(t_stack *a, t_stack *b, char s)
 
 	if (s == 'a' || s == 'A')//sa
 	{
+		if (a -> count == 0 || a-> count == 1)
+			return ;
 		if (s == 'a')
 			write(1, "sa\n", 3);
 		if (a->count < 2)
@@ -132,7 +134,8 @@ void	swap_stack(t_stack *a, t_stack *b, char s)
 	}
 	else if (s == 'b'|| s == 'B')//sb
 	{
-
+		if (b -> count == 0 || b -> count == 1)
+			return ;
 		if (s == 'b')
 			write(1, "sb\n", 3);
 		if (b->count < 2)
@@ -144,6 +147,10 @@ void	swap_stack(t_stack *a, t_stack *b, char s)
 	}
 	else//ss
 	{
+		if (a -> count == 0)
+			return (swap_stack(a, b, 'b'));
+		else if (b -> count == 0)
+			return (swap_stack(a, b, 'a'));
 		write(1, "ss\n", 3);
 		swap_stack(a, b, 'A');
 		swap_stack(a, b, 'B');
@@ -156,6 +163,8 @@ void	reverse_stack(t_stack *a, t_stack *b, char s)
 
 	if (s == 'a' || s == 'A')//ra
 	{
+		if (a -> count == 0 || a-> count == 1)
+			return ;
 		if (s == 'a')
 			write(1, "ra\n", 3);
 		tmp = pop_front(a);
@@ -163,6 +172,8 @@ void	reverse_stack(t_stack *a, t_stack *b, char s)
 	}
 	else if (s == 'b'|| s == 'B')//rb
 	{
+		if (b -> count == 0 || b -> count == 1)
+			return ;
 		if (s == 'b')
 			write(1, "ra\n", 3);
 		tmp = pop_front(b);
@@ -170,6 +181,10 @@ void	reverse_stack(t_stack *a, t_stack *b, char s)
 	}
 	else//rr
 	{
+		if (a -> count == 0)
+			return (reverse_stack(a, b, 'b'));
+		else if (b -> count == 0)
+			return (reverse_stack(a, b, 'a'));
 		write(1, "rr\n", 3);
 		reverse_stack(a, b, 'A');
 		reverse_stack(a, b, 'B');
@@ -182,6 +197,8 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 
 	if (s == 'a' || s == 'A')//ra
 	{
+		if (a -> count == 0 || a-> count == 1)
+			return ;
 		if (s == 'a')
 			write(1, "rra\n", 4);
 		tmp = pop_back(a);
@@ -189,6 +206,8 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 	}
 	else if (s == 'b'|| s == 'B')//rb
 	{
+		if (b -> count == 0 || b -> count == 1)
+			return ;
 		if (s == 'b')
 			write(1, "rrb\n", 4);
 		tmp = pop_back(b);
@@ -196,6 +215,10 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 	}
 	else//rr
 	{
+		if (a -> count == 0)
+			return (rreverse_stack(a, b, 'b'));
+		else if (b -> count == 0)
+			return (rreverse_stack(a, b, 'a'));
 		write(1, "rrr\n", 4);
 		rreverse_stack(a, b, 'A');
 		rreverse_stack(a, b, 'B');

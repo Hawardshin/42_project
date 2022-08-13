@@ -36,6 +36,7 @@
     "bitset": "c",
     "chrono": "c",
     "unordered_map": "c",
-    "cstdio": "c"
+    "cstdio": "c",
+    "set": "c"
   }
 }

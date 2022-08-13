@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/12 21:48:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/13 14:33:20 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,6 @@ char	*ft_all_join(int argc, char **argv)
 	return (str);
 }
 
-//head와 tail이 같은 상황에 대한 고려가 필요
-//new_node 동적 할당 실패했을 경우?
-// void	add_node(int data, t_stack *stack_a)
-// {
-// 	t_node	*new_node;
-
-// 	new_node = (t_node *)malloc(sizeof(t_node));
-// 	if (!new_node)
-// 		return ;
-// 	if (stack_a -> head == NULL)
-// 		stack_a -> head = new_node;
-// 	new_node -> num = data;
-// 	new_node -> bef = NULL;
-// 	new_node -> next = stack_a -> head;
-// 	stack_a -> head->bef = new_node;
-// 	if (stack_a -> tail == NULL)
-// 	{
-// 		stack_a -> tail = new_node;
-// 		stack_a -> tail ->next = NULL;
-// 	}
-// 	stack_a -> head = new_node;
-// }
 void	add_node(int data, t_stack *stack_a)
 {
 	t_node	*new_node;
@@ -142,10 +120,7 @@ int	chk_dup(int in, t_stack *stack_a)
 	while (now != NULL)
 	{
 		if (now -> num == in)
-		//{
-			//ft_mlstclear(&(stack_a -> head));
 			ft_error();
-		//}
 		else
 			now = now -> next;
 	}
