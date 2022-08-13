@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 17:27:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/13 20:54:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,7 @@ void	div_stack(t_stack *a, t_stack *b)
 	pivot = a->count / 3;
 	cnt = a -> count;
 	if (cnt == 3)
-	{
-		three_argv(a, b);
-		return ;
-	}
+		return (three_argv(a, b));
 	num = 1;
 	while (num <= pivot)//1부터 피봇까지 쭉 넘긴다.
 	{
@@ -133,6 +130,8 @@ void	div_stack(t_stack *a, t_stack *b)
 		push_stack(a, b, 'b');
 		num++;
 	}
+	if (a->count == 3)
+		return (three_argv(a, b));
 	while (num <= pivot * 2)//1부터 피봇까지 쭉 넘긴다.
 	{
 		head_move = list_head_find(a, pivot + 1, pivot * 2);
@@ -148,5 +147,3 @@ void	div_stack(t_stack *a, t_stack *b)
 		push_stack(a, b, 'b');
 	three_argv(a, b);
 }
-
-// int	get_pivot

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 18:01:37 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/13 20:59:01 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,68 @@ t_node	*find_least_node(t_stack *a, t_stack *b)
 	return (least_node);
 }
 
-void	a_sort(t_stack *a,t_stack *b)
+// int	is_sorted(t_stack *stack, int n)//스택의 현재 이 값보다 몇개가 더 작은지
+// {
+// 	int		idx;
+// 	t_node	*node;
+
+// 	node = stack -> head;
+// 	idx = 0;
+// 	while (node)
+// 	{
+// 		if (node->num > n)
+// 			idx++;
+// 		node = node->next;
+// 	}
+// 	return (idx);
+// }
+
+void	a_sort(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 
 	node = a->head;
-	if (node ->ascore < (a->count - 1) / 2 )//애매해 count -1이 맞는걸까
-		go_head(a, b, a-> count - node->ascore - 2, 'a');
-	else
-		go_tail(a, b, node ->ascore - 1, 'a');
-	swap_stack(a, b, 'a');
 
+	if (node->ascore > (a->count - 1) / 2)
+	{
+		if (a-> count - node->ascore -1 < 1)
+			return ;
+		go_tail(a, b, a-> count - node->ascore - 1, 'a');
+	}
+	else
+	{
+		if (node ->ascore  < 1)
+			return ;
+		go_head(a, b, node ->ascore - 1, 'a');
+	}
+	swap_stack(a, b, 'a');
+}
+
+void	forwarding(t_stack *a, t_stack *b)
+{
+	t_node	*node;
+	int	cnt;
+
+	node = a->head;
+	cnt = 0;
+	while (node)
+	{
+		if (a->count - 1 == is_sorted(a, node->num))
+		{
+			if (cnt > (a->count) / 2)
+				go_tail(a, b, a->count - cnt, 'a');
+			else
+				go_head(a, b, cnt, 'a');
+			return ;
+		}
+		node = node ->next;
+		cnt++;
+	}
 }
 
 void	move_btoa(t_stack *a, t_stack *b)
 {
+
 	t_node	*node;
 
 	node = find_least_node(a, b);
@@ -112,12 +159,17 @@ void	move_btoa(t_stack *a, t_stack *b)
 		go_head(a, b, node ->bscore, 'b');
 	push_stack(a, b, 'a');
 	a_sort(a, b);
+	forwarding(a, b);
 }
 
 void	print_all_score(t_stack *a)//테스트용 함수
 {
 	t_node	*node;
-
+	if (a == NULL)
+	{
+		printf("NULL");
+		return ;
+	}
 	node = a->head;
 	while (node)
 	{
@@ -126,36 +178,43 @@ void	print_all_score(t_stack *a)//테스트용 함수
 	}
 }
 
+// void	ft_is_sorted(t_stack *a, t_stack *b)
+// {
+// 	t_node	*node;
+// 	int		cnt;
+
+// 	node = a->head;
+// 	cnt = 0;
+// 	while (node ->num != a->count)
+// 	{
+// 		cnt++;
+// 	}
+// }
+
 
 void	sort_start(t_stack *a, t_stack *b)
 {
-	while (b->count != 0)
+	// while (b->count != 0)
+	// {
+	for (int i=0; i < 4; i++)
 	{
 		score_b(a, b);
-	// printf("\n-----a-----\n");
-	// printstack(a);
-	// printf("\n-----b-----\n");
-	// printstack(b);
-	// printf("\n-----a-----\n");
-	// print_all_score(a);
-	// printf("\n-----b-----\n");
-	// print_all_score(b);
-	// printf("\n-----a-----\n");
-	// printstack(a);
-	// printf("\n-----b-----\n");
-	// printstack(b);
-	// printf("\n-----a-----\n");
-	// print_all_score(a);
-	// printf("\n-----b-----\n");
-	// print_all_score(b);
 		move_btoa(a, b);
 	}
-	// printf("\n-----a-----\n");
-	// printstack(a);
-	// printf("\n-----b-----\n");
-	// printstack(b);
-	// printf("\n-----a-----\n");
-	// print_all_score(a);
-	// printf("\n-----b-----\n");
-	// print_all_score(b);
+	// for (int i=0; i < 6; i++)
+	// {
+		printf("\n-----a-----\n");
+		printstack(a);
+		printf("\n-----b-----\n");
+		printstack(b);
+		score_b(a, b);
+		move_btoa(a, b);
+
+		printf("\n-----a-----\n");
+		print_all_score(a);
+		printf("\n-----b-----\n");
+		print_all_score(b);
+	//}
+	//}
+
 }
