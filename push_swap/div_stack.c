@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 16:38:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:07:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,18 +115,16 @@ void	swap_for(int len, t_stack *a, t_stack *b, char c)
 void	div_stack(t_stack *a, t_stack *b)
 {
 	int	pivot;
-	int	cnt;
 	int	num;
 	int	head_move;
 	int	tail_move;
 
 	pivot = a->count / 3;
-	cnt = a -> count;
-	if (cnt == 3)
-		return (three_argv(a, b));
 	num = 1;
 	while (num <= pivot)//1부터 피봇까지 쭉 넘긴다.
 	{
+		if (a->count == 3)
+			return (three_argv(a, b));
 		head_move = list_head_find(a, 1, pivot);
 		tail_move = list_tail_find(a, 1, pivot);
 		if (head_move <= tail_move)
@@ -136,10 +134,10 @@ void	div_stack(t_stack *a, t_stack *b)
 		push_stack(a, b, 'b');
 		num++;
 	}
-	if (a->count == 3)
-		return (three_argv(a, b));
 	while (num <= pivot * 2)//1부터 피봇까지 쭉 넘긴다.
 	{
+		if (a->count == 3)
+			return (three_argv(a, b));
 		head_move = list_head_find(a, pivot + 1, pivot * 2);
 		tail_move = list_tail_find(a, pivot + 1, pivot * 2);
 		if (head_move <= tail_move)

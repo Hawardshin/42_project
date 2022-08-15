@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 16:48:57 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:07:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,8 @@ void	print_all_score(t_stack *a)//테스트용 함수
 
 void	sort_start(t_stack *a, t_stack *b)
 {
-	 while (b->count != 0)
-	 {
+	while (b->count != 0)
+	{
 	// {
 	// for (int i=0; i < 90; i++)
 	// {
@@ -200,10 +200,10 @@ void	sort_start(t_stack *a, t_stack *b)
 		// printf("\n-----b :%d-----\n",b->count);
 		// print_all_score(b);
 	 	forwarding(a, b);
-		printf("\n-----a-----\n");
-		print_all_score(a);
-		printf("\n-----b-----\n");
-		print_all_score(b);
+		// printf("\n-----a-----\n");
+		// print_all_score(a);
+		// printf("\n-----b-----\n");
+		// print_all_score(b);
 
 		// printf("\n-----a-----\n");
 		// printstack(a);
