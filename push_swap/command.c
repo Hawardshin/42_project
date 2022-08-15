@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 17:37:19 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 18:09:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	push_front(t_stack *s, t_node *new)
 {
-	 if (!s || !new)
-	 	return ;
+	if (!s || !new)
+		return ;
 	if (s->count == 0)
 	{
 		s -> head = new;
@@ -35,7 +35,7 @@ void	push_back(t_stack *s, t_node *new)
 {
 	if (!s || !new)
 		return ;
-	if (s -> count ==0)
+	if (s -> count == 0)
 	{
 		s->head = new;
 		s->tail = new;
@@ -68,12 +68,12 @@ t_node	*pop_front(t_stack *s)
 	return (tmp);
 }
 
-t_node	*pop_back(t_stack *s)//검증 필요
+t_node	*pop_back(t_stack *s)
 {
-	 if (!s || s -> count == 0) // count == 0일 때 하는게 맞겠지
-	 	return (0);
 	t_node	*tmp;
 
+	if (!s || s -> count == 0)
+		return (0);
 	tmp = s-> tail;
 	s->tail = s->tail->bef;
 	tmp ->bef = 0;
@@ -98,9 +98,9 @@ void	push_stack(t_stack *a, t_stack *b, char s)
 		if (b -> count == 0)
 			return ;
 		tmp = pop_front(b);
-		push_front(a,tmp);
-		write(1, "pa\n",3);
-	}//s == b
+		push_front(a, tmp);
+		write(1, "pa\n", 3);
+	}
 	else//pb
 	{
 		if (a -> count == 0)
@@ -145,23 +145,13 @@ void	swap_stack(t_stack *a, t_stack *b, char s)
 		push_front(b, tmp1);
 		push_front(b, tmp2);
 	}
-	else//ss
-	{
-		if (a -> count == 0)
-			return (swap_stack(a, b, 'b'));
-		else if (b -> count == 0)
-			return (swap_stack(a, b, 'a'));
-		write(1, "ss\n", 3);
-		swap_stack(a, b, 'A');
-		swap_stack(a, b, 'B');
-	}
 }
 
 void	reverse_stack(t_stack *a, t_stack *b, char s)
 {
 	t_node	*tmp;
 
-	if (s == 'a' || s == 'A')//ra
+	if (s == 'a' || s == 'A')
 	{
 		if (a -> count == 0 || a-> count == 1)
 			return ;
@@ -170,7 +160,7 @@ void	reverse_stack(t_stack *a, t_stack *b, char s)
 		tmp = pop_front(a);
 		push_back(a, tmp);
 	}
-	else if (s == 'b'|| s == 'B')//rb
+	else if (s == 'b' || s == 'B')
 	{
 		if (b -> count == 0 || b -> count == 1)
 			return ;
@@ -179,23 +169,13 @@ void	reverse_stack(t_stack *a, t_stack *b, char s)
 		tmp = pop_front(b);
 		push_back(b, tmp);
 	}
-	else//rr
-	{
-		if (a -> count == 0)
-			return (reverse_stack(a, b, 'b'));
-		else if (b -> count == 0)
-			return (reverse_stack(a, b, 'a'));
-		write(1, "rr\n", 3);
-		reverse_stack(a, b, 'A');
-		reverse_stack(a, b, 'B');
-	}
 }
 
 void	rreverse_stack(t_stack *a, t_stack *b, char s)
 {
 	t_node	*tmp;
 
-	if (s == 'a' || s == 'A')//ra
+	if (s == 'a' || s == 'A')
 	{
 		if (a -> count == 0 || a-> count == 1)
 			return ;
@@ -204,7 +184,7 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 		tmp = pop_back(a);
 		push_front(a, tmp);
 	}
-	else if (s == 'b'|| s == 'B')//rb
+	else if (s == 'b' || s == 'B')
 	{
 		if (b -> count == 0 || b -> count == 1)
 			return ;
@@ -213,14 +193,37 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 		tmp = pop_back(b);
 		push_front(b, tmp);
 	}
-	else//rr
-	{
-		if (a -> count == 0)
-			return (rreverse_stack(a, b, 'b'));
-		else if (b -> count == 0)
-			return (rreverse_stack(a, b, 'a'));
-		write(1, "rrr\n", 4);
-		rreverse_stack(a, b, 'A');
-		rreverse_stack(a, b, 'B');
-	}
+}
+
+void	rrr_stack (t_stack *a, t_stack *b)
+{
+	if (a -> count == 0)
+		return (rreverse_stack(a, b, 'b'));
+	else if (b -> count == 0)
+		return (rreverse_stack(a, b, 'a'));
+	write(1, "rrr\n", 4);
+	rreverse_stack(a, b, 'A');
+	rreverse_stack(a, b, 'B');
+}
+
+void	rr_stack(t_stack *a, t_stack* b)
+{
+	if (a -> count == 0)
+		return (reverse_stack(a, b, 'b'));
+	else if (b -> count == 0)
+		return (reverse_stack(a, b, 'a'));
+	write(1, "rr\n", 3);
+	reverse_stack(a, b, 'A');
+	reverse_stack(a, b, 'B');
+}
+
+void	ss_stack(t_stack *a, t_stack *b)
+{
+	if (a -> count == 0)
+		return (swap_stack(a, b, 'b'));
+	else if (b -> count == 0)
+		return (swap_stack(a, b, 'a'));
+	write(1, "ss\n", 3);
+	swap_stack(a, b, 'A');
+	swap_stack(a, b, 'B');
 }

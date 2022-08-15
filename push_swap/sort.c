@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 17:30:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:47:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	score_b(t_stack *a, t_stack *b)
 	t_node	*bnode;
 	int		bi;
 	int		l_score;
-	// t_node	*least_node;
 
 	bnode = b->head;
 	bi = 0;
@@ -46,20 +45,10 @@ void	score_b(t_stack *a, t_stack *b)
 	while (bnode)
 	{
 		bnode->ascore = ft_a_score(a, bnode->num);
-		// if (bnode->ascore > a->count / 2)
-		// 	bnode->ascore = a-> count - bnode->ascore;
 		bnode->bscore = bi;
-		// if (bi > b->count / 2)
-		// 	bnode -> bscore = b->count - bi;
-		// if (l_score == -1 || l_score > bnode->ascore + bnode->bscore)
-		// {
-		// 	least_node = bnode;
-		// 	l_score = bnode->ascore + bnode->bscore;
-		// }
 		bi++;
 		bnode = bnode->next;
 	}
-	// return (least_node);
 }
 
 t_node	*find_least_node(t_stack *a, t_stack *b)
@@ -90,22 +79,6 @@ t_node	*find_least_node(t_stack *a, t_stack *b)
 	return (least_node);
 }
 
-// int	is_sorted(t_stack *stack, int n)//스택의 현재 이 값보다 몇개가 더 작은지
-// {
-// 	int		idx;
-// 	t_node	*node;
-
-// 	node = stack -> head;
-// 	idx = 0;
-// 	while (node)
-// 	{
-// 		if (node->num > n)
-// 			idx++;
-// 		node = node->next;
-// 	}
-// 	return (idx);
-// }
-
 void	a_sort(t_stack *a, t_stack *b)
 {
 	t_node	*node;
@@ -115,13 +88,12 @@ void	a_sort(t_stack *a, t_stack *b)
 		swap_rev(a-> count - node->ascore - 1, a, b, 'a');
 	else
 		swap_for(node ->ascore, a, b, 'a');
-	// swap_stack(a, b, 'a');
 }
 
 void	forwarding(t_stack *a, t_stack *b)
 {
 	t_node	*node;
-	int	cnt;
+	int		cnt;
 
 	node = a->head;
 	cnt = 0;
@@ -142,7 +114,6 @@ void	forwarding(t_stack *a, t_stack *b)
 
 void	move_btoa(t_stack *a, t_stack *b)
 {
-
 	t_node	*node;
 
 	node = find_least_node(a, b);
@@ -152,75 +123,33 @@ void	move_btoa(t_stack *a, t_stack *b)
 		go_head(a, b, node ->bscore, 'b');
 	push_stack(a, b, 'a');
 	a_sort(a, b);
-	// forwarding(a, b);
 }
 
-void	print_all_score(t_stack *a)//테스트용 함수
-{
-	t_node	*node;
-	if (a == NULL)
-	{
-		printf("NULL");
-		return ;
-	}
-	node = a->head;
-	while (node)
-	{
-		printf("num :%d ascore:%d bscore:%d\n",node->num,node->ascore,node->bscore);
-		node = node->next;
-	}
-}
-
-// void	ft_is_sorted(t_stack *a, t_stack *b)
+// void	print_all_score(t_stack *a)//테스트용 함수
 // {
 // 	t_node	*node;
-// 	int		cnt;
-
-// 	node = a->head;
-// 	cnt = 0;
-// 	while (node ->num != a->count)
+// 	if (a == NULL)
 // 	{
-// 		cnt++;
+// 		printf("NULL");
+// 		return ;
+// 	}
+// 	node = a->head;
+// 	while (node)
+// 	{
+// 		printf("num :%d ascore:%d bscore:%d\n",node->num,node->ascore,node->bscore);
+// 		node = node->next;
 // 	}
 // }
-
-
 void	sort_start(t_stack *a, t_stack *b)
 {
 	while (b->count != 0)
 	{
-	// {
-	// for (int i=0; i < 90; i++)
-	// {
-		// printf("\n-----a :%d-----\n",a->count);
-		// print_all_score(a);
-		// printf("\n-----b :%d-----\n",b->count);
-		// print_all_score(b);
 		score_b(a, b);
 		move_btoa(a, b);
 	}
-		// printf("\n-----a :%d-----\n",a->count);
-		// print_all_score(a);
-		// printf("\n-----b :%d-----\n",b->count);
-		// print_all_score(b);
-	 	forwarding(a, b);
-		// printf("\n-----a-----\n");
-		// print_all_score(a);
-		// printf("\n-----b-----\n");
-		// print_all_score(b);
-
-		// printf("\n-----a-----\n");
-		// printstack(a);
-		// printf("\n-----b-----\n");
-		// printstack(b);
-		// score_b(a, b);
-		// move_btoa(a, b);
-
-		// printf("\n-----a :%d-----\n",a->count);
-		// print_all_score(a);
-		// printf("\n-----b :%d-----\n",b->count);
-		// print_all_score(b);
-	//}
-	//}
-
+	forwarding(a, b);
+	// printf("\n-----a :%d-----\n",a->count);
+	// print_all_score(a);
+	// printf("\n-----b :%d-----\n",b->count);
+	// print_all_score(b);
 }

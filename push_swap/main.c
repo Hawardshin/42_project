@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 17:37:31 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 18:33:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ void	ft_error(void)
 	exit(1);
 }
 
-void	node_indexing(t_stack *a)
+void	count_num(t_stack *a, int *tmp)
 {
-	int	i;
-	t_node	*node;
-	node = a -> head;
+	int		cnt;
 	t_node	*tnode;
-	int	*tmp;
-	int cnt;// 가장 작은 친구가 1 가장 큰친구 count
-	tmp = malloc(sizeof(int) * (a->count + 1));
-	if (!tmp)
-		return ;
+	t_node	*node;
+	int		i;
+
+	node = a->head;
 	i = 0;
 	while (node != NULL)
 	{
@@ -41,10 +38,23 @@ void	node_indexing(t_stack *a)
 				cnt++;
 			tnode = tnode -> next;
 		}
-		tmp[i] = cnt;
-		i++;
+		tmp[i++] = cnt;
 		node = node -> next;
 	}
+}
+
+void	node_indexing(t_stack *a)
+{
+	int		i;
+	t_node	*node;
+	int		*tmp;
+
+	node = a -> head;
+	tmp = malloc(sizeof(int) * (a->count + 1));
+	if (!tmp)
+		return ;
+	i = 0;
+	count_num(a, tmp);
 	i = 0;
 	node = a->head;
 	while (node != NULL)
@@ -52,11 +62,8 @@ void	node_indexing(t_stack *a)
 		node -> num = tmp[i++];
 		node = node -> next;
 	}
-	free(tmp);
 }
 
-//넣으면서 0부터 데이터 넣어주기.
-//atoi변경 실패시 프로세스 종료 이렇게 해도 될까?
 void	data_init(t_stack *stack_a, int argc, char **argv)
 {
 	char	**splited;
@@ -65,7 +72,6 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 
 	i = 0;
 	tmp = ft_all_join(argc, argv);
-	//printf("%s",tmp);
 	splited = ft_split(tmp, ' ');
 	if (!splited)
 		ft_error();
@@ -74,14 +80,12 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 	{
 		add_node(chk_dup(ft_atoi_c(splited[i]), stack_a), stack_a);
 		stack_a -> count++;
-		//printf("%d",(*stack_a) ->head ->num);
 		free(splited[i]);
 		i++;
 	}
 	free(splited);
 	node_indexing(stack_a);
 }
-
 
 //테스트용 함수
 void printstack(t_stack *stack_a)
@@ -102,9 +106,8 @@ void printstack(t_stack *stack_a)
 
 int	main(int argc, char **argv)
 {
-	// setvbuf(stdout, NULL, _IONBF, 0);/////printf write순서 맞추기
 	t_stack	*stack_a;
-	t_stack	*stack_b;//나중에 최적화 하기
+	t_stack	*stack_b;
 
 	stack_a = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack_a)
@@ -121,35 +124,8 @@ int	main(int argc, char **argv)
 	stack_b -> tail = NULL;
 	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
-	// printstack(stack_a);
-	// printstack(stack_b);
 	div_stack(stack_a, stack_b);
 	sort_start(stack_a, stack_b);
 	// printstack(stack_a);
-	// printstack(stack_b);
-	// printstack(stack_a);
-	// printstack(stack_b);
-	// push_stack(stack_a, stack_b, 'b');
-	// push_stack(stack_a, stack_b, 'b');
-	// push_stack(stack_a, stack_b, 'b');
-	// printf("\n::::a::::\n");
-	// printstack(stack_a);
-	// printf("\n::::b::::\n");
-	// printstack(stack_b);
-	// swap_stack(stack_a, stack_b, 'C');
-	// printf("\nafter swap\n::::a::::\n");
-	// printstack(stack_a);
-	// printf("\n::::b::::\n");
-	// printstack(stack_b);
-	// reverse_stack(stack_a, stack_b, 'C');
-	// printf("\nafter reverse\n::::a::::\n");
-	// printstack(stack_a);
-	// printf("\n::::b::::\n");
-	// printstack(stack_b);
-	// rreverse_stack(stack_a, stack_b, 'C');
-	// printf("\nafter rreverse\n::::a::::\n");
-	// printstack(stack_a);
-	// printf("\n::::b::::\n");
-	// printstack(stack_b);
-}
 
+}
