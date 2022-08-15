@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 17:38:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:37:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	reverse_stack(t_stack *a, t_stack *b, char s)
 		if (b -> count == 0 || b -> count == 1)
 			return ;
 		if (s == 'b')
-			write(1, "ra\n", 3);
+			write(1, "rb\n", 3);
 		tmp = pop_front(b);
 		push_back(b, tmp);
 	}

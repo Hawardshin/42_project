@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 17:09:34 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:37:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void printstack(t_stack *stack_a)
 
 int	main(int argc, char **argv)
 {
-	setvbuf(stdout, NULL, _IONBF, 0);/////printf write순서 맞추기
+	// setvbuf(stdout, NULL, _IONBF, 0);/////printf write순서 맞추기
 	t_stack	*stack_a;
 	t_stack	*stack_b;//나중에 최적화 하기
 

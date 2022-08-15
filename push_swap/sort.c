@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 17:07:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:30:28 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,10 @@ void	sort_start(t_stack *a, t_stack *b)
 	// {
 	// for (int i=0; i < 90; i++)
 	// {
+		// printf("\n-----a :%d-----\n",a->count);
+		// print_all_score(a);
+		// printf("\n-----b :%d-----\n",b->count);
+		// print_all_score(b);
 		score_b(a, b);
 		move_btoa(a, b);
 	}
