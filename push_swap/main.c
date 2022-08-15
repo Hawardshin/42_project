@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 20:39:29 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 15:10:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	node_indexing(t_stack *a)
 	if (!tmp)
 		return ;
 	i = 0;
-	while (node !=NULL)
+	while (node != NULL)
 	{
 		cnt = 1;
 		tnode = a -> head;

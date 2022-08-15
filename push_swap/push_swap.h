@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 19:52:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 15:27:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	div_stack(t_stack *a, t_stack *b);
 void	go_head(t_stack	*a, t_stack *b, int idx, char c);
 void	go_tail(t_stack *a, t_stack *b, int idx, char c);
 int		is_sorted(t_stack *stack, int n);
+void	swap_rev(int len, t_stack *a, t_stack *b, char c);
+void	swap_for(int len, t_stack *a, t_stack *b, char c);
+
 //chk.c
 void	two_argv(t_stack *a, t_stack *b);
 void	three_argv(t_stack *a, t_stack *b);

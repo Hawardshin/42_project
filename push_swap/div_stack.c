@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 20:54:17 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:38:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,25 @@ void	swap_rev(int len, t_stack *a, t_stack *b, char c)
 	int	i;
 
 	i = 0;
+	// if (a->head->ascore == a->count - 1)
+	// {
+	// 	rreverse_stack(a, b, c);
+	// 	swap_stack(a, b, c);
+	// 	return ;
+	// }
 	while (i < len)
 	{
-		swap_stack(a, b, c);
-		if (i != len - 1)
-			rreverse_stack(a, b, c);
+		rreverse_stack(a, b, c);
+		// if (i != len - 1)
+			swap_stack(a, b, c);
 		i++;
 	}
 	i = 1;
-	while (i < len)
-	{
-		reverse_stack(a, b, c);
-		i++;
-	}
+// 	while (i < len)
+// 	{
+// 		reverse_stack(a, b, c);
+// 		i++;
+// 	}
 }
 
 void	swap_for(int len, t_stack *a, t_stack *b, char c)
@@ -80,11 +86,11 @@ void	swap_for(int len, t_stack *a, t_stack *b, char c)
 		i++;
 	}
 	i = 1;
-	while (i < len)
-	{
-		rreverse_stack(a, b, c);
-		i++;
-	}
+	// while (i < len)
+	// {
+	// 	rreverse_stack(a, b, c);
+	// 	i++;
+	// }
 }
 
 // void	sorting(t_stack *a ,t_stack *b, char c)
