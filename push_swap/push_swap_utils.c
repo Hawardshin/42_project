@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/13 14:33:20 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 19:21:47 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,7 @@ void	add_node(int data, t_stack *stack_a)
 		stack_a -> tail -> next = new_node;
 	new_node -> next = NULL;
 	if (((stack_a) -> head) == NULL)
-	{
-	//	printf("Aas");
 		stack_a -> head = new_node;
-	}
-	//printf("b");
 	stack_a -> tail = new_node;
 }
 
@@ -73,8 +69,6 @@ int	ft_atoi_c(const char *str)
 
 	sign = 1;
 	result = 0;
-	// while ((*str >= 9 && *str <= 13) || *str == ' ')
-	// 	str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')

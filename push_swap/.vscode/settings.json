@@ -37,6 +37,7 @@
     "chrono": "c",
     "unordered_map": "c",
     "cstdio": "c",
-    "set": "c"
+    "set": "c",
+    "random": "c"
   }
 }

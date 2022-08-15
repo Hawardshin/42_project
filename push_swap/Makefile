@@ -6,14 +6,24 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/13 16:04:45 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/15 21:52:33 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = push_swap_utils.c main.c command.c div_stack.c list.c chk.c sort.c
+SRCS = 	push_swap_utils.c \
+		main.c \
+		command.c \
+		command_double.c\
+		command_utils.c \
+		div_stack.c \
+		list.c \
+		three_argv.c \
+		sort.c \
+		sort_utils.c\
+
 
 OBJS= $(SRCS:.c=.o)
 

@@ -1,49 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 11:52:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 19:25:44 by joushin          ###   ########.fr       */
+/*   Created: 2022/08/15 21:43:40 by joushin           #+#    #+#             */
+/*   Updated: 2022/08/15 21:48:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	list_head_find(t_stack *a, int start, int end)
+int	node_rank(t_stack *stack, int n)
 {
-	int		cnt;
+	int		idx;
 	t_node	*node;
 
-	node = a->head;
-	cnt = 0;
+	node = stack -> head;
+	idx = 0;
 	while (node)
 	{
-		if (start <= node-> num && node -> num <= end)
-			return (cnt);
-		else
-			node = node -> next;
-		cnt++;
+		if (node->num > n)
+			idx++;
+		node = node->next;
 	}
-	return (-1);
+	return (idx);
 }
 
-int	list_tail_find(t_stack *a, int start, int end)
+void	go_head(t_stack	*a, t_stack *b, int idx, char c)
 {
-	int		cnt;
-	t_node	*node;
-
-	node = a->tail;
-	cnt = 1;
-	while (node)
+	while (idx)
 	{
-		if (start <= node-> num && node -> num <= end)
-			return (cnt);
-		else
-			node = node -> bef;
-		cnt++;
+		reverse_stack(a, b, c);
+		idx--;
 	}
-	return (-1);
+}
+
+void	go_tail(t_stack *a, t_stack *b, int idx, char c)
+{
+	while (idx)
+	{
+		rreverse_stack(a, b, c);
+		idx--;
+	}
 }

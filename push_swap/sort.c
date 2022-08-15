@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 17:47:27 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 21:49:04 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	forwarding(t_stack *a, t_stack *b)
 	cnt = 0;
 	while (node)
 	{
-		if (a->count - 1 == is_sorted(a, node->num))
+		if (a->count - 1 == node_rank(a, node->num))
 		{
 			if (cnt > (a->count) / 2)
 				go_tail(a, b, a->count - cnt, 'a');

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 18:33:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 21:37:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error(void)
 	exit(1);
 }
 
-void	count_num(t_stack *a, int *tmp)
+static void	count_num(t_stack *a, int *tmp)
 {
 	int		cnt;
 	t_node	*tnode;
@@ -127,5 +127,5 @@ int	main(int argc, char **argv)
 	div_stack(stack_a, stack_b);
 	sort_start(stack_a, stack_b);
 	// printstack(stack_a);
-
+	// printstack(stack_b);
 }

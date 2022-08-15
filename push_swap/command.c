@@ -6,94 +6,18 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 18:09:17 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/15 18:55:12 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "./libft/libft.h"
 
-void	push_front(t_stack *s, t_node *new)
-{
-	if (!s || !new)
-		return ;
-	if (s->count == 0)
-	{
-		s -> head = new;
-		s -> tail = new;
-	}
-	else
-	{
-		s->head->bef = new;
-		new->next = s->head;
-		s->head = new;
-	}
-	s->count++;
-}
-
-void	push_back(t_stack *s, t_node *new)
-{
-	if (!s || !new)
-		return ;
-	if (s -> count == 0)
-	{
-		s->head = new;
-		s->tail = new;
-	}
-	else
-	{
-		s->tail->next = new;
-		new -> next = NULL;
-		new -> bef = s->tail;
-		s->tail = new;
-	}
-	s->count++;
-}
-
-t_node	*pop_front(t_stack *s)
-{
-	 if (!s || s -> count == 0)
-	 	return (0);
-	t_node	*tmp;
-
-	tmp = s-> head;
-	s->head = s->head->next;
-	tmp ->next = 0;
-	tmp -> bef = 0;
-	if (s->count == 1)
-		s->tail = 0;
-	else
-		s->head->bef = 0;
-	s->count--;
-	return (tmp);
-}
-
-t_node	*pop_back(t_stack *s)
-{
-	t_node	*tmp;
-
-	if (!s || s -> count == 0)
-		return (0);
-	tmp = s-> tail;
-	s->tail = s->tail->bef;
-	tmp ->bef = 0;
-	tmp -> next = 0;
-	if (s->count == 1)
-	{
-		s->head = 0;
-		s->tail = 0;
-	}
-	else
-		s->tail->next = 0;
-	s->count--;
-	return (tmp);
-}
-
 void	push_stack(t_stack *a, t_stack *b, char s)
 {
 	t_node	*tmp;
 
-	if (s == 'a')//pa
+	if (s == 'a')
 	{
 		if (b -> count == 0)
 			return ;
@@ -101,25 +25,39 @@ void	push_stack(t_stack *a, t_stack *b, char s)
 		push_front(a, tmp);
 		write(1, "pa\n", 3);
 	}
-	else//pb
+	else
 	{
 		if (a -> count == 0)
 			return ;
 		tmp = pop_front(a);
-		//printf("kk : %d",tmp->num);
-		push_front(b,tmp);
+		push_front(b, tmp);
 		write(1, "pb\n", 3);
 	}
 }
 
+void	swap_b(t_stack *b, char s)
+{
+	t_node	*tmp1;
+	t_node	*tmp2;
 
-//비어있을 때 생각해야하는가?? 했다.
+	if (b -> count == 0 || b -> count == 1)
+		return ;
+	if (s == 'b')
+		write(1, "sb\n", 3);
+	if (b->count < 2)
+		return ;
+	tmp1 = pop_front(b);
+	tmp2 = pop_front(b);
+	push_front(b, tmp1);
+	push_front(b, tmp2);
+}
+
 void	swap_stack(t_stack *a, t_stack *b, char s)
 {
 	t_node	*tmp1;
 	t_node	*tmp2;
 
-	if (s == 'a' || s == 'A')//sa
+	if (s == 'a' || s == 'A')
 	{
 		if (a -> count == 0 || a-> count == 1)
 			return ;
@@ -130,21 +68,9 @@ void	swap_stack(t_stack *a, t_stack *b, char s)
 		tmp1 = pop_front(a);
 		tmp2 = pop_front(a);
 		push_front(a, tmp1);
-		push_front(a, tmp2);
+		return (push_front(a, tmp2));
 	}
-	else if (s == 'b'|| s == 'B')//sb
-	{
-		if (b -> count == 0 || b -> count == 1)
-			return ;
-		if (s == 'b')
-			write(1, "sb\n", 3);
-		if (b->count < 2)
-			return ;
-		tmp1 = pop_front(b);
-		tmp2 = pop_front(b);
-		push_front(b, tmp1);
-		push_front(b, tmp2);
-	}
+	swap_b(b, s);
 }
 
 void	reverse_stack(t_stack *a, t_stack *b, char s)
@@ -193,37 +119,4 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s)
 		tmp = pop_back(b);
 		push_front(b, tmp);
 	}
-}
-
-void	rrr_stack (t_stack *a, t_stack *b)
-{
-	if (a -> count == 0)
-		return (rreverse_stack(a, b, 'b'));
-	else if (b -> count == 0)
-		return (rreverse_stack(a, b, 'a'));
-	write(1, "rrr\n", 4);
-	rreverse_stack(a, b, 'A');
-	rreverse_stack(a, b, 'B');
-}
-
-void	rr_stack(t_stack *a, t_stack* b)
-{
-	if (a -> count == 0)
-		return (reverse_stack(a, b, 'b'));
-	else if (b -> count == 0)
-		return (reverse_stack(a, b, 'a'));
-	write(1, "rr\n", 3);
-	reverse_stack(a, b, 'A');
-	reverse_stack(a, b, 'B');
-}
-
-void	ss_stack(t_stack *a, t_stack *b)
-{
-	if (a -> count == 0)
-		return (swap_stack(a, b, 'b'));
-	else if (b -> count == 0)
-		return (swap_stack(a, b, 'a'));
-	write(1, "ss\n", 3);
-	swap_stack(a, b, 'A');
-	swap_stack(a, b, 'B');
 }
