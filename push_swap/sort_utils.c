@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 21:43:40 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 11:52:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:03:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ int	ft_a_score(t_stack *stack, int n)
 	t_node	*node;
 
 	node = stack -> head;
+	if (node_rank(stack, n) == stack -> count && node_rank(stack, node->num) ==stack ->count -1 )
+		return (0);
 	idx = 1;
-	while (node->next)
+	while (node-> next)
 	{
 		if (node->num < n && n < node->next->num)
-			return (idx);
-		if (node -> num > node->next->num && n < node -> next->num)
+	 	 	return (idx);
+		 if (node -> num > node->next->num && n < node -> next->num)
 			return (idx);
 		if (node -> num > node -> next->num && n > node ->num)
 			return (idx);
@@ -65,6 +67,23 @@ int	ft_a_score(t_stack *stack, int n)
 		idx++;
 	}
 	return (idx);
+	// while (node->next)
+	// {
+	// 	if(n > node -> num)
+	// 		return (idx);
+	// 	// if (node->num < n && n < node->next->num)
+	// 	// 	return (idx);
+	// 	// if (node -> num > node->next->num && n < node -> next->num)
+	// 	// 	return (idx);
+	// 	// if (node -> num > node -> next->num && n > node ->num)
+	// 	// 	return (idx);
+	// 	node = node->next;
+	// 	idx++;
+	// }
+	// if (stack -> head-> num > n)
+	// 	return (0);
+	// else
+	// 	return (idx);
 }
 
 void	score_b(t_stack *a, t_stack *b)
