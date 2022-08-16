@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 11:58:27 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 17:19:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 char	*ft_all_join(int argc, char **argv)
 {
-	int		i;
-	int		len;
-	char	*str;
-	int		idx;
-	int		j;
+	long long	i;
+	long long	len;
+	char		*str;
+	long long	idx;
+	long long	j;
 
 	i = 0;
 	idx = 0;
@@ -38,6 +38,7 @@ char	*ft_all_join(int argc, char **argv)
 		if (i != argc - 1)
 			str[idx++] = ' ';
 	}
+	str[idx] = '\0';
 	return (str);
 }
 
@@ -70,9 +71,9 @@ int	ft_atoi_c(const char *str)
 		if (*str == '-')
 			sign = -1;
 		str++;
-	}
-	if (!*str)
+		if (!*str)
 		ft_error();
+	}
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + *str - '0';
@@ -91,12 +92,15 @@ void	ft_mlstclear(t_node **node)
 {
 	t_node	*tmp;
 
-	while ((*node) != NULL)
+	if (node && *node)
 	{
-		tmp = *node;
-		*node = (*node)->next;
-		free(tmp);
-		tmp = NULL;
+		while ((*node) != NULL)
+		{
+			tmp = *node;
+			*node = (*node)->next;
+			free(tmp);
+			tmp = NULL;
+		}
 	}
 	*node = NULL;
 }

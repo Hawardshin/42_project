@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 11:35:03 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:56:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	node_indexing(t_stack *a)
 		node -> num = tmp[i++];
 		node = node -> next;
 	}
+	free(tmp);
 }
 
 void	data_init(t_stack *stack_a, int argc, char **argv)
@@ -75,6 +76,7 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 	splited = ft_split(tmp, ' ');
 	if (!splited)
 		ft_error();
+	i = 0;
 	free(tmp);
 	while (splited[i])
 	{
@@ -109,6 +111,10 @@ int	main(int argc, char **argv)
 	data_init(stack_a, argc, argv);
 	div_stack(stack_a, stack_b);
 	sort_start(stack_a, stack_b);
+	ft_mlstclear(&stack_a->head);
+	ft_mlstclear(&stack_b->head);
+	free(stack_a);
+	free(stack_b);
 }
 // void	printstack(t_stack *stack_a)
 // {

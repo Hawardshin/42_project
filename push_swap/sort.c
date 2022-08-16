@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 16:05:58 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:21:25 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	move_btoa(t_stack *a, t_stack *b)
 		go_head(a, b, node ->bscore, 'b');
 	a_sort(a, b);
 	push_stack(a, b, 'a');
-
 }
 #include <stdio.h>
 void	print_all_score(t_stack *a)//테스트용 함수
