@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 19:17:32 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 19:25:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_stack
 	t_node	*head;
 	t_node	*tail;
 }t_stack;
+
 //push_swap_utils.c
 char	*ft_all_join(int argc, char **argv);
 void	add_node(int data, t_stack *stack_a);

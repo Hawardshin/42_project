@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 19:16:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 19:26:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	a_sort(t_stack *a, t_stack *b)
 
 	node = b->head;
 	if (node->ascore > a->count / 2)
-		go_tail(a, b , a-> count - node->ascore, 'a');
+		go_tail(a, b, a-> count - node->ascore, 'a');
 	else
 		go_head(a, b, node ->ascore, 'a');
 }
