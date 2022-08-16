@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 16:21:25 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 19:02:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,40 @@ static void	forwarding(t_stack *a, t_stack *b)
 	}
 }
 
+void	command_optimize(t_stack *a, t_stack *b, t_node **node)
+{
+	int	idx;
+
+	if ((*node)->bscore > b->count / 2 && (*node)->ascore > a->count / 2)
+	{
+		idx = b->count - (*node)->bscore;
+		if (b->count - (*node)->bscore > a-> count - (*node)->ascore)
+			idx = a-> count - (*node)->ascore;
+		(*node)->bscore = (*node)->bscore + idx;
+		(*node)->ascore = (*node)->ascore + idx;
+		idx++;
+		while (--idx)
+			rrr_stack(a, b);
+	}
+	else if ((*node)->bscore <= b->count / 2 && (*node)->ascore <= a->count / 2)
+	{
+		idx = (*node)->ascore;
+		if ((*node)->bscore < (*node)->ascore)
+			idx = (*node)->bscore;
+		(*node)->ascore = (*node)->ascore - idx;
+		(*node)->bscore = (*node)->bscore - idx;
+		idx++;
+		while (--idx)
+			rr_stack(a, b);
+	}
+}
+
 static void	move_btoa(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 
 	node = find_least_node(a, b);
+	command_optimize(a, b, &node);
 	if (node->bscore > b->count / 2)
 		go_tail(a, b, b->count - node -> bscore, 'b');
 	else
@@ -110,7 +139,7 @@ void	sort_start(t_stack *a, t_stack *b)
 {
 	while (b->count != 0)
 	{
-	// for (int i=0; i < 80; i++)
+	// for (int i=0; i < 15; i++)
 	// {
 		score_b(a, b);
 		move_btoa(a, b);

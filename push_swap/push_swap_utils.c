@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 17:19:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 17:28:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_atoi_c(const char *str)
 			sign = -1;
 		str++;
 		if (!*str)
-		ft_error();
+			ft_error();
 	}
 	while (*str >= '0' && *str <= '9')
 	{
