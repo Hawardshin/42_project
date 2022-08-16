@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 21:37:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:35:03 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,6 @@ void	data_init(t_stack *stack_a, int argc, char **argv)
 	node_indexing(stack_a);
 }
 
-//테스트용 함수
-void printstack(t_stack *stack_a)
-{
-	if (stack_a -> count == 0)
-	{
-		printf("NULL\n");
-		return ;
-	}
-	printf("count :: %d\n",stack_a -> count);
-	t_node *tmp = (stack_a ->head);
-	while (tmp != NULL)
-	{
-	 	printf("%d\n", tmp->num);
-		tmp = tmp -> next;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -126,6 +109,19 @@ int	main(int argc, char **argv)
 	data_init(stack_a, argc, argv);
 	div_stack(stack_a, stack_b);
 	sort_start(stack_a, stack_b);
-	// printstack(stack_a);
-	// printstack(stack_b);
 }
+// void	printstack(t_stack *stack_a)
+// {
+// 	if (stack_a -> count == 0)
+// 	{
+// 		printf("NULL\n");
+// 		return ;
+// 	}
+// 	printf("count :: %d\n",stack_a -> count);
+// 	t_node *tmp = (stack_a ->head);
+// 	while (tmp != NULL)
+// 	{
+// 	 	printf("%d\n", tmp->num);
+// 		tmp = tmp -> next;
+// 	}
+// }

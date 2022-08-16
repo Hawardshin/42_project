@@ -38,6 +38,7 @@
     "unordered_map": "c",
     "cstdio": "c",
     "set": "c",
-    "random": "c"
+    "random": "c",
+    "functional": "c"
   }
 }

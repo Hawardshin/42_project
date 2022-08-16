@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 21:53:29 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:53:48 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-#include <stdio.h>/////
+// #include <stdio.h>/////
 
 typedef struct s_node
 {
@@ -32,7 +32,7 @@ typedef struct s_stack
 	t_node	*head;
 	t_node	*tail;
 }t_stack;
-void printstack(t_stack *stack_a);/////
+// void printstack(t_stack *stack_a);/////
 //push_swap_utils.c
 char	*ft_all_join(int argc, char **argv);
 void	add_node(int data, t_stack *stack_a);
@@ -81,5 +81,7 @@ void	sort_start(t_stack *a, t_stack *b);
 int		node_rank(t_stack *stack, int n);
 void	go_head(t_stack	*a, t_stack *b, int idx, char c);
 void	go_tail(t_stack *a, t_stack *b, int idx, char c);
+int		ft_a_score(t_stack *stack, int n);
+void	score_b(t_stack *a, t_stack *b);
 
 #endif

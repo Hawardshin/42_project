@@ -6,52 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:33:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 21:49:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:55:12 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_a_score(t_stack *stack, int n)//a스택의 위치 찾기
-{
-	int		idx;
-	t_node	*node;
-
-	node = stack -> head;
-	idx = 1;
-	while (node->next)
-	{
-		if (node->num < n && n < node->next->num)
-			return (idx);
-		if (node -> num > node->next->num && n < node -> next->num)
-			return (idx);
-		if (node -> num > node -> next->num && n > node ->num)
-			return (idx);
-		node = node->next;
-		idx++;
-	}
-	return (idx);
-}
-//a에서 움직여야 하는 횟수와 b에서 움직여야 하는 횟수를 구조체에 담아준다.
-void	score_b(t_stack *a, t_stack *b)
-{
-	t_node	*bnode;
-	int		bi;
-	int		l_score;
-
-	bnode = b->head;
-	bi = 0;
-	l_score = -1;
-	while (bnode)
-	{
-		bnode->ascore = ft_a_score(a, bnode->num);
-		bnode->bscore = bi;
-		bi++;
-		bnode = bnode->next;
-	}
-}
-
-t_node	*find_least_node(t_stack *a, t_stack *b)
+static t_node	*find_least_node(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 	t_node	*least_node;
@@ -79,7 +40,7 @@ t_node	*find_least_node(t_stack *a, t_stack *b)
 	return (least_node);
 }
 
-void	a_sort(t_stack *a, t_stack *b)
+static void	a_sort(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 
@@ -90,7 +51,7 @@ void	a_sort(t_stack *a, t_stack *b)
 		swap_for(node ->ascore, a, b, 'a');
 }
 
-void	forwarding(t_stack *a, t_stack *b)
+static void	forwarding(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 	int		cnt;
@@ -112,7 +73,7 @@ void	forwarding(t_stack *a, t_stack *b)
 	}
 }
 
-void	move_btoa(t_stack *a, t_stack *b)
+static void	move_btoa(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 
@@ -125,6 +86,19 @@ void	move_btoa(t_stack *a, t_stack *b)
 	a_sort(a, b);
 }
 
+void	sort_start(t_stack *a, t_stack *b)
+{
+	while (b->count != 0)
+	{
+		score_b(a, b);
+		move_btoa(a, b);
+	}
+	forwarding(a, b);
+}
+// printf("\n-----a :%d-----\n",a->count);
+// print_all_score(a);
+// printf("\n-----b :%d-----\n",b->count);
+// print_all_score(b);
 // void	print_all_score(t_stack *a)//테스트용 함수
 // {
 // 	t_node	*node;
@@ -136,20 +110,8 @@ void	move_btoa(t_stack *a, t_stack *b)
 // 	node = a->head;
 // 	while (node)
 // 	{
-// 		printf("num :%d ascore:%d bscore:%d\n",node->num,node->ascore,node->bscore);
+// 		printf("num :%d ascore:%d bscore:%d\n"
+//,node->num,node->ascore,node->bscore);
 // 		node = node->next;
 // 	}
 // }
-void	sort_start(t_stack *a, t_stack *b)
-{
-	while (b->count != 0)
-	{
-		score_b(a, b);
-		move_btoa(a, b);
-	}
-	forwarding(a, b);
-	// printf("\n-----a :%d-----\n",a->count);
-	// print_all_score(a);
-	// printf("\n-----b :%d-----\n",b->count);
-	// print_all_score(b);
-}

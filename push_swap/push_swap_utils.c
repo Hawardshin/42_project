@@ -6,15 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/15 19:21:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:58:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "./libft/libft.h"
-//중복 체크해주기, int_max넘는지 확인, 문제 없으면 데이터 넣어주기.
 
-//한꺼번에 다 넣어버리고 에러 핸들링 해주기 위한 함수.
 char	*ft_all_join(int argc, char **argv)
 {
 	int		i;
@@ -55,13 +53,11 @@ void	add_node(int data, t_stack *stack_a)
 	if (stack_a -> tail != NULL)
 		stack_a -> tail -> next = new_node;
 	new_node -> next = NULL;
-	if (((stack_a) -> head) == NULL)
+	if ((stack_a -> head) == NULL)
 		stack_a -> head = new_node;
 	stack_a -> tail = new_node;
 }
 
-
-//atoi에서 - 하나 받거나 + 하나 받는거 터트려? 일단 난 잡자.
 int	ft_atoi_c(const char *str)
 {
 	int					sign;
@@ -98,13 +94,12 @@ void	ft_mlstclear(t_node **node)
 	while ((*node) != NULL)
 	{
 		tmp = *node;
-		*node = (*node) -> next;
+		*node = (*node)->next;
 		free(tmp);
 		tmp = NULL;
 	}
 	*node = NULL;
 }
-//이걸 리스트 클리어 해주고 하는게 맞는걸까? 어차피 다 exit 할꺼라면 필요 없지 않나
 
 int	chk_dup(int in, t_stack *stack_a)
 {
