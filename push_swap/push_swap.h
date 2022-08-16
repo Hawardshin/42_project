@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 19:08:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 19:17:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	rreverse_stack(t_stack *a, t_stack *b, char s);
 void	rrr_stack(t_stack *a, t_stack *b);
 void	rr_stack(t_stack *a, t_stack *b);
 void	ss_stack(t_stack *a, t_stack *b);
+void	command_optimize(t_stack *a, t_stack *b, t_node **node);
 
 //main.c
 void	ft_error(void);

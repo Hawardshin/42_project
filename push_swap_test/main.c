@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 19:12:49 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:56:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,3 +116,18 @@ int	main(int argc, char **argv)
 	free(stack_a);
 	free(stack_b);
 }
+// void	printstack(t_stack *stack_a)
+// {
+// 	if (stack_a -> count == 0)
+// 	{
+// 		printf("NULL\n");
+// 		return ;
+// 	}
+// 	printf("count :: %d\n",stack_a -> count);
+// 	t_node *tmp = (stack_a ->head);
+// 	while (tmp != NULL)
+// 	{
+// 	 	printf("%d\n", tmp->num);
+// 		tmp = tmp -> next;
+// 	}
+// }
