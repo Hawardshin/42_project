@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:55:59 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 12:46:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 14:12:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	rrr_stack(t_stack *a, t_stack *b)
 		return (rreverse_stack(a, b, 'b'));
 	else if (b -> count == 0)
 		return (rreverse_stack(a, b, 'a'));
-	write(1, "rrr\n", 4);
 	rreverse_stack(a, b, 'A');
 	rreverse_stack(a, b, 'B');
 }
@@ -30,7 +29,6 @@ void	rr_stack(t_stack *a, t_stack *b)
 		return (reverse_stack(a, b, 'b'));
 	else if (b -> count == 0)
 		return (reverse_stack(a, b, 'a'));
-	write(1, "rr\n", 3);
 	reverse_stack(a, b, 'A');
 	reverse_stack(a, b, 'B');
 }
@@ -41,7 +39,6 @@ void	ss_stack(t_stack *a, t_stack *b)
 		return (swap_stack(a, b, 'b'));
 	else if (b -> count == 0)
 		return (swap_stack(a, b, 'a'));
-	write(1, "ss\n", 3);
 	swap_stack(a, b, 'A');
 	swap_stack(a, b, 'B');
 }

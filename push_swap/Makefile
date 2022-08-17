@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/17 13:15:02 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/17 13:46:04 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ RM= rm -rf
 all : $(NAME)
 
 ifdef BONUS
-	make -C ./push_swap_bonus all
+	make -C ./push_swap_bonus/ all
 else
 endif
 

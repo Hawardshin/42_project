@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 12:55:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:00:23 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ typedef struct s_stack
 	t_node	*head;
 	t_node	*tail;
 }t_stack;
+
+//checker.c
+int		ft_strcmp(char *s, char *com);
+void	check_fuc(char *s, t_stack*a, t_stack*b);
+int		ft_is_sorted(t_stack *a, t_stack *b);
+void	sort_check(t_stack *a, t_stack *b);
 
 //get_next_line_bonus.c
 char	*get_next_line(int fd);
@@ -74,24 +80,5 @@ void	data_init(t_stack *stack_a, int argc, char **argv);
 //list_bonus.c
 int		list_head_find(t_stack *a, int start, int end);
 int		list_tail_find(t_stack *a, int start, int end);
-
-//div_stack_bonus.c
-void	div_stack(t_stack *a, t_stack *b);
-void	swap_rev(int len, t_stack *a, t_stack *b, char c);
-void	swap_for(int len, t_stack *a, t_stack *b, char c);
-int		div_pivot(int start, int end, t_stack *a, t_stack *b);
-
-//three_argv_bonus.c
-void	three_argv(t_stack *a, t_stack *b);
-
-//sort_bonus.c
-void	sort_start(t_stack *a, t_stack *b);
-
-// sort_utils_bonus.c
-int		node_rank(t_stack *stack, int n);
-void	go_head(t_stack	*a, t_stack *b, int idx, char c);
-void	go_tail(t_stack *a, t_stack *b, int idx, char c);
-int		ft_a_score(t_stack *stack, int n);
-void	score_b(t_stack *a, t_stack *b);
 
 #endif

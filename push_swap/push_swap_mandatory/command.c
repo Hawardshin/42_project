@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 13:15:35 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:25:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void	swap_stack(t_stack *a, t_stack *b, char s)
 	{
 		if (a -> count == 0 || a-> count == 1)
 			return ;
-		if (s == 'a')
-			write(1, "sa\n", 3);
 		if (a->count < 2)
 			return ;
+		if (s == 'a')
+			write(1, "sa\n", 3);
 		tmp1 = pop_front(a);
 		tmp2 = pop_front(a);
 		push_front(a, tmp1);

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 13:36:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 14:57:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ int	main(int argc, char **argv)
 	stack_b -> tail = NULL;
 	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
-	div_stack(stack_a, stack_b);
-	sort_start(stack_a, stack_b);
+	sort_check(stack_a, stack_b);
 	ft_mlstclear(&stack_a->head);
 	ft_mlstclear(&stack_b->head);
 	free(stack_a);
