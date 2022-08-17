@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/17 15:49:30 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/17 16:24:38 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,25 +37,25 @@ RM= rm -rf
 all : $(NAME)
 
 ifdef BONUS
-	make -C ./push_swap_bonus/ all
+	@make -C ./push_swap_bonus/ all
 else
 endif
 
 $(NAME) : $(OBJS)
-	make -C ./libft all
+	@make -C ./libft all
 	$(CC) $(CFLAGS) -o $@ $^ -L ./libft -lft
 
 bonus :
-	make BONUS=1
+	@make BONUS=1
 
 clean:
-	make -C ./libft clean
-	make -C ./push_swap_bonus clean
+	@make -C ./libft clean
+	@make -C ./push_swap_bonus clean
 	$(RM) $(OBJS)
 
 fclean: clean
-	make -C ./libft fclean
-	make -C ./push_swap_bonus fclean
+	@make -C ./libft fclean
+	@make -C ./push_swap_bonus fclean
 	$(RM) $(NAME)
 
 re:

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 15:49:09 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:23:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	list_tail_find(t_stack *a, int start, int end)
 	}
 	return (-1);
 }
-
 
 static int	div_pivot(int start, int end, t_stack *a, t_stack *b)
 {
