@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 15:40:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 17:06:18 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,36 @@ typedef struct s_stack
 	t_node	*tail;
 }t_stack;
 
-//checker.c
 void	sort_check(t_stack *a, t_stack *b);
 
-//get_next_line_bonus.c
 char	*get_next_line(int fd);
 char	*ft__strjoin(char *s1, char *s2);
 char	*ft__strdup(const char *s1);
 void	*ft__memmove(void *dst, const void *src, size_t len);
 size_t	ft__strlen(const char *str);
 
-//push_swap_utils_bonus.c
 char	*ft_all_join(int argc, char **argv);
 void	add_node(int data, t_stack *stack_a);
 int		ft_atoi_c(const char *str);
 void	ft_mlstclear(t_node **node);
 int		chk_dup(int in, t_stack *stack_a);
 
-//command_utils_bonus.c
+char	*get_next_line(int fd);
+
 void	push_front(t_stack *s, t_node *new);
 void	push_back(t_stack *s, t_node *new);
 t_node	*pop_front(t_stack *s);
 t_node	*pop_back(t_stack *s);
 
-//command_bonus.c
 void	push_stack(t_stack *a, t_stack *b, char s);
 void	swap_stack(t_stack *a, t_stack *b, char s);
 void	reverse_stack(t_stack *a, t_stack *b, char s);
 void	rreverse_stack(t_stack *a, t_stack *b, char s);
 
-//command_double_bonus.c
 void	rrr_stack(t_stack *a, t_stack *b);
 void	rr_stack(t_stack *a, t_stack *b);
 void	ss_stack(t_stack *a, t_stack *b);
-void	command_optimize(t_stack *a, t_stack *b, t_node **node);
 
-//main_bonus.c
 void	ft_error(void);
 
 #endif
