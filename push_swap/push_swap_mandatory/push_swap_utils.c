@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:42:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 17:28:50 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 13:15:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/libft.h"
+#include "../libft/libft.h"
 
 char	*ft_all_join(int argc, char **argv)
 {

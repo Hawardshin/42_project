@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:55:59 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 19:16:48 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 13:15:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/libft.h"
+#include "../libft/libft.h"
 
 void	rrr_stack(t_stack *a, t_stack *b)
 {

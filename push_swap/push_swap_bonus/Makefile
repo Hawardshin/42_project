@@ -5,62 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/17 13:15:02 by joushin          ###   ########.fr        #
+#    Created: 2022/08/17 12:36:05 by joushin           #+#    #+#              #
+#    Updated: 2022/08/17 13:09:34 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-DIR = ./push_swap_mandatory
+B_SRCS = 	push_swap_utils_bonus.c \
+			main_bonus.c \
+			command_bonus.c \
+			command_double_bonus.c\
+			command_utils_bonus.c \
+			div_stack_bonus.c \
+			list_bonus.c \
+			three_argv_bonus.c \
+			sort_bonus.c \
+			sort_utils_bonus.c\
+			get_next_line.c \
+			get_next_line_utils.c
 
-SRCS = 	$(DIR)/push_swap_utils.c \
-		$(DIR)/main.c \
-		$(DIR)/command.c \
-		$(DIR)/command_double.c\
-		$(DIR)/command_utils.c \
-		$(DIR)/div_stack.c \
-		$(DIR)/list.c \
-		$(DIR)/three_argv.c \
-		$(DIR)/sort.c \
-		$(DIR)/sort_utils.c\
+B_OBJS= $(B_SRCS:.c=.o)
 
-OBJS= $(SRCS:.c=.o)
-
-NAME = push_swap
+NAME = ../checker
 
 RM= rm -rf
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -o $@ -c $^
-
 all : $(NAME)
 
-ifdef BONUS
-	make -C ./push_swap_bonus all
-else
-endif
-
-$(NAME) : $(OBJS)
-	make -C ./libft all
-	$(CC) $(CFLAGS) -o $@ $^ -L ./libft -lft
-
-bonus :
-	make BONUS=1
+$(NAME) : $(B_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ -L ../libft -lft
 
 clean:
-	make -C ./libft clean
-	make -C ./push_swap_bonus clean
-	$(RM) $(OBJS)
+	$(RM) $(B_OBJS)
 
 fclean: clean
-	make -C ./libft fclean
-	make -C ./push_swap_bonus fclean
 	$(RM) $(NAME)
 
 re:
 	make fclean
 	make all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
