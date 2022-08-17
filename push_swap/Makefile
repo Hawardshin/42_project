@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 19:02:02 by joushin           #+#    #+#              #
-#    Updated: 2022/08/17 13:46:04 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/17 15:49:30 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ SRCS = 	$(DIR)/push_swap_utils.c \
 		$(DIR)/command_double.c\
 		$(DIR)/command_utils.c \
 		$(DIR)/div_stack.c \
-		$(DIR)/list.c \
 		$(DIR)/three_argv.c \
 		$(DIR)/sort.c \
 		$(DIR)/sort_utils.c\

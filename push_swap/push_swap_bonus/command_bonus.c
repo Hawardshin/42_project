@@ -6,12 +6,11 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 14:42:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:45:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-#include "../libft/libft.h"
 
 void	push_stack(t_stack *a, t_stack *b, char s)
 {

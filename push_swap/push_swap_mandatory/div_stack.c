@@ -6,40 +6,50 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:46:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/16 11:32:31 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:49:09 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_rev(int len, t_stack *a, t_stack *b, char c)
+static int	list_head_find(t_stack *a, int start, int end)
 {
-	int	i;
+	int		cnt;
+	t_node	*node;
 
-	i = 0;
-	while (i < len)
+	node = a->head;
+	cnt = 0;
+	while (node)
 	{
-		rreverse_stack(a, b, c);
-		swap_stack(a, b, c);
-		i++;
+		if (start <= node-> num && node -> num <= end)
+			return (cnt);
+		else
+			node = node -> next;
+		cnt++;
 	}
+	return (-1);
 }
 
-void	swap_for(int len, t_stack *a, t_stack *b, char c)
+static int	list_tail_find(t_stack *a, int start, int end)
 {
-	int	i;
+	int		cnt;
+	t_node	*node;
 
-	i = 0;
-	while (i < len)
+	node = a->tail;
+	cnt = 1;
+	while (node)
 	{
-		swap_stack(a, b, c);
-		if (i != len - 1)
-			reverse_stack(a, b, c);
-		i++;
+		if (start <= node-> num && node -> num <= end)
+			return (cnt);
+		else
+			node = node -> bef;
+		cnt++;
 	}
+	return (-1);
 }
 
-int	div_pivot(int start, int end, t_stack *a, t_stack *b)
+
+static int	div_pivot(int start, int end, t_stack *a, t_stack *b)
 {
 	int	head_move;
 	int	tail_move;

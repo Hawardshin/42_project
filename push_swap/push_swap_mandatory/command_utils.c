@@ -6,12 +6,11 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:50:15 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 13:15:30 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:44:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "../libft/libft.h"
 
 void	push_front(t_stack *s, t_node *new)
 {

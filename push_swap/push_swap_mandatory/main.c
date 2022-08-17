@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 13:15:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:51:06 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	count_num(t_stack *a, int *tmp)
 	}
 }
 
-void	node_indexing(t_stack *a)
+static void	node_indexing(t_stack *a)
 {
 	int		i;
 	t_node	*node;
@@ -65,7 +65,7 @@ void	node_indexing(t_stack *a)
 	free(tmp);
 }
 
-void	data_init(t_stack *stack_a, int argc, char **argv)
+static void	data_init(t_stack *stack_a, int argc, char **argv)
 {
 	char	**splited;
 	char	*tmp;
