@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 15:00:23 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:40:33 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ typedef struct s_stack
 }t_stack;
 
 //checker.c
-int		ft_strcmp(char *s, char *com);
-void	check_fuc(char *s, t_stack*a, t_stack*b);
-int		ft_is_sorted(t_stack *a, t_stack *b);
 void	sort_check(t_stack *a, t_stack *b);
 
 //get_next_line_bonus.c
@@ -75,10 +72,5 @@ void	command_optimize(t_stack *a, t_stack *b, t_node **node);
 
 //main_bonus.c
 void	ft_error(void);
-void	data_init(t_stack *stack_a, int argc, char **argv);
-
-//list_bonus.c
-int		list_head_find(t_stack *a, int start, int end);
-int		list_tail_find(t_stack *a, int start, int end);
 
 #endif

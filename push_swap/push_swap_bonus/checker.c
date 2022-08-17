@@ -6,13 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:57:12 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 15:02:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:36:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-int	ft_strcmp(char *s, char *com)
+static int	ft_strcmp(char *s, char *com)
 {
 	while (*s && *com)
 	{
@@ -27,7 +27,7 @@ int	ft_strcmp(char *s, char *com)
 		return (0);
 }
 
-void	check_fuc(char *s, t_stack*a, t_stack*b)
+static void	check_fuc(char *s, t_stack*a, t_stack*b)
 {
 	if (ft_strcmp(s, "pa\n"))
 		push_stack(a, b, 'a');
@@ -55,7 +55,7 @@ void	check_fuc(char *s, t_stack*a, t_stack*b)
 		ft_error();
 }
 
-int	ft_is_sorted(t_stack *a, t_stack *b)
+static int	ft_is_sorted(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 

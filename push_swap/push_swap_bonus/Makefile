@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 12:36:05 by joushin           #+#    #+#              #
-#    Updated: 2022/08/17 15:05:08 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/17 15:41:01 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ B_SRCS = 	push_swap_utils_bonus.c \
 			command_bonus.c \
 			command_double_bonus.c\
 			command_utils_bonus.c \
-			list_bonus.c \
 			get_next_line.c \
 			get_next_line_utils.c\
 			checker.c

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 14:57:34 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:40:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	count_num(t_stack *a, int *tmp)
 	}
 }
 
-void	node_indexing(t_stack *a)
+static void	node_indexing(t_stack *a)
 {
 	int		i;
 	t_node	*node;
