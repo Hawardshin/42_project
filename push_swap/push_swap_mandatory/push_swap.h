@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 16:28:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/18 10:05:08 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_stack
 	t_node	*head;
 	t_node	*tail;
 }t_stack;
+
+int		ft_is_sorted(t_stack *a, t_stack *b);
 
 char	*ft_all_join(int argc, char **argv);
 void	add_node(int data, t_stack *stack_a);

@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"push_swap_bonus.h": "c",
-		"libft.h": "c",
-		"push_swap.h": "c",
-		"__split_buffer": "c",
-		"iterator": "c"
-	}
-}

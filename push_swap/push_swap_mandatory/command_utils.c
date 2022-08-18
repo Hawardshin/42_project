@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:50:15 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 15:44:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/18 10:04:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,22 @@ t_node	*pop_back(t_stack *s)
 		s->tail->next = 0;
 	s->count--;
 	return (tmp);
+}
+
+int	ft_is_sorted(t_stack *a, t_stack *b)
+{
+	t_node	*node;
+
+	node = a->head;
+	if (b->count != 0)
+		return (0);
+	if (a->count == 1)
+		return (1);
+	while (node -> next)
+	{
+		if (node -> num > node -> next -> num)
+			return (0);
+		node = node -> next;
+	}
+	return (1);
 }

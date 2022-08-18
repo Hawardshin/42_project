@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:09:57 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 16:34:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/18 10:22:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	node_indexing(t_stack *a)
 	node = a -> head;
 	tmp = malloc(sizeof(int) * (a->count + 1));
 	if (!tmp)
-		return ;
+		exit(1);
 	i = 0;
 	count_num(a, tmp);
 	i = 0;
@@ -72,12 +72,17 @@ static void	data_init(t_stack *stack_a, int argc, char **argv)
 	int		i;
 
 	i = 0;
+	stack_a -> head = NULL;
+	stack_a -> tail = NULL;
+	stack_a -> count = 0;
 	tmp = ft_all_join(argc, argv);
+	if (!tmp)
+		exit(1);
 	splited = ft_split(tmp, ' ');
-	if (!splited)
-		ft_error();
-	i = 0;
 	free(tmp);
+	if (!splited)
+		exit(1);
+	i = 0;
 	while (splited[i])
 	{
 		add_node(chk_dup(ft_atoi_c(splited[i]), stack_a), stack_a);
@@ -94,23 +99,21 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	stack_a = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack_a)
-		return (0);
-	stack_b = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack_b)
-		return (0);
 	if (argc < 2)
 		return (0);
-	stack_a -> head = NULL;
-	stack_a -> tail = NULL;
-	stack_a -> count = 0;
+	stack_a = (t_stack *)malloc(sizeof(t_stack));
+	stack_b = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack_a || !stack_b)
+		exit(1);
 	stack_b -> head = NULL;
 	stack_b -> tail = NULL;
 	stack_b -> count = 0;
 	data_init(stack_a, argc, argv);
-	div_stack(stack_a, stack_b);
-	sort_start(stack_a, stack_b);
+	if (ft_is_sorted(stack_a, stack_b) == 0)
+	{
+		div_stack(stack_a, stack_b);
+		sort_start(stack_a, stack_b);
+	}
 	ft_mlstclear(&stack_a->head);
 	ft_mlstclear(&stack_b->head);
 	free(stack_a);
