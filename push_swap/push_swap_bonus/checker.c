@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:57:12 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/17 15:36:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/19 12:44:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_is_sorted(t_stack *a, t_stack *b)
 	t_node	*node;
 
 	node = a->head;
-	if (b->count != 0)
+	if (b->count != 0 || a->count == 0)
 		return (0);
 	if (a->count == 1)
 		return (1);
@@ -77,6 +77,8 @@ void	sort_check(t_stack *a, t_stack *b)
 {
 	char	*s;
 
+	if (a->count == 0)
+		return ;
 	while (1)
 	{
 		s = get_next_line(0);
