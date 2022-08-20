@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/20 21:54:08 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/20 22:00:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	parse_cmd(t_px *pipex, char **argv, char **envp)
 
 	pipex->infile = ft_strdup(argv[1]);
 	pipex->cmd[0] = ft_split(argv[2], ' ');
+	check_slash();
+
 
 }
 
