@@ -27,5 +27,11 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+	"pipex.h": "c",
+	"wait.h": "c",
+	"stdlib.h": "c",
+	"unistd.h": "c"
+}
 }
