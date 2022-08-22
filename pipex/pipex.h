@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/22 17:14:37 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/22 21:12:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_px
 {
 	char		**cmd[3];// 명령 모음
 	char		**path;// 경로
-	char		*cmd_path[3];//명령어 경로 모음
+	char		*cmd_path[3][2];//명령어 경로 모음
 	int			pipe[2];// 파이프 fd 0이 출구 1이 입구
 	// int			num;//??
 	char		*infile;//입력 파일
