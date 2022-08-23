@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/23 21:53:45 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/23 22:32:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,89 +83,68 @@ void	level_fuc(t_px *pipex)
 {
 	int		idx;
 	pid_t	pid;
-	int		size = 1;
-	int fd1[2];//fd1은 자식에서 부모로 보내는 파이프 용도로 사용
+	int		size;
+	int		fd1[2];
+	int		fds;
+	int		fds2;
 
 	idx = 0;
-	if (pipe(fd1) == -1 )//파이프 생성 실패시
+	size = 1;
+	if (pipe(fd1) == -1)
 	{
-		printf("vb\n");
+		perror("pipe error ");
 		exit(1);
 	}
 	pid = fork();
 	if (pid == -1)
-	{//프로세싱 실패
-		printf("nopro\n");
+	{
+		perror("fork error ");
 		exit(1);
-	}
+	}//자식 프로세스
 	else if (pid == 0)
 	{
-		int fds = open(pipex->infile,O_RDONLY);
-		//자식 프로세스
-		// write(fd1[1],,BUFFER_SIZE);
-		if (dup2(fds, 0) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
+		fds = open(pipex->infile, O_RDONLY);
+		if (fds == -1)
 		{
-			printf("not fd\n");
+			perror("open error : ");
 			exit(1);
 		}
+		if (dup2(fds, 0) == -1)
+			exit(1);
+		if (dup2(fd1[1], 1) == -1)
+			exit(1);
 		close(fds);
-		if (dup2(fd1[1], 1) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
-		{
-			printf("not fd\n");
-			exit(1);
-		}
 		close(fd1[1]);
 		if (pipex->cmd_path[idx][0] != NULL)
 			execve(pipex->cmd_path[idx][0], (pipex->cmd[idx]), pipex->ev);
 	}
 	else
 	{//부모프로세스
-		int fds2 = open(pipex->outfile, O_WRONLY);
+		fds2 = open(pipex->outfile, O_WRONLY);
 		if (fds2 == -1)
 		{
-			// open 실패시 출력하는 에러노 값을 출력해주자.
-			// 궁금한점 : open을 실패한 경우 그냥 표준 출력으로 찍어주기만 하면 되는 걸까?
-			printf("open no\n");
+			perror("open error : ");
 			exit(1);
 		}
 		sleep(2);
 		idx++;
 		close(fd1[1]);
-		if (dup2(fd1[0], 0) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
-		{
-			printf("not fd\n");
+		if (dup2(fd1[0], 0) == -1)
 			exit(1);
-		}
+		if (dup2(fds2, 1) == -1)
+			exit(1);
 		close(fd1[0]);
-		if (dup2(fds2, 1) == -1)//여기서 표준 출력을 이 fd값으로 바꿔주게 되면
-		{
-			printf("not fd\n");
-			exit(1);
-		}
 		close(fds2);
 		if (pipex->cmd_path[idx][0] != NULL)
-			execve(pipex->cmd_path[idx][0], (pipex->cmd[idx]), pipex->ev);//즉 그 다음경로부터 본다.
+			execve(pipex->cmd_path[idx][0], (pipex->cmd[idx]), pipex->ev);
 	}
-	// while (idx < 3)
-	// {
-	// 	if (pipex->cmd_path[idx][0] != NULL)
-	// 		execve(pipex->cmd_path[idx][0], &(pipex->cmd_path[idx][0]), pipex->ev);//이렇게 해주면 현재 환경변수가 없는 것
-	// 	idx++;
-	// }
-	// printf("명령어 수행 실패\n");
 }
-
-
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_px	pipex;
 	if (argc == 5)
 	{
-		// pipex.cmd = (char ***)malloc (sizeof(char **) * 3);
-		// if (!pipex.cmd)
-		// 	return (0);
-		// pipex.cmd[3] = NULL;
 		ft_memset(&pipex, 0, sizeof(t_px));
 		pipex.ev = envp;
 		parse_input(&pipex, argv, envp);//파싱하기
