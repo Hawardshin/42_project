@@ -237,3 +237,10 @@ errno.h를 인클루드 해서 현재 발생한 에러에 대해서 errno값을 
 //     execve("/bin/ls", argv, envp);
 //     return (0);
 // }
+
+int main(int argc ,char **argv,  char **envp)
+{
+	printf("%s\n\n",&argv[1][0]);
+	execve("/bin/ls",&argv[1], envp);
+	printf("no");
+}
