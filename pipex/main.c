@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/22 21:55:54 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/23 16:45:04 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,13 @@ void	level_fuc(t_px *pipex)
 		exit(1);
 	}//입력 파일을 어떻게 명령을 수행하는지?
 	//여러개 읽을 때 fork 와일문 돌리고 만약 자식 프로세스면 와일문 안돌게 만들면 여러개의 프로세스를 만들 수 있다.
-	int fds = open(pipex->infile,O_RDONLY);
-	if (fds == -1)
+	// int fds = open(pipex->infile,O_RDONLY);
+	int fds2 = open(pipex->outfile, O_WRONLY);
+	if (fds2 == -1)
 	{
 		//open 실패시 출력하는 에러노 값을 출력해주자.
 		// 궁금한점 : open을 실패한 경우 그냥 표준 출력으로 찍어주기만 하면 되는 걸까?
 		printf("open no\n");
-		exit(1);
-	}
-	if (dup2(fds, 0) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
-	{
-		printf("not fd\n");
 		exit(1);
 	}
 	pid = fork();
@@ -98,27 +94,51 @@ void	level_fuc(t_px *pipex)
 		exit(1);
 	}
 	else if (pid == 0)
-	{//자식 프로세스
+	{
+		int fds = open(pipex->infile,O_RDONLY);
+		//자식 프로세스
 		// write(fd1[1],,BUFFER_SIZE);
+		if (dup2(fds, 0) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
+		{
+			printf("not fd\n");
+			exit(1);
+		}
+		close(fds);
+		if (dup2(fd1[1], 1) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
+		{
+			printf("not fd\n");
+			exit(1);
+		}
+		close(fd1[1]);
 		if (pipex->cmd_path[idx][0] != NULL)
 			execve(pipex->cmd_path[idx][0], &(pipex->cmd_path[idx][0]), pipex->ev);
 	}
 	else
-	{
-		while (size != 0)
+	{//부모프로세스
+		sleep(2);
+		idx++;
+		close(fd1[1]);
+		if (dup2(fd1[0], 0) == -1)//여기서 표준 입력을 이 fd값으로 바꿔주게 되면
 		{
-			size = read(0, buff, BUFFER_SIZE);
+			printf("not fd\n");
+			exit(1);
 		}
+		close(fd1[0]);
+		if (dup2(fds2, 1) == -1)//여기서 표준 출력을 이 fd값으로 바꿔주게 되면
+		{
+			printf("not fd\n");
+			exit(1);
+		}
+		close(fds2);
+		execve(pipex->cmd_path[idx][0], &(pipex->cmd_path[idx][0]), pipex->ev);
 	}
 	// while (idx < 3)
 	// {
-
-
 	// 	if (pipex->cmd_path[idx][0] != NULL)
 	// 		execve(pipex->cmd_path[idx][0], &(pipex->cmd_path[idx][0]), pipex->ev);//이렇게 해주면 현재 환경변수가 없는 것
 	// 	idx++;
 	// }
-	printf("명령어 수행 실패\n");
+	// printf("명령어 수행 실패\n");
 }
 
 int	main(int argc, char **argv, char **envp)
