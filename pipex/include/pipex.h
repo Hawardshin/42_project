@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/24 18:51:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/24 20:38:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct s_px
 	struct s_px	*next;//다음
 }t_px ;
 
-#endif
-
 void	ft_error_check(int idx, t_px *pipex);
 void	my_free(char **to_free);
 char	*mft_strdup(const char *s1);
@@ -45,7 +43,7 @@ void	parse_input(t_px *pipex, char **argv, char **envp);
 void	check_cmd(t_px *pipex);
 void	level_fuc(t_px *pipex);
 
-
+#endif
 // fork할 때 pid가 0 : 자식이다.
 // pipe함수
 // fd[2]에서
