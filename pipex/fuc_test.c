@@ -238,9 +238,21 @@ errno.h를 인클루드 해서 현재 발생한 에러에 대해서 errno값을 
 //     return (0);
 // }
 
-int main(int argc ,char **argv,  char **envp)
-{
-	printf("%s\n\n",&argv[1][0]);
-	execve("/bin/ls",&argv[1], envp);
-	printf("no");
-}
+// int main(int argc ,char **argv,  char **envp)
+// {
+// 	printf("%s\n\n",&argv[1][0]);
+// 	execve("/bin/ls",&argv[1], envp);
+// 	printf("no");
+// }
+
+// void	plus(int a)
+// {
+// 	a++;
+// }
+
+// int main()
+// {
+// 	static int a = 0;
+// 	plus(a);
+// 	printf("%d\n\n",a);
+// }

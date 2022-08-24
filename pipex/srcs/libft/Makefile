@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/08 14:46:10 by joushin           #+#    #+#              #
-#    Updated: 2022/07/12 14:09:43 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/24 18:40:28 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,11 @@ SRCS = ft_isalpha.c ft_isdigit.c \
 	   ft_split.c ft_itoa.c ft_strmapi.c \
 	   ft_striteri.c ft_putchar_fd.c \
 	   ft_putstr_fd.c ft_putendl_fd.c \
-	   ft_putnbr_fd.c
+	   ft_putnbr_fd.c \
+	   ft_printf.c ft_printf_utils.c \
+	   ft_printf_fuc.c\
+	   ft_eprintf.c ft_eprintf_utils.c\
+	   ft_eprintf_fuc.c
 
 
 SRCS_BONUS = ft_lstnew.c ft_lstadd_front.c \

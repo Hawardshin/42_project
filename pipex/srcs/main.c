@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/23 22:32:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/24 18:51:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	parse_input(t_px *pipex, char **argv, char **envp)
 		envp++;
 	tmp_path = mft_strdup(*envp + 5);
 	pipex -> path = ft_split(tmp_path, ':');
-	my_free(tmp_path);
+	my_free(&tmp_path);
 }
 
 //만약 경로상에 존재하지 않는다면 현재 디렉토리에서도 탐색하는걸 추가할까?
-void	check_cmd(t_px *pipex, char **argv, char **envp)
+void	check_cmd(t_px *pipex)
 {
 	char	*pathname;
 	int		idx;
@@ -70,12 +70,12 @@ void	check_cmd(t_px *pipex, char **argv, char **envp)
 				return ;
 			if (access(pathname, R_OK | X_OK) == 0)
 				pipex->cmd_path[idx][0] = mft_strdup(pathname);
-			my_free(pathname);
+			my_free(&pathname);
 		}
 		if(!(pipex->cmd_path[idx][0]))//
 			pipex->cmd_path[idx][0] = NULL;
 		// printf("ak: %s\n",pipex->cmd_path[idx][0]);
-		my_free(cmdtmp);
+		my_free(&cmdtmp);
 	}
 }
 
@@ -84,17 +84,12 @@ void	level_fuc(t_px *pipex)
 	int		idx;
 	pid_t	pid;
 	int		size;
-	int		fd1[2];
 	int		fds;
 	int		fds2;
 
 	idx = 0;
 	size = 1;
-	if (pipe(fd1) == -1)
-	{
-		perror("pipe error ");
-		exit(1);
-	}
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -111,10 +106,11 @@ void	level_fuc(t_px *pipex)
 		}
 		if (dup2(fds, 0) == -1)
 			exit(1);
-		if (dup2(fd1[1], 1) == -1)
+		if (dup2(pipex->pipefd[1], 1) == -1)
 			exit(1);
 		close(fds);
-		close(fd1[1]);
+		close(pipex->pipefd[1]);
+		ft_error_check(idx, pipex);
 		if (pipex->cmd_path[idx][0] != NULL)
 			execve(pipex->cmd_path[idx][0], (pipex->cmd[idx]), pipex->ev);
 	}
@@ -128,15 +124,17 @@ void	level_fuc(t_px *pipex)
 		}
 		sleep(2);
 		idx++;
-		close(fd1[1]);
-		if (dup2(fd1[0], 0) == -1)
+		close(pipex->pipefd[1]);
+		if (dup2(pipex->pipefd[0], 0) == -1)
 			exit(1);
 		if (dup2(fds2, 1) == -1)
 			exit(1);
-		close(fd1[0]);
+		close(pipex->pipefd[0]);
 		close(fds2);
+		ft_error_check(idx, pipex);
 		if (pipex->cmd_path[idx][0] != NULL)
 			execve(pipex->cmd_path[idx][0], (pipex->cmd[idx]), pipex->ev);
+
 	}
 }
 
@@ -148,7 +146,12 @@ int	main(int argc, char **argv, char **envp)
 		ft_memset(&pipex, 0, sizeof(t_px));
 		pipex.ev = envp;
 		parse_input(&pipex, argv, envp);//파싱하기
-		check_cmd(&pipex, argv, envp);//명령어 체크해서 있으면 제대로 없으면 NULL로 채워주기
+		check_cmd(&pipex);//명령어 체크해서 있으면 제대로 없으면 NULL로 채워주기]
+		if (pipe(pipex.pipefd) == -1)
+		{
+			perror("pipe error ");
+			exit(1);
+		}
 		level_fuc(&pipex);//파이프라인 작동시키기
 	}
 	else

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 06:47:32 by joushin           #+#    #+#             */
-/*   Updated: 2022/07/11 07:35:06 by joushin          ###   ########.fr       */
+/*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
+/*   Updated: 2022/08/24 17:35:26 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "pipex.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_error_check(int idx, t_px *pipex)
 {
-	int	i;
+	if (pipex->cmd_path[idx][0] == NULL)
+	{
 
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-		ft_putchar_fd(s[i++], fd);
+	}
 }
