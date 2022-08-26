@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 15:56:12 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/26 16:39:09 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_error(int	Flag, char *s)
 	}
 	else if (Flag == 2)
 	{
-		// perror(s);
+		perror(s);
 		exit(1);
 	}
 	else if (Flag == 3)
@@ -157,7 +157,7 @@ void	cmd_init(t_data *px)
 		i = -1;
 		while (px -> path[++i])
 		{
-			if (ft_strncmp(px->path[i], "/", 1) != 0)
+			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
 				pathname = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
 			else
 				pathname = ft_mstrdup(px->path[i]);
@@ -229,17 +229,17 @@ void	exec_last(t_data *px)
 	node = px->cmd_node_tail;
 	wait(&status);
 	close(px->pipefd[1]);
-	o_fd = open(px->outfile, O_WRONLY);
+	o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0666);
 	if (o_fd == -1)
-		print_error(3, px->infile);
+		print_error(3, px->outfile);
 	if (dup2(px->pipefd[0], 0) == -1)
 		print_error(2, NULL);
 	if (dup2(o_fd, 1) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[0]);
 	close(o_fd);
-	if (node->cmd_path[(px->pipe_num) - 1] != NULL)
-		execve(node->cmd_path[(px->pipe_num) - 1], (node->cmd), px->ev);
+	if (node->cmd_path[0] != NULL)
+		execve(node->cmd_path[0], (node->cmd), px->ev);
 	print_error(1, node->cmd[0]);
 }
 
@@ -247,6 +247,7 @@ void	fork_child(t_data *px)
 {
 	int		i;
 	pid_t	pid;
+	int		status;
 
 	i = -1;
 	while (++i < px->pipe_num)
@@ -260,8 +261,10 @@ void	fork_child(t_data *px)
 				exec_last(px);
 			else
 				exec_pipe(i, px);
+			wait(&status);
 		}
 	}
+	wait(&status);
 }
 int	main(int argc, char **argv, char **envp)
 {
