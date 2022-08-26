@@ -6,11 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:18:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/25 14:22:12 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/26 17:12:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "./libft/libft.h"
 
 static long long	len_count(char const *str, char c)
 {

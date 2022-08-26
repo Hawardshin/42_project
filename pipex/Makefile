@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 21:08:50 by joushin           #+#    #+#              #
-#    Updated: 2022/08/26 15:51:47 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/26 17:03:39 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,10 @@ LIBFT = srcs/libft/libft.a
 RM= rm -rf
 
 SRCS =	srcs/main.c \
-		srcs/check_error.c \
-		srcs/m_split.c
+		srcs/pase.c \
+		srcs/m_split.c \
+		srcs/pipe_utils.c \
+		srcs/pipe.c
 
 SRCS_BONUS = \
 

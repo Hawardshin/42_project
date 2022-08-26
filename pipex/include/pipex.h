@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 15:42:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/26 17:11:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,23 @@ typedef struct s_data
 	t_px	*cmd_node_tail;
 }t_data;
 
-void	ft_error_check(int idx, t_px *pipex);
-void	my_free(char **to_free);
-char	*mft_strdup(const char *s1);
+void	print_error(int Flag, char *s);
+
+void	node_init(t_data *px, char **argv);
 void	parse_input(t_data *px, int argc, char **argv, char **envp);
-void	check_cmd(t_px *pipex);
-void	level_fuc(t_px *pipex);
-void	print_error(int	Flag, char *s);
+void	cmd_init(t_data *px);
+
+void	exec_first(t_data *px);
+void	exec_last(t_data *px);
+void	exec_pipe(int idx, t_data *px);
+void	fork_child(t_data *px);
+
+void	my_free(char **to_free);
+char	*ft_mstrdup(const char *s1);
+char	*ft_mstrjoin(char const *s1, char const *s2);
+t_px	*mlst_find(int idx, t_data *data);
+pid_t	mfork(void);
+
 char	**ft_msplit(char const *str, char c);
 
 #endif
