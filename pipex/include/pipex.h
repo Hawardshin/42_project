@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/25 16:57:13 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/26 15:42:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ typedef struct s_data
 void	ft_error_check(int idx, t_px *pipex);
 void	my_free(char **to_free);
 char	*mft_strdup(const char *s1);
-void	parse_input(t_data *px, char **argv, char **envp);
+void	parse_input(t_data *px, int argc, char **argv, char **envp);
 void	check_cmd(t_px *pipex);
 void	level_fuc(t_px *pipex);
 void	print_error(int	Flag, char *s);
 char	**ft_msplit(char const *str, char c);
+
 #endif
 // fork할 때 pid가 0 : 자식이다.
 // pipe함수

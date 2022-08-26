@@ -1,7 +1,7 @@
 
 
-#include "pipex.h"
-#include "./libft/libft.h"
+#include "./include/pipex.h"
+#include "./srcs/libft/libft.h"
 #include <errno.h>
 #define BUFSIZE 30
 
@@ -256,3 +256,8 @@ errno.h를 인클루드 해서 현재 발생한 에러에 대해서 errno값을 
 // 	plus(a);
 // 	printf("%d\n\n",a);
 // }
+
+int main(int argc, char **argv, char **envp)
+{
+	printf("%d\n",argc);
+}
