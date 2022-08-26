@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 17:12:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/26 17:41:18 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ void	exec_first(t_data *px)
 void	exec_last(t_data *px)
 {
 	int		o_fd;
-	int		status;
 	t_px	*node;
 
 	node = px->cmd_node_tail;
-	wait(&status);
 	close(px->pipefd[1]);
 	o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0666);
 	if (o_fd == -1)
@@ -61,9 +59,7 @@ void	exec_last(t_data *px)
 void	exec_pipe(int idx, t_data *px)
 {
 	t_px	*node;
-	int	status;
 
-	wait(&status);
 	node = mlst_find(idx, px);
 	if (dup2(px->pipefd[1], 0) == -1)
 		print_error(2, NULL);
@@ -94,8 +90,7 @@ void	fork_child(t_data *px)
 				exec_last(px);
 			else
 				exec_pipe(i, px);
-			wait(&status);
 		}
 	}
-	wait(&status);
+	waitpid(pid, &status, WUNTRACED);
 }
