@@ -3,31 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 17:41:18 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/27 17:03:26 by haward           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "./libft/libft.h"
 
-void	exec_first(t_data *px)
+void	exec_first(t_data *px)//함수 분리 필요 unlink(".tmp"); 삭제 하기 -> 이 함수 나가서
 {
 	int		o_fd;
 	t_px	*node;
+	char	*tmp;
 
 	node = px->cmd_node_head;
-	o_fd = open(px->infile, O_RDONLY);
-	close(px->pipefd[0]);
-	if (o_fd == -1)
-		print_error(3, px->infile);
+	if (px->flag == 1)//새로운 파일 만들어서 하는거
+	{
+		o_fd = open (".tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
+		if (o_fd == -1)
+			print_error(3, px->infile);
+		tmp = get_next_line(0);
+		while (!ft_strcmp(tmp, px->infile))
+		{
+			write (o_fd, tmp, ft_strlen(tmp));
+			my_free(tmp);
+			tmp = get_next_line(0);
+			if (tmp == NULL)
+			{
+				ft_eprintf("warning: here-document \
+			at line 58 delimited by end-of-file (wanted `%s')",px->infile);
+				//exit(0);//이거 확인
+				break;
+			}
+		}
+		if (tmp)
+			my_free(tmp);
+	}
+	else
+	{
+		o_fd = open(px->infile, O_RDONLY);
+		if (o_fd == -1)
+			print_error(3, px->infile);
+	}
 	if (dup2(o_fd, 0) == -1)
-		print_error(2, NULL);
+			print_error(2, NULL);
+	close(o_fd);
+	close(px->pipefd[0]);
 	if (dup2(px->pipefd[1], 1) == -1)
 		print_error(2, NULL);
-	close(o_fd);
 	close(px->pipefd[1]);
 	if (node->cmd_path[0] != NULL)
 		execve(node->cmd_path[0], node->cmd, px->ev);
@@ -42,7 +68,10 @@ void	exec_last(t_data *px)
 
 	node = px->cmd_node_tail;
 	close(px->pipefd[1]);
-	o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0666);
+	if (px->flag == 1)
+		o_fd = open(px->outfile, O_APPEND | O_WRONLY | O_CREAT, 0666 );//O_WRONLY하는게 맞나.
+	else
+		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0666);
 	if (o_fd == -1)
 		print_error(3, px->outfile);
 	if (dup2(px->pipefd[0], 0) == -1)
@@ -72,7 +101,7 @@ void	exec_pipe(int idx, t_data *px)
 	print_error(1, node->cmd[0]);
 }
 
-void	fork_child(t_data *px)
+int	fork_child(t_data *px)
 {
 	int		i;
 	pid_t	pid;
@@ -93,4 +122,5 @@ void	fork_child(t_data *px)
 		}
 	}
 	waitpid(pid, &status, WUNTRACED);
+	return (status >> 8 & 0x000000ff);
 }

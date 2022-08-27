@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 17:11:57 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/27 17:04:56 by haward           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>  //perror
 # include <string.h> //strerror
 # include <sys/wait.h> //wait, wait pid
-
+# define BUFFER_SIZE 42
 typedef struct s_px
 {
 	char	**cmd; //명령어 , 옵션들, 널
@@ -38,6 +38,7 @@ typedef struct s_data
 	char	**path;//환경변수에서 자른 path
 	int		pipefd[2];//처음에 만든 파이프
 	int		pipe_num;
+	bool	flag;//파이프 보너스 >> << 를 위해서 주는 flag
 	t_px	*cmd_node_head;//각 명령어 별로 노드로
 	t_px	*cmd_node_tail;
 }t_data;
@@ -51,7 +52,7 @@ void	cmd_init(t_data *px);
 void	exec_first(t_data *px);
 void	exec_last(t_data *px);
 void	exec_pipe(int idx, t_data *px);
-void	fork_child(t_data *px);
+int		fork_child(t_data *px);
 
 void	my_free(char **to_free);
 char	*ft_mstrdup(const char *s1);
