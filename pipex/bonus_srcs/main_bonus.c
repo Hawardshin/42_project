@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 20:55:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 21:07:08 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //옵션으로 들어온 녀석 까지 같이 검사해주면 될까? ls -c 는 실행되는데 cat -c는 실행이 안됨..
 
-void	print_error(int	Flag, char *s)
+void	print_error(int Flag, char *s)
 {
 	if (Flag == 0)
 	{
@@ -45,9 +45,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc >= 5)
 	{
-		ft_memset(&px, 0, sizeof(t_px));
+		ft_memset(&px, 0, sizeof(t_data));
 		px.ev = envp;
-		px.cmd_node_head = NULL;
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		{
 			parse_input(&px, argc - 1, argv + 1, envp);

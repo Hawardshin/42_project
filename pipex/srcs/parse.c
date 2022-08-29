@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 20:26:44 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 21:20:04 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 {
 	px->infile = argv[1];
 	px->outfile = argv[4];
-	px->ev = envp;
-	px->pipe_num = argc - 3;//파이프 갯수
+	px->pipe_num = argc - 3;
 	node_init(px, argv);
 	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)
 		envp++;
@@ -100,11 +99,9 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 		print_error(2, "pipe error\n");
 }
 
-//명령어에 이미 /가 있다면 그냥 그대로 실행해보고 아니면 /붙혀서 해본다.
-//명령어를 찾아서 각 노드별로 명령어를 적어주는 방식사용
 void	cmd_init(t_data *px)
 {
-	char	*pathname;
+	char	*ptmp;
 	int		idx;
 	int		i;
 	t_px	*node;
@@ -118,12 +115,12 @@ void	cmd_init(t_data *px)
 		while (px -> path[++i])
 		{
 			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
-				pathname = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
+				ptmp = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
 			else
-				pathname = ft_mstrdup(node->cmd[0]);
-			if (access(pathname, R_OK | X_OK) == 0)
-				node->cmd_path[0] = ft_mstrdup(pathname);
-			my_free(&pathname);
+				ptmp = ft_mstrdup(node->cmd[0]);
+			if (access(ptmp, R_OK | X_OK) == 0)
+				node->cmd_path[0] = ft_mstrdup(ptmp);
+			my_free(&ptmp);
 		}
 	}
 }

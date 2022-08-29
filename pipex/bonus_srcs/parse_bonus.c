@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:14:20 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 21:30:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,11 @@ void	node_init(t_data *px, char **argv)
 	i = -1;
 	while (++i < px->pipe_num)
 	{
-		node = (t_px *)malloc(sizeof (t_px));
+		node = (t_px *)malloc(sizeof(t_px));
 		if (!node)
 			print_error(0, NULL);
 		node->next = NULL;
 		node->idx = i;
-		while (*argv[i + 2] == ' ')
-			argv[i + 2]++;
 		if (!ft_strncmp(argv[i + 2], "awk ", 4) || \
 			!ft_strncmp(argv[i + 2], "sed ", 4))
 		{
@@ -77,7 +75,7 @@ void	node_init(t_data *px, char **argv)
 			node -> cmd[0] = ft_mstrtrim(&(node->cmd[0]), " ");
 		}
 		else
-			node ->cmd = ft_msplit(argv[i + 2],' ');//argv[0] : 실행파일 argv[1] : 파일1번
+			node ->cmd = ft_msplit(argv[i + 2], ' ');
 		if (px->cmd_node_head != NULL)
 			px->cmd_node_tail->next = node;
 		else
@@ -89,8 +87,8 @@ void	node_init(t_data *px, char **argv)
 void	parse_input(t_data *px, int argc, char **argv, char **envp)
 {
 	px->infile = argv[1];
-	px->outfile = argv[4];
-	px->pipe_num = argc - 3;//파이프 갯수
+	px->outfile = argv[argc - 1];
+	px->pipe_num = argc - 3;
 	node_init(px, argv);
 	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)
 		envp++;
@@ -101,11 +99,9 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 		print_error(2, "pipe error\n");
 }
 
-//명령어에 이미 /가 있다면 그냥 그대로 실행해보고 아니면 /붙혀서 해본다.
-//명령어를 찾아서 각 노드별로 명령어를 적어주는 방식사용
 void	cmd_init(t_data *px)
 {
-	char	*pathname;
+	char	*ptmp;
 	int		idx;
 	int		i;
 	t_px	*node;
@@ -119,12 +115,12 @@ void	cmd_init(t_data *px)
 		while (px -> path[++i])
 		{
 			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
-				pathname = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
+				ptmp = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
 			else
-				pathname = ft_mstrdup(px->path[i]);
-			if (access(pathname, R_OK | X_OK) == 0)
-				node->cmd_path[0] = ft_mstrdup(pathname);
-			my_free(&pathname);
+				ptmp = ft_mstrdup(px->path[i]);
+			if (access(ptmp, R_OK | X_OK) == 0)
+				node->cmd_path[0] = ft_mstrdup(ptmp);
+			my_free(&ptmp);
 		}
 	}
 }

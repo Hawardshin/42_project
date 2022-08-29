@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 20:51:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 21:23:29 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_bonus(int *o_fd, t_data *px)
 	tmp = get_next_line(0);
 	while (ft_strncmp(tmp, px->infile, ft_strlen(px->infile)))
 	{
-		write (o_fd, tmp, ft_strlen(tmp));
+		write (*o_fd, tmp, ft_strlen(tmp));
 		my_free (&tmp);
 		tmp = get_next_line(0);
 	}
@@ -66,18 +66,18 @@ void	exec_last(t_data *px)
 	close(px->pipefd[1]);
 	if (px->flag == 1)
 	{
-		o_fd = open(px->outfile, O_APPEND | O_WRONLY | O_CREAT, 0666);
+		o_fd = open(px->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
 		unlink(".tmp");
 	}
 	else
-		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0666);
+		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (o_fd == -1)
 		print_error(3, px->outfile);
 	if (dup2(px->pipefd[0], 0) == -1)
 		print_error(2, NULL);
+	close(px->pipefd[0]);
 	if (dup2(o_fd, 1) == -1)
 		print_error(2, NULL);
-	close(px->pipefd[0]);
 	close(o_fd);
 	if (node->cmd_path[0] != NULL)
 		execve(node->cmd_path[0], (node->cmd), px->ev);
@@ -91,9 +91,9 @@ void	exec_pipe(int idx, t_data *px)
 	node = mlst_find(idx, px);
 	if (dup2(px->pipefd[1], 0) == -1)
 		print_error(2, NULL);
+	close(px->pipefd[1]);
 	if (dup2(px->pipefd[0], 1) == -1)
 		print_error(2, NULL);
-	close(px->pipefd[1]);
 	close(px->pipefd[0]);
 	if (node->cmd_path[0] != NULL)
 		execve(node->cmd_path[0], node->cmd, px->ev);
