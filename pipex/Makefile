@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 21:08:50 by joushin           #+#    #+#              #
-#    Updated: 2022/08/26 17:03:39 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/29 10:59:02 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,24 +16,30 @@ CFLAGS = -Wall -Wextra -Werror
 INC = -I include
 
 NAME = pipex
-LIBFT = srcs/libft/libft.a
 
 RM= rm -rf
 
 SRCS =	srcs/main.c \
-		srcs/pase.c \
+		srcs/parse.c \
 		srcs/m_split.c \
 		srcs/pipe_utils.c \
-		srcs/pipe.c
+		srcs/pipe.c \
 
-SRCS_BONUS = \
+
+SRCS_BONUS =	bonus_srcs/main_bonus.c \
+				bonus_srcs/parse_bonus.c \
+				bonus_srcs/m_split_bonus.c \
+				bonus_srcs/pipe_utils_bonus.c \
+				bonus_srcs/pipe_bonus.c \
+				bonus_srcs/get_next_line.c \
+				bonus_srcs/get_next_line_utils.c \
 
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 ifdef WITH_BONUS
-	OBJECTS = $(OBJS) $(OBJS_BONUS)
+	OBJECTS = $(OBJS_BONUS)
 else
 	OBJECTS = $(OBJS)
 endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:01:08 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/29 10:11:26 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	check_new_line(char *buf)
+static int	check_new_line(char *buf)
 {
 	int	idx;
 
@@ -29,7 +29,7 @@ int	check_new_line(char *buf)
 	return (0);
 }
 
-char	*ft_read_line(int fd, char *backup)
+static char	*ft_read_line(int fd, char *backup)
 {
 	char	buff[BUFFER_SIZE + 1];
 	ssize_t	read_size;
@@ -55,7 +55,7 @@ char	*ft_read_line(int fd, char *backup)
 	return (backup);
 }
 
-char	*ft_get_line(char **str)
+static char	*ft_get_line(char **str)
 {
 	char	*ret_line;
 	int		l;

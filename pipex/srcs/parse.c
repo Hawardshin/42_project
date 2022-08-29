@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pase.c                                             :+:      :+:    :+:   */
+/*   pase_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/27 16:56:00 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/29 10:11:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 #include "./libft/libft.h"
 
-static char	**all_free(int i, char **result)
-{
-	while (--i >= 0)
-	{
-		free(result[i]);
-		result[i] = NULL;
-	}
-	free(result);
-	result = NULL;
-	return (0);
-}
 void	node_init(t_data *px, char **argv)
 {
 	int		i;
 	t_px	*node;
-	char	*tmp;
 
 	i = -1;
 	while (++i < px->pipe_num)
@@ -39,42 +27,6 @@ void	node_init(t_data *px, char **argv)
 		node->next = NULL;
 		node->idx = i;
 		node ->cmd = ft_msplit(argv[i + 2],' ');//argv[0] : 실행파일 argv[1] : 파일1번
-		if (node->cmd[0] == "awk" || node->cmd[0] == "sed")//awk sed 처리
-		{
-			tmp = ft_mstrdup(node->cmd[0]);
-			int	idx = 0;
-			while (node->cmd[idx])
-			{
-				free(node->cmd[idx]);
-				node->cmd[idx] =NULL;
-				idx++;
-			}
-			free(node->cmd);
-			node->cmd = NULL;
-			node->cmd = (char **)malloc (sizeof (char *) * 3);
-			if (!(node->cmd))
-				print_error(0,NULL);
-			node->cmd[0] = tmp;// 이렇게 해도 될까? free하고 듑해야하는건 아닐까?
-			idx = 0;
-			while (argv[i + 2][idx] == *tmp)
-				idx++;
-			int	len = ft_strlen(argv[i + 2] + idx);
-			node->cmd[1] = (char *)malloc(sizeof(char) * (len + 1));
-			if (!(node ->cmd[1]))
-				print_error(0, NULL);
-			idx += 3;
-			int j = 0;
-			while (argv[i + 2][idx])
-			{
-				if (argv[i+2][idx] == '\'')
-					idx++;
-				node->cmd[1][j] = argv[i + 2][idx];
-				idx++;
-				j++;
-			}
-			node->cmd[1][j] = 0;
-			node->cmd[2] = 0;
-		}
 		if (px->cmd_node_head != NULL)
 		{
 			node->bef = px->cmd_node_tail;
@@ -93,6 +45,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 {
 	px->infile = argv[1];
 	px->outfile = argv[4];
+	px->ev = envp;
 	px->pipe_num = argc - 3;//파이프 갯수
 	node_init(px, argv);
 	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)

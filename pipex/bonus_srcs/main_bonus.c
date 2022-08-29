@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/27 17:05:10 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/29 10:52:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include "./libft/libft.h"
-# define BUFFER_SIZE 400
+#include "pipex_bonus.h"
+#include "../srcs/libft/libft.h"
+
 //옵션으로 들어온 녀석 까지 같이 검사해주면 될까? ls -c 는 실행되는데 cat -c는 실행이 안됨..
 
 void	print_error(int	Flag, char *s)
@@ -34,7 +34,7 @@ void	print_error(int	Flag, char *s)
 	}
 	else if (Flag == 3)
 	{
-		ft_eprintf("no such file or directory: %s\n",s);
+		ft_eprintf("no such file or directory: %s\n", s);
 		exit(1);
 	}
 }
@@ -42,21 +42,25 @@ void	print_error(int	Flag, char *s)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	px;
+
 	if (argc >= 5)
 	{
 		ft_memset(&px, 0, sizeof(t_px));
 		px.ev = envp;
-		if (argv[1] == "here_doc")
+		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		{
 			parse_input(&px, argc - 1, argv + 1, envp);
 			px.flag = 1;
 		}
 		else
 			parse_input(&px, argc, argv, envp);
-		cmd_init(&px);//명령어 체크해서 있으면 제대로 없으면 NULL로 채워주기]
+		cmd_init(&px);
 		return (fork_child(&px));
 	}
 	else
+	{
+		ft_eprintf("argv error\n");//이거 이렇게 처리해도 되는걸까?
 		return (1);
+	}
 	return (0);
 }

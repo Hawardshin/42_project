@@ -6,13 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 16:53:37 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 10:52:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "./libft/libft.h"
-# define BUFFER_SIZE 400
+
 //옵션으로 들어온 녀석 까지 같이 검사해주면 될까? ls -c 는 실행되는데 cat -c는 실행이 안됨..
 
 void	print_error(int	Flag, char *s)
@@ -51,6 +51,9 @@ int	main(int argc, char **argv, char **envp)
 		fork_child(&px);
 	}
 	else
+	{
+		ft_eprintf("argv error\n");//이거 이렇게 처리해도 되는걸까?
 		return (1);
+	}
 	return (0);
 }

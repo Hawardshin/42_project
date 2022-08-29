@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_utils.c                                       :+:      :+:    :+:   */
+/*   pipe_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:42:40 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:33:30 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 10:34:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include "./libft/libft.h"
+#include "pipex_bonus.h"
+#include "../srcs/libft/libft.h"
 
 void	my_free(char **to_free)
 {

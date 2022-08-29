@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haward <haward@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:41 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:01:19 by haward           ###   ########.fr       */
+/*   Updated: 2022/08/29 10:11:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 size_t	ft__strlen(const char *str)
 {
@@ -75,7 +75,7 @@ char	*ft__strdup(const char *s1)
 	len = ft__strlen(s1);
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
-		return (NULL);
+		print_error(0, NULL);
 	ft__strlcpy(result, s1, len + 1);
 	return (result);
 }
@@ -89,10 +89,7 @@ char	*ft__strjoin(char *s1, char *s2)
 	i = 0;
 	retstr = malloc(sizeof(char) * (ft__strlen(s1) + ft__strlen(s2) + 1));
 	if (!retstr)
-	{
-		free(s1);
-		return (0);
-	}
+		print_error(0, NULL);
 	while (s1[i])
 	{
 		retstr[i] = s1[i];

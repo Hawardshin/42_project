@@ -35,6 +35,7 @@
 	"unistd.h": "c",
 	"libft.h": "c",
 	"sstream": "c",
-	"__node_handle": "c"
+	"__node_handle": "c",
+	"pipex_bonus.h": "c"
 }
 }

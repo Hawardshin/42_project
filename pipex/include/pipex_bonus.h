@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:42:04 by joushin          ###   ########.fr       */
+/*   Created: 2022/08/29 09:57:04 by joushin           #+#    #+#             */
+/*   Updated: 2022/08/29 10:20:58 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <fcntl.h>  //open
 # include <unistd.h> //close, read, write, dup, dup2,access,
@@ -20,6 +20,7 @@
 # include <stdio.h>  //perror
 # include <string.h> //strerror
 # include <sys/wait.h> //wait, wait pid
+# define BUFFER_SIZE 42
 
 typedef struct s_px
 {
@@ -38,6 +39,7 @@ typedef struct s_data
 	char	**path;//환경변수에서 자른 path
 	int		pipefd[2];//처음에 만든 파이프
 	int		pipe_num;
+	int		flag;//파이프 보너스 >> << 를 위해서 주는 flag
 	t_px	*cmd_node_head;//각 명령어 별로 노드로
 	t_px	*cmd_node_tail;
 }t_data;
@@ -60,6 +62,13 @@ t_px	*mlst_find(int idx, t_data *data);
 pid_t	mfork(void);
 
 char	**ft_msplit(char const *str, char c);
+
+size_t	ft__strlen(const char *str);
+void	*ft__memmove(void *dst, const void *src, size_t len);
+size_t	ft__strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft__strdup(const char *s1);
+
+char	*get_next_line(int fd);
 
 #endif
 // fork할 때 pid가 0 : 자식이다.
