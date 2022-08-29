@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:18:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:34:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 15:45:02 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ char	**ft_msplit(char const *str, char c)
 
 	i = 0;
 	if (!str)
-		print_error(0,NULL);
+		print_error(0, NULL);
 	result = (char **)malloc(sizeof(char *) * (len_count(str, c) + 1));
 	if (!result)
-		print_error(0,NULL);
+		print_error(0, NULL);
 	move_if_charset(&str, c);
 	while (*str)
 	{
 		k = 0;
 		result[i] = malloc(sizeof(char) * (len_into(str, c) + 1));
 		if (!result[i])
-			print_error(0,NULL);
+			print_error(0, NULL);
 		while (*str && *str != c)
 			result[i][k++] = *str++;
 		result[i][k] = '\0';

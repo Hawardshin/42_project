@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:57:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:20:58 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:31:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_px
 	char	**cmd; //명령어 , 옵션들, 널
 	char	*cmd_path[2]; //명령어 경로 합쳐서, 널//둘다 널로 초기화 해주기
 	int		idx;// 몇번째 파이프인지
-	struct s_px *bef;
 	struct s_px	*next;
 }t_px ;
 
@@ -67,6 +66,7 @@ size_t	ft__strlen(const char *str);
 void	*ft__memmove(void *dst, const void *src, size_t len);
 size_t	ft__strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft__strdup(const char *s1);
+char	*ft__strjoin(char *s1, char *s2);
 
 char	*get_next_line(int fd);
 

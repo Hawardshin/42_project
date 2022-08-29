@@ -6,13 +6,13 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 21:08:50 by joushin           #+#    #+#              #
-#    Updated: 2022/08/29 10:59:02 by joushin          ###   ########.fr        #
+#    Updated: 2022/08/29 14:53:20 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 INC = -I include
 
 NAME = pipex
@@ -58,7 +58,7 @@ bonus :
 
 clean:
 	@make -C ./srcs/libft clean
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	@make -C ./srcs/libft fclean

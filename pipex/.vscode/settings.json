@@ -36,6 +36,7 @@
 	"libft.h": "c",
 	"sstream": "c",
 	"__node_handle": "c",
-	"pipex_bonus.h": "c"
+	"pipex_bonus.h": "c",
+	"complex": "c"
 }
 }

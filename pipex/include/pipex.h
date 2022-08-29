@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:42:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:20:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_px
 	char	**cmd; //명령어 , 옵션들, 널
 	char	*cmd_path[2]; //명령어 경로 합쳐서, 널//둘다 널로 초기화 해주기
 	int		idx;// 몇번째 파이프인지
-	struct s_px *bef;
 	struct s_px	*next;
 }t_px ;
 

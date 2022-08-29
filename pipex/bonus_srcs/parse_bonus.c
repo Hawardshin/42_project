@@ -6,64 +6,53 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 12:02:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 16:14:20 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 #include "../srcs/libft/libft.h"
 
-static char	**all_free(int i, char **result)
+static int	check_in(char a, char const *set)
 {
-	while (--i >= 0)
+	int	i;
+
+	i = 0;
+	while (set[i])
 	{
-		free(result[i]);
-		result[i] = NULL;
+		if (set[i] == a)
+			return (1);
+		i++;
 	}
-	free(result);
-	result = NULL;
 	return (0);
 }
 
-void	pase_sed_awk(t_data *px, )
+char	*ft_mstrtrim(char **s1, char const *set)
 {
-	char	*tmp;
-	if (ft_strncmp(node->cmd[0], "awk", 3) == 0 || ft_strncmp(node->cmd[0], "sed") == 0)//awk sed 처리
-		{
-			tmp = ft_mstrdup(node->cmd[0]);
-			int	idx = 0;
-			while (node->cmd[idx])
-			{
-				free(node->cmd[idx]);
-				node->cmd[idx] =NULL;
-				idx++;
-			}
-			free(node->cmd);
-			node->cmd = NULL;
-			node->cmd = (char **)malloc (sizeof (char *) * 3);
-			if (!(node->cmd))
-				print_error(0,NULL);
-			node->cmd[0] = tmp;// 이렇게 해도 될까? free하고 듑해야하는건 아닐까?
-			idx = 0;
-			while (argv[i + 2][idx] == *tmp)
-				idx++;
-			int	len = ft_strlen(argv[i + 2] + idx);
-			node->cmd[1] = (char *)malloc(sizeof(char) * (len + 1));
-			if (!(node ->cmd[1]))
-				print_error(0, NULL);
-			idx += 3;
-			int j = 0;
-			while (argv[i + 2][idx])
-			{
-				if (argv[i+2][idx] == '\'')
-					idx++;
-				node->cmd[1][j] = argv[i + 2][idx];
-				idx++;
-				j++;
-			}
-			node->cmd[1][j] = 0;
-			node->cmd[2] = 0;
-		}
+	int		start;
+	int		end;
+	int		i;
+	char	*ret;
+
+	start = 0;
+	i = 0;
+	if (!(*s1))
+		return (0);
+	if (!set)
+		return ((char *)(*s1));
+	end = ft_strlen(*s1) - 1;
+	while ((*s1)[start] && check_in((*s1)[start], set))
+		start++;
+	while ((*s1)[end] && check_in((*s1)[end], set) && start <= end)
+		end--;
+	ret = (char *)malloc(sizeof(char) * (end - start + 2));
+	if (!ret)
+		print_error(0, NULL);
+	while (start <= end)
+		ret[i++] = (*s1)[start++];
+	ret[i] = '\0';
+	my_free(s1);
+	return (ret);
 }
 
 void	node_init(t_data *px, char **argv)
@@ -76,23 +65,23 @@ void	node_init(t_data *px, char **argv)
 	{
 		node = (t_px *)malloc(sizeof (t_px));
 		if (!node)
-			print_error(0,NULL);
+			print_error(0, NULL);
 		node->next = NULL;
 		node->idx = i;
 		while (*argv[i + 2] == ' ')
 			argv[i + 2]++;
-		node ->cmd = ft_msplit(argv[i + 2],' ');//argv[0] : 실행파일 argv[1] : 파일1번
-		parse_sed_awk(px, argv[i + 2], node);
-		if (px->cmd_node_head != NULL)
+		if (!ft_strncmp(argv[i + 2], "awk ", 4) || \
+			!ft_strncmp(argv[i + 2], "sed ", 4))
 		{
-			node->bef = px->cmd_node_tail;
-			px->cmd_node_tail->next = node;
+			node->cmd = ft_split(argv[i + 2], '\'');
+			node -> cmd[0] = ft_mstrtrim(&(node->cmd[0]), " ");
 		}
 		else
-		{
+			node ->cmd = ft_msplit(argv[i + 2],' ');//argv[0] : 실행파일 argv[1] : 파일1번
+		if (px->cmd_node_head != NULL)
+			px->cmd_node_tail->next = node;
+		else
 			px->cmd_node_head = node;
-			node->bef = NULL;
-		}
 		px->cmd_node_tail = node;
 	}
 }

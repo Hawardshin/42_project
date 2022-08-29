@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:34:17 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 15:56:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ void	exec_first(t_data *px)//함수 분리 필요 unlink(".tmp"); 삭제 하기 
 		if (o_fd == -1)
 			print_error(3, px->infile);
 		tmp = get_next_line(0);
-		while (!ft_strcmp(tmp, px->infile))
+		while (ft_strncmp(tmp, px->infile, ft_strlen(px->infile)))
 		{
 			write (o_fd, tmp, ft_strlen(tmp));
-			my_free(tmp);
+			my_free(&tmp);
 			tmp = get_next_line(0);
 			if (tmp == NULL)
 			{
 				ft_eprintf("warning: here-document \
-			at line 58 delimited by end-of-file (wanted `%s')",px->infile);
+			at line 58 delimited by end-of-file (wanted `%s')", px->infile);
 				//exit(0);//이거 확인
 				break;
 			}
 		}
 		if (tmp)
-			my_free(tmp);
+			my_free(&tmp);
 	}
 	else
 	{
@@ -49,7 +49,7 @@ void	exec_first(t_data *px)//함수 분리 필요 unlink(".tmp"); 삭제 하기 
 			print_error(3, px->infile);
 	}
 	if (dup2(o_fd, 0) == -1)
-			print_error(2, NULL);
+		print_error(2, NULL);
 	close(o_fd);
 	close(px->pipefd[0]);
 	if (dup2(px->pipefd[1], 1) == -1)
@@ -79,7 +79,7 @@ void	exec_last(t_data *px)
 	if (dup2(o_fd, 1) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[0]);
-	close(o_fd);
+	close(o_fd);//
 	if (node->cmd_path[0] != NULL)
 		execve(node->cmd_path[0], (node->cmd), px->ev);
 	print_error(1, node->cmd[0]);
@@ -91,7 +91,7 @@ void	exec_pipe(int idx, t_data *px)
 
 	node = mlst_find(idx, px);
 	if (dup2(px->pipefd[1], 0) == -1)
-		print_error(2, NULL);
+		print_error(2, NULL);//
 	if (dup2(px->pipefd[0], 1) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[1]);

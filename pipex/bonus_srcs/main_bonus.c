@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:52:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 15:48:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_memset(&px, 0, sizeof(t_px));
 		px.ev = envp;
+		px.cmd_node_head = NULL;
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		{
 			parse_input(&px, argc - 1, argv + 1, envp);
 			px.flag = 1;
 		}
 		else
-			parse_input(&px, argc, argv, envp);
+			parse_input(&px, argc, argv, envp);//
 		cmd_init(&px);
 		return (fork_child(&px));
 	}

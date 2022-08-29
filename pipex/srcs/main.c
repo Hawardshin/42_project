@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:52:50 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 16:04:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 5)
 	{
 		ft_memset(&px, 0, sizeof(t_px));
-		px.ev = envp;
-		parse_input(&px, argc, argv, envp);//파싱하기
+		px.cmd_node_head = NULL;
+		parse_input(&px, argc, argv, envp);
 		cmd_init(&px);//명령어 체크해서 있으면 제대로 없으면 NULL로 채워주기]
 		fork_child(&px);
 	}
