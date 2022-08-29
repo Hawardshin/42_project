@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:57:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:26:44 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	node_init(t_data *px, char **argv)
 			node -> cmd[0] = ft_mstrtrim(&(node->cmd[0]), " ");
 		}
 		else
-			node ->cmd = ft_msplit(argv[i + 2],' ');
+			node ->cmd = ft_msplit(argv[i + 2], ' ');
 		if (px->cmd_node_head != NULL)
 			px->cmd_node_tail->next = node;
 		else
@@ -120,7 +120,7 @@ void	cmd_init(t_data *px)
 			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
 				pathname = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
 			else
-				pathname = ft_mstrdup(px->path[i]);
+				pathname = ft_mstrdup(node->cmd[0]);
 			if (access(pathname, R_OK | X_OK) == 0)
 				node->cmd_path[0] = ft_mstrdup(pathname);
 			my_free(&pathname);

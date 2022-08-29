@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:04:24 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:55:13 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	main(int argc, char **argv, char **envp)
 		ft_memset(&px, 0, sizeof(t_px));
 		px.cmd_node_head = NULL;
 		parse_input(&px, argc, argv, envp);
-		cmd_init(&px);//명령어 체크해서 있으면 제대로 없으면 NULL로 채워주기]
-		fork_child(&px);
+		cmd_init(&px);
+		return (fork_child(&px));
 	}
 	else
 	{
-		ft_eprintf("argv error\n");//이거 이렇게 처리해도 되는걸까?
+		ft_eprintf("argv error\n");
 		return (1);
 	}
 	return (0);

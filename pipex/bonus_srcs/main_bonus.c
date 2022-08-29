@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 15:48:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:55:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ int	main(int argc, char **argv, char **envp)
 			px.flag = 1;
 		}
 		else
-			parse_input(&px, argc, argv, envp);//
+			parse_input(&px, argc, argv, envp);
 		cmd_init(&px);
 		return (fork_child(&px));
 	}
 	else
 	{
-		ft_eprintf("argv error\n");//이거 이렇게 처리해도 되는걸까?
+		ft_eprintf("argv error\n");
 		return (1);
 	}
 	return (0);

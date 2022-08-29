@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:55:13 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:40:14 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exec_last(t_data *px)
 
 	node = px->cmd_node_tail;
 	close(px->pipefd[1]);
-	o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0666);
+	o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (o_fd == -1)
 		print_error(3, px->outfile);
 	if (dup2(px->pipefd[0], 0) == -1)
@@ -77,15 +77,15 @@ int	fork_child(t_data *px)
 {
 	int		i;
 	pid_t	pid;
-	// int		status;
+	int		status;
 
 	i = -1;
+	pid = 1;
 	while (++i < px->pipe_num)
 	{
 		pid = mfork();
 		if (pid == 0)
 		{
-			// wait(&status);
 			if (i == 0)
 				exec_first(px);
 			else if (i + 1 == px->pipe_num)
@@ -93,8 +93,12 @@ int	fork_child(t_data *px)
 			else
 				exec_pipe(i, px);
 		}
+		waitpid(pid, &status, WNOHANG);
 	}
-	// waitpid(pid, &status, WUNTRACED);
-	return (0);
-	// return (status >> 8 & 0x000000ff);
+	close(px->pipefd[1]);
+	close(px->pipefd[0]);
+	waitpid(pid, &status, 0);
+	if (0 == (status & 0xff))
+		return (status >> 8);
+	return (status);
 }
