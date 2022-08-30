@@ -38,6 +38,7 @@
 	"__node_handle": "c",
 	"pipex_bonus.h": "c",
 	"complex": "c",
-	"__mutex_base": "c"
+	"__mutex_base": "c",
+	"cstdio": "c"
 }
 }

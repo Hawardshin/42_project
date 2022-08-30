@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:40:14 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 16:11:00 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	node_init(t_data *px, char **argv)
 			print_error(0, NULL);
 		node->next = NULL;
 		node->idx = i;
-		if (!ft_strncmp(argv[i + 2], "awk ", 4) || \
+		if (!ft_strncmp(argv[i + 2], "awk ", 4) && \
 			!ft_strncmp(argv[i + 2], "sed ", 4))
 			awk_sed(argv, i, node);
 		else

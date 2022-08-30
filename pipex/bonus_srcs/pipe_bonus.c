@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:38:54 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 16:51:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	exec_first(t_data *px)
 	t_px	*node;
 
 	node = px->cmd_node_head;
+	ft_putstr_fd(node->cmd_path[0], 2);///
+	ft_putstr_fd(":: first \n",2);
 	if (px->flag == 1)
 	{
 		exec_bonus(&o_fd, px);
@@ -69,6 +71,8 @@ void	exec_last(t_data *px)
 	t_px	*node;
 
 	node = px->cmd_node_tail;
+	ft_putstr_fd(node->cmd_path[0], 2);//
+	ft_putstr_fd(":: last \n",2);
 	close(px->pipefd[1]);
 	if (px->flag == 1)
 	{
@@ -95,6 +99,9 @@ void	exec_pipe(int idx, t_data *px)
 	t_px	*node;
 
 	node = mlst_find(idx, px);
+	ft_putstr_fd(node->cmd_path[0], 2);///
+	ft_eprintf("%d \n", idx);
+	ft_putstr_fd(":: mid \n",2);
 	if (dup2(px->pipefd[1], 0) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[1]);

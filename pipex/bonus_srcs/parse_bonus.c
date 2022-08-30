@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:16:29 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 16:09:59 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	node_init(t_data *px, char **argv)
 			print_error(0, NULL);
 		node->next = NULL;
 		node->idx = i;
-		if (!ft_strncmp(argv[i + 2], "awk ", 4) || \
+		if (!ft_strncmp(argv[i + 2], "awk ", 4) && \
 			!ft_strncmp(argv[i + 2], "sed ", 4))
 			awk_sed(argv, i, node);
 		else
@@ -71,7 +71,7 @@ void	node_init(t_data *px, char **argv)
 void	parse_input(t_data *px, int argc, char **argv, char **envp)
 {
 	px->infile = argv[1];
-	px->outfile = argv[argc - 1];
+	px->outfile = argv[argc -1];
 	px->pipe_num = argc - 3;
 	node_init(px, argv);
 	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)
@@ -94,8 +94,9 @@ void	cmd_init(t_data *px)
 	while (++idx < px->pipe_num)
 	{
 		node = mlst_find(idx, px);
-		ft_memset(node->cmd_path, 0, 2);
 		i = -1;
+		node->cmd_path[0] = NULL;
+		node->cmd_path[1] = NULL;
 		while (px -> path[++i])
 		{
 			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
@@ -106,5 +107,7 @@ void	cmd_init(t_data *px)
 				node->cmd_path[0] = ft_mstrdup(ptmp);
 			my_free(&ptmp);
 		}
+		// printf("%s\n",node->cmd_path[0]);
 	}
+	// exit(0);
 }
