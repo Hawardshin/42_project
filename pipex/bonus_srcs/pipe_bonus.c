@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 16:51:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 17:46:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	exec_last(t_data *px)
 
 	node = px->cmd_node_tail;
 	ft_putstr_fd(node->cmd_path[0], 2);//
-	ft_putstr_fd(":: last \n",2);
-	close(px->pipefd[1]);
+	ft_putstr_fd(":: last \n", 2);
+	close(px->pipefd[px->pipe_num][1]);
 	if (px->flag == 1)
 	{
 		o_fd = open(px->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
@@ -83,7 +83,7 @@ void	exec_last(t_data *px)
 		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (o_fd == -1)
 		print_error(2, px->outfile);
-	if (dup2(px->pipefd[0], 0) == -1)
+	if (dup2(px->pipefd[0][0], 0) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[0]);
 	if (dup2(o_fd, 1) == -1)
@@ -101,11 +101,11 @@ void	exec_pipe(int idx, t_data *px)
 	node = mlst_find(idx, px);
 	ft_putstr_fd(node->cmd_path[0], 2);///
 	ft_eprintf("%d \n", idx);
-	ft_putstr_fd(":: mid \n",2);
-	if (dup2(px->pipefd[1], 0) == -1)
+	ft_putstr_fd(":: mid\n", 2);
+	if (dup2(px->pipefd[idx][1], 0) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[1]);
-	if (dup2(px->pipefd[0], 1) == -1)
+	if (dup2(px->pipefd[idx][0], 1) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[0]);
 	if (node->cmd_path[0] != NULL)

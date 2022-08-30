@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:57:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 21:02:45 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 17:20:08 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_data
 	char	*outfile;//나갈 파일
 	char	**ev;//환경변수들
 	char	**path;//환경변수에서 자른 path
-	int		pipefd[2];//처음에 만든 파이프
+	int		**pipefd;//처음에 만든 파이프
 	int		pipe_num;
 	int		flag;//파이프 보너스 >> << 를 위해서 주는 flag
 	t_px	*cmd_node_head;//각 명령어 별로 노드로

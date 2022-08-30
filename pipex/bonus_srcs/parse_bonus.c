@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 16:09:59 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 17:38:39 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	node_init(t_data *px, char **argv)
 
 void	parse_input(t_data *px, int argc, char **argv, char **envp)
 {
+	int	i;
+
 	px->infile = argv[1];
 	px->outfile = argv[argc -1];
 	px->pipe_num = argc - 3;
@@ -79,8 +81,19 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 	if (!envp)
 		print_error(3, "Not exist path!\n");
 	px -> path = ft_msplit(ft_mstrdup(*envp + 5), ':');
-	if (pipe(px->pipefd) == -1)
-		print_error(3, "pipe error\n");
+	i = 0;
+	px->pipefd = (int **)malloc(sizeof(int *) * (argc - 3));
+	if (!(px->pipefd))
+		print_error(0, NULL);
+	while (i < argc -3)
+	{
+		px->pipefd[i] = (int *)malloc(sizeof (int) * 2);
+		if (!(px->pipefd[i]))
+			print_error(0, NULL);
+		if (pipe(px->pipefd[i]) == -1)
+			print_error(3, "pipe error\n");
+		i++;
+	}
 }
 
 void	cmd_init(t_data *px)
