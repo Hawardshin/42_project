@@ -6,53 +6,40 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 21:20:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:53:33 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "./libft/libft.h"
 
-static int	check_in(char a, char const *set)
+void	awk_sed(char **argv, int i, t_px *node)
 {
-	int	i;
+	int		j;
+	int		tmp;
+	char	**tmp_node;
 
-	i = 0;
-	while (set[i])
+	j = 0;
+	node->cmd = ft_msplit(argv[i + 2], ' ');
+	while ((ft_strncmp(node->cmd[j], "\'", 1) != 0 && \
+		ft_strncmp(node->cmd[j], "\"", 1) != 0) && node->cmd[j])
+		j++;
+	tmp = j;
+	if (node->cmd[j] == 0)
+		return ;
+	while (node->cmd[j])
+		my_free(&(node->cmd[j++]));
+	tmp_node = ft_msplit(argv[i + 2], '\'');
+	node->cmd[tmp] = ft_mstrdup(tmp_node[1]);
+	node->cmd[tmp + 1] = ft_mstrdup(tmp_node[2]);
+	tmp = 0;
+	while (tmp_node[tmp])
 	{
-		if (set[i] == a)
-			return (1);
-		i++;
+		my_free(&tmp_node[tmp]);
+		tmp++;
 	}
-	return (0);
-}
-
-char	*ft_mstrtrim(char **s1, char const *set)
-{
-	int		start;
-	int		end;
-	int		i;
-	char	*ret;
-
-	start = 0;
-	i = 0;
-	if (!(*s1))
-		return (0);
-	if (!set)
-		return ((char *)(*s1));
-	end = ft_strlen(*s1) - 1;
-	while ((*s1)[start] && check_in((*s1)[start], set))
-		start++;
-	while ((*s1)[end] && check_in((*s1)[end], set) && start <= end)
-		end--;
-	ret = (char *)malloc(sizeof(char) * (end - start + 2));
-	if (!ret)
-		print_error(0, NULL);
-	while (start <= end)
-		ret[i++] = (*s1)[start++];
-	ret[i] = '\0';
-	my_free(s1);
-	return (ret);
+	free(tmp_node);
+	tmp_node = NULL;
 }
 
 void	node_init(t_data *px, char **argv)
@@ -70,10 +57,7 @@ void	node_init(t_data *px, char **argv)
 		node->idx = i;
 		if (!ft_strncmp(argv[i + 2], "awk ", 4) || \
 			!ft_strncmp(argv[i + 2], "sed ", 4))
-		{
-			node->cmd = ft_split(argv[i + 2], '\'');
-			node -> cmd[0] = ft_mstrtrim(&(node->cmd[0]), " ");
-		}
+			awk_sed(argv, i, node);
 		else
 			node ->cmd = ft_msplit(argv[i + 2], ' ');
 		if (px->cmd_node_head != NULL)
@@ -93,10 +77,10 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)
 		envp++;
 	if (!envp)
-		print_error(2, "Not exist path!\n");
+		print_error(3, "Not exist path!\n");
 	px->path = ft_msplit(ft_mstrdup(*envp + 5), ':');
 	if (pipe(px->pipefd) == -1)
-		print_error(2, "pipe error\n");
+		print_error(3, "pipe error\n");
 }
 
 void	cmd_init(t_data *px)

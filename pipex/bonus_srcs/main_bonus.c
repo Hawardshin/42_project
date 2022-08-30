@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 21:07:08 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:03:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_error(int Flag, char *s)
 	}
 	else if (Flag == 3)
 	{
-		ft_eprintf("no such file or directory: %s\n", s);
+		ft_eprintf("%s", s);
 		exit(1);
 	}
 }

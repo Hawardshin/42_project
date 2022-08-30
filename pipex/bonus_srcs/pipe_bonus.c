@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 21:23:29 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:03:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	exec_bonus(int *o_fd, t_data *px)
 
 	*o_fd = open (".tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (*o_fd == -1)
-		print_error(3, px->infile);
+		print_error(2, px->infile);
 	tmp = get_next_line(0);
 	while (ft_strncmp(tmp, px->infile, ft_strlen(px->infile)))
 	{
@@ -43,7 +43,7 @@ void	exec_first(t_data *px)
 	{
 		o_fd = open(px->infile, O_RDONLY);
 		if (o_fd == -1)
-			print_error(3, px->infile);
+			print_error(2, px->infile);
 	}
 	if (dup2(o_fd, 0) == -1)
 		print_error(2, NULL);
@@ -72,7 +72,7 @@ void	exec_last(t_data *px)
 	else
 		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (o_fd == -1)
-		print_error(3, px->outfile);
+		print_error(2, px->outfile);
 	if (dup2(px->pipefd[0], 0) == -1)
 		print_error(2, NULL);
 	close(px->pipefd[0]);
@@ -117,7 +117,7 @@ int	fork_child(t_data *px)
 			else if (i + 1 == px->pipe_num)
 				exec_last(px);
 			else
-				exec_pipe(i, px);
+				exec_pipe(i + 1, px);
 		}
 		waitpid(pid, &status, WNOHANG);
 	}

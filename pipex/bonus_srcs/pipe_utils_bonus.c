@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:42:40 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:34:52 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:12:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_mstrdup(const char *s1)
 	char	*result;
 	size_t	len;
 
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1);
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
