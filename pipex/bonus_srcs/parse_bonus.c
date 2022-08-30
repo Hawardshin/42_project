@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:02:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:16:29 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	awk_sed(char **argv, int i, t_px *node)
 
 	j = 0;
 	node->cmd = ft_msplit(argv[i + 2], ' ');
-	while ((ft_strncmp(node->cmd[j], "\'", 1) != 0 && \
-		ft_strncmp(node->cmd[j], "\"", 1) != 0) && node->cmd[j])
+	while (ft_strncmp(node->cmd[j], "\'", 1) != 0 && node->cmd[j])
 		j++;
 	tmp = j;
 	if (node->cmd[j] == 0)
@@ -31,7 +30,8 @@ void	awk_sed(char **argv, int i, t_px *node)
 		my_free(&(node->cmd[j++]));
 	tmp_node = ft_msplit(argv[i + 2], '\'');
 	node->cmd[tmp] = ft_mstrdup(tmp_node[1]);
-	node->cmd[tmp + 1] = ft_mstrdup(tmp_node[2]);
+	if (!tmp_node[1])
+		node->cmd[tmp + 1] = ft_mstrdup(tmp_node[2]);
 	tmp = 0;
 	while (tmp_node[tmp])
 	{
