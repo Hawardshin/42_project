@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 18:18:23 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 18:40:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_data
 	char	**ev;
 	char	**path;
 	int		pipefd[2];
-	int		pipe_num;
+	int		cmd_num;
 	t_px	*cmd_node_head;
 	t_px	*cmd_node_tail;
 }t_data;

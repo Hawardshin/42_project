@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 16:54:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 18:41:06 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	awk_sed(char **argv, int i, t_px *node)
 		tmp_node = ft_msplit(argv[i + 2], '\'');
 	else
 		tmp_node = ft_msplit(argv[i + 2], '\"');
+	my_free(&(node->cmd[tmp]));
 	node->cmd[tmp] = ft_mstrdup(tmp_node[1]);
 	node->cmd[tmp + 1] = NULL;
 	tmp = 0;
@@ -47,7 +48,7 @@ void	node_init(t_data *px, char **argv)
 	t_px	*node;
 
 	i = -1;
-	while (++i < px->pipe_num)
+	while (++i < px->cmd_num)
 	{
 		node = (t_px *)malloc(sizeof(t_px));
 		if (!node)
@@ -73,7 +74,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 {
 	px->infile = argv[1];
 	px->outfile = argv[4];
-	px->pipe_num = argc - 3;
+	px->cmd_num = argc - 3;
 	node_init(px, argv);
 	if (!envp)
 		print_error(3, "Not exist path!\n");
@@ -94,7 +95,7 @@ void	cmd_init(t_data *px)
 	t_px	*node;
 
 	idx = -1;
-	while (++idx < px->pipe_num)
+	while (++idx < px->cmd_num)
 	{
 		node = mlst_find(idx, px);
 		node->cmd_path[0] = NULL;

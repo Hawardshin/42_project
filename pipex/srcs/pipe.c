@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 14:22:55 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 19:12:00 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	fork_child(t_data *px)
 	int		status;
 
 	i = -1;
-	while (++i < px->pipe_num)
+	while (++i < px->cmd_num)
 	{
 		pid = mfork();
 		if (pid == 0)
@@ -76,6 +76,9 @@ int	fork_child(t_data *px)
 	close(px->pipefd[1]);
 	close(px->pipefd[0]);
 	waitpid(pid, &status, 0);
+	while (1)
+	{
+	}
 	if (0 == (status & 0xff))
 		return (status >> 8);
 	return (status);
