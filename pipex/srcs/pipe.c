@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 14:54:42 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 14:22:55 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	exec_first(t_data *px)
 	print_error(1, node->cmd[0]);
 }
 
-//만약 명령어 갯수가 1일 때 2번 실행가능성 있다.
 void	exec_last(t_data *px)
 {
 	int		o_fd;
@@ -56,22 +55,6 @@ void	exec_last(t_data *px)
 	print_error(1, node->cmd[0]);
 }
 
-void	exec_pipe(int idx, t_data *px)
-{
-	t_px	*node;
-
-	node = mlst_find(idx, px);
-	if (dup2(px->pipefd[1], 0) == -1)
-		print_error(2, NULL);
-	close(px->pipefd[1]);
-	if (dup2(px->pipefd[0], 1) == -1)
-		print_error(2, NULL);
-	close(px->pipefd[0]);
-	if (node->cmd_path[0] != NULL)
-		execve(node->cmd_path[0], node->cmd, px->ev);
-	print_error(1, node->cmd[0]);
-}
-
 int	fork_child(t_data *px)
 {
 	int		i;
@@ -86,12 +69,9 @@ int	fork_child(t_data *px)
 		{
 			if (i == 0)
 				exec_first(px);
-			else if (i + 1 == px->pipe_num)
-				exec_last(px);
 			else
-				exec_pipe(i + 1, px);
+				exec_last(px);
 		}
-		waitpid(pid, &status, WNOHANG);
 	}
 	close(px->pipefd[1]);
 	close(px->pipefd[0]);

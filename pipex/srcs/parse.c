@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 16:11:00 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 16:54:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,24 @@ void	awk_sed(char **argv, int i, t_px *node)
 
 	j = 0;
 	node->cmd = ft_msplit(argv[i + 2], ' ');
-	while (ft_strncmp(node->cmd[j], "\'", 1) != 0 && node->cmd[j])
+	while (ft_strncmp(node->cmd[j], "\'", 1) != 0 && \
+	ft_strncmp(node->cmd[j], "\"", 1) != 0 && node->cmd[j])
 		j++;
 	tmp = j;
 	if (node->cmd[j] == 0)
 		return ;
 	while (node->cmd[j])
-		my_free(&(node->cmd[j++]));
-	tmp_node = ft_msplit(argv[i + 2], '\'');
+		my_free(&(node->cmd[++j]));
+	if (ft_strncmp(node->cmd[tmp], "\'", 1) == 0)
+		tmp_node = ft_msplit(argv[i + 2], '\'');
+	else
+		tmp_node = ft_msplit(argv[i + 2], '\"');
 	node->cmd[tmp] = ft_mstrdup(tmp_node[1]);
-	if (!tmp_node[1])
-		node->cmd[tmp + 1] = ft_mstrdup(tmp_node[2]);
+	node->cmd[tmp + 1] = NULL;
 	tmp = 0;
 	while (tmp_node[tmp])
-	{
-		my_free(&tmp_node[tmp]);
-		tmp++;
-	}
+		my_free(&tmp_node[tmp++]);
 	free(tmp_node);
-	tmp_node = NULL;
 }
 
 void	node_init(t_data *px, char **argv)
@@ -55,7 +54,9 @@ void	node_init(t_data *px, char **argv)
 			print_error(0, NULL);
 		node->next = NULL;
 		node->idx = i;
-		if (!ft_strncmp(argv[i + 2], "awk ", 4) && \
+		while (*(argv[i + 2]) == ' ')
+			argv[i + 2]++;
+		if (!ft_strncmp(argv[i + 2], "awk ", 4) || \
 			!ft_strncmp(argv[i + 2], "sed ", 4))
 			awk_sed(argv, i, node);
 		else
@@ -74,13 +75,15 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 	px->outfile = argv[4];
 	px->pipe_num = argc - 3;
 	node_init(px, argv);
-	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)
-		envp++;
 	if (!envp)
+		print_error(3, "Not exist path!\n");
+	while (envp != NULL && *envp != NULL && ft_strncmp(*envp, "PATH", 4) != 0)
+		envp++;
+	if (envp == NULL || *envp == NULL)
 		print_error(3, "Not exist path!\n");
 	px->path = ft_msplit(ft_mstrdup(*envp + 5), ':');
 	if (pipe(px->pipefd) == -1)
-		print_error(3, "pipe error\n");
+		print_error(3, NULL);
 }
 
 void	cmd_init(t_data *px)
@@ -94,7 +97,8 @@ void	cmd_init(t_data *px)
 	while (++idx < px->pipe_num)
 	{
 		node = mlst_find(idx, px);
-		ft_memset(node->cmd_path, 0, 2);
+		node->cmd_path[0] = NULL;
+		node->cmd_path[1] = NULL;
 		i = -1;
 		while (px -> path[++i])
 		{

@@ -6,17 +6,16 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:03:24 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 16:31:20 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 #include "../srcs/libft/libft.h"
 
-//옵션으로 들어온 녀석 까지 같이 검사해주면 될까? ls -c 는 실행되는데 cat -c는 실행이 안됨..
-
 void	print_error(int Flag, char *s)
 {
+	ft_putstr_fd("pipex: ", 2);
 	if (Flag == 0)
 	{
 		ft_putstr_fd("Memory allocation fails.\n", 2);
@@ -24,7 +23,7 @@ void	print_error(int Flag, char *s)
 	}
 	else if (Flag == 1)
 	{
-		ft_eprintf("command not found: %s\n", s);
+		ft_eprintf("%s: command not found\n", s);
 		exit(127);
 	}
 	else if (Flag == 2)
@@ -36,6 +35,22 @@ void	print_error(int Flag, char *s)
 	{
 		ft_eprintf("%s", s);
 		exit(1);
+	}
+}
+
+void	ft_all_close(t_data *px, int idx, int bef)
+{
+	int	i;
+
+	i = 0;
+	while (i < px->cmd_num - 1)
+	{
+		if (i != idx && i != bef)
+		{
+			close(px->pipefd[i][0]);
+			close(px->pipefd[i][1]);
+		}
+		i++;
 	}
 }
 

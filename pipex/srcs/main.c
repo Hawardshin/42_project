@@ -6,17 +6,16 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 14:53:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 16:20:14 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "./libft/libft.h"
 
-//옵션으로 들어온 녀석 까지 같이 검사해주면 될까? ls -c 는 실행되는데 cat -c는 실행이 안됨..
-
 void	print_error(int Flag, char *s)
 {
+	ft_putstr_fd("pipex: ", 2);
 	if (Flag == 0)
 	{
 		ft_putstr_fd("Memory allocation fails.\n", 2);
@@ -24,7 +23,7 @@ void	print_error(int Flag, char *s)
 	}
 	else if (Flag == 1)
 	{
-		ft_eprintf("command not found: %s\n", s);
+		ft_eprintf("%s: command not found\n", s);
 		exit(127);
 	}
 	else if (Flag == 2)

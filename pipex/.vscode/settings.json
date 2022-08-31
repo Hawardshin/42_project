@@ -39,6 +39,8 @@
 	"pipex_bonus.h": "c",
 	"complex": "c",
 	"__mutex_base": "c",
-	"cstdio": "c"
+	"cstdio": "c",
+	"cstdlib": "c",
+	"locale": "c"
 }
 }

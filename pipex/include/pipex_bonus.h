@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:57:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 13:05:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 14:07:44 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data
 }t_data;
 
 void	print_error(int Flag, char *s);
+void	ft_all_close(t_data *px, int idx, int bef);
 
 void	node_init(t_data *px, char **argv);
 void	parse_input(t_data *px, int argc, char **argv, char **envp);
