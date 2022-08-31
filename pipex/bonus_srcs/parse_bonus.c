@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/30 17:38:39 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 13:05:56 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	node_init(t_data *px, char **argv)
 	t_px	*node;
 
 	i = -1;
-	while (++i < px->pipe_num)
+	while (++i < px->cmd_num)
 	{
 		node = (t_px *)malloc(sizeof(t_px));
 		if (!node)
@@ -74,7 +74,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 
 	px->infile = argv[1];
 	px->outfile = argv[argc -1];
-	px->pipe_num = argc - 3;
+	px->cmd_num = argc - 3;
 	node_init(px, argv);
 	while (ft_strncmp(*envp, "PATH", 4) != 0 && envp)
 		envp++;
@@ -85,7 +85,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 	px->pipefd = (int **)malloc(sizeof(int *) * (argc - 3));
 	if (!(px->pipefd))
 		print_error(0, NULL);
-	while (i < argc -3)
+	while (i < argc - 4)
 	{
 		px->pipefd[i] = (int *)malloc(sizeof (int) * 2);
 		if (!(px->pipefd[i]))
@@ -104,7 +104,7 @@ void	cmd_init(t_data *px)
 	t_px	*node;
 
 	idx = -1;
-	while (++idx < px->pipe_num)
+	while (++idx < px->cmd_num)
 	{
 		node = mlst_find(idx, px);
 		i = -1;
