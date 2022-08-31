@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 14:28:03 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/26 15:45:10 by joushin          ###   ########.fr       */
+/*   Updated: 2022/08/31 18:19:14 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int		print_hex_upper(va_list ap);
 int		print_addr(va_list ap);
 int		print_dec_int(va_list ap);
 
-
 char	*ft_lltoa(long long n);
 int		ft_putnbr_base(unsigned int nbr, char *base);
 int		ft_print_addr(void *addr);
@@ -92,7 +91,6 @@ int		eprint_hex_lower(va_list ap);
 int		eprint_hex_upper(va_list ap);
 int		eprint_addr(va_list ap);
 int		eprint_dec_int(va_list ap);
-
 
 int		ft_eputnbr_base(unsigned int nbr, char *base);
 int		ft_eprint_addr(void *addr);
