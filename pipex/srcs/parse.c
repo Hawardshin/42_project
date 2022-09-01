@@ -6,14 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 18:41:06 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:25:39 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "./libft/libft.h"
 
-void	awk_sed(char **argv, int i, t_px *node)
+static void	awk_sed(char **argv, int i, t_px *node)
 {
 	int		j;
 	int		tmp;
@@ -42,7 +42,7 @@ void	awk_sed(char **argv, int i, t_px *node)
 	free(tmp_node);
 }
 
-void	node_init(t_data *px, char **argv)
+static void	node_init(t_data *px, char **argv)
 {
 	int		i;
 	t_px	*node;
@@ -61,13 +61,24 @@ void	node_init(t_data *px, char **argv)
 			!ft_strncmp(argv[i + 2], "sed ", 4))
 			awk_sed(argv, i, node);
 		else
-			node ->cmd = ft_msplit(argv[i + 2], ' ');
+			node->cmd = ft_msplit(argv[i + 2], ' ');
 		if (px->cmd_node_head != NULL)
 			px->cmd_node_tail->next = node;
 		else
 			px->cmd_node_head = node;
 		px->cmd_node_tail = node;
 	}
+}
+
+static char	*ft_make_cmd_path(t_data *px, t_px *node, int i)
+{
+	char	*tmp;
+	char	*ptmp;
+
+	tmp = ft_mstrjoin("/", node->cmd[0]);
+	ptmp = ft_mstrjoin(px->path[i], tmp);
+	my_free(&tmp);
+	return (ptmp);
 }
 
 void	parse_input(t_data *px, int argc, char **argv, char **envp)
@@ -82,7 +93,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 		envp++;
 	if (envp == NULL || *envp == NULL)
 		print_error(3, "Not exist path!\n");
-	px->path = ft_msplit(ft_mstrdup(*envp + 5), ':');
+	px->path = ft_msplit(*envp + 5, ':');
 	if (pipe(px->pipefd) == -1)
 		print_error(3, NULL);
 }
@@ -104,7 +115,7 @@ void	cmd_init(t_data *px)
 		while (px -> path[++i])
 		{
 			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
-				ptmp = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
+				ptmp = ft_make_cmd_path(px, node, i);
 			else
 				ptmp = ft_mstrdup(node->cmd[0]);
 			if (access(ptmp, R_OK | X_OK) == 0)

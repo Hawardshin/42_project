@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:42:40 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 18:36:03 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:57:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_mstrdup(const char *s1)
 	return (result);
 }
 
-char	*ft_mstrjoin(char const *s1, char const *s2)
+char	*ft_mstrjoin(char const *s1, char *s2)
 {
 	char	*retstr;
 	size_t	i;

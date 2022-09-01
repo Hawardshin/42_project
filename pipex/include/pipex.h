@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:07:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 18:40:24 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:27:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,20 @@ typedef struct s_data
 	t_px	*cmd_node_tail;
 }t_data;
 
+char	**ft_msplit(char const *str, char c);
+
 void	print_error(int Flag, char *s);
 
-void	node_init(t_data *px, char **argv);
 void	parse_input(t_data *px, int argc, char **argv, char **envp);
 void	cmd_init(t_data *px);
 
-void	exec_first(t_data *px);
-void	exec_last(t_data *px);
-void	exec_pipe(int idx, t_data *px);
 int		fork_child(t_data *px);
 
 void	my_free(char **to_free);
 char	*ft_mstrdup(const char *s1);
-char	*ft_mstrjoin(char const *s1, char const *s2);
+char	*ft_mstrjoin(char const *s1, char *s2);
 t_px	*mlst_find(int idx, t_data *data);
 pid_t	mfork(void);
 
-char	**ft_msplit(char const *str, char c);
 
 #endif

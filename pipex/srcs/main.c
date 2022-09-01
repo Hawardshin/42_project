@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 16:20:14 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:27:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	print_error(int Flag, char *s)
 		exit(1);
 	}
 }
+
 
 int	main(int argc, char **argv, char **envp)
 {

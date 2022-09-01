@@ -41,6 +41,7 @@
 	"__mutex_base": "c",
 	"cstdio": "c",
 	"cstdlib": "c",
-	"locale": "c"
+	"locale": "c",
+	"system_error": "c"
 }
 }
