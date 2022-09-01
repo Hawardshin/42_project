@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/01 16:03:42 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 16:20:47 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	parse_input(t_data *px, int argc, char **argv, char **envp)
 		envp++;
 	if (envp == NULL || *envp == NULL)
 		print_error(3, "Not exist path!\n");
-	px -> path = ft_msplit(ft_mstrdup(*envp + 5), ':');
+	px -> path = ft_msplit(*envp + 5, ':');
 	i = -1;
 	px->pipefd = (int **)malloc(sizeof(int *) * (argc - 3));
 	if (!(px->pipefd))
