@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:06:23 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 16:31:20 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:44:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,34 @@ void	ft_all_close(t_data *px, int idx, int bef)
 		}
 		i++;
 	}
+}
+
+void	ft_end_free(t_data *px)
+{
+	t_px	*node;
+	t_px	*tmp;
+	int		i;
+
+	node = px->cmd_node_head;
+	while (node)
+	{
+		i = 0;
+		tmp = node;
+		node = node->next;
+		while (tmp->cmd[i])
+			my_free(&(tmp ->cmd[i++]));
+		free(tmp->cmd);
+		if (tmp->cmd_path[0])
+			my_free(&(tmp->cmd_path[0]));
+		free(tmp);
+	}
+	i = 0;
+	while (px->path[i])
+		my_free(&(px->path[i++]));
+	free(px->path);
+	i = 0;
+	while (i < px->cmd_num - 1)
+		free(px->pipefd[i++]);
 }
 
 int	main(int argc, char **argv, char **envp)

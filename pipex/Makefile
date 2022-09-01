@@ -6,13 +6,13 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 21:08:50 by joushin           #+#    #+#              #
-#    Updated: 2022/09/01 14:41:25 by joushin          ###   ########.fr        #
+#    Updated: 2022/09/01 15:51:30 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INC = -I include
 
 NAME = pipex

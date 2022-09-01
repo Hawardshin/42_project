@@ -6,14 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:52:48 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 18:38:56 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 16:03:42 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 #include "../srcs/libft/libft.h"
 
-void	awk_sed(char **argv, int i, t_px *node)
+static void	awk_sed(char **argv, int i, t_px *node)
 {
 	int		j;
 	int		tmp;
@@ -42,7 +42,7 @@ void	awk_sed(char **argv, int i, t_px *node)
 	free(tmp_node);
 }
 
-void	node_init(t_data *px, char **argv)
+static void	node_init(t_data *px, char **argv)
 {
 	int		i;
 	t_px	*node;
@@ -68,6 +68,17 @@ void	node_init(t_data *px, char **argv)
 			px->cmd_node_head = node;
 		px->cmd_node_tail = node;
 	}
+}
+
+static char	*ft_make_cmd_path(t_data *px, t_px *node, int i)
+{
+	char	*tmp;
+	char	*ptmp;
+
+	tmp = ft_mstrjoin("/", node->cmd[0]);
+	ptmp = ft_mstrjoin(px->path[i], tmp);
+	my_free(&tmp);
+	return (ptmp);
 }
 
 void	parse_input(t_data *px, int argc, char **argv, char **envp)
@@ -110,13 +121,13 @@ void	cmd_init(t_data *px)
 	while (++idx < px->cmd_num)
 	{
 		node = mlst_find(idx, px);
-		i = -1;
 		node->cmd_path[0] = NULL;
 		node->cmd_path[1] = NULL;
+		i = -1;
 		while (px -> path[++i])
 		{
 			if (ft_strncmp(node->cmd[0], "/", 1) != 0)
-				ptmp = ft_mstrjoin(px->path[i], ft_mstrjoin("/", node->cmd[0]));
+				ptmp = ft_make_cmd_path(px, node, i);
 			else
 				ptmp = ft_mstrdup(node->cmd[0]);
 			if (access(ptmp, R_OK | X_OK) == 0)

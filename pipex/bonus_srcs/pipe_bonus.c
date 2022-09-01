@@ -6,14 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:32:39 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 14:12:34 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:49:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 #include "../srcs/libft/libft.h"
 
-void	exec_bonus(int *o_fd, t_data *px)
+static void	exec_bonus(int *o_fd, t_data *px)
 {
 	char	*tmp;
 	int		len;
@@ -34,7 +34,7 @@ void	exec_bonus(int *o_fd, t_data *px)
 	close(*o_fd);
 }
 
-void	exec_first(t_data *px)
+static void	exec_first(t_data *px)
 {
 	int		o_fd;
 	t_px	*node;
@@ -62,7 +62,7 @@ void	exec_first(t_data *px)
 	print_error(1, node->cmd[0]);
 }
 
-void	exec_last(t_data *px)
+static void	exec_last(t_data *px)
 {
 	int		o_fd;
 	t_px	*node;
@@ -90,7 +90,7 @@ void	exec_last(t_data *px)
 	print_error(1, node->cmd[0]);
 }
 
-void	exec_pipe(int idx, t_data *px)
+static void	exec_pipe(int idx, t_data *px)
 {
 	t_px	*node;
 
@@ -125,14 +125,14 @@ int	fork_child(t_data *px)
 				exec_first(px);
 			else if (i + 1 == px->cmd_num)
 				exec_last(px);
-			else
-				exec_pipe(i, px);
+			exec_pipe(i, px);
 		}
 		if (px->flag && i == 0)
 			waitpid(pid, &status, 0);
 	}
 	ft_all_close(px, -1, -1);
 	waitpid(pid, &status, 0);
+	ft_end_free(px);
 	if (0 == (status & 0xff))
 		return (status >> 8);
 	return (status);

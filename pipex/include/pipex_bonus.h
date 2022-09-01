@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:57:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/08/31 18:18:08 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:49:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,11 @@ typedef struct s_data
 
 void	print_error(int Flag, char *s);
 void	ft_all_close(t_data *px, int idx, int bef);
+void	ft_end_free(t_data *px);
 
-void	node_init(t_data *px, char **argv);
 void	parse_input(t_data *px, int argc, char **argv, char **envp);
 void	cmd_init(t_data *px);
 
-void	exec_first(t_data *px);
-void	exec_last(t_data *px);
-void	exec_pipe(int idx, t_data *px);
 int		fork_child(t_data *px);
 
 void	my_free(char **to_free);
