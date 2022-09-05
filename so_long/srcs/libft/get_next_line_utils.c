@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:19:41 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/03 16:03:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/05 19:58:30 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*ft__strdup(const char *s1)
 	len = ft__strlen(s1);
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
-		print_error(0, NULL);
+		ft_putstr_fd("Memory allocate fail\n", 2);
 	ft__strlcpy(result, s1, len + 1);
 	return (result);
 }
@@ -89,7 +89,7 @@ char	*ft__strjoin(char *s1, char *s2)
 	i = 0;
 	retstr = malloc(sizeof(char) * (ft__strlen(s1) + ft__strlen(s2) + 1));
 	if (!retstr)
-		print_error(0, NULL);
+		ft_putstr_fd("Memory allocate fail\n", 2);
 	while (s1[i])
 	{
 		retstr[i] = s1[i];

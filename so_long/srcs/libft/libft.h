@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 14:28:03 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/03 16:06:44 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/05 19:57:38 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int		ft_eprint_addr(void *addr);
 int		ft_printf(const char *args, ...);
 int		ft_eprintf(const char *args, ...);
 
-char	*get_next_line(int fd);
-
 char	*ft__strjoin(char *s1, char *s2);
 char	*ft__strdup(const char *s1);
 size_t	ft__strlcpy(char *dst, const char *src, size_t dstsize);
 void	*ft__memmove(void *dst, const void *src, size_t len);
 size_t	ft__strlen(const char *str);
+
+char	*get_next_line(int fd);
 
 #endif
