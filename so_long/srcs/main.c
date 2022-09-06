@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:53:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 17:23:49 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/06 20:50:47 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	img_set(t_game g)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv)///최대크기 , 맵파일 이름, x눌렀을때 끄는거
 {
 	void	*mlx;
 	void	*win;
@@ -54,13 +54,13 @@ int	main(int argc, char **argv)
 	{
 		map_parse(argv[1], &data);
 		chk_map(data);
-		param_init(&param);
 		mlx = mlx_init();
 		parse_image(mlx, &data);
 		printf("%d %d", data.high, data.width);
 		win = mlx_new_window(mlx, data.width * 64, data.high * 64, "./so_long");
 		data.win = win;
 		data.mlx = mlx;
+		param_init(&param, data);
 		// for (int i=0; i < data.high; i++)
 		// {
 		// 	for (int j = 0; j < data.width; j++)

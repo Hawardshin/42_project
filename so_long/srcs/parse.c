@@ -6,10 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:56:06 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 17:11:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/06 20:12:33 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../mlx/mlx.h"
 #include "so_long.h"
@@ -22,7 +21,6 @@ void	parse_image(void *mlx, t_game *data)
 
 	data->land = mlx_xpm_file_to_image (mlx, \
 	"./asset/land.xpm", &img_width, &img_height);
-
 	data->wall = mlx_xpm_file_to_image(mlx, \
 	"./asset/wall.xpm", &img_width, &img_height);
 	data->chest = mlx_xpm_file_to_image(mlx, \

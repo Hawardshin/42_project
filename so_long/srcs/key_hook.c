@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:26:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 16:48:35 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/06 20:57:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,38 @@
 #include "../mlx/mlx.h"
 #include "./libft/libft.h"
 
-void	param_init(t_param *param)
+void	param_init(t_param *param, t_game g)
 {
-	param->x = 3;
-	param->y = 4;
+	int	hi;
+	int	wi;
+
+	hi = -1;
+	while (++hi < g.high)
+	{
+		wi = -1;
+		while (++wi < g.width)
+		{
+			if (g.map[hi * g.width + wi] == 'P')
+			{
+				param->x = wi;
+				param->y = hi;
+			}
+		}
+	}
 }
 
-int	key_press(int keycode, t_param *param)
+int	key_press(int keycode, t_param *param, t_game *data)
 {
 	if (keycode == KEY_W)
-		param->y++;
+		move_w(param, data);
 	else if (keycode == KEY_S)
-		param->y--;
+		move_s(param, data);
 	else if (keycode == KEY_A)
-		param->x--;
+		move_a(param, data);
 	else if (keycode == KEY_D)
-		param->x++;
+		move_d(param, data);
 	else if (keycode == KEY_ESC)
-		exit(0);
-	ft_printf("x: %d, y: %d\n", param->x, param->y);
+		exit_game(param, data);
+	printf("x : %d y : %d\n", param->x, param->y);
 	return (0);
 }
