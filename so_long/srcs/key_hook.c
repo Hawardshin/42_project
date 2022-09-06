@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:26:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/03 15:14:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/06 16:48:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	param_init(t_param *param)
 
 int	key_press(int keycode, t_param *param)
 {
-	// static int	a = 0;
-
 	if (keycode == KEY_W)
 		param->y++;
 	else if (keycode == KEY_S)

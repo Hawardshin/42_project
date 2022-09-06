@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/03 13:06:03 by joushin           #+#    #+#              #
-#    Updated: 2022/09/03 15:12:20 by joushin          ###   ########.fr        #
+#    Updated: 2022/09/06 17:09:23 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ RM= rm -rf
 
 SRCS =	$(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/key_hook.c \
+		$(SRCS_DIR)/parse.c \
+		$(SRCS_DIR)/so_long_utils.c
 
 SRCS_BONUS = $(SRCS_BONUS_DIR)/main.c \
 
