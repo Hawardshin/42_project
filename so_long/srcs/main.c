@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:53:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 20:50:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:41:38 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,22 @@ int	main(int argc, char **argv)///최대크기 , 맵파일 이름, x눌렀을때
 {
 	void	*mlx;
 	void	*win;
-	t_param	param;
 	t_game	data;
 
 	if (argc > 1)
 	{
 		map_parse(argv[1], &data);
+		printf("%d %d\n", data.high, data.width);
 		chk_map(data);
 		mlx = mlx_init();
 		parse_image(mlx, &data);
-		printf("%d %d", data.high, data.width);
+		printf("%d %d\n", data.high, data.width);
 		win = mlx_new_window(mlx, data.width * 64, data.high * 64, "./so_long");
+		printf("%d %d\n", data.high, data.width);
 		data.win = win;
 		data.mlx = mlx;
-		param_init(&param, data);
+		param_init(&data);
+		printf("%d %d\n", data.high, data.width);
 		// for (int i=0; i < data.high; i++)
 		// {
 		// 	for (int j = 0; j < data.width; j++)
@@ -70,7 +72,10 @@ int	main(int argc, char **argv)///최대크기 , 맵파일 이름, x눌렀을때
 		// 	printf("\n");
 		// }
 		img_set(data);
-		mlx_hook(win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
+		printf("%d %d\n", data.high, data.width);
+		mlx_hook(win, X_EVENT_KEY_RELEASE, 0, &key_press, &data);
+		printf("%d %d\n", data.high, data.width);
 		mlx_loop(mlx);
+		printf("%d %d\n", data.high, data.width);
 	}
 }

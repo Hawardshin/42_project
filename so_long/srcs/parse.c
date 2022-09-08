@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:56:06 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 20:12:33 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:43:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	map_parse(char *map_file, t_game *data)
 				error_handle("map format error\n");
 		}
 	}
+	// printf("%d %d\n", data->high, data->width);
 	close(o_fd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:31:47 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 20:54:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/08 16:03:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,54 @@
 #include "so_long.h"
 #include "./libft/libft.h"
 
-void	move_w(t_param *param, t_game *data)
+void	move_w(t_game *data)
 {
-	if (param->y + 1 >= data->high || \
-	data->map[(param->y + 1) * data->width + param->x] != '0')
+	if (data->y < 1 || \
+	data->map[(data->y - 1) * data->width + data->x] != '0')
 		return ;
-	data->map[param->y * data->width + param->x] = '0';
-	param->y++;
-	data->map[param->y * data->width + param->x] = 'P';
+	data->map[data->y * data->width + data->x] = '0';
+	data->y--;
+	data->map[data->y * data->width + data->x] = 'P';
 	img_set(*data);
 }
 
-void	move_s(t_param *param, t_game *data)
+void	move_s(t_game *data)
 {
-	if (param->y <= 1 || \
-	data->map[(param->y - 1) * data->width + param->x] != '0')
+	if (data->y + 1 > data->high || \
+	data->map[(data->y + 1) * data->width + data->x] != '0')
 		return ;
-	data->map[param->y * data->width + param->x] = '0';
-	param->y--;
-	data->map[param->y * data->width + param->x] = 'P';
+	data->map[data->y * data->width + data->x] = '0';
+	data->y++;
+	data->map[data->y * data->width + data->x] = 'P';
 	img_set(*data);
 }
 
-void	move_a(t_param *param, t_game *data)
+void	move_a(t_game *data)
 {
-	if (param->x <= 1 || \
-	data->map[param->y * data->width + (param->x -1)] != '0')
+	if (data->x < 1 || \
+	data->map[data->y * data->width + (data->x - 1)] != '0')
 		return ;
-	data->map[param->y * data->width + param->x] = '0';
-	param->x--;
-	data->map[param->y * data->width + param->x + 1] = 'P';
+	data->map[data->y * data->width + data->x] = '0';
+	data->x--;
+	data->map[data->y * data->width + data->x] = 'P';
 	img_set(*data);
 }
 
-void	move_d(t_param *param, t_game *data)
+void	move_d(t_game *data)
 {
-	if (param->x + 1 >= data->width || \
-	data->map[param->y * data->width + (param->x + 1)] != '0')
+	if (data->x > data->width || \
+	data->map[data->y * data->width + (data->x + 1)] != '0')
 		return ;
-	data->map[param->y * data->width + param->x] = '0';
-	param->x++;
-	data->map[param->y * data->width + param->x] = 'P';
+	data->map[data->y * data->width + data->x] = '0';
+	data->x++;
+	data->map[data->y * data->width + data->x] = 'P';
+	img_set(*data);
 }
 
-void	exit_game(t_param *param, t_game *data)
+void	exit_game(t_game *data)
 {
-	param->x = -1;
-	param->y = -1;
+	data->x = -1;
+	data->y = -1;
 	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:51:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 20:47:49 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:38:54 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ printf, malloc, free, perror,
 strerror, exit
 */
 
-typedef struct s_param
+typedef struct s_game
 {
 	int		x;
 	int		y;
-}t_param;
-
-typedef struct s_game
-{
 	int		str_line;
 	int		high;
 	int		width;
@@ -53,8 +49,8 @@ typedef struct s_game
 }t_game;
 
 void	img_set(t_game g);
-void	param_init(t_param *param, t_game g);
-int		key_press(int keycode, t_param *param, t_game *data);
+void	param_init(t_game *g);
+int		key_press(int keycode, t_game *data);
 
 void	parse_image(void *mlx, t_game *data);
 void	map_parse(char *map_file, t_game *data);
@@ -65,10 +61,10 @@ void	error_handle(char *s);
 char	*ft_strjoin_no_nl(char *dest, char *src);
 char	*ft_strdup_no_nl(char *str);
 
-void	move_w(t_param *param, t_game *data);
-void	move_s(t_param *param, t_game *data);
-void	move_a(t_param *param, t_game *data);
-void	move_d(t_param *param, t_game *data);
-void	exit_game(t_param *param, t_game *data);
+void	move_w(t_game *data);
+void	move_s(t_game *data);
+void	move_a(t_game *data);
+void	move_d(t_game *data);
+void	exit_game(t_game *data);
 
 #endif

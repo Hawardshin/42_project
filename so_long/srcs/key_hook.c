@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:26:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/06 20:57:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:38:08 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,38 @@
 #include "../mlx/mlx.h"
 #include "./libft/libft.h"
 
-void	param_init(t_param *param, t_game g)
+void	param_init(t_game *g)
 {
 	int	hi;
 	int	wi;
 
 	hi = -1;
-	while (++hi < g.high)
+	while (++hi < g->high)
 	{
 		wi = -1;
-		while (++wi < g.width)
+		while (++wi < g->width)
 		{
-			if (g.map[hi * g.width + wi] == 'P')
+			if (g->map[hi * g->width + wi] == 'P')
 			{
-				param->x = wi;
-				param->y = hi;
+				g->x = wi;
+				g->y = hi;
 			}
 		}
 	}
 }
 
-int	key_press(int keycode, t_param *param, t_game *data)
+int	key_press(int keycode, t_game *param)
 {
 	if (keycode == KEY_W)
-		move_w(param, data);
+		move_w(param);
 	else if (keycode == KEY_S)
-		move_s(param, data);
+		move_s(param);
 	else if (keycode == KEY_A)
-		move_a(param, data);
+		move_a(param);
 	else if (keycode == KEY_D)
-		move_d(param, data);
+		move_d(param);
 	else if (keycode == KEY_ESC)
-		exit_game(param, data);
+		exit_game(param);
 	printf("x : %d y : %d\n", param->x, param->y);
 	return (0);
 }
