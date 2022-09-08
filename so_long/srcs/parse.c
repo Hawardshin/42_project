@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:56:06 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/08 15:43:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/08 18:00:42 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	parse_image(void *mlx, t_game *data)
 	"./asset/chest.xpm", &img_width, &img_height);
 	data->chest_open = mlx_xpm_file_to_image(mlx, \
 	"./asset/chest_open.xpm", &img_width, &img_height);
-	data->player = mlx_xpm_file_to_image(mlx, \
+	data->play = mlx_xpm_file_to_image(mlx, \
 	"./asset/player.xpm", &img_width, &img_height);
-	data->out_path = mlx_xpm_file_to_image(mlx, \
+	data->out = mlx_xpm_file_to_image(mlx, \
 	"./asset/out_path.xpm", &img_width, &img_height);
 }
 
@@ -59,7 +59,6 @@ void	map_parse(char *map_file, t_game *data)
 				error_handle("map format error\n");
 		}
 	}
-	// printf("%d %d\n", data->high, data->width);
 	close(o_fd);
 }
 
