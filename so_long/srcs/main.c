@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:53:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/08 18:34:08 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/12 22:00:47 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,36 @@ void	img_set(t_game g)
 	}
 }
 
-int	main(int argc, char **argv) ///최대크기 , x눌렀을때 끄는거
+void	file_chk(int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	t_game	data;
-
 	if (argc <= 1)
 		error_handle("no map\n");
-	if (!argv[1])
-		error_handle("map name error\n");
-	if (ft_strlen(argv[1]) < 4)
+	if (!argv[1] || ft_strlen(argv[1]) < 4)
 		error_handle("map name error\n");
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
 		error_handle("map name error\n");
+}
+
+int	main(int argc, char **argv)
+{
+	t_game	data;
+
+	file_chk(argc, argv);
 	map_parse(argv[1], &data);
-	chk_map(data);
-	mlx = mlx_init();
-	parse_image(mlx, &data);
-	win = mlx_new_window(mlx, data.width * 64, data.high * 64, "./so_long");
-	data.win = win;
-	data.mlx = mlx;
+	chk_map(&data);
+	data.mlx = mlx_init();
+	if (!data.mlx)
+		error_handle("can't open new window\n");
+	parse_image(data.mlx, &data);
+	printf("wid :%d %d\n", data.width * 64, data.high * 64);
+	printf("\n%d %d", data.width  ,data.high);
+	if (128 < data.width || 128  < data.high)
+		error_handle("too big map\n");
+	data.win = mlx_new_window(data.mlx, \
+	data.width * 64, data.high * 64, "./so_long");
 	param_init(&data);
 	img_set(data);
-	mlx_hook(win, X_EVENT_KEY_RELEASE, 0, &key_press, &data);
-	mlx_hook(win, X_EVENT_KEY_EXIT, 0, &exit_game, &data);
-	mlx_loop(mlx);
-	printf("%d %d\n", data.high, data.width);//
+	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 0, &key_press, &data);
+	mlx_hook(data.win, X_EVENT_KEY_EXIT, 0, &exit_game, &data);
+	mlx_loop(data.mlx);
 }

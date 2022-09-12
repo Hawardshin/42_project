@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:56:06 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/08 18:00:42 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/12 18:30:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,30 @@ void	map_parse(char *map_file, t_game *data)
 	close(o_fd);
 }
 
-void	chk_map(t_game data)
+void	chk_map(t_game *data)
 {
 	int	e_cnt;
 	int	p_cnt;
-	int	c_cnt;
 	int	i;
 
 	i = -1;
+	data->c_cnt = 0;
 	e_cnt = 0;
-	c_cnt = 0;
 	p_cnt = 0;
-	while (data.map[++i])
+	while (data->map[++i])
 	{
-		if ((!(i / data.width) || !(data.width % (i + 1)) || \
-		!(data.width % i)) && (data.map[i] != '1'))
+		if ((!(i / data->width) || !(data->width % (i + 1)) || \
+		!(data->width % i)) && (data->map[i] != '1'))
 			error_handle("1map format error\n");
-		if (data.map[i] == 'E')
+		if (data->map[i] == 'E')
 			e_cnt++;
-		else if (data.map[i] == 'P')
+		else if (data->map[i] == 'P')
 			p_cnt++;
-		else if (data.map[i] == 'C')
-			c_cnt++;
-		else if (data.map[i] != '0' && data.map[i] != '1')
+		else if (data->map[i] == 'C')
+			data->c_cnt++;
+		else if (data->map[i] != '0' && data->map[i] != '1')
 			error_handle("2map format error\n");
 	}
-	if (c_cnt != 1 || p_cnt != 1 || e_cnt == 0)
+	if (data->c_cnt < 1 || p_cnt != 1 || e_cnt < 1)
 		error_handle("3map format error\n");
 }

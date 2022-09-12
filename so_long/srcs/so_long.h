@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:51:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/08 18:34:42 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/12 21:34:45 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_game
 {
 	int		x;
 	int		y;
+	int		c_cnt;
 	int		str_line;
 	int		high;
 	int		width;
@@ -56,7 +57,7 @@ int		key_press(int keycode, t_game *data);
 
 void	parse_image(void *mlx, t_game *data);
 void	map_parse(char *map_file, t_game *data);
-void	chk_map(t_game data);
+void	chk_map(t_game *data);
 
 void	error_handle(char *s);
 void	error_handle(char *s);

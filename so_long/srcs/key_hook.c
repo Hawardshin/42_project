@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:26:08 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/08 18:32:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/12 20:05:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	param_init(t_game *g)
 	int	wi;
 
 	hi = -1;
-	g->flag = 0;
 	while (++hi < g->high)
 	{
 		wi = -1;
