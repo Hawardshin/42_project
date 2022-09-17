@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:53:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/12 22:00:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/17 18:04:09 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ int	main(int argc, char **argv)
 	if (!data.mlx)
 		error_handle("can't open new window\n");
 	parse_image(data.mlx, &data);
-	printf("wid :%d %d\n", data.width * 64, data.high * 64);
-	printf("\n%d %d", data.width  ,data.high);
-	if (128 < data.width || 128  < data.high)
+	if (128 < data.width || 128 < data.high)
 		error_handle("too big map\n");
 	data.win = mlx_new_window(data.mlx, \
 	data.width * 64, data.high * 64, "./so_long");

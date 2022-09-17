@@ -6,12 +6,12 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/03 13:06:03 by joushin           #+#    #+#              #
-#    Updated: 2022/09/06 20:47:10 by joushin          ###   ########.fr        #
+#    Updated: 2022/09/17 18:11:19 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 INC = -I include
 
 NAME = so_long

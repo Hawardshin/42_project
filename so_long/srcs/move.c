@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:31:47 by joushin           #+#    #+#             */
-/*   Updated: 2022/09/12 18:37:59 by joushin          ###   ########.fr       */
+/*   Updated: 2022/09/17 18:20:49 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	move_w(t_game *data)
 	{
 		data->map[data->y * data->width + data->x] = '0';
 		data->map[(data->y - 1) * data->width + data->x] = '0';
+		img_set(*data);
 		data->y--;
 		data->map[data->y * data->width + data->x] = 'P';
 		data->c_cnt--;
@@ -117,6 +118,7 @@ int	exit_game(t_game *data)
 {
 	data->x = -1;
 	data->y = -1;
+	free(data->map);
 	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }
