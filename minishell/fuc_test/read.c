@@ -5,13 +5,15 @@
 
 int main()
 {
-	char *str;
+	char	*str;
+
 	while (1)
 	{
-		str = readline("hello>");
+		str = readline("jshell$ ");
 		if (!str)
 		{
-			return 0;
+			printf("done\n");
+			return (0);
 		}
 	}
 }

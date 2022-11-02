@@ -30,6 +30,7 @@
 ],
 "files.associations": {
 	"readline.h": "c",
-	"history.h": "c"
+	"history.h": "c",
+	"stdio.h": "c"
 }
 }
