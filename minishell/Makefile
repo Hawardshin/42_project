@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/02 17:00:06 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/06 21:28:57 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,11 @@ LIBRARY = -L/Users/joushin/.brew/opt/readline/lib -lreadline -L$(LIBFT_DIR) -lft
 LIBFT_DIR = ./libft/
 
 SRCS = main.c \
+	   node.c \
+	   parse.c \
+	   scanner.c \
+	   source.c \
+	   executor.c 
 		
 OBJS = $(SRCS:.c=.o)
 
