@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 18:31:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/06 18:31:28 by joushin          ###   ########.fr       */
+/*   Created: 2022/11/09 20:07:06 by joushin           #+#    #+#             */
+/*   Updated: 2022/11/09 22:08:29 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-#define PARSER_H
-#include "scanner.h"    /* struct token_s */
-#include "source.h"     /* struct source_s */
-struct node_s *parse_simple_command(struct token_s *tok);
+#ifndef TOKEN_H
+# define TOKEN_H
+
+#include "node.h"
+t_token	*tokenize(t_readline *src);
+
 #endif
