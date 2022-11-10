@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/10 16:31:34 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/10 16:37:10 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	parse_and_execute(t_readline *src, t_main_node *main_node)
 		// printf("eof\n");
 		return (0);//리턴 값 바꾸기.
 	}
-
 	// printf("%s\n",main_node->path[0]);
 	while(tok && !tok->eof)
 	{
@@ -107,6 +106,7 @@ int	parse_and_execute(t_readline *src, t_main_node *main_node)
 		if (tok->eof)
 			break;
 		// print_token(tok);
+		// printf("node :: %s\n", main_node->node_tail->cmd[0]);
 	}
 	printf("out\n");
 	return 1;
@@ -119,6 +119,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc; (void) argv; (void) envp ;
 	signal(SIGINT, handler);
 	t_main_node	*main_node;
+	t_readline	src;
 
 	main_node = set_main_node(envp);
 	while (1)
@@ -141,7 +142,7 @@ int	main(int argc, char **argv, char **envp)
 			// exit(1);
             break;
         }
-		t_readline	src;
+
     	src.buffer = cmd;
     	src.bufsize = ft_strlen(cmd);
     	src.now_pos = -2;

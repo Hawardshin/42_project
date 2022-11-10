@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:05:25 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/09 22:39:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/10 16:38:51 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	make_new_node(t_main_node *cmd_node, t_token *tok)
 	//file 과 cmd구분하는 부분이 필요해요..
 	//만약 명령이라면?
 	node = cmd_init(cmd_node, tok);
+	printf("cmd path :%s\n",node->cmd_path[0]);
 	if (cmd_node->node_head == NULL)
 	{
 		// printf("goo\n");

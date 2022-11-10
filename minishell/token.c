@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/10 16:25:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/10 16:42:39 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	token_case(t_readline *src)
 		move_char(src);
 		// printf("move :: %c \n",move_char(src));
 	}
-	if (check_sep(see_char(src) == 0))
-		move_char(src);
+	// if (check_sep(see_char(src) == 0))
+	// 	move_char(src);
 	return (0);
 }
 
@@ -90,6 +90,6 @@ t_token	*tokenize(t_readline *src)
 	// if (src->bufsize == src->done_pos)
 	// 	src->done_pos--;
 	token_buff[i] = 0;
-	printf("%s\n",token_buff);
+	// printf("ss%s0\n",token_buff);
 	return (create_token(token_buff));
 }
