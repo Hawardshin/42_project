@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:05:25 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/10 16:38:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/10 17:51:25 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,15 @@ static char	*ft_make_cmd_path(t_main_node *px, t_token *tok, int i)
 	return (ptmp);
 }
 
-t_node	*cmd_init(t_main_node *px, t_token *tok)
+void	init_cmd(t_main_node *px, t_token *tok, t_node *node)
+{
+	if (ft_strncmp(tok->text, "-", 1) == 0)
+	{
+		node->cmd[1] = ft_strdup(tok->text);
+	}
+}
+
+t_node	*cmd_path_init(t_main_node *px, t_token *tok)
 {
 	t_node		*node;
 	struct stat	st;
@@ -35,9 +43,11 @@ t_node	*cmd_init(t_main_node *px, t_token *tok)
 	int			i;
 
 	node = malloc(sizeof(t_node));// 널가드
+	ft_memset(node, 0, sizeof(t_node));
 	idx = -1;
-	node->cmd_path[0] = NULL;
-	node->cmd_path[1] = NULL;
+	init_cmd(px, tok,node);
+	// node->cmd_path[0] = NULL;
+	// node->cmd_path[1] = NULL;
 	i = -1;
 	while (px -> path[++i])
 	{
@@ -57,10 +67,14 @@ void	make_new_node(t_main_node *cmd_node, t_token *tok)
 {
 	t_node	*node;
 
-	//file 과 cmd구분하는 부분이 필요해요..
+	//file 과 cmd구분하는 부분이 필요해요.. + -로 시작하는 경우 옵션 나눠주자.
 	//만약 명령이라면?
-	node = cmd_init(cmd_node, tok);
+	if (ft_strncmp(tok->text, "-", 1) == 0)//그리고 이전 노드가 있고 명령노드인경우.
+	{
+	}
+	node = cmd_path_init(cmd_node, tok);
 	printf("cmd path :%s\n",node->cmd_path[0]);
+	printf("%s",node->cmd[0]);
 	if (cmd_node->node_head == NULL)
 	{
 		// printf("goo\n");
