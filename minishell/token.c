@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/09 22:51:52 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/10 16:25:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ int	check_sep(char a)
 //토큰의 구분자에 해당하면 -1
 int	token_case(t_readline *src)
 {
-	if (src->now_pos == src->bufsize -1)
-		return (1);
-	if (src->done_pos == src->bufsize)
+	if (see_char(src) == -1 && src->done_pos == src->bufsize)
 		return (1);
 	while (check_sep(see_char(src))) //구분자가 있는지 확인하면서 계속 뒤로 늘린다.
 	{
@@ -76,18 +74,22 @@ t_token	*tokenize(t_readline *src)
 	int		i;
 
 	i = 0;
+	skip_white_spaces(src);
+
 	if (token_case(src) == 1)
-		create_token(NULL);
+		return(create_token(NULL));
 	token_buff = malloc(src->now_pos - src->done_pos + 2);
 	if (!token_buff)
 		return (NULL);
 	// printf("now :%d done:%d buff_size %d\n",src->now_pos, src->done_pos,src->bufsize);
 	while (src->done_pos <= src->now_pos)
 	{
-		printf("%c\n",src->buffer[src->done_pos]);
+		// printf("%c\n",src->buffer[src->done_pos]);
 		token_buff[i++] = src->buffer[src->done_pos++];
 	}
+	// if (src->bufsize == src->done_pos)
+	// 	src->done_pos--;
 	token_buff[i] = 0;
-	printf("%s",token_buff);
+	printf("%s\n",token_buff);
 	return (create_token(token_buff));
 }

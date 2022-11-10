@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:27:24 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/09 20:27:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/10 16:31:06 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,15 @@ char	see_char(t_readline *src)//보기만 함.
 
 void	skip_white_spaces(t_readline *src)
 {
-	char	c;
 
 	if (!src || !src->buffer)
 		return ;
-	c = see_char(src);
-	while (c != -1 && (c == ' ' || c == '\t'))
+	while (see_char(src) != -1 && (see_char(src) == ' ' || see_char(src) == '\t'))
 	{
-		c = see_char(src);
-		if (c != -1)
-			move_char(src);
+		move_char(src);
 	}
-	if (src->now_pos > 0)
-		src->done_pos = src->now_pos;
+	if (src->now_pos >= 0 && src->done_pos != src->bufsize)
+	{
+		src->done_pos = src->now_pos + 1;
+	}
 }
