@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"cstdlib": "c",
+		"token.h": "c",
+		"just_for_test.h": "c"
+	}
+}
