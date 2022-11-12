@@ -17,6 +17,16 @@ void	print_tok_type(int a)
 		printf("EOF_TOK\n");
 }
 
+void	Print_a_token(t_token *tok)
+{
+	t_token *tmp;
+	tmp = tok;
+	printf("------PRINT_A_TOK-------\n");
+	printf("text :%s;\ntok_type: ",tmp->text);
+	print_tok_type(tmp->tok_type);
+	printf("------PRINT_A_TOK-------\n");
+}
+
 void	Print_all_token(t_token	*tok)
 {
 	t_token *tmp;

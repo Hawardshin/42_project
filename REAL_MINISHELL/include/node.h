@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 13:59:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 15:58:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef struct	s_token
 	struct s_token	*bef;
 	struct s_token	*next;
 } t_token;
+
+typedef struct	s_main_token
+{
+	t_token	*start_token;
+	t_token	*end_token;
+	int		token_num;
+} t_main_token ;
 
 typedef struct	s_node
 {

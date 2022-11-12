@@ -5,5 +5,6 @@
 #include "node.h"
 
 void	Print_all_token(t_token	*tok);
+void	Print_a_token(t_token *tok);
 void	print_src_char(t_readline *src);
 #endif

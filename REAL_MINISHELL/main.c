@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 14:07:34 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:37:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	main(int argc, char **argv, char **envp)
 		src.bufsize = ft_strlen(rd_line);
 		src.now_pos = -2;
 
-		t_token * tok =tokenize(&src);
-		// Print_all_token(tok);
+		t_main_token * tok =tokenize(&src);
+		// Print_all_token(tok->start_token);
 		// check_syntax(tok);
 		// make_node(tok);
 		(void)tok;

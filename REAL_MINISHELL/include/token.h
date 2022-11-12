@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:07:06 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/11 22:08:55 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:09:38 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 #define RE_DIRECT 107 // >
 
 
-t_token	*tokenize(t_readline *src);
-char	see_char(t_readline *src);//보기만 함.
-char	move_char(t_readline *src); //움직이기까지 함.
+t_main_token	*tokenize(t_readline *src);
+char			see_char(t_readline *src);//보기만 함.
+char			move_char(t_readline *src); //움직이기까지 함.
 
 #endif
