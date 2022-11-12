@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/11 21:38:06 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 12:02:44 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rd_line);
 		free(rd_line);
 		rd_line = NULL;
-		break;
 	}
 	return (0);
 }
