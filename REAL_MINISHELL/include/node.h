@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 11:55:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 13:59:47 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #define PIPE_TOK 30
 #define SPACE_TOK 40
 #define EOF_TOK 50
+#define MAIN_TOK 60
 
 void	print_error(int Flag, char *s);
 
@@ -41,6 +42,7 @@ typedef struct	s_token
 	int				text_len;
 	char			*text;
 	// int				eof; //마지막 토큰인지 확인. 마지막이면 1로 지정해주기.
+	struct s_token	*bef;
 	struct s_token	*next;
 } t_token;
 

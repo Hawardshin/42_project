@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 12:02:44 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 14:07:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ int	main(int argc, char **argv, char **envp)
 		src.now_pos = -2;
 
 		t_token * tok =tokenize(&src);
-		Print_all_token(tok);
-		// chk_syntax();
-
+		// Print_all_token(tok);
+		// check_syntax(tok);
+		// make_node(tok);
+		(void)tok;
 		add_history(rd_line);
 		free(rd_line);
 		rd_line = NULL;

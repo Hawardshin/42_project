@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 12:22:44 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/12 14:38:49 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ t_token	*create_token(t_readline *src)
 				j++;
 			}
 			free(tok_buff);
+			tok->text_len = j;
 			tok->tok_type = ARGV_TOK;
 			return (tok);
 		}
@@ -165,6 +166,7 @@ t_token	*create_token(t_readline *src)
 				j++;
 			}
 			free(tok_buff);
+			tok->text_len = j;
 			tok->tok_type = ARGV_TOK;
 			return (tok);
 		}
@@ -215,6 +217,7 @@ t_token	*create_token(t_readline *src)
 			j++;
 		}
 		free(tok_buff);
+		tok->text_len = j;
 		tok->tok_type = ARGV_TOK;
 		return (tok);
 	}
@@ -274,33 +277,79 @@ t_token	*create_token(t_readline *src)
 		}
 		free(tok_buff);
 		free(env_buff);
+		tok->text_len = j;
 		tok->tok_type = ARGV_TOK;
 		return (tok);
 	}
 	return (NULL);
 
 }
-//토큰의 구분자에 해당하면 -1
 
+// 1. argv끼리 space없이 뭉쳐있는경우 하나의 argv_tok로 합쳐주기.
+// 2. space token은 다 삭제
+
+void	merge_two_tok(t_token *front, t_token *back)
+{
+	char	*buff;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	buff = malloc (front->text_len + back->text_len + 1);
+	while (front -> text[i])
+	{
+		buff[i] = front -> text[i];
+		i++;
+	}
+	while (back->text[j])
+	{
+		buff[i++] = back->text[j++];
+	}
+	buff[i] = '\0';
+	free(front->text);
+	front->text = buff;
+	front->next = back->next;
+	free(back->text);
+	free(back);
+}
+
+void	merge_argv_tok(t_token *tok)
+{
+	t_token	*end;
+
+	end = tok;
+	while ((end->tok_type != EOF_TOK) && (end!= NULL))
+	{
+		if ((end->tok_type == ARGV_TOK) && (end->next->tok_type == ARGV_TOK))
+		{
+			// merge_two_tok(&end, &(end->next));
+			merge_two_tok(end,end->next);
+		}
+		else
+			end = end->next;
+	}
+}
 
 t_token	*tokenize(t_readline *src)
 {
 	t_token	*end;
 	t_token	*tmp;
-	t_token	*main_tok_node = create_token(src);
-	end = main_tok_node;
-	printf("%s\n",main_tok_node->text);
+	t_token	*main_tok_node;
 
-	// main_tok_node = malloc (sizeof (t_token));
-	// if (!main_tok_node)
-	// 	return (NULL);
-	// ft_memset(main_tok_node, 0, sizeof (t_token));
-	// main_tok_node->next = NULL;
-	while (end->tok_type!= EOF_TOK && end)
+	main_tok_node = create_token(src);
+	main_tok_node ->bef = NULL;
+	end = main_tok_node;
+	while (end->tok_type != EOF_TOK && end)
 	{
 		tmp = create_token(src);
-		end ->next = tmp;
+		// printf("ss: %s\n",tmp->text);
+		tmp->bef = end;
+		end->next = tmp;
 		end = tmp;
-	}
+	}//여기까지가 모든 토큰을 다 만들어 주는것 //space까지
+	Print_all_token(main_tok_node);
+	merge_argv_tok(main_tok_node);
+	Print_all_token(main_tok_node);
 	return (main_tok_node);
 }
