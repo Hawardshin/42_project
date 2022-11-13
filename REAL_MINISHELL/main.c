@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 16:37:31 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:22:59 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int argc, char **argv, char **envp)
 	t_readline	src;
 	(void) envp;
 	// main_node = set_main_node(envp);
+	printf("\n-------------------------------------------start--------------------------------------------------\n");
 	while (1)
 	{
 		rd_line = readline("jshell$ ");
@@ -82,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break;
 		}
-
+		printf("\n-------------------------------------------input--------------------------------------------------\n");
 		src.buffer = rd_line;
 		src.bufsize = ft_strlen(rd_line);
 		src.now_pos = -2;
@@ -95,6 +96,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rd_line);
 		free(rd_line);
 		rd_line = NULL;
+		printf("\n-------------------------------------------end--------------------------------------------------\n");
 	}
 	return (0);
 }

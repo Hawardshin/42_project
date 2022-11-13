@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 17:33:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:43:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,25 +128,26 @@ t_token	*create_token(t_readline *src)
 	else if (token_case(see_char(src)) == D_QUOTES)
 	{
 		move_char(src);
-		if (token_case(see_char(src)) == DOLLAR)
+		while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
 		{
-				move_char(src);
-				while (token_case(see_char(src)) == CHAR)
-				{
-					env_buff[k] = move_char(src);
-					k++;
-				}
-				env_buff[k] = '\0';
-				// printf("env_BUFF::%s\n",env_buff);
-				env_text = getenv(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
-				// printf("envtext:%s\n",env_text);
-				free(env_buff);
-				while (env_text && *env_text)
-					tok_buff[i++] = *env_text++;
-		}
-		else
-		{
-			while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
+
+			if (token_case(see_char(src)) == DOLLAR)
+			{
+					move_char(src);
+					while (token_case(see_char(src)) == CHAR)
+					{
+						env_buff[k] = move_char(src);
+						k++;
+					}
+					env_buff[k] = '\0';
+					// printf("env_BUFF::%s\n",env_buff);
+					env_text = getenv(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
+					// printf("envtext:%s\n",env_text);
+					free(env_buff);
+					while (env_text && *env_text)
+						tok_buff[i++] = *env_text++;
+			}
+			else
 			{
 				tok_buff[i] = move_char(src);
 				i++;
@@ -303,31 +304,81 @@ void	merge_two_tok(t_token *front, t_token *back)
 		buff[i] = front -> text[i];
 		i++;
 	}
-	while (back->text[j])
+	while (back && back->text[j])
 	{
 		buff[i++] = back->text[j++];
 	}
 	buff[i] = '\0';
 	free(front->text);
 	front->text = buff;
+	if (i == 0)
+		i++;
+	front->text_len = i;
 	front->next = back->next;
 	free(back->text);
 	free(back);
 	back = NULL;
 }
 
+// void	delete_all_null_tok(t_main_token *tok) // 이건 쓸지 안 쓸지 모르겠습니다. 널 토큰같은 경우 어떻게 처리할지는 나중에 정할께용 아마 노드만들때 그냥 토큰 지워버리는게 더 합리적일듯?
+// {
+// 	t_token	*tmp;
+// 	t_token	*ntmp;
+
+// 	tmp = tok->start_token;
+// 	while (tmp->next != NULL)
+// 	{
+// 		if (tmp->tok_type == ARGV_TOK && tmp->text_len == 1)
+// 		{
+// 			if (tmp->bef==NULL)//시작 토큰이라면
+// 			{
+// 				ntmp = tmp->next;
+// 				free(tmp);
+// 				tmp = ntmp;
+// 				tmp->bef = NULL;
+// 				tok->start_token = tmp;
+// 			}
+// 			else
+// 			{
+// 				ntmp = tmp->next;
+// 				tmp->bef->next = tmp->next;
+// 				if (tmp->next != NULL)
+// 					tmp->next->bef = tmp->bef;
+// 				free(tmp);
+// 				tmp = ntmp;
+// 			}
+// 		}
+// 		else
+// 			tmp = tmp->next;
+// 	}
+// 	if (tmp->tok_type == ARGV_TOK && tmp->text_len == 1)
+// 	{
+// 		if (tmp->bef == NULL)//시작 토큰이라면
+// 		{
+// 			free(tmp);
+// 			tok->start_token = NULL;
+// 			tok->end_token = NULL;
+// 		}
+// 		else
+// 		{
+// 			tmp->bef->next = NULL;
+// 			free(tmp);
+// 		}
+// 	}
+// }
 void	merge_argv_tok(t_main_token *tok)
 {
 	t_token	*tmp;
 
 	tmp = tok->start_token;
-	while (tmp != NULL)
+	while (tmp->next != NULL)
 	{
-		if ((tmp->tok_type == ARGV_TOK) && tmp->next && (tmp->next->tok_type == ARGV_TOK))
+		if ((tmp->tok_type == ARGV_TOK) && ((tmp->next->tok_type) == ARGV_TOK))
 			merge_two_tok(tmp, tmp->next);
 		else
 			tmp = tmp->next;
 	}
+	// delete_all_null_tok(tok);
 }
 
 void	delete_all_space_tok(t_main_token *tok)
@@ -340,27 +391,34 @@ void	delete_all_space_tok(t_main_token *tok)
 	{
 		if (tmp->tok_type == SPACE_TOK)
 		{
-			if (!tmp->bef)
+			if (tmp->bef==NULL)//시작 토큰이라면
 			{
+				ntmp = tmp->next;
 				free(tmp);
-				tmp =tmp->next;
+				tmp = ntmp;
 				tmp->bef = NULL;
 				tok->start_token = tmp;
 			}
 			else
 			{
 				ntmp = tmp->next;
-				tmp->bef->next = tmp->next;
-				if (tmp->next != NULL)
-					tmp->next->bef = tmp->bef;
+				tmp->bef->next = ntmp;
+				if (ntmp)
+					ntmp->bef = tmp->bef;
 				free(tmp);
 				tmp = ntmp;
 			}
 		}
 		else
+		{
+			if (tmp->next)
+				tmp->next->bef = tmp;
 			tmp = tmp->next;
+		}
 	}
 }
+
+
 
 t_main_token	*tokenize(t_readline *src)
 {
@@ -394,8 +452,8 @@ t_main_token	*tokenize(t_readline *src)
 	}//여기까지가 모든 토큰을 다 만들어 주는것 //space까지
 	// Print_all_token(main_tok->start_token);
 	merge_argv_tok(main_tok);
-	Print_all_token((main_tok->start_token));
-	// delete_all_space_tok(main_tok);
 	// Print_all_token((main_tok->start_token));
+	delete_all_space_tok(main_tok);
+	Print_all_token((main_tok->start_token));
 	return (main_tok);
 }

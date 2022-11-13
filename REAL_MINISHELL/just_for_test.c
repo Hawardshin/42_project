@@ -35,7 +35,7 @@ void	Print_all_token(t_token	*tok)
 	for (int i=0; (tmp != NULL) && (tmp->tok_type != EOF_TOK); i++)
 	{
 		printf("------------tok---------------\n");
-		printf("idx :%d|\ntext :%s;\ntok_type: ",i,tmp->text);
+		printf("idx :%d|\ntext_len :%d\ntext :%s;\ntok_type: ",i,tmp->text_len,tmp->text);
 		print_tok_type(tmp->tok_type);
 		tmp = tmp->next;
 		printf("------------tok---------------\n");
