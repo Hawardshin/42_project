@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/13 19:43:19 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/13 20:35:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,14 @@ t_token	*create_token(t_readline *src)
 		move_char(src);
 		while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
 		{
-
 			if (token_case(see_char(src)) == DOLLAR)
 			{
 					move_char(src);
+					while (token_case(see_char(src)) == DOLLAR)
+					{
+						env_buff[k] = move_char(src);
+						k++;
+					}
 					while (token_case(see_char(src)) == CHAR)
 					{
 						env_buff[k] = move_char(src);
@@ -143,7 +147,8 @@ t_token	*create_token(t_readline *src)
 					// printf("env_BUFF::%s\n",env_buff);
 					env_text = getenv(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
 					// printf("envtext:%s\n",env_text);
-					free(env_buff);
+					if (k == 0) //달러 하나인 경우에는 $로 봐야해요
+						env_text = "$";
 					while (env_text && *env_text)
 						tok_buff[i++] = *env_text++;
 			}
@@ -168,6 +173,8 @@ t_token	*create_token(t_readline *src)
 				j++;
 			}
 			free(tok_buff);
+			free(env_buff);
+			env_buff = NULL;
 			tok->text_len = j;
 			tok->tok_type = ARGV_TOK;
 			return (tok);
@@ -197,6 +204,11 @@ t_token	*create_token(t_readline *src)
 	else if (token_case(see_char(src)) == DOLLAR)
 	{
 		move_char(src);
+		while (token_case(see_char(src)) == DOLLAR)
+		{
+			env_buff[k] = move_char(src);
+			k++;
+		}
 		while (token_case(see_char(src)) == CHAR)
 		{
 			env_buff[k] = move_char(src);
@@ -206,6 +218,8 @@ t_token	*create_token(t_readline *src)
 		env_text = getenv(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
 		// printf("envtext:%s\n",env_text);
 		free(env_buff);
+		if (k == 0) //달러 하나인 경우에는 $로 봐야해요
+			env_text = "$";
 		while (env_text && *env_text)
 			tok_buff[i++] = *env_text++;
 		tok_buff[i] = '\0';
