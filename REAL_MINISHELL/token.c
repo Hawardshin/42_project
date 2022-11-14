@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/14 17:17:15 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/14 20:23:56 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,22 +109,20 @@ t_token	*create_token(t_readline *src)
 		tok_buff[i] = '\0';
 		i++;
 		if (see_char(src) == ENDOF)
-			syntax_error();
+			g_state.exit_code = 258;
 		else
-		{
 			move_char(src);
-			tok->text = malloc(sizeof(char) * (i));
-			tok->text_len = i;
-			while (j < i)
-			{
-				tok->text[j] = tok_buff[j];
-				j++;
-			}
-			free(tok_buff);
-			tok->text_len = j;
-			tok->tok_type = ARGV_TOK;
-			return (tok);
+		tok->text = malloc(sizeof(char) * (i));
+		tok->text_len = i;
+		while (j < i)
+		{
+			tok->text[j] = tok_buff[j];
+			j++;
 		}
+		free(tok_buff);
+		tok->text_len = j;
+		tok->tok_type = ARGV_TOK;
+		return (tok);
 	}
 	else if (token_case(see_char(src)) == D_QUOTES)
 	{
@@ -134,7 +132,8 @@ t_token	*create_token(t_readline *src)
 			if (token_case(see_char(src)) == DOLLAR)
 			{
 					move_char(src);
-					while (token_case(see_char(src)) == DOLLAR)
+					k = 0;
+					while (token_case(see_char(src)) == DOLLAR)//달러뒤에 달러인 경우는 무시
 					{
 						env_buff[k] = move_char(src);
 						k++;
@@ -162,24 +161,22 @@ t_token	*create_token(t_readline *src)
 		tok_buff[i] = '\0';
 		i++;
 		if (token_case(see_char(src)) != D_QUOTES)
-			syntax_error();
+			g_state.exit_code = 258;
 		else
-		{
 			move_char(src);
-			tok->text = malloc(sizeof(char) * (i));
-			tok->text_len = i;
-			while (j < i)
-			{
-				tok->text[j] = tok_buff[j];
-				j++;
-			}
-			free(tok_buff);
-			free(env_buff);
-			env_buff = NULL;
-			tok->text_len = j;
-			tok->tok_type = ARGV_TOK;
-			return (tok);
+		tok->text = malloc(sizeof(char) * (i));
+		tok->text_len = i;
+		while (j < i)
+		{
+			tok->text[j] = tok_buff[j];
+			j++;
 		}
+		free(tok_buff);
+		free(env_buff);
+		env_buff = NULL;
+		tok->text_len = j;
+		tok->tok_type = ARGV_TOK;
+		return (tok);
 	}
 	else if (token_case(see_char(src)) == SPACE_B)
 	{
@@ -412,7 +409,8 @@ void	delete_all_space_tok(t_main_token *tok)
 				ntmp = tmp->next;
 				free(tmp);
 				tmp = ntmp;
-				tmp->bef = NULL;
+				if (tmp)
+					tmp->bef = NULL;
 				tok->start_token = tmp;
 			}
 			else

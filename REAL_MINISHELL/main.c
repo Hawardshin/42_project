@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/14 17:20:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/14 20:21:03 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "./include/token.h"
 #include "./include/just_for_test.h"
 #include "./include/env.h"
-// #include "./include/token.h"
+#include "./include/check_syntax.h"
+#include "./include/error.h"
 // #include "./include/m_utils.h"
 // #include "./include/parse_utils.h"
 // #include "./include/parse_cmd.h"
@@ -68,6 +69,7 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n-------------------------------------------start--------------------------------------------------\n");
 	while (1)
 	{
+
 		rd_line = readline("jshell$ ");
 		if(!rd_line)
 		{
@@ -85,6 +87,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break;
 		}
+		g_state.exit_code = 0;
 		printf("\n-------------------------------------------input--------------------------------------------------\n");
 		src.buffer = rd_line;
 		src.bufsize = ft_strlen(rd_line);
@@ -92,15 +95,20 @@ int	main(int argc, char **argv, char **envp)
 
 		t_main_token * tok =tokenize(&src);
 		// Print_all_token(tok->start_token);
-		// check_syntax(tok);
+		if (check_syntax(tok->start_token) || g_state.exit_code)// 여기서 끝나면 continue;
+		{
+			free(rd_line);
+			rd_line = NULL;
+			syntax_error();
+			//tok_clean()
+			continue ;
+		}
 		// make_node(tok);
 		(void)tok;
 		add_history(rd_line);
-		free(rd_line);
-		rd_line = NULL;
-		char * arr = get_env("PATH");
-		printf("%p\n%p\n",arr, get_env("PATH"));
-		free(arr);
+		// char * arr = get_env("PATH");
+		// printf("%p\n%p\n",arr, get_env("PATH"));
+		// free(arr);
 		printf("\n-------------------------------------------end--------------------------------------------------\n");
 	}
 	return (0);

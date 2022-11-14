@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/14 15:36:10 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/14 20:06:18 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS =	main.c \
 		just_for_test.c \
 		error.c \
 		env.c	\
+		check_syntax.c \
 
 OBJS = $(SRCS:.c=.o)
 
