@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/14 20:21:03 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/14 20:40:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,9 @@ int	main(int argc, char **argv, char **envp)
 			//tok_clean()
 			continue ;
 		}
-		// make_node(tok);
-		(void)tok;
+		// t_main_node * node = make_tok_to_node(tok);
+		//tok_clean();
 		add_history(rd_line);
-		// char * arr = get_env("PATH");
-		// printf("%p\n%p\n",arr, get_env("PATH"));
-		// free(arr);
 		printf("\n-------------------------------------------end--------------------------------------------------\n");
 	}
 	return (0);
