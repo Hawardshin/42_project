@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/13 20:35:21 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:17:15 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "./include/token.h"
 #include "./include/error.h"
 #include "./include/just_for_test.h"
+#include "./include/env.h"
 #include <errno.h>
 
 char	move_char(t_readline *src)//움직이기까지 함.
@@ -145,7 +146,7 @@ t_token	*create_token(t_readline *src)
 					}
 					env_buff[k] = '\0';
 					// printf("env_BUFF::%s\n",env_buff);
-					env_text = getenv(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
+					env_text = get_env(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
 					// printf("envtext:%s\n",env_text);
 					if (k == 0) //달러 하나인 경우에는 $로 봐야해요
 						env_text = "$";
@@ -215,8 +216,9 @@ t_token	*create_token(t_readline *src)
 			k++;
 		}
 		env_buff[k] = '\0';
-		env_text = getenv(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
+		env_text = get_env(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
 		// printf("envtext:%s\n",env_text);
+		// free(env_text);
 		free(env_buff);
 		if (k == 0) //달러 하나인 경우에는 $로 봐야해요
 			env_text = "$";

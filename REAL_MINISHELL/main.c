@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/13 19:54:10 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:20:51 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "./include/node.h"
 #include "./include/token.h"
 #include "./include/just_for_test.h"
+#include "./include/env.h"
 // #include "./include/token.h"
 // #include "./include/m_utils.h"
 // #include "./include/parse_utils.h"
@@ -62,6 +63,7 @@ int	main(int argc, char **argv, char **envp)
 	// t_main_node	*main_node;
 	t_readline	src;
 	(void) envp;
+	init_g_state(envp);
 	// main_node = set_main_node(envp);
 	printf("\n-------------------------------------------start--------------------------------------------------\n");
 	while (1)
@@ -96,6 +98,9 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rd_line);
 		free(rd_line);
 		rd_line = NULL;
+		char * arr = get_env("PATH");
+		printf("%p\n%p\n",arr, get_env("PATH"));
+		free(arr);
 		printf("\n-------------------------------------------end--------------------------------------------------\n");
 	}
 	return (0);

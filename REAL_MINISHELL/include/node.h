@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/12 15:58:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:58:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ typedef struct s_main_node
 	t_node	*node_head;
 	t_node	*node_tail;
 } t_main_node;
+
 
 #endif
