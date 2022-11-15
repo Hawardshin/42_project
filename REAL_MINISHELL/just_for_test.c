@@ -45,3 +45,46 @@ void	print_src_char(t_readline *src)
 {
 	printf("src->char ::::: %c;\n",see_char(src));
 }
+
+void	print_node_type(int a)
+{
+	printf("node type :: ");
+	if (a == HERE_DOC_NODE)
+		printf("HERE_DOC_NODE\n");
+	if (a == APPEND_NODE)
+		printf("APPEND_NODE\n");
+	if (a == OPEN_NODE)
+		printf("OPEN_NODE\n");
+	if (a == WRITE_NODE)
+		printf("WRITE_NODE\n");
+	if (a == 0)
+		printf("CMD_NODE\n");
+}
+
+void	print_all_node(t_main_node *node)
+{
+	t_node *tmp;
+
+	tmp = node->node_head;
+	printf("------PRINT_ALL_NODE-------\n");
+	for (int i=0; (tmp != NULL); i++)
+	{
+		printf("------------node---------------\n");
+		printf("node idx : %d\n", i);
+		if (tmp->node_type == 0)
+		{
+			print_node_type(tmp->node_type);
+			for (int j=0; tmp->cmd[j]!= NULL ;j++)
+				printf("cmd[%d] : %s;\n", j, tmp->cmd[j]);
+			printf("cmd path: %s;\n",tmp->cmd_path[0]);
+		}
+		else
+		{
+			print_node_type(tmp->node_type);
+			printf("file:: %s;\n",tmp->file);
+		}
+		tmp = tmp->next;
+		printf("------------node---------------\n");
+	}
+	printf("------PRINT_ALL_NODE-------\n");
+}

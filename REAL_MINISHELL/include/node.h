@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 10:28:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 13:40:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include "token.h"
 // #define HERE_DOC_NODE 1000 // <<
 // #define APPEND_NODE 2000 //?
 // #define OPEN_NODE 3000
@@ -32,9 +34,6 @@ typedef enum e_io_type
 	OPEN_NODE, //<
 	WRITE_NODE // >
 }	t_io_type;
-
-
-void	print_error(int Flag, char *s);
 
 typedef struct	s_node
 {
@@ -57,5 +56,7 @@ typedef struct s_main_node
 	t_node	*node_head;
 	t_node	*node_tail;
 } t_main_node;
+
+t_main_node	*make_tok_to_node(t_main_token *tok);
 
 #endif

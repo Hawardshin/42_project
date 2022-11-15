@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:51:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/11 20:52:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 13:09:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define ERROR_H
 
 void	syntax_error();
-
+void	print_error(int Flag, char *s);
 
 #endif

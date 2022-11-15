@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/14 20:06:18 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/15 13:40:53 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,15 @@ INCLUDE = -I./includes -I/Users/joushin/.brew/opt/readline/include
 LIBRARY = -L/Users/joushin/.brew/opt/readline/lib -lreadline -L$(LIBFT_DIR) -lft
 LIBFT_DIR = ./libft/
 
-SRCS =	main.c \
-		token.c \
-		just_for_test.c \
-		error.c \
+SRCS =	main.c	\
+		token.c	\
+		just_for_test.c	\
+		error.c	\
 		env.c	\
 		check_syntax.c \
+		node.c	\
+		m_split.c	\
+		utils.c	\
 
 OBJS = $(SRCS:.c=.o)
 

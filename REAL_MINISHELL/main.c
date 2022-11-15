@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 09:26:18 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:16:41 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "./include/env.h"
 #include "./include/check_syntax.h"
 #include "./include/error.h"
+#include "./include/utils.h"
 // #include "./include/m_utils.h"
 // #include "./include/parse_utils.h"
 // #include "./include/parse_cmd.h"
@@ -78,12 +79,12 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if(rd_line[0] == '\0' || ft_strncmp(rd_line, "\n",1) == 0)
 		{
-			free(rd_line);
+			my_free((void **)&rd_line);
 			continue;
 		}
 		if(ft_strncmp(rd_line, "exit",5) == 0)
 		{
-			free(rd_line);
+			my_free((void **)&rd_line);
 			printf("exit\n");
 			break;
 		}
@@ -95,15 +96,20 @@ int	main(int argc, char **argv, char **envp)
 
 		t_main_token * tok =tokenize(&src);
 		// Print_all_token(tok->start_token);
+		printf("\n---------------------------------------token_done-------------------------------------------------\n");
 		if (check_syntax(tok->start_token) || g_state.exit_code)// 여기서 끝나면 continue;
 		{
-			free(rd_line);
+			my_free((void **)&rd_line);
 			rd_line = NULL;
 			syntax_error();
 			//tok_clean()
 			continue ;
 		}
-		// t_main_node * node = make_tok_to_node(tok);
+		if (tok->start_token != NULL)
+		{
+			t_main_node * node = make_tok_to_node(tok);
+			print_all_node(node);
+		}
 		//tok_clean();
 		add_history(rd_line);
 		printf("\n-------------------------------------------end--------------------------------------------------\n");

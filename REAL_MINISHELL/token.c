@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/14 20:23:56 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:23:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "./include/error.h"
 #include "./include/just_for_test.h"
 #include "./include/env.h"
+#include "./include/utils.h"
 #include <errno.h>
 
 char	move_char(t_readline *src)//움직이기까지 함.
@@ -119,7 +120,7 @@ t_token	*create_token(t_readline *src)
 			tok->text[j] = tok_buff[j];
 			j++;
 		}
-		free(tok_buff);
+		my_free((void**)&tok_buff);
 		tok->text_len = j;
 		tok->tok_type = ARGV_TOK;
 		return (tok);
@@ -171,8 +172,8 @@ t_token	*create_token(t_readline *src)
 			tok->text[j] = tok_buff[j];
 			j++;
 		}
-		free(tok_buff);
-		free(env_buff);
+		my_free((void **)&tok_buff);
+		my_free((void**)&env_buff);
 		env_buff = NULL;
 		tok->text_len = j;
 		tok->tok_type = ARGV_TOK;
@@ -186,8 +187,8 @@ t_token	*create_token(t_readline *src)
 		}
 		tok->text = "SPACE";
 		tok->tok_type =SPACE_TOK;
-		free(env_buff);
-		free(tok_buff);
+		my_free((void**)&env_buff);
+		my_free((void**)&tok_buff);
 		return (tok);
 	}
 	else if (token_case(see_char(src)) == PIPE)
@@ -195,8 +196,8 @@ t_token	*create_token(t_readline *src)
 		move_char(src);
 		tok->text = "PIPE'|'";
 		tok->tok_type = PIPE_TOK;
-		free(env_buff);
-		free(tok_buff);
+		my_free((void**)&env_buff);
+		my_free((void**)&tok_buff);
 		return (tok);
 	}
 	else if (token_case(see_char(src)) == DOLLAR)
@@ -215,8 +216,8 @@ t_token	*create_token(t_readline *src)
 		env_buff[k] = '\0';
 		env_text = get_env(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
 		// printf("envtext:%s\n",env_text);
-		// free(env_text);
-		free(env_buff);
+		// my_free((void**)&env_text);
+		my_free((void**)&env_buff);
 		if (k == 0) //달러 하나인 경우에는 $로 봐야해요
 			env_text = "$";
 		while (env_text && *env_text)
@@ -232,7 +233,7 @@ t_token	*create_token(t_readline *src)
 			tok->text[j] = tok_buff[j];
 			j++;
 		}
-		free(tok_buff);
+		my_free((void**)&tok_buff);
 		tok->text_len = j;
 		tok->tok_type = ARGV_TOK;
 		return (tok);
@@ -248,8 +249,8 @@ t_token	*create_token(t_readline *src)
 		else
 			tok->text = "<";
 		tok->tok_type = IO_TOK;
-		free(env_buff);
-		free(tok_buff);
+		my_free((void**)&env_buff);
+		my_free((void**)&tok_buff);
 		return (tok);
 	}
 	else if (token_case(see_char(src)) == RE_DIRECT)
@@ -263,8 +264,8 @@ t_token	*create_token(t_readline *src)
 		else
 			tok->text = ">";
 		tok->tok_type = IO_TOK;
-		free(env_buff);
-		free(tok_buff);
+		my_free((void**)&env_buff);
+		my_free((void**)&tok_buff);
 		return (tok);
 	}
 	else if (token_case(see_char(src)) == CHAR)
@@ -283,8 +284,8 @@ t_token	*create_token(t_readline *src)
 			tok->text[j] = tok_buff[j];
 			j++;
 		}
-		free(tok_buff);
-		free(env_buff);
+		my_free((void**)&tok_buff);
+		my_free((void**)&env_buff);
 		tok->text_len = j;
 		tok->tok_type = ARGV_TOK;
 		return (tok);
@@ -293,8 +294,8 @@ t_token	*create_token(t_readline *src)
 	// {
 	// 	tok->text = "EOF";
 	// 	tok->tok_type = EOF_TOK;
-	// 	free(env_buff);
-	// 	free(tok_buff);
+	// 	my_free((void**)&env_buff);
+	// 	my_free((void**)&tok_buff);
 	// 	return (tok);
 	// }
 	return (NULL);
@@ -322,14 +323,14 @@ void	merge_two_tok(t_token *front, t_token *back)
 		buff[i++] = back->text[j++];
 	}
 	buff[i] = '\0';
-	free(front->text);
+	my_free((void**)&front->text);
 	front->text = buff;
 	if (i == 0)
 		i++;
 	front->text_len = i;
 	front->next = back->next;
-	free(back->text);
-	free(back);
+	my_free((void**)&back->text);
+	my_free((void**)&back);
 	back = NULL;
 }
 
@@ -346,7 +347,7 @@ void	merge_two_tok(t_token *front, t_token *back)
 // 			if (tmp->bef==NULL)//시작 토큰이라면
 // 			{
 // 				ntmp = tmp->next;
-// 				free(tmp);
+// 				my_free((void**)&tmp);
 // 				tmp = ntmp;
 // 				tmp->bef = NULL;
 // 				tok->start_token = tmp;
@@ -357,7 +358,7 @@ void	merge_two_tok(t_token *front, t_token *back)
 // 				tmp->bef->next = tmp->next;
 // 				if (tmp->next != NULL)
 // 					tmp->next->bef = tmp->bef;
-// 				free(tmp);
+// 				my_free((void**)&tmp);
 // 				tmp = ntmp;
 // 			}
 // 		}
@@ -368,14 +369,14 @@ void	merge_two_tok(t_token *front, t_token *back)
 // 	{
 // 		if (tmp->bef == NULL)//시작 토큰이라면
 // 		{
-// 			free(tmp);
+// 			my_free((void**)&tmp);
 // 			tok->start_token = NULL;
 // 			tok->end_token = NULL;
 // 		}
 // 		else
 // 		{
 // 			tmp->bef->next = NULL;
-// 			free(tmp);
+// 			my_free((void**)&tmp);
 // 		}
 // 	}
 // }
@@ -407,7 +408,7 @@ void	delete_all_space_tok(t_main_token *tok)
 			if (tmp->bef==NULL)//시작 토큰이라면
 			{
 				ntmp = tmp->next;
-				free(tmp);
+				my_free((void**)&tmp);
 				tmp = ntmp;
 				if (tmp)
 					tmp->bef = NULL;
@@ -419,7 +420,7 @@ void	delete_all_space_tok(t_main_token *tok)
 				tmp->bef->next = ntmp;
 				if (ntmp)
 					ntmp->bef = tmp->bef;
-				free(tmp);
+				my_free((void**)&tmp);
 				tmp = ntmp;
 			}
 		}
@@ -468,6 +469,6 @@ t_main_token	*tokenize(t_readline *src)
 	merge_argv_tok(main_tok);
 	// Print_all_token((main_tok->start_token));
 	delete_all_space_tok(main_tok);
-	Print_all_token((main_tok->start_token));
+	// Print_all_token((main_tok->start_token));
 	return (main_tok);
 }
