@@ -6,16 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 19:28:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:54:43 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/node.h"
 #include "./libft/libft.h"
-#include "./include/token.h"
-#include "./include/error.h"
 #include "./include/just_for_test.h"
-#include "./include/env.h"
 #include "./include/utils.h"
 #include <errno.h>
 
@@ -80,6 +77,60 @@ int	token_case(char a)
 	return (CHAR);
 }
 
+int	ft_token_len(t_readline *src)
+{
+	int	len;
+	int i;
+	char	*tmp;
+
+	tmp = src->buffer;
+	len = 0;
+	i = src->now_pos;
+	if (i == -2)
+		i = 0;
+	while (tmp[i + len] != '\0' && token_case(tmp [i + len]) != QUOTES)
+	{
+		len++;
+	}
+	return (len);
+}
+
+t_token	*create_quotes(t_readline *src)
+{
+	t_token	*tok;
+	int		len;
+	int		i;
+	int		npos;
+
+	i = 0;
+	tok = malloc(sizeof(t_token));
+	move_char(src);
+	move_char(src);
+	npos = src->now_pos;
+	if (npos == -2)
+		npos = 0;
+	len = ft_token_len(src);
+	if (len + src->now_pos >= src->bufsize)
+		g_state.exit_code = 258;
+	else
+	{
+		src->now_pos += len;
+	}
+	len++;
+	tok->text = malloc(sizeof(char) * (len + 1));
+	tok->text_len = len;
+	while (i + 1 < len)
+	{
+		tok->text[i] = src->buffer[i + npos];
+		i++;
+	}
+	tok->text[i] = '\0';
+	tok->text_len = i;
+	tok->tok_type = ARGV_TOK;
+	return (tok);
+}
+
+
 t_token	*create_token(t_readline *src)
 {
 	t_token	*tok;
@@ -100,31 +151,7 @@ t_token	*create_token(t_readline *src)
 		return (NULL);
 	ft_memset(tok, 0, sizeof(t_token));
 	if (token_case(see_char(src)) == QUOTES)//작은 따옴표인 경우 쭉 토큰화를 하고
-	{
-		move_char(src);
-		while (token_case(see_char(src)) != QUOTES && see_char(src) != ENDOF)
-		{
-			tok_buff[i] = move_char(src);
-			i++;
-		}
-		tok_buff[i] = '\0';
-		i++;
-		if (see_char(src) == ENDOF)
-			g_state.exit_code = 258;
-		else
-			move_char(src);
-		tok->text = malloc(sizeof(char) * (i));
-		tok->text_len = i;
-		while (j < i)
-		{
-			tok->text[j] = tok_buff[j];
-			j++;
-		}
-		my_free((void**)&tok_buff);
-		tok->text_len = j;
-		tok->tok_type = ARGV_TOK;
-		return (tok);
-	}
+		return (create_quotes(src));
 	else if (token_case(see_char(src)) == D_QUOTES)
 	{
 		move_char(src);

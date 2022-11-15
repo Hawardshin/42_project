@@ -6,17 +6,13 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:18:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 16:49:44 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 19:58:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/node.h"
-#include "./include/token.h"
 #include "./libft/libft.h"
-#include "./include/env.h"
 #include "./include/utils.h"
-#include "./include/error.h"
-#include "./include/env.h"
 
 //만든 토큰을 노드에 넣을 건데, 파이프를 기준으로 새로운 노드를 생성할 계획.
 //-- 새로운 노드 만들때마다 구현해야하는 것.
@@ -44,7 +40,7 @@ static char	*ft_make_cmd_path(t_main_node *px, char *text, int i)
 
 	tmp = ft_mstrjoin("/", text);
 	ptmp = ft_mstrjoin(px->path[i], tmp);
-	my_free((void**)&tmp);
+	my_free ((void**) &tmp);
 	return (ptmp);
 }
 

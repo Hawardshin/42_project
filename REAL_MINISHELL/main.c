@@ -6,46 +6,19 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 15:16:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:36:43 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "./libft/libft.h"
 #include "./include/node.h"
-#include "./include/token.h"
-#include "./include/just_for_test.h"
-#include "./include/env.h"
-#include "./include/check_syntax.h"
-#include "./include/error.h"
 #include "./include/utils.h"
-// #include "./include/m_utils.h"
-// #include "./include/parse_utils.h"
-// #include "./include/parse_cmd.h"
-// #include "./include/m_split.h"
-
-
-
-// t_main_node	*set_main_node(char **envp)
-// {
-// 	t_main_node *main_node;
-
-// 	main_node = malloc(sizeof(t_main_node));
-// 	if (!main_node)
-// 		return(NULL) ;//이것도 나중에 바꾸기.
-// 	ft_memset(main_node, 0, sizeof(t_main_node));
-// 	main_node->ev = envp;
-// 	while (envp != NULL && *envp != NULL && ft_strncmp(*envp, "PATH", 4) != 0)
-// 		envp++;
-// 	if (envp == NULL || *envp == NULL)
-// 		print_error(3, "Not exist path!\n");
-// 	main_node -> path = ft_msplit(*envp + 5, ':');
-// 	return (main_node);
-// }
+#include "./include/just_for_test.h"//이건 테스트용
 
 void	handler(int signum)
 {
-	if (signum != SIGINT)// 시그널에 해당하는게 아니면
+	if (signum != SIGINT)
 		return ;
 	write(1, "\n", 1);
 	if (rl_on_new_line() == -1)
@@ -54,50 +27,54 @@ void	handler(int signum)
 	rl_redisplay();
 }
 
+void	init_rd_line(t_readline *src, char *rd_line)
+{
+	g_state.exit_code = 0;
+	src->buffer = rd_line;
+	src->bufsize = ft_strlen(rd_line);
+	src->now_pos = -2;
+}
+
+
 int	main(int argc, char **argv, char **envp)
 {
-	// int		ret;
-	char	*rd_line;
+	char			*rd_line;
+	t_readline		src;
+	t_main_token	*tok;
+	t_main_node		*node;
+
 	if (argc != 1)
-		return 0;
+		return (0);
 	(void) argv;
 	signal(SIGINT, handler);
-	// t_main_node	*main_node;
-	t_readline	src;
-	(void) envp;
 	init_g_state(envp);
-	// main_node = set_main_node(envp);
 	printf("\n-------------------------------------------start--------------------------------------------------\n");
 	while (1)
 	{
 
 		rd_line = readline("jshell$ ");
-		if(!rd_line)
+		if (!rd_line)
 		{
 			printf("exit\n");
-			exit(EXIT_SUCCESS); //널인경우 성공
+			exit (EXIT_SUCCESS);
 		}
-		if(rd_line[0] == '\0' || ft_strncmp(rd_line, "\n",1) == 0)
+		if (rd_line[0] == '\0' || ft_strncmp(rd_line, "\n",  1) == 0)
 		{
 			my_free((void **)&rd_line);
-			continue;
+			continue ;
 		}
-		if(ft_strncmp(rd_line, "exit",5) == 0)
+		if (ft_strncmp(rd_line, "exit", 5) == 0)
 		{
 			my_free((void **)&rd_line);
 			printf("exit\n");
-			break;
+			break ;
 		}
-		g_state.exit_code = 0;
+		init_rd_line(&src, rd_line);
 		printf("\n-------------------------------------------input--------------------------------------------------\n");
-		src.buffer = rd_line;
-		src.bufsize = ft_strlen(rd_line);
-		src.now_pos = -2;
-
-		t_main_token * tok =tokenize(&src);
-		// Print_all_token(tok->start_token);
+		tok = tokenize(&src);
 		printf("\n---------------------------------------token_done-------------------------------------------------\n");
-		if (check_syntax(tok->start_token) || g_state.exit_code)// 여기서 끝나면 continue;
+		Print_all_token(tok->start_token);
+		if (check_syntax(tok->start_token) || g_state.exit_code)
 		{
 			my_free((void **)&rd_line);
 			rd_line = NULL;
@@ -107,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (tok->start_token != NULL)
 		{
-			t_main_node * node = make_tok_to_node(tok);
+			node = make_tok_to_node(tok);
 			print_all_node(node);
 		}
 		//tok_clean();

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:19:47 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 15:01:41 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 19:40:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,6 @@ char	*ft_mstrdup(const char *s1);
 char	*ft_mstrjoin(char const *s1, char const *s2);
 pid_t	mfork(void);
 char	**ft_msplit(char *str, char c);
+void	syntax_error();
+void	print_error(int Flag, char *s);
 #endif

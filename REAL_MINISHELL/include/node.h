@@ -6,86 +6,159 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 16:50:26 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:08:09 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
-#define NODE_H
-#include <signal.h>
-#include <stdio.h>
-#include <sys/wait.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "token.h"
-// #define HERE_DOC_NODE 1000 // <<
-// #define APPEND_NODE 2000 //?
-// #define OPEN_NODE 3000
-// #define WRITE_NODE 4000
+# define NODE_H
 
-// typedef enum e_io_type
-// {
-// 	HERE_DOC_NODE = 10, // <<
-// 	APPEND_NODE, //>>
-// 	OPEN_NODE, //<
-// 	WRITE_NODE // >
-// }	t_io_type;
+# include<signal.h>
+# include<stdio.h>
+# include <sys/wait.h>
+# include<readline/readline.h>
+# include<readline/history.h>
+# include<sys/stat.h>
+# include<sys/wait.h>
+# include<unistd.h>
+# include<stdlib.h>
+
+enum e_char_case
+{
+	ENDOF = -1,
+	CHAR = 10,
+	PIPE ,
+	QUOTES ,
+	D_QUOTES,
+	SPACE_B,
+	DOLLAR,
+	DIRECT,
+	RE_DIRECT,
+} ;
+
+/*node*/
+// >> , >
 
 typedef enum e_outfile_type
 {
-	APPEND_TYPE = 10, // >>
-	WRITE_TYPE // >
-} t_outfile_type;
+	APPEND_TYPE=10,
+	WRITE_TYPE
+}	t_outfile_type;
 
-typedef struct s_heredoc //<< 의 경우 전부다 이렇게 들어온다.
+typedef enum e_tok_type
+{
+	IO_TOK,
+	ARGV_TOK,
+	PIPE_TOK,
+	SPACE_TOK,
+}	t_toke_type;
+
+//<< 의 경우 전부다 이렇게 들어온다.
+typedef struct s_heredoc
 {
 	char				*sep;
 	struct s_heredoc	*prev;
 	struct s_heredoc	*next;
-} t_heredoc;
+}	t_heredoc;
 
-typedef struct s_infile_node //<
+//<
+typedef struct s_infile_node
 {
-	char				*file;
-	struct s_infile_node *prev;
-	struct s_infile_node *next;
-} t_infile_node;
+	char					*file;
+	struct s_infile_node	*prev;
+	struct s_infile_node	*next;
+}	t_infile_node;
 
-typedef struct s_outfile_node // > ,>>
+// >,>>
+typedef struct s_outfile_node
 {
-	char				*file;
-	t_outfile_type		type;
-	struct s_outfile_node *prev;
-	struct s_outfile_node *next;
-} t_outfile_node;
+	char					*file;
+	t_outfile_type			type;
+	struct s_outfile_node	*prev;
+	struct s_outfile_node	*next;
+}	t_outfile_node;
 
-typedef struct	s_node
+typedef struct s_node
 {
-	int				idx;	//몇번 째 노드인지
-						//2개는 명령인 경우만 채워지고 아닌경우 NULL로 채워짐
-	char			**cmd;	// 명령어 이차원 배열인 이유는 execve를 하기 위해 1번에 명령어와 그 뒤에 인자들.
-	char			*cmd_path[2];	//명령어 경로
+	int				idx;
+	char			**cmd;
+	char			*cmd_path[2];
 	t_heredoc		*heardoc_node;
 	t_infile_node	*infile_node;
 	t_outfile_node	*outfile_node;
 	struct s_node	*next;
 	struct s_node	*prev;
-} t_node;
+}	t_node;
 
 typedef struct s_main_node
 {
 	char	**ev;
 	char	**path;
-	int		**pipefd; //파이프 0 1 두개의 2차원 배열
-	int		cmd_num; //명령의 노드의 총 갯수 - 파이프의 갯수로 생각
+	int		**pipefd;//파이프 0 1 두개의 2차원 배열
+	int		cmd_num;//명령의 노드의 총 갯수 - 파이프의 갯수로 생각
 	t_node	*node_head;
 	t_node	*node_tail;
-} t_main_node;
+}	t_main_node;
 
-t_main_node	*make_tok_to_node(t_main_token *tok);
+/*token*/
+// I/O_red_token ,argv_token, pipeline_token , space_token
+typedef struct s_token
+{
+	t_toke_type		tok_type;
+	int				text_len;
+	char			*text;
+	struct s_token	*bef;
+	struct s_token	*next;
+}	t_token;
+
+typedef struct s_main_token
+{
+	t_token	*start_token;
+	t_token	*end_token;
+	int		token_num;
+}	t_main_token ;
+
+/*env*/
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
+typedef struct s_env_main_node
+{
+	t_env	*head;
+	t_env	*tail;
+}	t_env_main_node;
+
+typedef struct s_state
+{
+	t_env_main_node	env_main_node;
+	pid_t			pid;
+	int				exit_code;
+	// int				is_fork;
+}	t_state;
+
+/* readline*/
+typedef struct	s_readline
+{
+	char	*buffer;/* 입력 텍스트 */
+	int		bufsize;/* 입력 텍스트 크기*/
+	int		now_pos;/* 소스 안에서 문자위치*/
+} t_readline;
+t_state	g_state;
+
+/*token_fuction*/
+t_main_token	*tokenize(t_readline *src);
+char			see_char(t_readline *src);//보기만 함.
+char			move_char(t_readline *src); //움직이기까지 함.
+t_main_node		*make_tok_to_node(t_main_token *tok);
+
+/*env */
+void			init_g_state(char **envp);
+char			*get_env(char *key);
+int				check_syntax(t_token *start_tok);
 
 #endif

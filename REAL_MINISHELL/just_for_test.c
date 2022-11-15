@@ -1,7 +1,4 @@
-
-
 #include "./include/node.h"
-#include "./include/token.h"
 
 void	print_tok_type(int a)
 {
@@ -77,13 +74,10 @@ void	print_all_node(t_main_node *node)
 
 	tmp = node->node_head;
 	printf("------PRINT_ALL_NODE-------\n");
-	for (int i=0; (tmp != NULL); i++)
+	for (int i=0; tmp != NULL; i++)
 	{
 		printf("------------node---------------\n");
 		printf("node idx : %d\n", i);
-		// if (tmp->node_type == 0)
-		// {
-			// print_node_type(tmp->node_type);
 		for (int j=0; tmp->cmd && tmp->cmd[j]!= NULL ;j++)
 				printf("cmd[%d] : %s;\n", j, tmp->cmd[j]);
 		printf("cmd path: %s;\n",tmp->cmd_path[0]);

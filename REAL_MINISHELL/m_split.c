@@ -6,12 +6,11 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:47:51 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 15:05:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:00:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
-#include "./include/error.h"
 #include "./include/node.h"
 #include "./include/utils.h"
 static long long	len_count(char *str, char c)
