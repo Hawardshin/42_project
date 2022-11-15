@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 13:40:24 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:50:26 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,41 @@
 // #define OPEN_NODE 3000
 // #define WRITE_NODE 4000
 
-typedef enum e_io_type
+// typedef enum e_io_type
+// {
+// 	HERE_DOC_NODE = 10, // <<
+// 	APPEND_NODE, //>>
+// 	OPEN_NODE, //<
+// 	WRITE_NODE // >
+// }	t_io_type;
+
+typedef enum e_outfile_type
 {
-	HERE_DOC_NODE = 10, // <<
-	APPEND_NODE, //>>
-	OPEN_NODE, //<
-	WRITE_NODE // >
-}	t_io_type;
+	APPEND_TYPE = 10, // >>
+	WRITE_TYPE // >
+} t_outfile_type;
+
+typedef struct s_heredoc //<< 의 경우 전부다 이렇게 들어온다.
+{
+	char				*sep;
+	struct s_heredoc	*prev;
+	struct s_heredoc	*next;
+} t_heredoc;
+
+typedef struct s_infile_node //<
+{
+	char				*file;
+	struct s_infile_node *prev;
+	struct s_infile_node *next;
+} t_infile_node;
+
+typedef struct s_outfile_node // > ,>>
+{
+	char				*file;
+	t_outfile_type		type;
+	struct s_outfile_node *prev;
+	struct s_outfile_node *next;
+} t_outfile_node;
 
 typedef struct	s_node
 {
@@ -41,8 +69,9 @@ typedef struct	s_node
 						//2개는 명령인 경우만 채워지고 아닌경우 NULL로 채워짐
 	char			**cmd;	// 명령어 이차원 배열인 이유는 execve를 하기 위해 1번에 명령어와 그 뒤에 인자들.
 	char			*cmd_path[2];	//명령어 경로
-	char			*file;  //이건 IO_TOKEN일떄만 들어간다.
-	t_io_type		node_type; //IO_TOKEN일 때 어떤 IO_NODE 인지
+	t_heredoc		*heardoc_node;
+	t_infile_node	*infile_node;
+	t_outfile_node	*outfile_node;
 	struct s_node	*next;
 	struct s_node	*prev;
 } t_node;

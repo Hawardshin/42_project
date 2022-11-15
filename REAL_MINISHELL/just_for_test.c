@@ -46,21 +46,31 @@ void	print_src_char(t_readline *src)
 	printf("src->char ::::: %c;\n",see_char(src));
 }
 
-void	print_node_type(int a)
+void	print_all_io(t_node *node)
 {
-	printf("node type :: ");
-	if (a == HERE_DOC_NODE)
-		printf("HERE_DOC_NODE\n");
-	if (a == APPEND_NODE)
-		printf("APPEND_NODE\n");
-	if (a == OPEN_NODE)
-		printf("OPEN_NODE\n");
-	if (a == WRITE_NODE)
-		printf("WRITE_NODE\n");
-	if (a == 0)
-		printf("CMD_NODE\n");
+	t_heredoc *hnode = node->heardoc_node;
+	t_infile_node *inode = node->infile_node;
+	t_outfile_node *onode = node->outfile_node;
+	for (int i=0; hnode!=NULL;i++)
+	{
+		printf("idx :: %d hear_doc_node(<<) :: %s;\n",i,hnode->sep);
+		hnode = hnode->next;
+	}
+	for (int i=0; inode!=NULL;i++)
+	{
+		printf("idx :: %d infile_node(<) :: %s;\n",i,inode->file);
+		inode = inode->next;
+	}
+	for (int i=0; onode!= NULL;i++)
+	{
+		if (onode->type == APPEND_TYPE)
+			printf("outfile_node(>>)");
+		else if (onode->type == WRITE_TYPE)
+			printf("outfile_node(>)");
+		printf("idx :: %d outfile_node :: %s;\n",i,onode->file);
+		onode = onode->next;
+	}
 }
-
 void	print_all_node(t_main_node *node)
 {
 	t_node *tmp;
@@ -71,18 +81,13 @@ void	print_all_node(t_main_node *node)
 	{
 		printf("------------node---------------\n");
 		printf("node idx : %d\n", i);
-		if (tmp->node_type == 0)
-		{
-			print_node_type(tmp->node_type);
-			for (int j=0; tmp->cmd[j]!= NULL ;j++)
+		// if (tmp->node_type == 0)
+		// {
+			// print_node_type(tmp->node_type);
+		for (int j=0; tmp->cmd && tmp->cmd[j]!= NULL ;j++)
 				printf("cmd[%d] : %s;\n", j, tmp->cmd[j]);
-			printf("cmd path: %s;\n",tmp->cmd_path[0]);
-		}
-		else
-		{
-			print_node_type(tmp->node_type);
-			printf("file:: %s;\n",tmp->file);
-		}
+		printf("cmd path: %s;\n",tmp->cmd_path[0]);
+		print_all_io(tmp);
 		tmp = tmp->next;
 		printf("------------node---------------\n");
 	}

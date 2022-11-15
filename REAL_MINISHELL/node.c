@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:18:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 15:15:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:49:44 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 	// 이 IO_TOK 같은 경우 명령이 아니니까 cmd랑 cmd_path가 모두 널이다.
 
 // 토큰을 여기서 free해주는 것도 나쁘지 않겠다.
+
+
+//이렇게 생각을 했었는데 구조를 바꿨습니다.
+//각 노드 즉 파이프가 나오기 전까지는 새로운 노드를 생성하지 않습니다.
+//각각의 io_token에 대해서 3개의 구조체에 링크드 리스트로 연결해서 들고갈 것입니다.
+
 
 static char	*ft_make_cmd_path(t_main_node *px, char *text, int i)
 {
@@ -108,22 +114,85 @@ t_main_node * make_tok_to_node(t_main_token *tok)
 		else if (tmp_tok-> tok_type == IO_TOK)
 		{
 			if (ft_strncmp(tmp_tok->text ,"<<", 2) == 0)
-				node->node_type =HERE_DOC_NODE;
+			{
+				t_heredoc	*hear;
+				hear = malloc(sizeof (t_heredoc));
+				ft_memset(hear, 0, sizeof(t_heredoc));
+				if ((node->heardoc_node) == NULL)
+					node->heardoc_node = hear;
+				else
+				{
+					t_heredoc *htmp = node->heardoc_node;
+					while (htmp->next != NULL)
+						htmp = htmp->next;
+					htmp->next=hear;
+					hear->prev = htmp;
+				}
+				tmp_tok= tmp_tok->next;
+				hear->sep = ft_strdup(tmp_tok->text);
+			}
 			else if (ft_strncmp(tmp_tok->text, "<", 1) == 0)
-				node->node_type =OPEN_NODE;
+			{
+				t_infile_node	*infile;
+				infile = malloc(sizeof (t_infile_node));
+				ft_memset(infile, 0, sizeof(t_infile_node));
+				if ((node->infile_node) == NULL)
+					node->infile_node = infile;
+				else
+				{
+					t_infile_node *itmp = node->infile_node;
+					while (itmp->next != NULL)
+						itmp = itmp->next;
+					itmp->next=infile;
+					infile->prev = itmp;
+				}
+				tmp_tok= tmp_tok->next;
+				infile->file = ft_strdup(tmp_tok->text);
+			}
 			else if (ft_strncmp(tmp_tok->text, ">", 1) == 0)
-				node->node_type =WRITE_NODE;
+			{
+				t_outfile_node	*outfile;
+				outfile = malloc(sizeof (t_outfile_node));
+				ft_memset(outfile, 0, sizeof(t_outfile_node));
+				if ((node->outfile_node) == NULL)
+					node->outfile_node = outfile;
+				else
+				{
+					t_outfile_node *otmp = node->outfile_node;
+					while (otmp->next != NULL)
+						otmp = otmp->next;
+					otmp->next=outfile;
+					outfile->prev = otmp;
+				}
+				tmp_tok= tmp_tok->next;
+				outfile->file = ft_strdup(tmp_tok->text);
+				outfile->type = WRITE_TYPE;
+			}
 			else if (ft_strncmp(tmp_tok->text , ">>", 2) == 0)
-				node->node_type =APPEND_NODE;
+			{
+				t_outfile_node	*outfile;
+				outfile = malloc(sizeof (t_outfile_node));
+				ft_memset(outfile, 0, sizeof(t_outfile_node));
+				if ((node->outfile_node) == NULL)
+					node->outfile_node = outfile;
+				else
+				{
+					t_outfile_node *otmp = node->outfile_node;
+					while (otmp->next != NULL)
+						otmp = otmp->next;
+					otmp->next=outfile;
+					outfile->prev = otmp;
+				}
+				tmp_tok= tmp_tok->next;
+				outfile->file = ft_strdup(tmp_tok->text);
+				outfile->type = APPEND_TYPE;
+			}
 			else
 			{
 				printf("WHAT THE ?\n");
 				exit(1000);
 			}
 			tmp_tok= tmp_tok->next;
-			node->file = ft_strdup(tmp_tok->text);
-			tmp_tok = tmp_tok->next;
-			// free((void**)tmp_tok->bef);
 		}
 		else if (tmp_tok->tok_type == PIPE_TOK)
 		{
