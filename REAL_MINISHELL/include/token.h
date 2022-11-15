@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:07:06 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/14 20:42:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 09:36:56 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,37 @@
 
 #include "node.h"
 
-#define ENDOF -1 //널
-#define CHAR 100
-#define PIPE 101 // |
-#define QUOTES 102 // ''
-#define D_QUOTES 103 // ""
-#define SPACE_B 104 // ' '
-#define DOLLAR 105 // $
-#define DIRECT 106 // <
-#define RE_DIRECT 107 // >
 
-#define IO_TOK 10
-#define ARGV_TOK 20
-#define PIPE_TOK 30
-#define SPACE_TOK 40
-#define EOF_TOK 50
-#define MAIN_TOK 60
+enum e_char_case
+{
+	ENDOF = -1,
+	CHAR = 10,
+	PIPE , //'|'
+	QUOTES , // ''
+ 	D_QUOTES , // ""
+ 	SPACE_B , // ' '
+ 	DOLLAR ,// $
+ 	DIRECT ,// <
+ 	RE_DIRECT, // >
+} ;
+// #define ENDOF -1 //널
+// #define CHAR 100
+// #define PIPE 101 // |
+// #define QUOTES 102 // ''
+// #define D_QUOTES 103 // ""
+// #define SPACE_B 104 // ' '
+// #define DOLLAR 105 // $
+// #define DIRECT 106 // <
+// #define RE_DIRECT 107 // >
+
+typedef enum e_tok_type
+{
+	IO_TOK,
+ 	ARGV_TOK,
+	PIPE_TOK,
+	SPACE_TOK,
+} t_toke_type;
+
 
 typedef struct	s_readline
 {
@@ -41,7 +56,7 @@ typedef struct	s_readline
 
 typedef struct	s_token
 {
-	int				tok_type;// I/O_red_token ,argv_token, pipeline_token , space_token
+	t_toke_type		tok_type;// I/O_red_token ,argv_token, pipeline_token , space_token
 	int				text_len;
 	char			*text;
 	// int				eof; //마지막 토큰인지 확인. 마지막이면 1로 지정해주기.

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/14 21:19:45 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 10:28:51 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,14 @@
 // #define OPEN_NODE 3000
 // #define WRITE_NODE 4000
 
-typedef enum e_node_type
+typedef enum e_io_type
 {
-	HERE_DOC_NODE, // <<
+	HERE_DOC_NODE = 10, // <<
 	APPEND_NODE, //>>
 	OPEN_NODE, //<
 	WRITE_NODE // >
-}	t_node_type;
-// enum
-// {
-// 	<< = 0,
-// 	< = 10,
-// 	> = 20,
-// 	>> = 3
-// };
+}	t_io_type;
+
 
 void	print_error(int Flag, char *s);
 
@@ -49,8 +43,9 @@ typedef struct	s_node
 	char			**cmd;	// 명령어 이차원 배열인 이유는 execve를 하기 위해 1번에 명령어와 그 뒤에 인자들.
 	char			*cmd_path[2];	//명령어 경로
 	char			*file;  //이건 IO_TOKEN일떄만 들어간다.
-	t_node_type		node_type; //IO_TOKEN일 때 어떤 IO_NODE 인지
+	t_io_type		node_type; //IO_TOKEN일 때 어떤 IO_NODE 인지
 	struct s_node	*next;
+	struct s_node	*prev;
 } t_node;
 
 typedef struct s_main_node

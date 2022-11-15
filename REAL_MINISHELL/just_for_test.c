@@ -13,8 +13,6 @@ void	print_tok_type(int a)
 		printf("PIPE_TOK\n");
 	if (a == SPACE_TOK)
 		printf("SPACE_TOK\n");
-	if (a == EOF_TOK)
-		printf("EOF_TOK\n");
 }
 
 void	Print_a_token(t_token *tok)
@@ -32,7 +30,7 @@ void	Print_all_token(t_token	*tok)
 	t_token *tmp;
 	tmp = tok;
 	printf("------PRINT_ALL_TOK-------\n");
-	for (int i=0; (tmp != NULL) && (tmp->tok_type != EOF_TOK); i++)
+	for (int i=0; (tmp != NULL); i++)
 	{
 		printf("------------tok---------------\n");
 		printf("idx :%d|\ntext_len :%d\ntext :%s;\ntok_type: ",i,tmp->text_len,tmp->text);
