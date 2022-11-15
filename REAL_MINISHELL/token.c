@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 15:23:21 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/15 19:28:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ t_token	*create_token(t_readline *src)
 	int		j;
 	int		k;
 
-	tok_buff = malloc(sizeof(char) * 1000000000);
-	env_buff = malloc(sizeof(char) * 1000000000);
+	tok_buff = malloc(sizeof(char) * 1000);
+	env_buff = malloc(sizeof(char) * 1000);
 	tok = malloc(sizeof(t_token));
 	i = 0;
 	j = 0;
