@@ -6,13 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:19:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 20:31:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:59:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "./include/node.h"
-#include "./include/utils.h"
+#include "../../include/node.h"
+#include "../../include/just_for_test.h"
+#include "../../include/utils.h"
+#include "../libft/libft.h"
 
 void	my_free(void **to_free)
 {

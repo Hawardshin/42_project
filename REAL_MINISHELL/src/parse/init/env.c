@@ -6,12 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:13:50 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 20:00:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:56:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/node.h"
-#include "./libft/libft.h"
+#include "../../../include/node.h"
+#include "../../../include/node.h"
+#include "../../../include/just_for_test.h"
+#include "../../../include/utils.h"
+#include "../../libft/libft.h"
 
 void	env_lst_add_back(char *key, char *value)// 문자열을 동적할당해서 들어온다고 가정.
 {

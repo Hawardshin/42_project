@@ -24,6 +24,7 @@
 		"readline.h": "c",
 		"stdlib.h": "c",
 		"signal.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"__node_handle": "c"
 	}
 }

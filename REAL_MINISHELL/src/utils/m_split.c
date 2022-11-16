@@ -6,13 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:47:51 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 20:00:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:59:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "./include/node.h"
-#include "./include/utils.h"
+#include "../../include/node.h"
+#include "../../include/just_for_test.h"
+#include "../../include/utils.h"
+#include "../libft/libft.h"
+
 static long long	len_count(char *str, char c)
 {
 	long long	count;

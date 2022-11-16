@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/15 13:40:53 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/16 23:07:03 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,17 +18,34 @@ DEBUG_FLAGS = -g3 -fsanitize=address
 INCLUDE = -I./includes -I/Users/joushin/.brew/opt/readline/include
 
 LIBRARY = -L/Users/joushin/.brew/opt/readline/lib -lreadline -L$(LIBFT_DIR) -lft
-LIBFT_DIR = ./libft/
 
-SRCS =	main.c	\
-		token.c	\
-		just_for_test.c	\
-		error.c	\
-		env.c	\
-		check_syntax.c \
-		node.c	\
-		m_split.c	\
-		utils.c	\
+LIBFT_DIR = ./$(SRC_DIR)/libft/
+PARSE_DIR = ./$(SRC_DIR)/parse/
+UTILS_DIR = ./$(SRC_DIR)/utils/
+EXECVE_DIR = ./$(SRC_DIR)/execve/
+INIT_DIR = $(PARSE_DIR)init/
+TOK_TO_NODE_DIR = $(PARSE_DIR)tok_to_node/
+TOKEN_DIR = $(PARSE_DIR)tokenize/
+SRC_DIR = src
+
+SRCS =	main.c								\
+		just_for_test.c						\
+		$(INIT_DIR)env.c					\
+		$(TOK_TO_NODE_DIR)check_syntax.c	\
+		$(TOK_TO_NODE_DIR)node.c			\
+		$(TOK_TO_NODE_DIR)node_case.c		\
+		$(TOK_TO_NODE_DIR)node_utils.c		\
+		$(TOK_TO_NODE_DIR)main_node_init.c	\
+		$(TOKEN_DIR)tok_case_one.c			\
+		$(TOKEN_DIR)tok_case_two.c			\
+		$(TOKEN_DIR)tok_case_three.c		\
+		$(TOKEN_DIR)tok_case_four.c			\
+		$(TOKEN_DIR)tok_optimize.c			\
+		$(TOKEN_DIR)tok_utils.c				\
+		$(TOKEN_DIR)token.c					\
+		$(UTILS_DIR)m_split.c				\
+		$(UTILS_DIR)error.c 				\
+		$(UTILS_DIR)utils.c					\
 
 OBJS = $(SRCS:.c=.o)
 

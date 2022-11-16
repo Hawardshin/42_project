@@ -6,12 +6,12 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/15 20:36:43 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/16 21:15:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "./libft/libft.h"
+#include "./src/libft/libft.h"
 #include "./include/node.h"
 #include "./include/utils.h"
 #include "./include/just_for_test.h"//이건 테스트용
