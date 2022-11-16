@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/16 23:07:03 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/16 23:17:46 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ TOK_TO_NODE_DIR = $(PARSE_DIR)tok_to_node/
 TOKEN_DIR = $(PARSE_DIR)tokenize/
 SRC_DIR = src
 
-SRCS =	main.c								\
+SRCS =	$(SRC_DIR)/main.c					\
 		just_for_test.c						\
 		$(INIT_DIR)env.c					\
 		$(TOK_TO_NODE_DIR)check_syntax.c	\

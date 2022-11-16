@@ -6,15 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 21:15:52 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/16 23:18:18 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "./src/libft/libft.h"
-#include "./include/node.h"
-#include "./include/utils.h"
-#include "./include/just_for_test.h"//이건 테스트용
+#include "./libft/libft.h"
+#include "../include/node.h"
+#include "../include/utils.h"
+#include "../include/just_for_test.h"//이건 테스트용
 
 void	handler(int signum)
 {
