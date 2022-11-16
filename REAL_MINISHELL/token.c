@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 16:15:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/16 18:47:09 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "./include/utils.h"
 #include <errno.h>
 
-char	move_char(t_readline *src)//움직이기까지 함.
+char	move_char(t_readline *src) //움직이기까지 함.
 {
 	char	c1;
 
@@ -152,9 +152,8 @@ int	ft_all_len(t_readline *src)
 	tmp = src->now_pos;
 	while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
 	{
-		if (token_case(see_char(src)) == DOLLAR)
+		if (token_case(move_char(src)) == DOLLAR)
 		{
-			move_char(src);
 			i = 0;
 			env_buff = malloc (ft_env_len(src) + 1);
 			while (token_case(see_char(src)) == DOLLAR)//달러뒤에 달러인 경우는 무시
@@ -165,67 +164,74 @@ int	ft_all_len(t_readline *src)
 			len += ft_strlen(get_env(env_buff));
 			my_free((void **) &env_buff);
 		}
-		else
-		{
-			move_char(src);
-			len++;
-		}
+		len++;
 	}
 	src->now_pos = tmp;
 	return (len);
 }
 
-
-t_token	*create_d_quotes(t_readline *src)
+char	*make_env_text(t_readline *src)
 {
-
-	char	*env_text;
 	char	*env_buff;
 	int		k;
-	int		i= 0;
-	t_token *tok = malloc(sizeof(t_token));
+	char	*env_text;
+
+	k = 0;
+	env_buff = malloc (ft_env_len(src) + 1);
 	move_char(src);
-	char	*tok_buff  = malloc(ft_all_len(src) + 1);
+	k = 0;
+	env_buff = malloc (ft_env_len(src) + 1);
+	k = 0;
+	while (token_case(see_char(src)) == DOLLAR)//달러뒤에 달러인 경우는 무시
+		env_buff[k++] = move_char(src);
+	while (token_case(see_char(src)) == CHAR)
+		env_buff[k++] = move_char(src);
+	env_buff[k] = '\0';
+	env_text = get_env(env_buff);
+	my_free((void **) &env_buff);
+	if (k == 0)
+		env_text = "$";
+	return (env_text);
+}
+
+char	*make_double_tok(t_readline *src)
+{
+	char	*tok_buff;
+	int		i;
+	int		k;
+	char	*env_text;
+
+	i = 0;
+	k = 0;
+	tok_buff  = malloc(ft_all_len(src) + 1);
 	while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
 	{
 		if (token_case(see_char(src)) == DOLLAR)
 		{
-			env_buff = malloc (ft_env_len(src) + 1);
-			move_char(src);
-			k = 0;
-			while (token_case(see_char(src)) == DOLLAR)//달러뒤에 달러인 경우는 무시
-			{
-				env_buff[k] = move_char(src);
-				k++;
-			}
-			while (token_case(see_char(src)) == CHAR)
-			{
-				env_buff[k] = move_char(src);
-				k++;
-			}
-			env_buff[k] = '\0';
-			env_text = get_env(env_buff);//이거 환경변수 세팅해서 바꿔야되는데 일단 토큰부터 다 만들고 진행할 예정
-			my_free((void **) &env_buff);
-			if (k == 0) //달러 하나인 경우에는 $로 봐야해요
-				env_text = "$";
+			env_text = make_env_text(src);
 			while (env_text && *env_text)
 				tok_buff[i++] = *env_text++;
 			tok_buff[i] = '\0';
 		}
 		else
-		{
-			tok_buff[i] = move_char(src);
-			i++;
-		}
+			tok_buff[i++] = move_char(src);
 	}
 	tok_buff[i] = '\0';
-	i++;
+	return (tok_buff);
+}
+
+t_token	*create_d_quotes(t_readline *src)
+{
+	t_token	*tok;
+
+	move_char(src);
+	tok = malloc(sizeof(t_token));
+	tok->text = make_double_tok(src);
 	if (token_case(see_char(src)) != D_QUOTES)
 		g_state.exit_code = 258;
 	else
 		move_char(src);
-	tok->text = tok_buff;
-	tok->text_len = i;
+	tok->text_len = ft_strlen(tok->text);
 	tok->tok_type = ARGV_TOK;
 	return (tok);
 }
@@ -534,13 +540,11 @@ t_main_token	*tokenize(t_readline *src)
 			main_tok->end_token = next;
 			break;
 		}
-		// printf("ss: %s\n",tmp->text);
 		next->bef = main_tok->end_token;
 		next->next = NULL;
 		main_tok->token_num++;
 		tmp = next;
 	}//여기까지가 모든 토큰을 다 만들어 주는것 //space까지
-	// Print_all_token(main_tok->start_token);
 	merge_argv_tok(main_tok);
 	// Print_all_token((main_tok->start_token));
 	delete_all_space_tok(main_tok);
