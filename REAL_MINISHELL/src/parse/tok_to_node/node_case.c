@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:52:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 23:08:30 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/17 13:30:13 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,34 @@
 
 void	make_hdoc_node(t_node *node, t_token **tmp_tok)
 {
-	t_heredoc	*hear;
-	t_heredoc	*htmp;
+	t_infile_node	*infile;
+	t_infile_node	*itmp;
 
-	hear = malloc(sizeof (t_heredoc));
-	ft_memset(hear, 0, sizeof(t_heredoc));
-	if ((node->heardoc_node) == NULL)
-		node->heardoc_node = hear;
+	infile = malloc(sizeof (t_infile_node));
+	ft_memset(infile, 0, sizeof(t_infile_node));
+	if ((node->infile_node) == NULL)
+		node->infile_node = infile;
 	else
 	{
-		htmp = node->heardoc_node;
-		while (htmp->next != NULL)
-			htmp = htmp->next;
-		htmp->next = hear;
-		hear->prev = htmp;
+		itmp = node->infile_node;
+		while (itmp->next != NULL)
+			itmp = itmp->next;
+		itmp->next = infile;
+		infile->prev = itmp;
 	}
 	(*tmp_tok) = (*tmp_tok)->next;
-	hear->sep = ft_strdup((*tmp_tok)->text);
+	infile->file = ft_strdup((*tmp_tok)->text);
+	infile->is_heardoc = 1;
+	if ((node->heardoc_node) == NULL)
+		node->heardoc_node = infile;
+	else
+	{
+		itmp = node->heardoc_node;
+		while (itmp->hnext != NULL)
+			itmp = itmp->hnext;
+		itmp->hnext = infile;
+		infile->hprev = itmp;
+	}
 }
 
 void	make_ifile_node(t_node *node, t_token **tmp_tok)

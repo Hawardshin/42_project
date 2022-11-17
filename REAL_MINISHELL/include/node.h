@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 23:07:16 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/17 13:30:21 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include<signal.h>
 # include<stdio.h>
-# include <sys/wait.h>
+# include<sys/wait.h>
 # include<readline/readline.h>
 # include<readline/history.h>
 # include<sys/stat.h>
@@ -23,6 +23,8 @@
 # include<unistd.h>
 # include<stdlib.h>
 # include<errno.h>
+# include<fcntl.h>
+# define BUFFER_SIZE 42
 
 enum e_char_case
 {
@@ -55,17 +57,21 @@ typedef enum e_tok_type
 }	t_toke_type;
 
 //<< 의 경우 전부다 이렇게 들어온다.
-typedef struct s_heredoc
-{
-	char				*sep;
-	struct s_heredoc	*prev;
-	struct s_heredoc	*next;
-}	t_heredoc;
+// typedef struct s_heredoc
+// {
+// 	int					idx;
+// 	char				*sep;
+// 	struct s_heredoc	*prev;
+// 	struct s_heredoc	*next;
+// }	t_heredoc;
 
-//<
+//< << heardoc인 경우 flag에 1이 들어가고 file에 구분자가 들어간다.
 typedef struct s_infile_node
 {
+	int						is_heardoc;
 	char					*file;
+	struct s_infile_node	*hnext;
+	struct s_infile_node	*hprev;
 	struct s_infile_node	*prev;
 	struct s_infile_node	*next;
 }	t_infile_node;
@@ -84,7 +90,7 @@ typedef struct s_node
 	int				idx;
 	char			**cmd;
 	char			*cmd_path[2];
-	t_heredoc		*heardoc_node;
+	t_infile_node	*heardoc_node;
 	t_infile_node	*infile_node;
 	t_outfile_node	*outfile_node;
 	struct s_node	*next;

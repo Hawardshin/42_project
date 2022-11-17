@@ -45,17 +45,20 @@ void	print_src_char(t_readline *src)
 
 void	print_all_io(t_node *node)
 {
-	t_heredoc *hnode = node->heardoc_node;
+	t_infile_node *hnode = node->heardoc_node;
 	t_infile_node *inode = node->infile_node;
 	t_outfile_node *onode = node->outfile_node;
 	for (int i=0; hnode!=NULL;i++)
 	{
-		printf("idx :: %d hear_doc_node(<<) :: %s;\n",i,hnode->sep);
-		hnode = hnode->next;
+		printf("idx :: %d hear_doc_node(<<) :: %s;\n",i,hnode->file);
+		hnode = hnode->hnext;
 	}
 	for (int i=0; inode!=NULL;i++)
 	{
+		if (inode->is_heardoc == 0)
 		printf("idx :: %d infile_node(<) :: %s;\n",i,inode->file);
+		else if  (inode->is_heardoc == 1)
+			printf("idx :: %d infile_node(<<) :: %s;\n",i,inode->file);
 		inode = inode->next;
 	}
 	for (int i=0; onode!= NULL;i++)
