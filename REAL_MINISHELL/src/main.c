@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 15:28:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:40:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	while (1)
 	{
-
 		rd_line = readline("jshell$ ");
 		if (!rd_line)
 		{
@@ -86,6 +85,7 @@ int	main(int argc, char **argv, char **envp)
 		if (tok->start_token != NULL)
 		{
 			node = make_tok_to_node(tok);
+			node->ev = envp;
 			// print_all_node(node);
 			fork_child(node);
 		}
