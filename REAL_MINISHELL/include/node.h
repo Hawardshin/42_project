@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/17 13:30:21 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:12:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_main_token
 	t_token	*start_token;
 	t_token	*end_token;
 	int		token_num;
-}	t_main_token ;
+}	t_main_token;
 
 /*env*/
 typedef struct s_env
@@ -155,6 +155,7 @@ typedef struct	s_readline
 	int		bufsize;/* 입력 텍스트 크기*/
 	int		now_pos;/* 소스 안에서 문자위치*/
 } t_readline;
+
 t_state	g_state;
 
 /*token_fuction*/
@@ -189,4 +190,11 @@ void			make_rfile_node(t_node *node, t_token **tmp_tok);
 t_node			*make_pipe_node(t_token **tmp_tok, t_main_node *main_node);
 t_main_node		*main_init(t_main_token **tok, t_token **tmp_tok, t_node **node);
 void			pipe_init(t_main_node *main_node);
+
+/*exec.c*/
+int				fork_child(t_main_node *px);
+/*exec_utils.c*/
+void			ft_all_close(t_main_node *px, int idx, int bef);
+t_node			*mlst_find(int idx, t_main_node *data);
+
 #endif

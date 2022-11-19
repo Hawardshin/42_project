@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/17 13:30:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:02:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			node = make_tok_to_node(tok);
 			print_all_node(node);
-			// fork_child();
+			fork_child(node);
 		}
 		//tok_clean();
 		add_history(rd_line);

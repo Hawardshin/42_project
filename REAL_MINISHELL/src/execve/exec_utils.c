@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:42:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/17 12:56:35 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:18:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_all_close(t_main_node *px, int idx, int bef)
 	int	i;
 
 	i = 0;
-	while (i < px->cmd_num - 1)
+	while (i + 1 < px->cmd_num)
 	{
 		if (i != idx && i != bef)
 		{

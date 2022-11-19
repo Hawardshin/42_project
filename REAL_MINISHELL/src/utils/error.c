@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:47:56 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 20:59:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:09:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	print_error(int Flag, char *s)
 	}
 }
 
-
-void	syntax_error()
+void	syntax_error(void)
 {
 	ft_eprintf("bash: syntax error near unexpected token\n");
 	// exit(258);

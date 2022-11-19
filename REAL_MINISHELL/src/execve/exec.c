@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:35:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/17 14:18:29 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 14:37:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 여기서 가장 마지막 hear_doc이 맞는경우 어떻게 돌아야하는가? 이 경우는 open을 해보긴 하지만 순서대로 실패하는지만 검사를 해보면 된다.
 */
 
-static void	exec_bonus(int *o_fd, t_infile_node *px)
+static void	exec_bonus(int *o_fd, t_infile_node *px, int idx)
 {
 	char	*tmp;
 	int		len;
@@ -39,21 +39,27 @@ static void	exec_bonus(int *o_fd, t_infile_node *px)
 	*o_fd = open (".tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (*o_fd == -1)
 		print_error(2, px->file);
+	while (idx)
+	{
+		write(1, "pipe ", 5);
+		idx--;
+	}
+	write(1, "heredoc> ", 9);
 	tmp = get_next_line(0);
 	while (ft_strncmp(tmp, px->file, ft_strlen(px->file)))
 	{
+		write(1, "heredoc> ", 9);
 		len = (int)ft_strlen(tmp);
 		write (*o_fd, tmp, len);
-		my_free (&tmp);
+		my_free ((void **)&tmp);
 		tmp = get_next_line(0);
 	}
 	if (tmp)
-		my_free(&tmp);
+		my_free((void **)&tmp);
 	close(*o_fd);
 }
 /* 첫번째 경우
-open 하기 i
-*/
+open 하기 i */
 static void	exec_first(t_main_node *px)
 {
 	int				o_fd;
@@ -67,12 +73,15 @@ static void	exec_first(t_main_node *px)
 	flag = 0;
 	inode = node->heardoc_node;
 	o_fd = 0;
+	w_fd = 1;
 	while (inode != NULL)
 	{
-		exec_bonus(&o_fd, px);
+		exec_bonus(&o_fd, inode, 0);
+		if (inode ->hnext == NULL)
+			break ;
 		inode = inode->hnext;
 	}
-	if (inode && inode->next == NULL)
+	if (inode != NULL && inode->next == NULL)
 		flag = 1;
 	inode = node->infile_node;
 	while (inode != NULL)
@@ -81,98 +90,108 @@ static void	exec_first(t_main_node *px)
 		{
 			if (o_fd != 0)
 				close(o_fd);
-			o_fd = open(px->file, O_RDONLY);
+			o_fd = open(inode->file, O_RDONLY);
 			if (o_fd == -1)
-				print_error(2, px->file);
+				print_error(2, inode->file);
 		}
 		inode = inode->next;
 	}
-	onode = node->outfile_node;
 	if (flag)
 	{
-		o_fd = open(".tmp", O_RDONLY);
 		if (o_fd != 0)
 			close(o_fd);
+		o_fd = open(".tmp", O_RDONLY);
 	}
+	onode = node->outfile_node;
 	while (onode)
 	{
 		if (onode->type == APPEND_TYPE)
-		{
 			w_fd = open(onode->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
-		}
 		else if (onode ->type == WRITE_TYPE)
-		{
 			w_fd = open(onode->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-		}
 		if (w_fd == -1)
-			print_error(2, oonde->file);
+			print_error(2, onode->file);
 		onode = onode->next;
 	}
 	ft_all_close(px, 0, -1);
 	close(px->pipefd[0][0]);
+	printf("ooooooooooooo%d\n",o_fd);
 	if ((o_fd != 0) && dup2(o_fd, 0) == -1)
 		print_error(2, NULL);
 	if (o_fd != 0)
 		close(o_fd);
-	if (node->outfile_node != NULL)
+	// printf("ooooooooooooo%d\n",o_fd);
+	if (node->outfile_node != NULL || px->cmd_num == 1)
 		close(px->pipefd[0][1]);
 	else
 		w_fd = px->pipefd[0][1];
-	if (dup2(w_fd, 1) == -1)
+	if ((w_fd != 1) && dup2(w_fd, 1) == -1)
 		print_error(2, NULL);
-	if (w_fd != px->pipefd[0][1])
-		close(px->pipefd[0][1]);
+	// printf("w_fd :: %d o_fd :: %d\n",w_fd, o_fd);
 	if (node->cmd_path[0] != NULL)
 		execve(node->cmd_path[0], node->cmd, px->ev);
-	print_error(1, node->cmd[0]);
+	// print_error(1, node->cmd[0]);
 }
 
-static void	exec_last(t_main_node *px)
-{
-	int		o_fd;
-	t_node	*node;
+// static void	exec_last(t_main_node *px)
+// {
+// 	int		o_fd;
+// 	t_node	*node;
 
-	node = px->cmd_node_tail;
-	ft_all_close(px, (px->cmd_num) - 2, -1);
-	close(px->pipefd[(px->cmd_num) - 2][1]);
-	if (px->flag == 1)
-	{
-		o_fd = open(px->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
-		unlink(".tmp");
-	}
-	else
-		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-	if (o_fd == -1)
-		print_error(2, px->outfile);
-	if (dup2(px->pipefd[px->cmd_num - 2][0], 0) == -1)
-		print_error(2, NULL);
-	close(px->pipefd[px->cmd_num -2][0]);
-	if (dup2(o_fd, 1) == -1)
-		print_error(2, NULL);
-	close(o_fd);
-	if (node->cmd_path[0] != NULL)
-		execve(node->cmd_path[0], (node->cmd), px->ev);
-	print_error(1, node->cmd[0]);
-}
+// 	node = px->cmd_node_tail;
+// 	ft_all_close(px, (px->cmd_num) - 2, -1);
+// 	close(px->pipefd[(px->cmd_num) - 2][1]);
+// 	if (px->flag == 1)
+// 	{
+// 		o_fd = open(px->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
+// 		unlink(".tmp");
+// 	}
+// 	else
+// 		o_fd = open(px->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+// 	if (o_fd == -1)
+// 		print_error(2, px->outfile);
+// 	if (dup2(px->pipefd[px->cmd_num - 2][0], 0) == -1)
+// 		print_error(2, NULL);
+// 	close(px->pipefd[px->cmd_num -2][0]);
+// 	if (dup2(o_fd, 1) == -1)
+// 		print_error(2, NULL);
+// 	close(o_fd);
+// 	if (node->cmd_path[0] != NULL)
+// 		execve(node->cmd_path[0], (node->cmd), px->ev);
+// 	print_error(1, node->cmd[0]);
+// }
 
-static void	exec_pipe(int idx, t_main_node *px)
-{
-	t_node	*node;
+// static void	exec_pipe(int idx, t_main_node *px)
+// {
+// 	int				o_fd;
+// 	t_node			*node;
+// 	t_infile_node	*inode;
+// 	int				flag;
+// 	int				w_fd;
+// 	t_outfile_node	*onode;
 
-	node = mlst_find(idx, px);
-	ft_all_close(px, idx, idx - 1);
-	close(px->pipefd[idx - 1][1]);
-	close(px->pipefd[idx][0]);
-	if (dup2(px->pipefd[idx - 1][0], 0) == -1)
-		print_error(2, NULL);
-	close(px->pipefd[idx - 1][0]);
-	if (dup2(px->pipefd[idx][1], 1) == -1)
-		print_error(2, NULL);
-	close(px->pipefd[idx][1]);
-	if (node->cmd_path[0] != NULL)
-		execve(node->cmd_path[0], node->cmd, px->ev);
-	print_error(1, node->cmd[0]);
-}
+// 	node = mlst_find(idx, px);
+// 	flag = 0;
+// 	inode = node->heardoc_node;
+// 	o_fd = 0;
+// 	while (inode != NULL)
+// 	{
+// 		exec_bonus(&o_fd, inode, 0);
+// 		inode = inode->hnext;
+// 	}
+// 	ft_all_close(px, idx, idx - 1);
+// 	close(px->pipefd[idx - 1][1]);
+// 	close(px->pipefd[idx][0]);
+// 	if (dup2(px->pipefd[idx - 1][0], 0) == -1)
+// 		print_error(2, NULL);
+// 	close(px->pipefd[idx - 1][0]);
+// 	if (dup2(px->pipefd[idx][1], 1) == -1)
+// 		print_error(2, NULL);
+// 	close(px->pipefd[idx][1]);
+// 	if (node->cmd_path[0] != NULL)
+// 		execve(node->cmd_path[0], node->cmd, px->ev);
+// 	print_error(1, node->cmd[0]);
+// }
 
 int	fork_child(t_main_node *px)
 {
@@ -188,16 +207,16 @@ int	fork_child(t_main_node *px)
 		{
 			if (i == 0)
 				exec_first(px);
-			else if (i + 1 == px->cmd_num)
-				exec_last(px);
-			exec_pipe(i, px);
+			// else if (i + 1 == px->cmd_num)
+			// 	exec_last(px);
+			// exec_pipe(i, px);
 		}
-		if (px->flag && i == 0)
-			waitpid(pid, &status, 0);
+		// if (px->flag && i == 0)
+		// 	waitpid(pid, &status, 0);
 	}
 	ft_all_close(px, -1, -1);
 	waitpid(pid, &status, 0);
-	ft_end_free(px);
+	// ft_end_free(px);
 	if (0 == (status & 0xff))
 		return (status >> 8);
 	return (status);
