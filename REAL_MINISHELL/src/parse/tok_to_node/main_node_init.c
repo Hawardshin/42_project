@@ -6,10 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:45:21 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 23:03:57 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 18:05:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../../include/node.h"
 #include "../../../include/just_for_test.h"

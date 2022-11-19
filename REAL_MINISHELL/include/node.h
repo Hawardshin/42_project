@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 13:12:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 18:04:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ enum e_char_case
 
 /*node*/
 // >> , >
-
 typedef enum e_outfile_type
 {
 	APPEND_TYPE=10,
@@ -56,16 +55,6 @@ typedef enum e_tok_type
 	SPACE_TOK,
 }	t_toke_type;
 
-//<< 의 경우 전부다 이렇게 들어온다.
-// typedef struct s_heredoc
-// {
-// 	int					idx;
-// 	char				*sep;
-// 	struct s_heredoc	*prev;
-// 	struct s_heredoc	*next;
-// }	t_heredoc;
-
-//< << heardoc인 경우 flag에 1이 들어가고 file에 구분자가 들어간다.
 typedef struct s_infile_node
 {
 	int						is_heardoc;
@@ -97,12 +86,14 @@ typedef struct s_node
 	struct s_node	*prev;
 }	t_node;
 
+//파이프 0 1 두개의 2차원 배열
+//명령의 노드의 총 갯수 - 파이프의 갯수로 생각
 typedef struct s_main_node
 {
 	char	**ev;
 	char	**path;
-	int		**pipefd;//파이프 0 1 두개의 2차원 배열
-	int		cmd_num;//명령의 노드의 총 갯수 - 파이프의 갯수로 생각
+	int		**pipefd;
+	int		cmd_num;
 	t_node	*node_head;
 	t_node	*node_tail;
 }	t_main_node;
@@ -145,19 +136,20 @@ typedef struct s_state
 	t_env_main_node	env_main_node;
 	pid_t			pid;
 	int				exit_code;
-	// int				is_fork;
 }	t_state;
 
 /* readline*/
+/* 입력 텍스트 */
+/* 입력 텍스트 크기*/
+/* 소스 안에서 문자위치 */
 typedef struct	s_readline
 {
-	char	*buffer;/* 입력 텍스트 */
-	int		bufsize;/* 입력 텍스트 크기*/
-	int		now_pos;/* 소스 안에서 문자위치*/
-} t_readline;
+	char	*buffer;
+	int		bufsize;
+	int		now_pos;
+}	t_readline;
 
 t_state	g_state;
-
 /*token_fuction*/
 t_main_token	*tokenize(t_readline *src);
 char			see_char(t_readline *src);//보기만 함.
@@ -179,8 +171,8 @@ void			init_g_state(char **envp);
 char			*get_env(char *key);
 int				check_syntax(t_token *start_tok);
 char			*make_env_text(t_readline *src);
-/*node_fuction*/
 
+/*node_fuction*/
 t_main_node		*make_tok_to_node(t_main_token *tok);
 char			*find_path(char *text, t_main_node *main_node);
 void			make_hdoc_node(t_node *node, t_token **tmp_tok);
@@ -193,6 +185,7 @@ void			pipe_init(t_main_node *main_node);
 
 /*exec.c*/
 int				fork_child(t_main_node *px);
+
 /*exec_utils.c*/
 void			ft_all_close(t_main_node *px, int idx, int bef);
 t_node			*mlst_find(int idx, t_main_node *data);

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:12:35 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 20:12:45 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 18:05:46 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*make_double_tok(t_readline *src)
 
 	i = 0;
 	k = 0;
-	tok_buff  = malloc(ft_all_len(src) + 1);
+	tok_buff = malloc(ft_all_len(src) + 1);
 	while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
 	{
 		if (token_case(see_char(src)) == DOLLAR)
