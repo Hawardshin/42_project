@@ -6,10 +6,9 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 15:40:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 16:30:18 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "./libft/libft.h"
 #include "../include/node.h"
@@ -35,7 +34,6 @@ void	init_rd_line(t_readline *src, char *rd_line)
 	src->now_pos = -2;
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	char			*rd_line;
@@ -48,7 +46,6 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	signal(SIGINT, handler);
 	init_g_state(envp);
-	// printf("\n-------------------------------------------start--------------------------------------------------\n");
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	while (1)
 	{
@@ -70,9 +67,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		init_rd_line(&src, rd_line);
-		// printf("\n-------------------------------------------input--------------------------------------------------\n");
 		tok = tokenize(&src);
-		// printf("\n---------------------------------------token_done-------------------------------------------------\n");
 		// Print_all_token(tok->start_token);
 		if (check_syntax(tok->start_token) || g_state.exit_code)
 		{
@@ -86,12 +81,10 @@ int	main(int argc, char **argv, char **envp)
 		{
 			node = make_tok_to_node(tok);
 			node->ev = envp;
-			// print_all_node(node);
 			fork_child(node);
 		}
 		//tok_clean();
 		add_history(rd_line);
-		// printf("\n-------------------------------------------end--------------------------------------------------\n");
 	}
 	return (0);
 }

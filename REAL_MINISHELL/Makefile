@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/19 13:19:09 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/19 17:22:39 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,12 @@ SRCS =	$(SRC_DIR)/main.c					\
 		$(UTILS_DIR)utils.c					\
 		$(UTILS_DIR)get_next_line_utils.c	\
 		$(UTILS_DIR)get_next_line.c			\
-		$(EXECVE_DIR)exec.c					\
+		$(EXECVE_DIR)exec_main.c			\
 		$(EXECVE_DIR)exec_utils.c			\
+		$(EXECVE_DIR)exec_first.c			\
+		$(EXECVE_DIR)exec_init_and_heardoc.c\
+		$(EXECVE_DIR)exec_last.c			\
+		$(EXECVE_DIR)exec_pipe.c			\
 
 OBJS = $(SRCS:.c=.o)
 
