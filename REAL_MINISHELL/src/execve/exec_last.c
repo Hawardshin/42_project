@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:15:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 17:21:27 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 17:57:27 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../include/utils.h"
 #include "../../include/exec.h"
 
+//cmd->num -2에서 0만을 사용.
 static void	exec_last_fd(t_main_node *px, int o_fd, int w_fd)
 {
 	ft_all_close(px, (px->cmd_num) - 2, -1);
@@ -22,12 +23,11 @@ static void	exec_last_fd(t_main_node *px, int o_fd, int w_fd)
 		o_fd = px->pipefd[(px->cmd_num) - 2][0];
 	if (dup2(o_fd, 0) == -1)
 		print_error(2, NULL);
+	close(px->pipefd[px->cmd_num -2][0]);
 	if (o_fd != px->pipefd[(px->cmd_num) - 2][0])
 		close(o_fd);
-	close(px->pipefd[px->cmd_num -2][0]);
-	if (w_fd != 1 && dup2(w_fd, 1) == -1)
+	if ((w_fd != 1) && dup2(w_fd, 1) == -1)
 		print_error(2, NULL);
-	close(o_fd);
 }
 
 void	exec_last(t_main_node *px)

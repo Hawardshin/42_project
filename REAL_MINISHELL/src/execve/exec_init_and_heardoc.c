@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:10:03 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 17:21:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 17:29:17 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static void	exec_heardoc(int *o_fd, t_infile_node *px, int idx)
 		my_free((void **)&tmp);
 	close(*o_fd);
 }
-/* 첫번째 경우
-open 하기 i */
 
 static void	chk_infile_hear_doc(t_infile_node *inode, int *o_fd, int flag)
 {
