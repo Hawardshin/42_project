@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:35:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 15:26:53 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:55:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ static void	exec_first(t_main_node *px)
 	close(px->pipefd[0][1]);
 	if (node->cmd_path[0] != NULL)
 		execve(node->cmd_path[0], node->cmd, px->ev);
-	print_error(1, node->cmd[0]);
+	if (node != NULL && node->cmd != NULL)
+		print_error(1, node->cmd[0]);
 }
 
 static void	exec_last(t_main_node *px)
@@ -213,6 +214,8 @@ static void	exec_pipe(int idx, t_main_node *px)
 	unlink(".tmp");
 	node = mlst_find(idx, px);
 	flag = 0;
+	if (node == NULL)
+		return ;
 	inode = node->heardoc_node;
 	o_fd = 0;
 	w_fd = 1;
