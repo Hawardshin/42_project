@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:47:50 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 22:48:01 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 16:24:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*find_path(char *text, t_main_node *main_node)
 	struct stat	st;
 
 	i = -1;
+	if (!main_node->path)
+		return (NULL);
 	while (main_node -> path[++i])
 	{
 		if (ft_strncmp(text, "/", 1) != 0)

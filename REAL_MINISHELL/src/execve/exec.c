@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:35:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 15:55:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 16:18:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,30 @@ static void	exec_heardoc(int *o_fd, t_infile_node *px, int idx)
 {
 	char	*tmp;
 	int		len;
+	int		i;
 
+	i = 0;
 	*o_fd = open (".tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (*o_fd == -1)
 		print_error(2, px->file);
-	while (idx)
+	while (i < idx)
 	{
 		write(1, "pipe ", 5);
-		idx--;
+		i++;
 	}
 	write(1, "heredoc> ", 9);
 	tmp = get_next_line(0);
-	while (ft_strncmp(tmp, px->file, ft_strlen(px->file)))
+	while (1)
 	{
+		if (ft_strncmp(tmp, px->file, ft_strlen(px->file)) == 0 \
+		&& ft_strlen(px->file) + 1 == ft_strlen(tmp))
+			break ;
+		i = 0;
+		while (i < idx)
+		{
+			write(1, "pipe ", 5);
+			i++;
+		}
 		write(1, "heredoc> ", 9);
 		len = (int)ft_strlen(tmp);
 		write (*o_fd, tmp, len);
@@ -60,6 +71,7 @@ static void	exec_heardoc(int *o_fd, t_infile_node *px, int idx)
 }
 /* 첫번째 경우
 open 하기 i */
+
 static void	exec_first(t_main_node *px)
 {
 	int				o_fd;
