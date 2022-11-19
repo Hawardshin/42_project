@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:47:56 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 13:09:40 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:09:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void	print_error(int Flag, char *s)
 {
+	unlink(".tmp");
 	ft_putstr_fd("minishell: ", 2);
 	if (Flag == 0)
 	{

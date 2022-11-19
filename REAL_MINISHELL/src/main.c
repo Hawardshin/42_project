@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 13:02:17 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:28:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	signal(SIGINT, handler);
 	init_g_state(envp);
-	printf("\n-------------------------------------------start--------------------------------------------------\n");
+	// printf("\n-------------------------------------------start--------------------------------------------------\n");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	while (1)
 	{
 
@@ -70,10 +71,10 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		init_rd_line(&src, rd_line);
-		printf("\n-------------------------------------------input--------------------------------------------------\n");
+		// printf("\n-------------------------------------------input--------------------------------------------------\n");
 		tok = tokenize(&src);
-		printf("\n---------------------------------------token_done-------------------------------------------------\n");
-		Print_all_token(tok->start_token);
+		// printf("\n---------------------------------------token_done-------------------------------------------------\n");
+		// Print_all_token(tok->start_token);
 		if (check_syntax(tok->start_token) || g_state.exit_code)
 		{
 			my_free((void **)&rd_line);
@@ -85,12 +86,12 @@ int	main(int argc, char **argv, char **envp)
 		if (tok->start_token != NULL)
 		{
 			node = make_tok_to_node(tok);
-			print_all_node(node);
+			// print_all_node(node);
 			fork_child(node);
 		}
 		//tok_clean();
 		add_history(rd_line);
-		printf("\n-------------------------------------------end--------------------------------------------------\n");
+		// printf("\n-------------------------------------------end--------------------------------------------------\n");
 	}
 	return (0);
 }
