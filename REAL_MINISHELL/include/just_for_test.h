@@ -1,4 +1,3 @@
-
 #ifndef JUST_FOR_TEST_H
 # define JUST_FOR_TEST_H
 

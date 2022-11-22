@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:35:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 17:22:26 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/22 19:12:33 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	fork_child(t_main_node *px)
 				exec_first(px);
 			else if (i + 1 == px->cmd_num)
 				exec_last(px);
-			exec_pipe(i, px);
+			else
+				exec_pipe(i, px);
 		}
 		// if (px->flag && i == 0)
 		if (i == 0)

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:49 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 22:40:59 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/22 22:12:58 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_dollar_len(t_readline *src)
 		env_buff = malloc (ft_env_len(src) + 1);
 		while (token_case(see_char(src)) == DOLLAR)
 			env_buff[i++] = move_char(src);
+		if (see_char(src) == '?')
+			return (3);
 		while (token_case(see_char(src)) == CHAR)
 			env_buff[i++] = move_char(src);
 		env_buff[i] = '\0';
@@ -57,9 +59,9 @@ t_token	*create_dollar_tok(t_readline *src)
 	while (env_text && *env_text)
 		tok_buff[i++] = *env_text++;
 	tok_buff[i] = '\0';
-	while (env_text && *env_text)
-		tok_buff[i++] = *env_text++;
-	tok_buff[i] = '\0';
+	// while (env_text && *env_text)
+	// 	tok_buff[i++] = *env_text++;
+	// tok_buff[i] = '\0';
 	i++;
 	tok->text = tok_buff;
 	tok->text_len = i;

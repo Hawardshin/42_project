@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 18:04:29 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/22 22:13:43 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	handler(int signum)
 
 void	init_rd_line(t_readline *src, char *rd_line)
 {
-	g_state.exit_code = 0;
+	// g_state.exit_code = 0;
 	src->buffer = rd_line;
 	src->bufsize = ft_strlen(rd_line);
 	src->now_pos = -2;
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			exit (EXIT_SUCCESS);
 		}
-		if (rd_line[0] == '\0' || ft_strncmp(rd_line, "\n",  1) == 0)
+		if (rd_line[0] == '\0' || ft_strncmp(rd_line, "\n", 1) == 0)
 		{
 			my_free((void **)&rd_line);
 			continue ;
@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		init_rd_line(&src, rd_line);
 		tok = tokenize(&src);
 		// Print_all_token(tok->start_token);
-		if (check_syntax(tok->start_token) || g_state.exit_code)
+		if (check_syntax(tok->start_token))
 		{
 			my_free((void **)&rd_line);
 			rd_line = NULL;
@@ -81,6 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			node = make_tok_to_node(tok);
 			node->ev = envp;
+			// fork_child(node);
 			g_state.exit_code = fork_child(node);
 		}
 		//tok_clean();

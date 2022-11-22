@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:12:35 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 18:05:46 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/22 22:23:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ int	ft_all_len(t_readline *src)
 	return (len);
 }
 
+char	*this_is_question(t_readline *src, char **env_buff)
+{
+	move_char(src);
+	my_free((void **) env_buff);
+	return (ft_itoa(g_state.exit_code));
+}
+
 char	*make_env_text(t_readline *src)
 {
 	char	*env_buff;
@@ -74,19 +81,21 @@ char	*make_env_text(t_readline *src)
 
 	k = 0;
 	env_buff = malloc (ft_env_len(src) + 1);
-	move_char(src);
-	k = 0;
-	env_buff = malloc (ft_env_len(src) + 1);
-	k = 0;
+	if (see_char(src) == '?')
+		return (this_is_question(src, &env_buff));
 	while (token_case(see_char(src)) == DOLLAR)
+	{
 		env_buff[k++] = move_char(src);
+		if (see_char(src) == '?')
+			return (this_is_question(src, &env_buff));
+	}
 	while (token_case(see_char(src)) == CHAR)
 		env_buff[k++] = move_char(src);
 	env_buff[k] = '\0';
-	env_text = get_env(env_buff);
+	env_text = ft_strdup(get_env(env_buff));
 	my_free((void **) &env_buff);
 	if (k == 0)
-		env_text = "$";
+		env_text = ft_strdup("$");
 	return (env_text);
 }
 

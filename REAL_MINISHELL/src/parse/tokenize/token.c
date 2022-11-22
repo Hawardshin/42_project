@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 16:28:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/22 22:03:36 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_main_token	*tokenize(t_readline *src)
 		tmp->next = next;
 		if (!next)
 		{
-			main_tok->end_token = next;
+			main_tok->end_token = tmp;
 			break ;
 		}
 		next->bef = main_tok->end_token;
