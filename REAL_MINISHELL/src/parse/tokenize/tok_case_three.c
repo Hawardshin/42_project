@@ -94,11 +94,9 @@ char	*make_double_tok(t_readline *src)
 {
 	char	*tok_buff;
 	int		i;
-	int		k;
 	char	*env_text;
 
 	i = 0;
-	k = 0;
 	tok_buff = malloc(ft_all_len(src) + 1);
 	while ((token_case(see_char(src)) != D_QUOTES) && (see_char(src) != ENDOF))
 	{

@@ -86,9 +86,7 @@ char	*get_next_line(int fd)
 {
 	static char	*backup;
 	char		*ret_line;
-	int			i;
 
-	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	backup = ft_read_line(fd, backup);

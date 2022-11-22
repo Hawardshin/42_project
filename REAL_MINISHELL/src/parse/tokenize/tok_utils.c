@@ -18,18 +18,14 @@
 
 char	move_char(t_readline *src)
 {
-	char	c1;
 
 	if (!src || !src->buffer)
 	{
 		errno = ENODATA;
 		return (0);
 	}
-	c1 = 0;
 	if (src->now_pos == -2)
 		src->now_pos = -1;
-	else
-		c1 = src->buffer[src->now_pos];
 	if (++src->now_pos >= src->bufsize)
 	{
 		src->now_pos = src->bufsize;

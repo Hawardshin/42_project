@@ -20,9 +20,7 @@ int	ft_quote_len(t_readline *src)
 {
 	int		len;
 	int		i;
-	char	*tmp;
 
-	tmp = src->buffer;
 	len = 0;
 	i = src->now_pos;
 	if (i == -2)
