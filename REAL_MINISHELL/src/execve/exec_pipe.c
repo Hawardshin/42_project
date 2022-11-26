@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:14:16 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 19:59:31 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:52:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 //0이 read 1이 write
 // 전 파이프 0 1 다음 파이프 0 1
 // 전파이프 0 은 현재 input 다음파이프 1 output
-static void	exec_pipe_fd(int idx, t_main_node *px, int o_fd, int w_fd, t_node *node)
+
+static void	exec_pipe_fd(int idx, t_main_node *px, \
+							int o_fd, int w_fd, t_node *node)
 {
 	ft_all_close(px, idx, idx - 1);
 	close(px->pipefd[idx - 1][1]);
@@ -50,6 +52,7 @@ void	exec_pipe(int idx, t_main_node *px)
 	infile_init(node, &o_fd);
 	outfile_init(node, &w_fd);
 	exec_pipe_fd(idx, px, o_fd, w_fd, node);
+	signal(SIGQUIT, SIG_DFL);
 	if (node ->cmd && ft_built_check(node->cmd[0]))
 	{
 		ft_in_built(node, 0);

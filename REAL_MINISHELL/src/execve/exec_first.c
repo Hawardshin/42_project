@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:13:07 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:04:42 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:35:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ void	exec_first(t_main_node *px)
 	t_node	*node;
 
 	node = px->node_head;
+
 	infile_init(node, &o_fd);
 	outfile_init(node, &w_fd);
 	exec_first_fd(px, o_fd, w_fd, node);
+	ft_tc_on();
+	signal(SIGQUIT, SIG_DFL);
 	if (node ->cmd && ft_built_check(node->cmd[0]))
 	{
 		if (ft_built_first_check(node->cmd[0]) == 0 || px->cmd_num != 1)

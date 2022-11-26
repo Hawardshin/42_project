@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:49 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 13:15:44 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:35:38 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,41 @@
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-int	ft_dollar_len(t_readline *src)
+int	ft_dallar_len_utils(t_readline *src)
 {
+	int		i;
 	char	*env_buff;
 	int		len;
-	int		tmp;
-	int		i;
+
+	i = 0;
+	len = 0;
+	env_buff = malloc (ft_env_len(src) + 1);
+	if (!env_buff)
+		print_error(0, NULL);
+	while (token_case(see_char(src)) == DOLLAR)
+		env_buff[i++] = move_char(src);
+	if (see_char(src) == '?')
+	{
+		my_free((void **) &env_buff);
+		return (3);
+	}
+	while (token_case(see_char(src)) == CHAR)
+		env_buff[i++] = move_char(src);
+	env_buff[i] = '\0';
+	len += ft_strlen(get_env(env_buff));
+	my_free((void **) &env_buff);
+	return (len);
+}
+
+int	ft_dollar_len(t_readline *src)
+{
+	int	tmp;
+	int	len;
 
 	len = 0;
 	tmp = src->now_pos;
 	if (token_case(move_char(src)) == DOLLAR)
-	{
-		i = 0;
-		env_buff = malloc (ft_env_len(src) + 1);
-		if (!env_buff)
-			print_error(0, NULL);
-		while (token_case(see_char(src)) == DOLLAR)
-			env_buff[i++] = move_char(src);
-		if (see_char(src) == '?')
-			return (3);
-		while (token_case(see_char(src)) == CHAR)
-			env_buff[i++] = move_char(src);
-		env_buff[i] = '\0';
-		len += ft_strlen(get_env(env_buff));
-		my_free((void **) &env_buff);
-	}
+		len = ft_dallar_len_utils(src);
 	len++;
 	src->now_pos = tmp;
 	return (len);
@@ -107,6 +117,11 @@ t_token	*create_char_tok(t_readline *src)
 	while (token_case(see_char(src)) == CHAR)
 		tok->text[i++] = move_char(src);
 	tok->text[i] = '\0';
+	if (i == 1 && *(tok->text) == '~')
+	{
+		free(tok->text);
+		tok->text = ft_mstrdup(getenv("HOME"));
+	}
 	tok->tok_type = ARGV_TOK;
 	return (tok);
 }

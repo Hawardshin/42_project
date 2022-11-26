@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:52:43 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/23 20:17:37 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:28:50 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,6 @@
 #include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
-
-void	make_hdoc_node(t_node *node, t_token **tmp_tok)
-{
-	t_infile_node	*infile;
-	t_infile_node	*itmp;
-
-	infile = malloc(sizeof (t_infile_node));
-	if (!infile)
-		print_error(0, NULL);
-	ft_memset(infile, 0, sizeof(t_infile_node));
-	if ((node->infile_node) == NULL)
-		node->infile_node = infile;
-	else
-	{
-		itmp = node->infile_node;
-		while (itmp->next != NULL)
-			itmp = itmp->next;
-		itmp->next = infile;
-		infile->prev = itmp;
-	}
-	(*tmp_tok) = (*tmp_tok)->next;
-	infile->file = ft_mstrdup((*tmp_tok)->text);
-	infile->is_heardoc = 1;
-	if ((node->heardoc_node) == NULL)
-		node->heardoc_node = infile;
-	else
-	{
-		itmp = node->heardoc_node;
-		while (itmp->hnext != NULL)
-			itmp = itmp->hnext;
-		itmp->hnext = infile;
-		infile->hprev = itmp;
-	}
-}
 
 void	make_ifile_node(t_node *node, t_token **tmp_tok)
 {

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:27:31 by tson              #+#    #+#             */
-/*   Updated: 2022/11/25 22:12:00 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:41:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	sort_env(t_env_main_node *env)
 		j = 0;
 		while (j < i)
 		{
-			if (ft_strcmp(env_of_idx(*env, j)->key, env_of_idx(*env, j + 1)->key) > 0)
+			if (ft_strcmp(env_of_idx(*env, j)->key, \
+			env_of_idx(*env, j + 1)->key) > 0)
 				swap_env(*env, j, j + 1);
 			j++;
 		}
@@ -34,10 +35,10 @@ void	sort_env(t_env_main_node *env)
 	}
 }
 
-void    print_sorted_env(char *format)
+void	print_sorted_env(char *format)
 {
 	t_env			*p;
-	t_env_main_node env;
+	t_env_main_node	env;
 
 	env = env_dup(g_state.env_main_node);
 	sort_env(&env);
@@ -56,29 +57,29 @@ void    print_sorted_env(char *format)
 	free_all_env_main_node(&env);
 }
 
-void    print_normal_env(char *format)
+void	print_normal_env(char *format)
 {
-    t_env   *env;
+	t_env	*env;
 
-    env = g_state.env_main_node.head;
-    while (env)
-    {
+	env = g_state.env_main_node.head;
+	while (env)
+	{
 		if (env->value == NULL)
 		{
 			env = env->next;
 			continue ;
 		}
-        printf("%s%s=%s\n", format, env->key, env->value);
-        env = env->next;
-    }
+		printf("%s%s=%s\n", format, env->key, env->value);
+		env = env->next;
+	}
 }
 
-void    ft_env(int is_sort, char *format)
+void	ft_env(int is_sort, char *format)
 {
-    if (is_sort)
-    {
-        print_sorted_env(format);
-        return ;
-    }
-    print_normal_env(format);
+	if (is_sort)
+	{
+		print_sorted_env(format);
+		return ;
+	}
+	print_normal_env(format);
 }

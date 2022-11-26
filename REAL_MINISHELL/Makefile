@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 16:21:23 by joushin           #+#    #+#              #
-#    Updated: 2022/11/25 20:33:31 by joushin          ###   ########.fr        #
+#    Updated: 2022/11/26 17:24:44 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRCS =	$(SRC_DIR)/main.c					\
 		just_for_test.c						\
 		$(INIT_DIR)env.c					\
 		$(INIT_DIR)merge_env.c				\
+		$(INIT_DIR)env_utils.c				\
+		$(INIT_DIR)merge_env_utils.c		\
 		$(TOK_TO_NODE_DIR)check_syntax.c	\
 		$(TOK_TO_NODE_DIR)node.c			\
 		$(TOK_TO_NODE_DIR)node_case.c		\
@@ -45,6 +47,7 @@ SRCS =	$(SRC_DIR)/main.c					\
 		$(TOKEN_DIR)tok_optimize.c			\
 		$(TOKEN_DIR)tok_utils.c				\
 		$(TOKEN_DIR)token.c					\
+		$(TOKEN_DIR)tok_case_env_utils.c	\
 		$(UTILS_DIR)m_split.c				\
 		$(UTILS_DIR)error.c 				\
 		$(UTILS_DIR)utils.c					\

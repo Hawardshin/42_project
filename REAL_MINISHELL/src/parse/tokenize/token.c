@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:55:58 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:50:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ t_main_token	*main_tok_init(t_token *tmp)
 	return (main_tok);
 }
 
+t_main_token	*tok_error(t_main_token	*main_tok, t_token *tmp)
+{
+	main_tok -> is_error = 1;
+	tmp->next = NULL;
+	return (main_tok);
+}
+
 t_main_token	*tokenize(t_readline *src)
 {
 	t_main_token	*main_tok;
@@ -61,11 +68,7 @@ t_main_token	*tokenize(t_readline *src)
 	while (tmp)
 	{
 		if (tmp->tok_type == ERROR_TOK)
-		{
-			main_tok -> is_error = 1;
-			tmp->next = NULL;
-			return (main_tok);
-		}
+			return (tok_error(main_tok, tmp));
 		next = create_token(src);
 		tmp->next = next;
 		if (!next)
@@ -77,10 +80,8 @@ t_main_token	*tokenize(t_readline *src)
 		next->next = NULL;
 		main_tok->token_num++;
 		tmp = next;
-	}//여기까지가 모든 토큰을 다 만들어 주는것 //space까지
+	}
 	merge_argv_tok(main_tok);
-	// Print_all_token((main_tok->start_token));
 	delete_all_space_tok(main_tok);
-	// Print_all_token((main_tok->start_token));
 	return (main_tok);
 }

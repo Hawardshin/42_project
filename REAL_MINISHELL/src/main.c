@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:58:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:40:48 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include "../include/node.h"
 #include "../include/utils.h"
 #include "../include/just_for_test.h"//이건 테스트용
+#include <termios.h>
 
 void	handler(int signum)
 {
 	if (signum != SIGINT)
 		return ;
-	write(1, "\n", 1);
+	write(STDOUT_FILENO, "\n", 1);
 	if (rl_on_new_line() == -1)
 		exit(1);
 	rl_replace_line("", 1);
@@ -28,10 +29,27 @@ void	handler(int signum)
 
 void	init_rd_line(t_readline *src, char *rd_line)
 {
-	// g_state.exit_code = 0;
 	src->buffer = rd_line;
 	src->bufsize = ft_strlen(rd_line);
 	src->now_pos = -2;
+}
+
+void	ft_tc_on(void)
+{
+	struct termios	term;
+
+	tcgetattr(1, &term);
+	term.c_lflag |= (ECHOCTL);
+	tcsetattr(1, 0, &term);
+}
+
+void	ft_tc(void)
+{
+	struct termios	termios;
+
+	tcgetattr(STDIN_FILENO, &termios);
+	termios.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &termios);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -43,11 +61,13 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1)
 		print_error(1, argv[0]);
-	signal(SIGINT, handler);
 	init_g_state(envp);
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	while (1)
 	{
+		ft_tc();
+		signal(SIGINT, handler);
+		signal(SIGQUIT, SIG_IGN);
 		rd_line = readline("jshell$ ");
 		if (!rd_line)
 		{

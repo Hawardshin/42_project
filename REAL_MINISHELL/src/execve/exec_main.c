@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:35:18 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:12:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:27:39 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	fork_child(t_main_node *px)
 		pid = mfork();
 		if (pid == 0)
 		{
+			signal(SIGINT, SIG_DFL);
 			if (i == 0)
 				exec_first(px);
 			else if (i + 1 == px->cmd_num)

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:15:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 19:59:14 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:27:51 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	exec_last(t_main_node *px)
 	infile_init(node, &o_fd);
 	outfile_init(node, &w_fd);
 	exec_last_fd(px, o_fd, w_fd);
+	signal(SIGQUIT, SIG_DFL);
 	if (node ->cmd && ft_built_check(node->cmd[0]))
 	{
 		ft_in_built(node, 0);

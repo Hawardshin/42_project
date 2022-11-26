@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:50:00 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/23 20:22:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:43:25 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-void	merge_two_tok(t_token *front, t_token *back)
+char	*merge_tok_utils(t_token *front, t_token *back)
 {
 	char	*buff;
 	int		i;
@@ -36,10 +36,17 @@ void	merge_two_tok(t_token *front, t_token *back)
 		buff[i++] = back->text[j++];
 	buff[i] = '\0';
 	my_free((void **)&front->text);
-	front->text = buff;
 	if (i == 0)
 		i++;
 	front->text_len = i;
+	return (buff);
+
+}
+
+void	merge_two_tok(t_token *front, t_token *back)
+{
+	front->text = merge_tok_utils(front, back);
+
 	front->next = back->next;
 	my_free((void **)&back->text);
 	my_free((void **)&back);

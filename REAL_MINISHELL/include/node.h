@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 13:21:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:23:26 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct	s_readline
 
 t_state	g_state;
 /*token_fuction*/
+
 t_main_token	*tokenize(t_readline *src);
 char			see_char(t_readline *src);//보기만 함.
 char			move_char(t_readline *src); //움직이기까지 함.
@@ -170,6 +171,7 @@ t_token			*create_redirect_tok(t_readline *src);
 t_token			*create_char_tok(t_readline *src);
 void			merge_argv_tok(t_main_token *tok);
 void			delete_all_space_tok(t_main_token *tok);
+int				ft_dallar_len_utils(t_readline *src);
 /*env */
 t_env			*search_env(char *key);
 void			connect_two_node(t_env *front, t_env *back);
@@ -204,4 +206,7 @@ int				fork_child(t_main_node *px);
 void			ft_all_close(t_main_node *px, int idx, int bef);
 t_node			*mlst_find(int idx, t_main_node *data);
 
+int				ft_all_len(t_readline *src);
+void			init_rd_line(t_readline *src, char *rd_line);
+void			ft_tc_on(void);
 #endif
