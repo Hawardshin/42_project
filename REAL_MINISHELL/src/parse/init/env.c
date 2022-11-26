@@ -6,16 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:13:50 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 17:21:43 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:39:45 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/node.h"
-#include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-// 전역변수의 환경변수 주소값을 리턴해준다.
 char	*get_env(char *key)
 {
 	t_env	*e_node;
@@ -31,24 +29,7 @@ char	*get_env(char *key)
 	return (NULL);
 }
 
-t_env	*get_env_of_idx(int idx)
-{
-	t_env	*ret;
-	int		i;
-
-	ret = g_state.env_main_node.head;
-	i = 0;
-	while (ret)
-	{
-		if (i == idx)
-			break ;
-		ret = ret->next;
-		i++;
-	}
-	return (ret);
-}
-
-void	make_key_value(int i, char **envp)
+static void	make_key_value(int i, char **envp)
 {
 	char	*key;
 	char	*value;

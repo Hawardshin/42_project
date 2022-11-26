@@ -6,17 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 17:01:47 by tson              #+#    #+#             */
-/*   Updated: 2022/11/25 21:21:08 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:21:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/node.h"
-#include "../../include/just_for_test.h"
 #include "../../include/utils.h"
 #include "../libft/libft.h"
 #include "../../include/builtin.h"
 
-char	*set_key(char *str)
+static char	*set_key(char *str)
 {
 	int		equal_idx;
 	char	*ret;
@@ -35,7 +33,7 @@ char	*set_key(char *str)
 	return (ret);
 }
 
-char	*set_value(char *str)
+static char	*set_value(char *str)
 {
 	int		equal_idx;
 	char	*ret;
@@ -49,7 +47,7 @@ char	*set_value(char *str)
 	return (ret);
 }
 
-void	input_env(char *str)
+static void	input_env(char *str)
 {
 	char	*key;
 	char	*value;

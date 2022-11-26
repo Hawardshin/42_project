@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:47:51 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 20:59:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:13:42 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,12 @@ static void	move_if_charset(char **str, char c)
 		(*str)++;
 }
 
-char	**ft_msplit(char *str, char c)
+static void	div_result(char *str, char **result, char c)
 {
-	char		**result;
-	char		*tmp;
 	long long	i;
 	long long	k;
 
 	i = 0;
-	tmp = str;
-	if (!str)
-		print_error(0, NULL);
-	result = (char **)malloc(sizeof(char *) * (len_count(str, c) + 1));
-	if (!result)
-		print_error(0, NULL);
-	move_if_charset(&str, c);
 	while (*str)
 	{
 		k = 0;
@@ -79,6 +70,21 @@ char	**ft_msplit(char *str, char c)
 		move_if_charset(&str, c);
 	}
 	result[i] = 0;
+}
+
+char	**ft_msplit(char *str, char c)
+{
+	char		**result;
+	char		*tmp;
+
+	tmp = str;
+	if (!str)
+		print_error(0, NULL);
+	result = (char **)malloc(sizeof(char *) * (len_count(str, c) + 1));
+	if (!result)
+		print_error(0, NULL);
+	move_if_charset(&str, c);
+	div_result(str, result, c);
 	my_free((void **)&tmp);
 	return (result);
 }

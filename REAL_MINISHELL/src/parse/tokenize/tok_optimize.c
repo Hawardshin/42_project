@@ -6,17 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:50:00 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 16:43:25 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:02:28 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/node.h"
-#include "../../../include/node.h"
-#include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-char	*merge_tok_utils(t_token *front, t_token *back)
+static char	*merge_tok_utils(t_token *front, t_token *back)
 {
 	char	*buff;
 	int		i;
@@ -43,7 +41,7 @@ char	*merge_tok_utils(t_token *front, t_token *back)
 
 }
 
-void	merge_two_tok(t_token *front, t_token *back)
+static void	merge_two_tok(t_token *front, t_token *back)
 {
 	front->text = merge_tok_utils(front, back);
 

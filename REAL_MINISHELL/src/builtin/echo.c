@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tson <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:33:09 by tson              #+#    #+#             */
-/*   Updated: 2022/11/23 16:47:20 by tson             ###   ########.fr       */
+/*   Updated: 2022/11/26 19:16:00 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/node.h"
-#include "../../include/just_for_test.h"
 #include "../../include/utils.h"
 #include "../libft/libft.h"
 #include "../../include/builtin.h"

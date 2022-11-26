@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:15:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 15:27:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:23:44 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "../../include/exec.h"
 #include "../../include/builtin.h"
 
-//cmd->num -2에서 0만을 사용.
 static void	exec_last_fd(t_main_node *px, int o_fd, int w_fd)
 {
 	ft_all_close(px, (px->cmd_num) - 2, -1);

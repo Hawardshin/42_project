@@ -6,17 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:12:35 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 16:38:04 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:46:43 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/node.h"
-#include "../../../include/node.h"
-#include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-void	tok_buff_init(t_readline *src, char **tok_buff, t_token *tok)
+static void	tok_buff_init(t_readline *src, char **tok_buff, t_token *tok)
 {
 	char	*env_text;
 	int		flag;
@@ -43,7 +41,7 @@ void	tok_buff_init(t_readline *src, char **tok_buff, t_token *tok)
 		tok->tok_type = DELETE_TOK;
 }
 
-char	*make_double_tok(t_readline *src, t_token *tok)
+static char	*make_double_tok(t_readline *src, t_token *tok)
 {
 	char	*tok_buff;
 

@@ -6,17 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 16:50:32 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:04:19 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/node.h"
-#include "../../../include/node.h"
-#include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-t_token	*create_token(t_readline *src)
+static t_token	*create_token(t_readline *src)
 {
 	if (token_case(see_char(src)) == QUOTES)
 		return (create_quotes(src));
@@ -37,7 +35,7 @@ t_token	*create_token(t_readline *src)
 	return (NULL);
 }
 
-t_main_token	*main_tok_init(t_token *tmp)
+static t_main_token	*main_tok_init(t_token *tmp)
 {
 	t_main_token	*main_tok;
 
@@ -50,7 +48,7 @@ t_main_token	*main_tok_init(t_token *tmp)
 	return (main_tok);
 }
 
-t_main_token	*tok_error(t_main_token	*main_tok, t_token *tmp)
+static t_main_token	*tok_error(t_main_token	*main_tok, t_token *tmp)
 {
 	main_tok -> is_error = 1;
 	tmp->next = NULL;

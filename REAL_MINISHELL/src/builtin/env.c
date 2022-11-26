@@ -6,16 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:27:31 by tson              #+#    #+#             */
-/*   Updated: 2022/11/26 15:41:57 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:18:39 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/node.h"
-#include "../../include/just_for_test.h"
 #include "../../include/utils.h"
 #include "../libft/libft.h"
 
-void	sort_env(t_env_main_node *env)
+static void	sort_env(t_env_main_node *env)
 {
 	int	i;
 	int	j;
@@ -35,7 +34,7 @@ void	sort_env(t_env_main_node *env)
 	}
 }
 
-void	print_sorted_env(char *format)
+static void	print_sorted_env(char *format)
 {
 	t_env			*p;
 	t_env_main_node	env;
@@ -57,7 +56,7 @@ void	print_sorted_env(char *format)
 	free_all_env_main_node(&env);
 }
 
-void	print_normal_env(char *format)
+static void	print_normal_env(char *format)
 {
 	t_env	*env;
 

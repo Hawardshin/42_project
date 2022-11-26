@@ -6,17 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:22:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 15:59:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:41:37 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/node.h"
-#include "../../../include/node.h"
-#include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-t_env	*make_new_env(char *key, char *value)
+static t_env	*make_new_env(char *key, char *value)
 {
 	t_env	*ret;
 
@@ -38,7 +36,7 @@ t_env	*make_new_env(char *key, char *value)
 	return (ret);
 }
 
-void	lst_add_back_main_node(t_env_main_node *main_node, t_env *new_env)
+static void	lst_add_back_main_node(t_env_main_node *main_node, t_env *new_env)
 {
 	t_env	*last_env;
 

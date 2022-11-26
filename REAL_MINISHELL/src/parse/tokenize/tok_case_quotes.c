@@ -6,17 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:19:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:54:11 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:01:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/node.h"
-#include "../../../include/node.h"
-#include "../../../include/just_for_test.h"
 #include "../../../include/utils.h"
 #include "../../libft/libft.h"
 
-int	ft_quote_len(t_readline *src)
+static int	ft_quote_len(t_readline *src)
 {
 	int		len;
 	int		i;

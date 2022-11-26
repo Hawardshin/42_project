@@ -6,12 +6,25 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:47:46 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 13:35:54 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:14:49 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
 #include "../../include/node.h"
+
+static void	path_pipe_free(t_main_node *px)
+{
+	int	i;
+
+	i = 0;
+	while (px->path && px->path[i])
+		my_free((void **)&(px->path[i++]));
+	my_free((void **)&(px->path));
+	i = 0;
+	while (i < px->cmd_num - 1)
+		free((void **)px->pipefd[i++]);
+}
 
 void	ft_end_free(t_main_node *px)
 {
@@ -35,13 +48,7 @@ void	ft_end_free(t_main_node *px)
 		if (tmp)
 			my_free((void **)&tmp);
 	}
-	i = 0;
-	while (px->path && px->path[i])
-		my_free((void **)&(px->path[i++]));
-	my_free((void **)&(px->path));
-	i = 0;
-	while (i < px->cmd_num - 1)
-		free((void **)px->pipefd[i++]);
+	path_pipe_free(px);
 }
 
 void	tok_clean(t_main_token	*mtok)

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:56:32 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 17:21:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:39:12 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,21 @@
 #include "../../libft/libft.h"
 #include "../../../include/utils.h"
 
-int	check_key(char *key, char *value)
+static t_env	*search_env(char *key)
+{
+	t_env	*ret;
+
+	ret = g_state.env_main_node.head;
+	while (ret)
+	{
+		if (ft_strcmp(key, ret->key) == 0)
+			break ;
+		ret = ret->next;
+	}
+	return (ret);
+}
+
+static int	check_key(char *key, char *value)
 {
 	if (key == NULL)
 	{
@@ -32,7 +46,6 @@ int	check_key(char *key, char *value)
 	return (0);
 }
 
-// 문자열을 동적할당해서 들어온다고 가정.
 void	env_lst_add_back(char *key, char *value)
 {
 	t_env	*node;
@@ -55,20 +68,6 @@ void	env_lst_add_back(char *key, char *value)
 	else
 		g_state.env_main_node.head = node;
 	g_state.env_main_node.tail = node;
-}
-
-t_env	*search_env(char *key)
-{
-	t_env	*ret;
-
-	ret = g_state.env_main_node.head;
-	while (ret)
-	{
-		if (ft_strcmp(key, ret->key) == 0)
-			break ;
-		ret = ret->next;
-	}
-	return (ret);
 }
 
 void	connect_two_node(t_env *front, t_env *back)

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:14:16 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 15:52:52 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:34:55 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 #include "../../include/utils.h"
 #include "../../include/exec.h"
 #include "../../include/builtin.h"
-#include "../libft/libft.h"
 
-//0이 read 1이 write
-// 전 파이프 0 1 다음 파이프 0 1
-// 전파이프 0 은 현재 input 다음파이프 1 output
+static void	exec_pipe_wfd(int idx, t_main_node *px, int w_fd, t_node *node)
+{
+	if (node->outfile_node == NULL && px->cmd_num != 1)
+		w_fd = px->pipefd[idx][1];
+	if ((w_fd != 1) && dup2(w_fd, 1) == -1)
+		print_error(2, NULL);
+	close(px->pipefd[idx][1]);
+}
 
-static void	exec_pipe_fd(int idx, t_main_node *px, \
-							int o_fd, int w_fd, t_node *node)
+static void	exec_pipe_ofd(int idx, t_main_node *px, int o_fd)
 {
 	ft_all_close(px, idx, idx - 1);
 	close(px->pipefd[idx - 1][1]);
@@ -33,11 +36,6 @@ static void	exec_pipe_fd(int idx, t_main_node *px, \
 	close(px->pipefd[idx - 1][0]);
 	if (o_fd != px->pipefd[idx - 1][0])
 		close(o_fd);
-	if (node->outfile_node == NULL && px->cmd_num != 1)
-		w_fd = px->pipefd[idx][1];
-	if ((w_fd != 1) && dup2(w_fd, 1) == -1)
-		print_error(2, NULL);
-	close(px->pipefd[idx][1]);
 }
 
 void	exec_pipe(int idx, t_main_node *px)
@@ -51,7 +49,8 @@ void	exec_pipe(int idx, t_main_node *px)
 		return ;
 	infile_init(node, &o_fd);
 	outfile_init(node, &w_fd);
-	exec_pipe_fd(idx, px, o_fd, w_fd, node);
+	exec_pipe_wfd(idx, px, o_fd, node);
+	exec_pipe_ofd(idx, px, o_fd);
 	signal(SIGQUIT, SIG_DFL);
 	if (node ->cmd && ft_built_check(node->cmd[0]))
 	{

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:10:03 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 18:44:42 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:45:49 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	exec_heardoc(int *o_fd, t_infile_node *px)
 	tmp = get_next_line(0);
 	while (1)
 	{
-		if (ft_strncmp(tmp, px->file, ft_strlen(px->file)) == 0 \
-		&& ft_strlen(px->file) + 1 == ft_strlen(tmp))
+		if (!tmp || (ft_strncmp(tmp, px->file, ft_strlen(px->file)) == 0 \
+		&& ft_strlen(px->file) + 1 == ft_strlen(tmp)))
 			break ;
 		i = 0;
 		write(1, "> ", 2);

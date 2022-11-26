@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/26 17:23:26 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:41:45 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,20 +173,16 @@ void			merge_argv_tok(t_main_token *tok);
 void			delete_all_space_tok(t_main_token *tok);
 int				ft_dallar_len_utils(t_readline *src);
 /*env */
-t_env			*search_env(char *key);
 void			connect_two_node(t_env *front, t_env *back);
 void			env_lst_delete(char *key);
 void			env_lst_add_back(char *key, char *value);
 void			init_g_state(char **envp);
 char			*get_env(char *key);
-t_env			*get_env_of_idx(int idx);
 int				check_syntax(t_token *start_tok);
 t_env			*env_of_idx(t_env_main_node main_node, int idx);
 void			free_all_env_main_node(t_env_main_node *main_node);
 void			swap_env(t_env_main_node main_node, int idx1, int idx2);
 char			*make_env_text(t_readline *src);
-t_env			*make_new_env(char *key, char *value);
-void			lst_add_back_main_node(t_env_main_node *main_node, t_env *new_env);
 t_env_main_node	env_dup(t_env_main_node env);
 /*node_fuction*/
 t_main_node		*make_tok_to_node(t_main_token *tok);
