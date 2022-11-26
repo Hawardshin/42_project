@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:14:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/22 22:03:36 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:55:58 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_main_token	*main_tok_init(t_token *tmp)
 
 	main_tok = malloc(sizeof(t_main_node));
 	if (!main_tok)
-		return (NULL);
+		print_error(0, NULL);
 	ft_memset(main_tok, 0, sizeof(t_main_node));
 	main_tok->start_token = tmp;
 	main_tok->end_token = tmp;
@@ -60,6 +60,12 @@ t_main_token	*tokenize(t_readline *src)
 	main_tok = main_tok_init(tmp);
 	while (tmp)
 	{
+		if (tmp->tok_type == ERROR_TOK)
+		{
+			main_tok -> is_error = 1;
+			tmp->next = NULL;
+			return (main_tok);
+		}
 		next = create_token(src);
 		tmp->next = next;
 		if (!next)

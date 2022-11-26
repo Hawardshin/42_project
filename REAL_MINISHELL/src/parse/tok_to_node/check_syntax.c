@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:33:29 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 21:16:21 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/24 14:59:23 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_syntax(t_token *start_tok)
 		if (tok->tok_type == PIPE_TOK)
 		{
 			if (tok->bef == NULL || tok->next == NULL \
-		|| tok->bef->tok_type != ARGV_TOK || tok->next->tok_type != ARGV_TOK)
+		|| tok->bef->tok_type == PIPE_TOK || tok->next->tok_type == PIPE_TOK)
 			{
 				g_state.exit_code = 258;
 				return (1);

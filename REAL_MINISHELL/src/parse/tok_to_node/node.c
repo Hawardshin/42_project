@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:18:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 18:05:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:33:02 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	make_argv_node(t_node *node, t_token **tmp_tok, t_main_node *main_node)
 	t_token	*ttmp;
 
 	i = 0;
+	ttmp = (*tmp_tok);
 	node->cmd_path[0] = find_path((*tmp_tok)->text, main_node);
 	ttmp = (*tmp_tok);
 	while (ttmp && ttmp->tok_type == ARGV_TOK)
@@ -47,10 +48,12 @@ void	make_argv_node(t_node *node, t_token **tmp_tok, t_main_node *main_node)
 		ttmp = ttmp->next;
 	}
 	node ->cmd = malloc(sizeof (char *) * (i + 1));
+	if (!(node->cmd))
+		print_error(0, NULL);
 	i = 0;
 	while ((*tmp_tok) && (*tmp_tok)->tok_type == ARGV_TOK)
 	{
-		node->cmd[i] = ft_strdup((*tmp_tok)->text);
+		node->cmd[i] = ft_mstrdup((*tmp_tok)->text);
 		i++;
 		(*tmp_tok) = (*tmp_tok)->next;
 	}
@@ -79,7 +82,7 @@ t_main_node	*make_tok_to_node(t_main_token *tok)
 	main_node = main_init(&tok, &tmp_tok, &node);
 	while (tmp_tok)
 	{
-		if (tmp_tok-> tok_type == ARGV_TOK)
+		if (tmp_tok-> tok_type == ARGV_TOK && (tmp_tok->tok_type) != DELETE_TOK)
 			make_argv_node(node, &tmp_tok, main_node);
 		else if (tmp_tok-> tok_type == IO_TOK)
 			io_noding(&tmp_tok, node);

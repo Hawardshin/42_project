@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:19:34 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 20:59:17 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/24 17:21:06 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 #include "../../include/just_for_test.h"
 #include "../../include/utils.h"
 #include "../libft/libft.h"
+
+int	ft_strcmp(char *str1, char *str2)
+{
+	int	i;
+
+	i = 0;
+	while (!(str1[i] == '\0' || str2[i] == '\0'))
+	{
+		if (str1[i] != str2[i])
+			break ;
+		i++;
+	}
+	return (str1[i] - str2[i]);
+}
 
 void	my_free(void **to_free)
 {
@@ -70,6 +84,7 @@ pid_t	mfork(void)
 	rpid = fork();
 	if (rpid == -1)
 	{
+		g_state.exit_code = 1;
 		perror("fork error ");
 		exit(1);
 	}

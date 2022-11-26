@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tok_case_two.c                                     :+:      :+:    :+:   */
+/*   tok_case_char_dollar.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:49 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/22 22:12:58 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:15:44 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_dollar_len(t_readline *src)
 	{
 		i = 0;
 		env_buff = malloc (ft_env_len(src) + 1);
+		if (!env_buff)
+			print_error(0, NULL);
 		while (token_case(see_char(src)) == DOLLAR)
 			env_buff[i++] = move_char(src);
 		if (see_char(src) == '?')
@@ -53,19 +55,21 @@ t_token	*create_dollar_tok(t_readline *src)
 
 	i = 0;
 	tok = malloc(sizeof(t_token));
+	if (!tok)
+		print_error(0, NULL);
 	ft_memset(tok, 0, sizeof(t_token));
 	tok_buff = malloc(ft_dollar_len(src) + 1);
+	if (!tok_buff)
+		print_error(0, NULL);
 	env_text = make_env_text(src);
 	while (env_text && *env_text)
 		tok_buff[i++] = *env_text++;
-	tok_buff[i] = '\0';
-	// while (env_text && *env_text)
-	// 	tok_buff[i++] = *env_text++;
-	// tok_buff[i] = '\0';
-	i++;
+	tok_buff[i++] = '\0';
 	tok->text = tok_buff;
 	tok->text_len = i;
 	tok->tok_type = ARGV_TOK;
+	if (*tok_buff == '\0')
+		tok->tok_type = DELETE_TOK;
 	return (tok);
 }
 
@@ -93,14 +97,15 @@ t_token	*create_char_tok(t_readline *src)
 
 	i = 0;
 	tok = malloc(sizeof(t_token));
+	if (!tok)
+		print_error(0, NULL);
 	len = char_tok_len(src);
 	tok->text = malloc (len + 1);
+	if (!tok->text)
+		print_error(0, NULL);
 	tok->text_len = len;
 	while (token_case(see_char(src)) == CHAR)
-	{
-		tok->text[i] = move_char(src);
-		i++;
-	}
+		tok->text[i++] = move_char(src);
 	tok->text[i] = '\0';
 	tok->tok_type = ARGV_TOK;
 	return (tok);

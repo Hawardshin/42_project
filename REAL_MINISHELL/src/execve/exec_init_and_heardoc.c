@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:10:03 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 17:29:17 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/25 18:44:42 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../include/exec.h"
 #include "../libft/libft.h"
 
-static void	exec_heardoc(int *o_fd, t_infile_node *px, int idx)
+static void	exec_heardoc(int *o_fd, t_infile_node *px)
 {
 	char	*tmp;
 	int		len;
@@ -25,12 +25,7 @@ static void	exec_heardoc(int *o_fd, t_infile_node *px, int idx)
 	*o_fd = open (".tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (*o_fd == -1)
 		print_error(2, px->file);
-	while (i < idx)
-	{
-		write(1, "pipe ", 5);
-		i++;
-	}
-	write(1, "heredoc> ", 9);
+	write(1, "> ", 2);
 	tmp = get_next_line(0);
 	while (1)
 	{
@@ -38,12 +33,7 @@ static void	exec_heardoc(int *o_fd, t_infile_node *px, int idx)
 		&& ft_strlen(px->file) + 1 == ft_strlen(tmp))
 			break ;
 		i = 0;
-		while (i < idx)
-		{
-			write(1, "pipe ", 5);
-			i++;
-		}
-		write(1, "heredoc> ", 9);
+		write(1, "> ", 2);
 		len = (int)ft_strlen(tmp);
 		write (*o_fd, tmp, len);
 		my_free ((void **)&tmp);
@@ -87,7 +77,7 @@ void	infile_init(t_node *node, int *o_fd)
 	flag = 0;
 	while (inode != NULL)
 	{
-		exec_heardoc(o_fd, inode, 0);
+		exec_heardoc(o_fd, inode);
 		if (inode ->hnext == NULL)
 			break ;
 		inode = inode->hnext;

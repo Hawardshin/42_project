@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 20:47:56 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/25 20:28:11 by joushin          ###   ########.fr       */
+/*   Created: 2022/11/23 16:23:04 by tson              #+#    #+#             */
+/*   Updated: 2022/11/25 22:06:53 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,34 @@
 #include "../../include/utils.h"
 #include "../libft/libft.h"
 
-void	print_error(int Flag, char *s)
+int	cmd_len(char **cmd)
 {
-	unlink(".tmp");
-	g_state.exit_code = 1;
-	ft_putstr_fd("minishell: ", 2);
-	if (Flag == 0)
-	{
-		ft_putstr_fd("Memory allocation fails.\n", 2);
-		exit(1);
-	}
-	else if (Flag == 1)
-	{
-		g_state.exit_code = 127;
-		ft_eprintf("%s: command not found\n", s);
-		exit(127);
-	}
-	else if (Flag == 2)
-	{
-		perror(s);
-		exit(1);
-	}
-	else if (Flag == 3)
-	{
-		ft_eprintf("%s\n", s);
-		exit(1);
-	}
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+		i++;
+	return (i);
 }
 
-void	syntax_error(void)
+void	ft_cd(char **cmd, int flag)
 {
-	ft_eprintf("minishell: syntax error near unexpected token\n");
-	g_state.exit_code = 258;
+	if (cmd_len(cmd) == 1)
+	{
+		chdir(get_env("HOME"));
+		return ;
+	}
+	if (chdir(cmd[1]) == -1)
+	{
+		if (flag)
+		{
+			ft_eprintf("minishell: cd: %s: No such file or directory\n", cmd[1]);
+			g_state.exit_code = -1;
+		}
+		else
+		{
+			ft_eprintf("minishell: cd: %s: No such file or directory\n", cmd[1]);
+			exit (1);
+		}
+	}
 }

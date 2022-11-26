@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:20:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/17 12:21:25 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/23 20:23:05 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*ft_get_line(char **str)
 	l = check_new_line(*str);
 	ret_line = (char *)malloc(sizeof(char) * (l +1));
 	if (!ret_line)
-		return (NULL);
+		print_error(0, NULL);
 	while (i < l)
 	{
 		ret_line[i] = *(*str + i);

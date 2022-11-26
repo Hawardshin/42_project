@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tok_case_four.c                                    :+:      :+:    :+:   */
+/*   tok_case_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:19:45 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 21:20:07 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:54:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,20 @@ t_token	*create_quotes(t_readline *src)
 	i = 0;
 	move_char(src);
 	tok = malloc(sizeof(t_token));
+	if (!tok)
+		print_error(0, NULL);
 	len = ft_quote_len(src);
 	tok->text = malloc(sizeof(char) * (len + 1));
+	if (!(tok->text))
+		print_error(0, NULL);
 	tok->text_len = len;
 	while (token_case(see_char(src)) != QUOTES && see_char(src) != ENDOF)
-	{
-		tok->text[i] = move_char(src);
-		i++;
-	}
+		tok->text[i++] = move_char(src);
 	tok->text[i] = '\0';
+	tok->tok_type = ARGV_TOK;
 	if (see_char(src) == ENDOF)
-		g_state.exit_code = 258;
+		tok->tok_type = ERROR_TOK;
 	else
 		move_char(src);
-	tok->tok_type = ARGV_TOK;
 	return (tok);
 }

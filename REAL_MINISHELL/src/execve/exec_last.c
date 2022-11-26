@@ -6,13 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:15:04 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 17:57:27 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:59:14 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/node.h"
 #include "../../include/utils.h"
 #include "../../include/exec.h"
+#include "../../include/builtin.h"
 
 //cmd->num -2에서 0만을 사용.
 static void	exec_last_fd(t_main_node *px, int o_fd, int w_fd)
@@ -40,7 +41,14 @@ void	exec_last(t_main_node *px)
 	infile_init(node, &o_fd);
 	outfile_init(node, &w_fd);
 	exec_last_fd(px, o_fd, w_fd);
-	if (node->cmd_path[0] != NULL)
-		execve(node->cmd_path[0], (node->cmd), px->ev);
-	print_error(1, node->cmd[0]);
+	if (node ->cmd && ft_built_check(node->cmd[0]))
+	{
+		ft_in_built(node, 0);
+		exit(0);
+	}
+	else if (node->cmd_path[0] != NULL)
+		execve(node->cmd_path[0], (node->cmd), ret_env_char());
+	if (node != NULL && node->cmd != NULL)
+		print_error(1, node->cmd[0]);
+	exit(0);
 }

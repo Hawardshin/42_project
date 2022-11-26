@@ -6,13 +6,15 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:14:16 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 17:57:01 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:59:31 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/node.h"
 #include "../../include/utils.h"
 #include "../../include/exec.h"
+#include "../../include/builtin.h"
+#include "../libft/libft.h"
 
 //0이 read 1이 write
 // 전 파이프 0 1 다음 파이프 0 1
@@ -42,13 +44,20 @@ void	exec_pipe(int idx, t_main_node *px)
 	int		w_fd;
 	t_node	*node;
 
-	node = mlst_find(idx, px);
+	node = mlst_find(idx + 1, px);
 	if (node == NULL)
 		return ;
 	infile_init(node, &o_fd);
 	outfile_init(node, &w_fd);
 	exec_pipe_fd(idx, px, o_fd, w_fd, node);
-	if (node->cmd_path[0] != NULL)
-		execve(node->cmd_path[0], node->cmd, px->ev);
-	print_error(1, node->cmd[0]);
+	if (node ->cmd && ft_built_check(node->cmd[0]))
+	{
+		ft_in_built(node, 0);
+		exit(0);
+	}
+	else if (node->cmd_path[0] != NULL)
+		execve(node->cmd_path[0], node->cmd, ret_env_char());
+	if (node != NULL && node->cmd != NULL)
+		print_error(1, node->cmd[0]);
+	exit(0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tson <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 12:42:42 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/23 21:51:12 by joushin          ###   ########.fr       */
+/*   Created: 2022/11/23 16:33:09 by tson              #+#    #+#             */
+/*   Updated: 2022/11/23 16:47:20 by tson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,29 @@
 #include "../../include/just_for_test.h"
 #include "../../include/utils.h"
 #include "../libft/libft.h"
+#include "../../include/builtin.h"
 
-void	ft_all_close(t_main_node *px, int idx, int bef)
+void	ft_echo(char **cmd)
 {
-	int	i;
+	int		i;
+	char	newline[2];
 
-	i = 0;
-	while (i < px->cmd_num)
+	if (cmd_len(cmd) == 1)
+		return ;
+	i = 1;
+	newline[0] = '\n';
+	newline[1] = '\0';
+	if (ft_strcmp(cmd[1], "-n") == 0)
 	{
-		if (i != idx && i != bef)
-		{
-			close(px->pipefd[i][0]);
-			close(px->pipefd[i][1]);
-		}
+		i = 2;
+		newline[0] = '\0';
+	}
+	while (i < cmd_len(cmd))
+	{
+		printf("%s", cmd[i]);
 		i++;
+		if (i != cmd_len(cmd))
+			printf(" ");
 	}
-}
-
-t_node	*mlst_find(int idx, t_main_node *data)
-{
-	t_node	*node;
-
-	node = data->node_head;
-	while (node)
-	{
-		if (node->idx == idx)
-			return (node);
-		node = node ->next;
-	}
-	return (NULL);
+	printf("%s", newline);
 }

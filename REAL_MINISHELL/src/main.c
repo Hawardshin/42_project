@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:29:05 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/22 22:13:43 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:58:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int argc, char **argv, char **envp)
 	t_main_node		*node;
 
 	if (argc != 1)
-		return (0);
-	(void) argv;
+		print_error(1, argv[0]);
 	signal(SIGINT, handler);
 	init_g_state(envp);
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -69,22 +68,21 @@ int	main(int argc, char **argv, char **envp)
 		init_rd_line(&src, rd_line);
 		tok = tokenize(&src);
 		// Print_all_token(tok->start_token);
-		if (check_syntax(tok->start_token))
+		if ((tok->is_error == 1) || check_syntax(tok->start_token))
 		{
 			my_free((void **)&rd_line);
 			rd_line = NULL;
 			syntax_error();
-			//tok_clean()
+			tok_clean(tok);
 			continue ;
 		}
 		if (tok->start_token != NULL)
 		{
 			node = make_tok_to_node(tok);
-			node->ev = envp;
-			// fork_child(node);
+			tok_clean(tok);
+			node->ev = ret_env_char();
 			g_state.exit_code = fork_child(node);
 		}
-		//tok_clean();
 		add_history(rd_line);
 	}
 	return (0);

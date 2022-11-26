@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:34:09 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/19 18:04:05 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:21:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ typedef enum e_outfile_type
 
 typedef enum e_tok_type
 {
-	IO_TOK,
+	IO_TOK = 10,
 	ARGV_TOK,
 	PIPE_TOK,
 	SPACE_TOK,
+	ERROR_TOK,
+	DELETE_TOK,
 }	t_toke_type;
 
 typedef struct s_infile_node
@@ -114,6 +116,7 @@ typedef struct s_main_token
 	t_token	*start_token;
 	t_token	*end_token;
 	int		token_num;
+	int		is_error;
 }	t_main_token;
 
 /*env*/
@@ -129,6 +132,7 @@ typedef struct s_env_main_node
 {
 	t_env	*head;
 	t_env	*tail;
+	int		count;
 }	t_env_main_node;
 
 typedef struct s_state
@@ -167,11 +171,21 @@ t_token			*create_char_tok(t_readline *src);
 void			merge_argv_tok(t_main_token *tok);
 void			delete_all_space_tok(t_main_token *tok);
 /*env */
+t_env			*search_env(char *key);
+void			connect_two_node(t_env *front, t_env *back);
+void			env_lst_delete(char *key);
+void			env_lst_add_back(char *key, char *value);
 void			init_g_state(char **envp);
 char			*get_env(char *key);
+t_env			*get_env_of_idx(int idx);
 int				check_syntax(t_token *start_tok);
+t_env			*env_of_idx(t_env_main_node main_node, int idx);
+void			free_all_env_main_node(t_env_main_node *main_node);
+void			swap_env(t_env_main_node main_node, int idx1, int idx2);
 char			*make_env_text(t_readline *src);
-
+t_env			*make_new_env(char *key, char *value);
+void			lst_add_back_main_node(t_env_main_node *main_node, t_env *new_env);
+t_env_main_node	env_dup(t_env_main_node env);
 /*node_fuction*/
 t_main_node		*make_tok_to_node(t_main_token *tok);
 char			*find_path(char *text, t_main_node *main_node);

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:50:00 by joushin           #+#    #+#             */
-/*   Updated: 2022/11/16 20:50:28 by joushin          ###   ########.fr       */
+/*   Updated: 2022/11/23 20:22:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	merge_two_tok(t_token *front, t_token *back)
 	i = 0;
 	j = 0;
 	buff = malloc (front->text_len + back->text_len + 1);
+	if (!buff)
+		print_error(0, NULL);
 	while (front -> text[i])
 	{
 		buff[i] = front -> text[i];
