@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"utils.h": "c",
+		"node.h": "c",
+		"__node_handle": "c",
+		"just_for_test.h": "c",
+		"libft.h": "c",
+		"_pthread_attr_t.h": "c",
+		"__debug": "c",
+		"builtin.h": "c",
+		"__locale": "c",
+		"sstream": "c"
+	}
+}
