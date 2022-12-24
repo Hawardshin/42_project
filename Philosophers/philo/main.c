@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:20:38 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/24 16:56:39 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/24 22:47:20 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ int	get_time(t_init_data *data)
 	long			sec;
 	int				usec;
 
-	pthread_mutex_lock(data->time_mutex);
 	gettimeofday(&now_time, NULL);
 	sec = now_time.tv_sec;
 	usec = now_time.tv_usec;
-	pthread_mutex_unlock(data->time_mutex);
 	return ((sec - data->tv_sec) * 1000 + ((usec - data->tv_usec) / 1000));
 }
 
@@ -47,22 +45,19 @@ void	*philo_main(void *param)
 		eating(each_philo);
 		putdown_fork(each_philo);
 		sleeping(each_philo);
-		print_thinking(get_time(data), each_philo->id);
+		print_thinking(data, each_philo->id);
 	}
 	return (NULL);
 }
 
 int	init_input(int argc, char **argv, t_init_data *data)
 {
-	struct timeval	startTime;
+
 
 	data->num_of_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	gettimeofday(&startTime, NULL);
-	data->tv_sec = startTime.tv_sec;
-	data->tv_usec = startTime.tv_usec;
 	if (argc == 5)
 		data->must_eat = -1;
 	else
@@ -83,9 +78,7 @@ int	start_init(int argc, char **argv, t_init_data *data)
 	data->shared_fork = malloc(sizeof(char) * data->num_of_philo);
 	data->fork_mutex = malloc(sizeof(pthread_mutex_t *) * data->num_of_philo);
 	data->time_mutex = malloc (sizeof(pthread_mutex_t));
-	data->last_eat_mutex = malloc (sizeof(pthread_mutex_t));
 	pthread_mutex_init(data->time_mutex, NULL);
-	pthread_mutex_init(data->last_eat_mutex, NULL);
 	while (i < data->num_of_philo)
 	{
 		data->fork_mutex[i] = malloc (sizeof (pthread_mutex_t));
@@ -97,19 +90,37 @@ int	start_init(int argc, char **argv, t_init_data *data)
 
 void	sitdown(t_init_data *data, t_each_philo *philo, pthread_t *philo_arr)
 {
-	int	i;
+	int				i;
+	struct timeval	startTime;
 
 	i = 0;
+	gettimeofday(&startTime, NULL);
+	data->tv_sec = startTime.tv_sec;
+	data->tv_usec = startTime.tv_usec;
 	while (i < data->num_of_philo)
 	{
 		philo[i].init_data = data;
 		philo[i].id = i + 1;
 		philo[i].last_eat = get_time(data);
 		philo[i].eat_count = 0;
+		pthread_mutex_init(&philo[i].last_eat_mutex, NULL);
 		pthread_create(&(philo_arr[i]), NULL, philo_main, (void *) &philo[i]);
 		pthread_detach(philo_arr[i]);
 		i++;
 	}
+}
+
+void	clean(t_init_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philo)
+	{
+		pthread_mutex_destroy(data->fork_mutex[i]);
+		i++;
+	}
+	pthread_mutex_destroy(data->time_mutex);
 }
 
 int	main(int argc, char **argv)
@@ -132,5 +143,5 @@ int	main(int argc, char **argv)
 	}
 	sitdown(data, each_philo, philo_arr);
 	monitoring(data, each_philo);
-
+	clean(data);
 }

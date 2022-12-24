@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 18:08:00 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/24 16:58:27 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/24 21:28:51 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,19 @@ void	take_fork(t_each_philo *philo)
 	data = philo->init_data;
 	pthread_mutex_lock(data->fork_mutex[philo->id - 1]);
 	data->shared_fork[philo->id - 1] = 1;
-	print_taken_a_fork(get_time(data), philo->id);
+	print_taken_a_fork(data, philo->id);
 	pthread_mutex_lock(data->fork_mutex[philo->id % data->num_of_philo]);
 	data->shared_fork[philo->id % data->num_of_philo] = 1;
-	print_taken_a_fork(get_time(data), philo->id);
+	print_taken_a_fork(data, philo->id);
 }
 
 void	eating(t_each_philo *philo)
 {
 	t_init_data	*data;
-	int			time;
 
 	data = philo->init_data;
-	time = get_time(data);
-	pthread_mutex_lock(data->last_eat_mutex);
-	philo->last_eat = time;
-	pthread_mutex_unlock(data->last_eat_mutex);
-	print_eating(time, philo->id);
+	print_eating(data, philo);
 	msleep(data->time_to_eat);
-
 }
 
 void	putdown_fork(t_each_philo *philo)
@@ -54,6 +48,6 @@ void	putdown_fork(t_each_philo *philo)
 
 void	sleeping(t_each_philo *philo)
 {
-	print_sleeping(get_time(philo->init_data), philo->id);
+	print_sleeping(philo->init_data, philo->id);
 	msleep(philo->init_data->time_to_sleep);
 }
