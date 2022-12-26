@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:31:47 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/26 19:17:30 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/26 20:11:23 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,24 @@ int	get_time(t_init_data *data)
 	return ((sec - data->tv_sec) * 1000 + ((usec - data->tv_usec) / 1000));
 }
 
-void	clean(t_init_data *data)
+void	clean(t_each_philo *each_philo, t_init_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		pthread_mutex_destroy(data->fork_mutex[i]);
+		pthread_mutex_destroy(&(each_philo[i].last_eat_mutex));
+		pthread_mutex_destroy(&(each_philo[i].is_full_mutex));
 		i++;
 	}
+	while (i < data->num_of_philo)
+	{
+		pthread_mutex_destroy(data->fork_mutex[i]);
+		free(&data->fork_mutex[i]);
+		i++;
+	}
+	free(data->fork_mutex);
 	pthread_mutex_destroy(data->time_mutex);
+	free(data->time_mutex);
 }

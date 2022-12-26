@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:20:38 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/26 19:17:47 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/26 19:36:26 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	sitdown(t_init_data *data, t_each_philo *philo, pthread_t *philo_arr)
 	{
 		philo[i].init_data = data;
 		philo[i].id = i + 1;
-		philo[i].last_eat = get_time(data);
 		philo[i].eat_count = 0;
+		philo[i].last_eat = 0;
 		pthread_mutex_init(&philo[i].last_eat_mutex, NULL);
 		pthread_mutex_init(&philo[i].is_full_mutex, NULL);
 		i++;
@@ -131,5 +131,5 @@ int	main(int argc, char **argv)
 	}
 	sitdown(data, each_philo, philo_arr);
 	monitoring(data, each_philo);
-	// clean(data);
+	clean(each_philo, data);
 }

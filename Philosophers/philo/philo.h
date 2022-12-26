@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:45:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/26 17:47:35 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/26 19:24:24 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	print_died(t_init_data *data, int philo_num);
 int		get_time(t_init_data *data);
 void	monitoring(t_init_data *data, t_each_philo *each_philo);
 void	msleep(int time);
-void	clean(t_init_data *data);
+
+void	clean(t_each_philo *each_philo, t_init_data *data);
 
 #endif
