@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:45:01 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/26 11:44:43 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/26 17:47:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_each_philo
 	int				id;
 	int				eat_count;
 	pthread_mutex_t	last_eat_mutex;
+	pthread_mutex_t	is_full_mutex;
 	t_init_data		*init_data;
 }t_each_philo;
 

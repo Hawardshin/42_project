@@ -6,12 +6,12 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 11:05:58 by joushin           #+#    #+#              #
-#    Updated: 2022/12/26 11:36:59 by joushin          ###   ########.fr        #
+#    Updated: 2022/12/26 19:19:58 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 INC = -I include
 
 NAME = philo
@@ -44,5 +44,5 @@ re:
 	make fclean
 	make all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 

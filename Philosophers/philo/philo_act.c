@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 18:08:00 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/24 21:28:51 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/26 19:14:07 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	putdown_fork(t_each_philo *philo)
 	data = philo->init_data;
 	philo->eat_count++;
 	data->shared_fork[philo->id % data->num_of_philo] = 0;
-	pthread_mutex_unlock(data->fork_mutex[philo->id % data->num_of_philo]);
 	data->shared_fork[philo->id - 1] = 0;
+	pthread_mutex_unlock(data->fork_mutex[philo->id % data->num_of_philo]);
 	pthread_mutex_unlock(data->fork_mutex[philo->id - 1]);
 }
 
