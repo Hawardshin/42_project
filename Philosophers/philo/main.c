@@ -6,27 +6,11 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:20:38 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/24 22:47:20 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/26 12:03:47 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// 죽어야 하는 시간이 0인 경우 바로 죽이기.
-//먹는 시간이 0인 경우는 의미 없음
-// 반드시 먹어야하는게 0이라면 바로 종료 할 수 있도록 코드 짜기. 기본 init 은 -1로 처리
-
-int	get_time(t_init_data *data)
-{
-	struct timeval	now_time;
-	long			sec;
-	int				usec;
-
-	gettimeofday(&now_time, NULL);
-	sec = now_time.tv_sec;
-	usec = now_time.tv_usec;
-	return ((sec - data->tv_sec) * 1000 + ((usec - data->tv_usec) / 1000));
-}
 
 void	*philo_main(void *param)
 {
@@ -52,8 +36,6 @@ void	*philo_main(void *param)
 
 int	init_input(int argc, char **argv, t_init_data *data)
 {
-
-
 	data->num_of_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
@@ -90,13 +72,13 @@ int	start_init(int argc, char **argv, t_init_data *data)
 
 void	sitdown(t_init_data *data, t_each_philo *philo, pthread_t *philo_arr)
 {
-	int				i;
-	struct timeval	startTime;
+	int					i;
+	struct timeval		start_time;
 
 	i = 0;
-	gettimeofday(&startTime, NULL);
-	data->tv_sec = startTime.tv_sec;
-	data->tv_usec = startTime.tv_usec;
+	gettimeofday(&start_time, NULL);
+	data->tv_sec = start_time.tv_sec;
+	data->tv_usec = start_time.tv_usec;
 	while (i < data->num_of_philo)
 	{
 		philo[i].init_data = data;
@@ -104,44 +86,35 @@ void	sitdown(t_init_data *data, t_each_philo *philo, pthread_t *philo_arr)
 		philo[i].last_eat = get_time(data);
 		philo[i].eat_count = 0;
 		pthread_mutex_init(&philo[i].last_eat_mutex, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < data->num_of_philo)
+	{
 		pthread_create(&(philo_arr[i]), NULL, philo_main, (void *) &philo[i]);
 		pthread_detach(philo_arr[i]);
 		i++;
 	}
 }
 
-void	clean(t_init_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->num_of_philo)
-	{
-		pthread_mutex_destroy(data->fork_mutex[i]);
-		i++;
-	}
-	pthread_mutex_destroy(data->time_mutex);
-}
-
 int	main(int argc, char **argv)
 {
-	t_init_data		*data;
+	t_init_data		data;
 	t_each_philo	*each_philo;
 	pthread_t		*philo_arr;
 
-	data = malloc (sizeof (t_init_data));
-	memset(data, 0, sizeof (t_init_data));
-	if ((argc != 5 && argc != 6) || start_init(argc, argv, data))
+	memset(&data, 0, sizeof (t_init_data));
+	if ((argc != 5 && argc != 6) || start_init(argc, argv, &data))
 		return (1);
-	philo_arr = malloc (sizeof(pthread_t) * (data->num_of_philo));
-	each_philo = malloc (sizeof(t_each_philo) * (data->num_of_philo));
+	philo_arr = malloc (sizeof(pthread_t) * (data.num_of_philo));
+	each_philo = malloc (sizeof(t_each_philo) * (data.num_of_philo));
 	if (!philo_arr || !each_philo)
 	{
 		free(philo_arr);
 		free(each_philo);
 		return (1);
 	}
-	sitdown(data, each_philo, philo_arr);
-	monitoring(data, each_philo);
-	clean(data);
+	sitdown(&data, each_philo, philo_arr);
+	monitoring(&data, each_philo);
+	clean(&data);
 }
