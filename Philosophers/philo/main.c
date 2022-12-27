@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:20:38 by joushin           #+#    #+#             */
-/*   Updated: 2022/12/26 20:32:12 by joushin          ###   ########.fr       */
+/*   Updated: 2022/12/27 12:33:11 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	main(int argc, char **argv)
 	pthread_t		*philo_arr;
 
 	data = malloc(sizeof (t_init_data));
+	if (!data)
+		return (1);
 	memset(data, 0, sizeof (t_init_data));
 	if ((argc != 5 && argc != 6) || start_init(argc, argv, data))
 		return (1);
