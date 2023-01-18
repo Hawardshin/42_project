@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:05:43 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/18 18:30:27 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/18 21:52:14 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	init_map(t_game *g)
 	i = 0;
 	g->dir_x = 0;
 	g->dir_y = 0;
-	g->angle = 0;
 	g->x = -1;
 	g->y = -1;
 	while (i < g->high)
@@ -108,25 +107,29 @@ void	init_map(t_game *g)
 				{
 					g->dir_x = 0;
 					g->dir_y = 1;
-					g->angle = 90;
+					g->plane_x = VIEW_ANGLE * 1;
+					g->plane_y = 0;
 				}
 				else if (g->map[i][j] == 'S')
 				{
 					g->dir_x = 0;
 					g->dir_y = -1;
-					g->angle = 270;
+					g->plane_x = VIEW_ANGLE * -1;
+					g->plane_y = 0;
 				}
 				else if (g->map[i][j] == 'E')
 				{
 					g->dir_x = 1;
 					g->dir_y = 0;
-					g->angle = 0;
+					g->plane_x = 0;
+					g->plane_y = VIEW_ANGLE * 1;
 				}
 				else ////W
 				{
 					g->dir_x = -1;
 					g->dir_y = 0;
-					g->angle = 180;
+					g->plane_x = 0;
+					g->plane_y = VIEW_ANGLE * -1;
 				}
 			}
 			j++;
@@ -148,9 +151,6 @@ void	img_init(t_game *game)
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }
 
-double	y_direct(t_game *game,double angle);
-double	x_direct(t_game *game,double angle);
-void	draw_razer(t_game *game, double x1, double y1, double x2, double y2);
 
 int main(int argc, char ** argv)
 {
