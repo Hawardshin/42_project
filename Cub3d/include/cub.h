@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/18 14:24:34 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/18 18:21:34 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 # include "../srcs/libft/libft.h"
 # include "../mlx/mlx.h"
 # define X_EVENT_KEY_PRESS		2
@@ -30,6 +31,20 @@
 //변화 상수
 # define ROTATE_N				1
 # define PI						3.1415926
+
+# define TILE_SIZE 64
+
+
+typedef struct	s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+}t_img;
+
 typedef struct s_game
 {
 	void	*mlx;
@@ -47,16 +62,20 @@ typedef struct s_game
 	// dir_x = ROTATE_N * sin(angle * PI / 180) *dir_x - ROTATE_N * cos(angle * PI / 180) * dir_y
 	// dir_y = 2ay
 	// dir_y = 2 * dir_y * ROTATE_N * sin(angle * PI / 180)
-	int		dir_x;
-	int		dir_y;
+	double		dir_x;
+	double		dir_y;
 	//혹시 몰라서 현재 방향 각도 변수까지 줬다. 내가 이해하기 쉬우려고!
-	int		angle;
+	double		angle;
 	//지도의 높이
 	int		high;
 	//지도
 	int		width;
 	char	**map;
+	// 찍을 이미지
+	t_img img;
 }t_game;
+
+
 
 typedef struct s_fdata
 {
@@ -70,8 +89,19 @@ typedef struct s_fdata
 } t_fdata;
 
 
+typedef enum e_map_type
+{
+	PLAYER,
+	WALL,
+	EMPTY,
+	ERROR,
+}t_map_type;
+
+t_map_type check_type(char a);
+
 void	error_handle(char *s);
 char	*ft_strjoin_no_nl(char *dest, char *src);
 char	*ft_strdup_no_nl(char *str);
-
+void 	draw_lines(t_game *game);
+void	draw_rectangles(t_game *game);
 #endif

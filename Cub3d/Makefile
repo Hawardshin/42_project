@@ -6,7 +6,7 @@
 #    By: joushin <joushin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 12:44:37 by joushin           #+#    #+#              #
-#    Updated: 2023/01/16 15:30:57 by joushin          ###   ########.fr        #
+#    Updated: 2023/01/18 14:55:07 by joushin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS_DIR = srcs
 RM= rm -rf
 
 SRCS =  $(SRCS_DIR)/main.c \
-		$(SRCS_DIR)/utils.c
+		$(SRCS_DIR)/utils.c \
+		$(SRCS_DIR)/draw_map.c
 
 OBJS = $(SRCS:.c=.o)
 
