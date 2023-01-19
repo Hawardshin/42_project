@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:05:43 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 17:52:35 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 18:01:10 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,6 @@ void	draw_clear(t_game *game)
 
 int		main_loop(t_game *game)
 {
-	// draw_rectangles(game);
-	// draw_lines(game);
 	draw_clear(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	ray_casting(game);
@@ -172,9 +170,6 @@ void	img_init(t_game *game)
 	game->img.img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }
-
-
-
 
 int main(int argc, char ** argv)
 {
@@ -191,12 +186,7 @@ int main(int argc, char ** argv)
 	WINDOW_WIDTH ,WINDOW_HEIGHT, "./cub3d");
 	//이미지 파싱하기
 	img_init(&data);
-	// printf("x: %f, y: %f\n",x_direct(&data,45),y_direct(&data,45) );
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 0, &key_press, &data);
-	// mlx_hook(data.win, KEY_W, 0, &move_w, &data);
-	// mlx_hook(data.win, KEY_S, 0, &move_s, &data);
-	// mlx_hook(data.win, KEY_A, 0, &rotate_left, &data);
-	// mlx_hook(data.win, KEY_D, 0, &rotate_right, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 0, &exit_game, &data);
 	mlx_loop_hook(data.mlx, &main_loop, &data);
 	mlx_loop(data.mlx);

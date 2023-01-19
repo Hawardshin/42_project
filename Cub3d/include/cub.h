@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 17:25:28 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 18:03:26 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@
 # define RGB_White 0xFFFFFF
 # define RGB_Yellow 0xFFF000
 # define RGB_BLACK 0x000000
+
 # define ROTATE_SPEED 0.05
 # define MOVE_SPEED 0.05
+
 typedef struct	s_img
 {
 	void	*img;
