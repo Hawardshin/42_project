@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/18 21:54:19 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 15:51:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,23 @@
 # define ROTATE_N				1
 # define PI						3.1415926
 
-# define TILE_SIZE 64
 //1 의 경우 시야각 90도
 //시야각을 나타내는데 작아질 수록 시야가 작아진다. 스크린 사이즈의 절반의 길이를 의미
 //이건 시야각이 90도보단 작은 경우이다.
 //정확히 계산하자면 FOV = 2 * atan(0.66/1.0)=66.8°로 1인칭 슈팅게임(fps)에 적합함
 # define VIEW_ANGLE 0.66
 
+//화면 비율 16: 9 비율 준수
+# define WINDOW_MAGNI 100
+# define WINDOW_HEIGHT (WINDOW_MAGNI * 9)
+# define WINDOW_WIDTH  (WINDOW_MAGNI * 16)
+
+# define RGB_Red 0xFF0000
+# define RGB_Green 0x00FF00
+# define RGB_Blue 0x0000FF
+# define RGB_White 0xFFFFFF
+# define RGB_Yellow 0xFFF000
+# define RGB_BLACK 0x000000
 
 typedef struct	s_img
 {
@@ -64,8 +74,8 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	// 현재 위치
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 	//현재 방향벡터
 	double		dir_x;
 	double		dir_y;
@@ -105,6 +115,11 @@ t_map_type check_type(char a);
 void	error_handle(char *s);
 char	*ft_strjoin_no_nl(char *dest, char *src);
 char	*ft_strdup_no_nl(char *str);
-void 	draw_lines(t_game *game);
-void	draw_rectangles(t_game *game);
+// void 	draw_lines(t_game *game);
+// void	draw_rectangles(t_game *game);
+void	ray_casting(t_game *game);
+int	key_press(int keycode, t_game *param);
+int	exit_game(t_game *data);
+
+
 #endif

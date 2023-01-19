@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:05:43 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/18 21:52:14 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 15:55:13 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,14 @@ void	init_map(t_game *g)
 				{
 					g->dir_x = 0;
 					g->dir_y = 1;
-					g->plane_x = VIEW_ANGLE * 1;
+					g->plane_x = (VIEW_ANGLE * 1);
 					g->plane_y = 0;
 				}
 				else if (g->map[i][j] == 'S')
 				{
 					g->dir_x = 0;
 					g->dir_y = -1;
-					g->plane_x = VIEW_ANGLE * -1;
+					g->plane_x = (VIEW_ANGLE * -1);
 					g->plane_y = 0;
 				}
 				else if (g->map[i][j] == 'E')
@@ -122,14 +122,14 @@ void	init_map(t_game *g)
 					g->dir_x = 1;
 					g->dir_y = 0;
 					g->plane_x = 0;
-					g->plane_y = VIEW_ANGLE * 1;
+					g->plane_y = (VIEW_ANGLE * 1);
 				}
 				else ////W
 				{
 					g->dir_x = -1;
 					g->dir_y = 0;
 					g->plane_x = 0;
-					g->plane_y = VIEW_ANGLE * -1;
+					g->plane_y = (VIEW_ANGLE * -1);
 				}
 			}
 			j++;
@@ -138,18 +138,41 @@ void	init_map(t_game *g)
 	}
 }
 
+void	draw_clear(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i=0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			game->img.data[i * WINDOW_WIDTH + j] = RGB_BLACK;
+			j++;
+		}
+		i++;
+	}
+}
+
 int		main_loop(t_game *game)
 {
-	draw_rectangles(game);
-	draw_lines(game);
+	// draw_rectangles(game);
+	// draw_lines(game);
+	draw_clear(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
+	ray_casting(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
 void	img_init(t_game *game)
 {
-	game->img.img = mlx_new_image(game->mlx, game->width * TILE_SIZE, game->high * TILE_SIZE);
+	game->img.img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }
+
+
 
 
 int main(int argc, char ** argv)
@@ -164,13 +187,12 @@ int main(int argc, char ** argv)
 	if (!data.mlx)
 		error_handle("can't open new window\n");
 	data.win = mlx_new_window(data.mlx, \
-	(data.width * TILE_SIZE) , (data.high * TILE_SIZE), "./cub3d");
+	WINDOW_WIDTH ,WINDOW_HEIGHT, "./cub3d");
 	//이미지 파싱하기
-
 	img_init(&data);
 	// printf("x: %f, y: %f\n",x_direct(&data,45),y_direct(&data,45) );
-	// mlx_hook(data.win, X_EVENT_KEY_RELEASE, 0, &key_press, &data);
-	// mlx_hook(data.win, X_EVENT_KEY_EXIT, 0, &exit_game, &data);
+	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 0, &key_press, &data);
+	mlx_hook(data.win, X_EVENT_KEY_EXIT, 0, &exit_game, &data);
 	mlx_loop_hook(data.mlx, &main_loop, &data);
 	mlx_loop(data.mlx);
 }
