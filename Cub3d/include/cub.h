@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 15:51:32 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:25:28 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define KEY_S					1
 # define KEY_D					2
 //변화 상수
-# define ROTATE_N				1
+# define ROTATE_N				0.3
 # define PI						3.1415926
 
 //1 의 경우 시야각 90도
@@ -49,7 +49,8 @@
 # define RGB_White 0xFFFFFF
 # define RGB_Yellow 0xFFF000
 # define RGB_BLACK 0x000000
-
+# define ROTATE_SPEED 0.05
+# define MOVE_SPEED 0.05
 typedef struct	s_img
 {
 	void	*img;
@@ -74,8 +75,8 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	// 현재 위치
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 	//현재 방향벡터
 	double		dir_x;
 	double		dir_y;
@@ -87,13 +88,12 @@ typedef struct s_game
 	//지도
 	int		width;
 	char	**map;
-	// 찍을 이미지
+	// 화면에 찍을 이미지
 	t_img img;
 }t_game;
 
 typedef struct s_fdata
 {
-
 	void	*wall;
 	void	*land;
 	void	*play;
@@ -121,5 +121,9 @@ void	ray_casting(t_game *game);
 int	key_press(int keycode, t_game *param);
 int	exit_game(t_game *data);
 
+// int	rotate_right(t_game *data);
+// int	rotate_left(t_game *data);
+// int	move_s(t_game *data);
+// int	move_w(t_game *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:05:43 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 15:55:13 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:52:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,19 @@ void	init_map(t_game *g)
 					error_handle("ONLY ONE PLAYER CAN PLAY\n");
 				g->x = j;
 				g->y = i;
+				g->map[i][j] = '0';
 				if (g->map[i][j] == 'N')
 				{
 					g->dir_x = 0;
-					g->dir_y = 1;
-					g->plane_x = (VIEW_ANGLE * 1);
+					g->dir_y = -1;
+					g->plane_x = (VIEW_ANGLE * -1);
 					g->plane_y = 0;
 				}
 				else if (g->map[i][j] == 'S')
 				{
 					g->dir_x = 0;
-					g->dir_y = -1;
-					g->plane_x = (VIEW_ANGLE * -1);
+					g->dir_y = 1;
+					g->plane_x = (VIEW_ANGLE * 1);
 					g->plane_y = 0;
 				}
 				else if (g->map[i][j] == 'E')
@@ -191,7 +192,11 @@ int main(int argc, char ** argv)
 	//이미지 파싱하기
 	img_init(&data);
 	// printf("x: %f, y: %f\n",x_direct(&data,45),y_direct(&data,45) );
-	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 0, &key_press, &data);
+	mlx_hook(data.win, X_EVENT_KEY_PRESS, 0, &key_press, &data);
+	// mlx_hook(data.win, KEY_W, 0, &move_w, &data);
+	// mlx_hook(data.win, KEY_S, 0, &move_s, &data);
+	// mlx_hook(data.win, KEY_A, 0, &rotate_left, &data);
+	// mlx_hook(data.win, KEY_D, 0, &rotate_right, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 0, &exit_game, &data);
 	mlx_loop_hook(data.mlx, &main_loop, &data);
 	mlx_loop(data.mlx);

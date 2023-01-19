@@ -6,14 +6,14 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:43:54 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 15:11:23 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:46:57 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 // draw_line(game, 0, j * TILE_SIZE, game->width * TILE_SIZE, j * TILE_SIZE);
-void	draw_line(t_game *game, int image_idx, double start, double end, int color)
+void	draw_longitude_line(t_game *game, int image_idx, double start, double end, int color)
 {
 
 	while (start < end)
@@ -149,7 +149,7 @@ void	ray_casting(t_game *game)
 	int color;
 	if (game->map[mapY][mapX] == '1')
 	{
-		color = RGB_Red;
+		color = RGB_Green;
 	}
 	// else
 	// {
@@ -159,7 +159,7 @@ void	ray_casting(t_game *game)
 	//give x and y sides different brightness
 	if (side == 1)
 		color = color/2;
-	draw_line(game, line, drawStart,drawEnd,color);
+	draw_longitude_line(game, line, drawStart,drawEnd,color);
 	line++;
 	}
 }
