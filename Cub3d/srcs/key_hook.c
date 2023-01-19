@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:14:48 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 17:53:23 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 19:40:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,45 +25,31 @@ void	move_w(t_game *data)
 {
 	if (data->y < 0)
 		return ;
-	// if (data->map[data->y-1][data->x] != '0')
-	// 	return ;
 	if(data->map[(int)data->y][(int)(data->x + data->dir_x * MOVE_SPEED)] == '0')
 		data->x += data->dir_x * MOVE_SPEED;
 	if(data->map[(int)(data->y + data->dir_y * MOVE_SPEED)][(int)data->x]== '0')
 		data->y += data->dir_y * MOVE_SPEED;
-	// data->map[data->y][data->x] = '0';
-	// data->y--;
-	// data->map[data->y][data->x] = 'P';
-	// img_set(*data);
 }
 
 void	move_s(t_game *data)
 {
 	if (data->y + 1 > data->high)
 		return ;
-	// if (data->map[data->y+1][data->x] != '0')
-	// 	return ;
 	if(data->map[(int)(data->y)][(int)(data->x - data->dir_x * MOVE_SPEED)] == '0')
 		data->x -= data->dir_x * MOVE_SPEED;
 	if(data->map[(int)(data->y - data->dir_y * MOVE_SPEED)][(int)(data->x)] == '0')
 		data->y -= data->dir_y * MOVE_SPEED;
-	// data->map[data->y][data->x] = '0';
-	// data->y++;
-	// data->map[data->y][data->x] = 'P';
-	// img_set(*data);
 }
 
-// void	move_a(t_game *data)
-// {
-// 	if (data->x < 1)
-// 		return ;
-// 	if (data->map[data->y][data->x - 1] != '0')
-// 		return ;
-// 	data->map[data->y][data->x] = '0';
-// 	data->x--;
-// 	data->map[data->y][data->x] = 'P';
-// 	// img_set(*data);
-// }
+void	move_a(t_game *data)
+{
+	if (data->x < 1)
+		return ;
+	if(data->map[(int)(data->y)][(int)(data->x - data->dir_x * MOVE_SPEED)] == '0')
+		data->x -= data->dir_x * MOVE_SPEED;
+	// if(data->map[(int)(data->y - data->dir_y * MOVE_SPEED)][(int)(data->x)] == '0')
+	// 	data->y -= data->dir_y * MOVE_SPEED;
+}
 
 // void	move_d(t_game *data)
 // {
@@ -79,20 +65,26 @@ void	move_s(t_game *data)
 
 void	rotate_left(t_game *data)
 {
-	double oldDirX = data->dir_x;
+	double oldDirX;
+	double oldPlaneX;
+
+	oldDirX = data->dir_x;
+	oldPlaneX = data->plane_x;
 	data->dir_x = data->dir_x * cos(-ROTATE_SPEED) - data->dir_y * sin(-ROTATE_SPEED);
 	data->dir_y = oldDirX * sin(-ROTATE_SPEED) + data->dir_y * cos(-ROTATE_SPEED);
-	double oldPlaneX = data->plane_x;
 	data->plane_x = data->plane_x * cos(-ROTATE_SPEED) - data->plane_y * sin(-ROTATE_SPEED);
 	data->plane_y = oldPlaneX * sin(-ROTATE_SPEED) + data->plane_y * cos(-ROTATE_SPEED);
 }
 
 void	rotate_right(t_game *data)
 {
-	double oldDirX = data->dir_x;
+	double oldDirX;
+	double oldPlaneX;
+
+	oldDirX = data->dir_x;
+	oldPlaneX = data->plane_x;
 	data->dir_x = data->dir_x * cos(ROTATE_SPEED) - data->dir_y * sin(ROTATE_SPEED);
 	data->dir_y = oldDirX * sin(ROTATE_SPEED) + data->dir_y * cos(ROTATE_SPEED);
-	double oldPlaneX = data->plane_x;
 	data->plane_x = data->plane_x * cos(ROTATE_SPEED) - data->plane_y * sin(ROTATE_SPEED);
 	data->plane_y = oldPlaneX * sin(ROTATE_SPEED) + data->plane_y * cos(ROTATE_SPEED);
 }
