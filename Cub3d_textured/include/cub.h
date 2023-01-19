@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 18:03:26 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 22:21:40 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,18 @@ typedef struct	s_img
 	int		endian;
 }t_img;
 
+typedef struct s_fdata
+{
+	char	*no_path;
+	char	*so_path;
+	char	*ea_path;
+	char	*we_path;
+	void	*n_wall;
+	void	*s_wall;
+	void	*e_wall;
+	void	*w_wall;
+} t_fdata;
+
 // a = (변화상수 sin(각도 변수 * 파이 /180) ,
 // a = ROTATE_N * sin(angle * PI / 180);
 // b = 변화상수cos(각도변수 * 파이 /180))
@@ -92,17 +104,10 @@ typedef struct s_game
 	char	**map;
 	// 화면에 찍을 이미지
 	t_img img;
+	t_fdata asset;
 }t_game;
 
-typedef struct s_fdata
-{
-	void	*wall;
-	void	*land;
-	void	*play;
-	void	*chest;
-	void	*chest_open;
-	void	*out;
-} t_fdata;
+
 
 typedef enum e_map_type
 {

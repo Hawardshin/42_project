@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:43:54 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 17:46:57 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/19 22:10:10 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	ray_casting(t_game *game)
 	int	line;
 
 	line =0;
-	//line이 곧 스크린의 한줄씩을 의미한다.
-	while (line < WINDOW_WIDTH)
+	//이번에는 이전에 스크린에 세로로 줄 하나씩 찍는 방법을 사용할 수 없다.
+	// while (line < WINDOW_WIDTH)
+	while (!done())
 	{
 		//루프 한번 당, 레이저 하나씩 쏴서 그 값을 이용해 거리를 보는것이다.
 
