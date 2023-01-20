@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:05:43 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 22:44:26 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:41:43 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,19 +176,18 @@ int main(int argc, char ** argv)
 {
 	t_game	data;
 	file_chk(argc, argv);
-	parse_image_rgb(argv[1],&data);
+
 	map_parse(argv[1],&data);//일단은 다른 것 말고 지도만 있다고 생각하고 지도만 받을 것
 	//맵 체크 해주고 map_check();
 	print_map(&data);
 	init_map(&data);//여기서 예외 처리랑 다른 것들을 처리한다.
-
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		error_handle("can't open new window\n");
 	//이미지 파싱하기
+	parse_image_rgb(argv[1],&data);
 	data.win = mlx_new_window(data.mlx, \
 	WINDOW_WIDTH ,WINDOW_HEIGHT, "./cub3d");
-
 
 	img_init(&data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 0, &key_press, &data);

@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/19 22:21:40 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:25:35 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define WINDOW_MAGNI 100
 # define WINDOW_HEIGHT (WINDOW_MAGNI * 9)
 # define WINDOW_WIDTH  (WINDOW_MAGNI * 16)
+// #define WINDOW_WIDTH 64
+// #define WINDOW_HEIGHT 64
 
 # define RGB_Red 0xFF0000
 # define RGB_Green 0x00FF00
@@ -52,6 +54,9 @@
 
 # define ROTATE_SPEED 0.05
 # define MOVE_SPEED 0.05
+
+# define XPM_WIDTH 64
+# define XPM_HEIGHT 64
 
 typedef struct	s_img
 {
@@ -64,14 +69,19 @@ typedef struct	s_img
 
 typedef struct s_fdata
 {
+	t_img	no_img;
+	t_img	so_img;
+	t_img	ea_img;
+	t_img	we_img;
+
 	char	*no_path;
 	char	*so_path;
 	char	*ea_path;
 	char	*we_path;
-	void	*n_wall;
-	void	*s_wall;
-	void	*e_wall;
-	void	*w_wall;
+	// void	*n_wall;
+	// void	*s_wall;
+	// void	*e_wall;
+	// void	*w_wall;
 } t_fdata;
 
 // a = (변화상수 sin(각도 변수 * 파이 /180) ,
@@ -104,10 +114,9 @@ typedef struct s_game
 	char	**map;
 	// 화면에 찍을 이미지
 	t_img img;
+	//화면에 넣을 데이터
 	t_fdata asset;
 }t_game;
-
-
 
 typedef enum e_map_type
 {
@@ -127,7 +136,7 @@ char	*ft_strdup_no_nl(char *str);
 void	ray_casting(t_game *game);
 int	key_press(int keycode, t_game *param);
 int	exit_game(t_game *data);
-
+void	parse_image_rgb(void *mlx, t_game *data);
 // int	rotate_right(t_game *data);
 // int	rotate_left(t_game *data);
 // int	move_s(t_game *data);
