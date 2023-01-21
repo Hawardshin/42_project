@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:43:54 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/20 16:21:12 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/21 13:19:30 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ray_casting(t_game *game)
 
 	line =0;
 	//이번에는 이전에 스크린에 세로로 줄 하나씩 찍는 방법을 사용할 수 없다.
-	int buffer[WINDOW_HEIGHT][WINDOW_WIDTH];
+	// int buffer[WINDOW_HEIGHT][WINDOW_WIDTH];
 	// while (!done())
 	// {
 		while (line < WINDOW_WIDTH)
@@ -253,6 +253,8 @@ void	ray_casting(t_game *game)
 	// Starting texture coordinate
 	//일단 텍스쳐의 위치 첫 시작점을 윈도우 크기에 맞춰서 첫 시작점을 정해준다.
 	double texPos = (drawStart - WINDOW_HEIGHT / 2 + lineHeight / 2) * step;//window height 가 맞는지 살짝 애매.. h였는데
+	draw_longitude_line(game,line,0,drawStart,RGB_Blue);
+	draw_longitude_line(game,line,drawEnd,WINDOW_HEIGHT -1,RGB_Yellow);
 	for(int y = drawStart; y<drawEnd; y++)
 	{
 	// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
@@ -262,27 +264,28 @@ void	ray_casting(t_game *game)
 	//텍스쳐의 y좌표
 		int texY = (int)texPos & (XPM_HEIGHT - 1);
 		texPos += step;
-		int color = game->asset.no_img.data[XPM_HEIGHT * texY + texX]; // 1차원으로 하긴 했는데 원래 식이랑 맞는지 모르겠다.
-		// Uint32 color = texture[texNum][texHeight * texY + texX];
-		//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-		// if(side == 1) color = (color >> 1) & 8355711; // 아니 이건 뭐야 색상을 어둡게 해주는거래요..쩝 뭐라카노... 모르겠으면 나중에 바꾸기
-		buffer[line][y] = color;
+		int color;
+		if (side == 1)
+		{
+			if (rayDirY < 0)
+				color = game->asset.so_img.data[XPM_HEIGHT * texY + texX];
+			else
+				color =  game->asset.no_img.data[XPM_HEIGHT * texY + texX];
+		}
+		else
+		{
+			if (rayDirX < 0)
+				color = game->asset.we_img.data[XPM_HEIGHT * texY + texX];
+			else
+				color = game->asset.ea_img.data[XPM_HEIGHT * texY + texX];
+		}
+		game->img.data[(int) (y * WINDOW_WIDTH +(line))] = color;
 	}
 	//버퍼 그려주고
-	draw_buffer(buffer[0],game,line);
-	// 버퍼 비워준다.
-	for(int y = 0; y < WINDOW_HEIGHT; y++) for(int x = 0; x < WINDOW_WIDTH; x++) buffer[y][x] = 0;
+
 	//참고 : 여기서 step을 사용한 방식은 아핀 텍스처매핑 방법입니다.
 	//각 픽셀에 대해 각각 나눗셈을 하지않고 두 점 사이를 선형보간하는 방식입니다.
 	//이 방법은 일반적으로 원근법을 정확하게 표현해주지 못하지만 지금처럼 완벽하게 수직인 벽(그리고 완벽하게 수평인 천장과 바닥)인 경우에는 올바르게 나타납니다.
-
-	// if (line < 64)
-	// 	draw_image(game,line, drawStart,drawEnd,NORTH);
-	// else
-	// {
-	// 	draw_longitude_line(game, line, drawStart,drawEnd,color);
-	// }
 	line++;
 	}
-// }
 }

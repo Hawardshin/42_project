@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:22:21 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/20 14:17:16 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/21 13:08:30 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,19 @@ void	parse_image_rgb(void *mlx, t_game *data)
 	data->asset.so_img.img = mlx_xpm_file_to_image(mlx, \
 	"./file/eagle.xpm", &img_width, &img_height);
 
-	// data->asset.so_img.data=(int *)mlx_get_data_addr(data->asset.so_img.img, \
-	// &data->asset.so_img.bpp, &data->asset.so_img.size_l, &data->asset.so_img.endian);
-	// //
-	// data->asset.ea_img.img = mlx_xpm_file_to_image(mlx, \
-	// "./file/purplestone.xpm", &img_width, &img_height);
+	data->asset.so_img.data=(int *)mlx_get_data_addr(data->asset.so_img.img, \
+	&data->asset.so_img.bpp, &data->asset.so_img.size_l, &data->asset.so_img.endian);
+	//
+	data->asset.ea_img.img = mlx_xpm_file_to_image(mlx, \
+	"./file/purplestone.xpm", &img_width, &img_height);
 
-	// data->asset.ea_img.data=(int *)mlx_get_data_addr(data->asset.ea_img.img, \
-	// &data->asset.ea_img.bpp, &data->asset.ea_img.size_l, &data->asset.ea_img.endian);
-	// //
-	// data->asset.we_img.img = mlx_xpm_file_to_image(mlx, \
-	// "./file/redbrick.xpm", &img_width, &img_height);
+	data->asset.ea_img.data=(int *)mlx_get_data_addr(data->asset.ea_img.img, \
+	&data->asset.ea_img.bpp, &data->asset.ea_img.size_l, &data->asset.ea_img.endian);
+	//
+	data->asset.we_img.img = mlx_xpm_file_to_image(mlx, \
+	"./file/redbrick.xpm", &img_width, &img_height);
 
-	// data->asset.we_img.data=(int *)mlx_get_data_addr(data->asset.we_img.img, \
-	// &data->asset.we_img.bpp, &data->asset.we_img.size_l, &data->asset.we_img.endian);
+	data->asset.we_img.data=(int *)mlx_get_data_addr(data->asset.we_img.img, \
+	&data->asset.we_img.bpp, &data->asset.we_img.size_l, &data->asset.we_img.endian);
 
 }
