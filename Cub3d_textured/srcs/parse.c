@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:22:21 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/21 13:08:30 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:16:16 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,6 @@
 
 void	parse_image_rgb(void *mlx, t_game *data)
 {
-	// int		o_fd;
-	// char	*str;
-	// int		len;
-
-	// o_fd = open(map_file, O_RDONLY);
-	// if (o_fd == -1)
-	// 	error_handle("not exist cub\n");
-	// str = get_next_line(o_fd);
-	// if (!str)
-	// 	error_handle("cub format error\n");
-	// while (*str == )
-	// parse_one_line(data, str, *str);
 	int	img_width;
 	int	img_height;
 

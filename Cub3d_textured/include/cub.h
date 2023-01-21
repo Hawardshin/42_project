@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:20 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/20 14:25:35 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:02:32 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,70 @@ typedef enum e_map_type
 	EMPTY,
 	ERROR,
 }t_map_type;
+
+typedef enum e_wall_type
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	LINE,
+}t_wall_type;
+
+typedef struct s_draw_vec
+{
+	//(즉 우리가 쏘는 레이저가 카메라 평면에서 어디에 있는지)
+	// -1부터 1이다.
+	double cameraX;
+	//광선의 방향벡터
+	//광선의 방향은 ( 방향벡터 ) + ( 카메라평면 x 배수 )
+	double rayDirX;
+	double rayDirY;
+	//현재 지도에서 내가 위치한 위치벡터 game->x가 2.9라면 mapX = 2, -2.94라면 -2 즉 아랫자리 버림
+	int mapX;
+	int mapY;
+	//그려야 할 길이
+	int lineHeight;
+	//세로 줄 그리기 시작하는 좌표 점
+	int drawStart;
+	//그리기 끝내는점
+	int drawEnd;
+	//실제로 벽에 부딪힌 x좌표를 정확하게 표시
+	//다만 세로벽에 부딪혔다면, Y좌표이다.
+	double wallX;
+	//이제 우리는 벽에 텍스처표현을 해주기 위해 텍스처의 어떤 x좌표 texX 를 적용해야 하는지 알아냈습니다.
+	//코드의 마지막 부분에서 wallX 로, 텍스처의 x좌표를 나타내는 texX 를 계산해 주었습니다.
+	int texX;
+	//스크린 픽셀에 따라서 한번에 얼마만큼 이동할지를 결정하는 step변수
+	double step;
+	//일단 텍스쳐의 위치 첫 시작점을 윈도우 크기에 맞춰서 첫 시작점을 정해준다.
+	double texPos;
+}t_draw_vec;
+
+typedef struct s_dda_vec
+{
+	//현 위치에서 다음 x칸 이동할 때 대각선 길이
+	//현 위치에서 다음 y칸 	이동할 때 대각선 길이
+	double sideDistX;
+	double sideDistY;
+	//x한칸 이동할 때 대각선 길이
+	//y한칸 이동할 때 대각선 길이
+	double deltaDistX;
+	double deltaDistY;
+	//광선의 벽까지의 길이
+	double perpWallDist;
+
+	// x로 갈지 Y로 갈지 정한다.
+	// 즉 얼마만큼 한번에 이동할지 x한걸음 y한걸음 정도로 이해
+	// -1이나 1로 정한다.
+	int stepX;
+	int stepY;
+
+	int hit; //벽에 부딛혔는지 확인한다.//루프의 종료조건
+	int side; // 만약 세로줄에 부딪혔다면 side는 0 가로줄에 부딪혔다면 side = 1 입니다.
+
+}t_dda_vec;
+
 
 t_map_type check_type(char a);
 
