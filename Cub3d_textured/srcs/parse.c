@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:22:21 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/21 15:16:16 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/22 14:55:38 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,15 @@ void	parse_image_rgb(void *mlx, t_game *data)
 
 	data->asset.we_img.data=(int *)mlx_get_data_addr(data->asset.we_img.img, \
 	&data->asset.we_img.bpp, &data->asset.we_img.size_l, &data->asset.we_img.endian);
+}
 
+// void	parse_image(char *argv, t_game *data)
+// {
+
+// }
+
+void	parse_data(char *argv, t_game *data)
+{
+	parse_image_rgb(argv, data);
+	map_parse(argv, data);
 }
