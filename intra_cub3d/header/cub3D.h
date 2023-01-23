@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 14:10:05 by tson              #+#    #+#             */
-/*   Updated: 2023/01/22 22:07:25 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/23 14:12:52 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef int		t_color;
 # define RGB_COLOR_ERR_MES "Rgb color error\n"
 # define TEXTURE_ERR_MES "Texture error\n"
 # define INVALID_PROG_ARG_MES "Program argument is invalid\n"
+# define SAME_ID_ERR_MES "Duplicated identifier exist\n"
 # define OPEN_FAIL -1
 # define SET_TEXTURE_SUCCESS 1
 # define SET_TEXTURE_FAIL 0
@@ -133,9 +134,7 @@ typedef struct s_game
 	void			*mlx;
 	void			*win;
 	char			**map;
-	// 이 두개로 최대 크기 정합니다.
 	int				max_high;
-	//이게 정확한 크기
 	int				map_high;
 	int				*map_wid;
 	char			*(identifiers[6]);
@@ -180,7 +179,6 @@ typedef struct s_move_arr
 	int	dy[4];
 }t_move_arr;
 
-
 t_bool		is_valid_file_name(char *file_name);
 void		check_arg(int argc, char *argv[], t_game *game);
 int			on_keyboard_press(int keycode, t_game *game);
@@ -197,7 +195,8 @@ double		calculate_perp_dist(t_game *game, t_hit_point hit_point);
 void		draw_one_line(t_game *game, t_hit_point hit_point, \
 									int col, int length);
 void		render(t_game *game);
-void		draw_texture(t_game *game, t_rendering ren, int col, int length);
+void		draw_texture(t_game *game, t_rendering ren, \
+			int col, t_hit_point hit);
 void		draw_ceiling(t_game *game, t_rendering ren, int col);
 void		draw_floor(t_game *game, t_rendering ren, int col);
 void		set_start_end(t_rendering *ren, int length);
@@ -230,5 +229,5 @@ void		init_mapping(t_move_arr *arr, t_game *g);
 void		make_max_map(t_game *game);
 char		*pass_nl_first_init(t_game *game, int fd);
 void		init_player(t_game *g, int i, int j);
-
+t_bool		check_all_white_space(char *str);
 #endif

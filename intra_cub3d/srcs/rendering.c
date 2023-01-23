@@ -37,19 +37,21 @@ void	draw_one_line(t_game *game, t_hit_point hit_point, int col, int length)
 	set_tex_idx(&ren, hit_point);
 	set_tex_x(game, &ren, hit_point);
 	draw_ceiling(game, ren, col);
-	draw_texture(game, ren, col, length);
+	draw_texture(game, ren, col, hit_point);
 	draw_floor(game, ren, col);
 }
 
-void	draw_texture(t_game *game, t_rendering ren, int col, int length)
+void	draw_texture(t_game *game, t_rendering ren, int col, t_hit_point hit)
 {
 	int		i;
 	int		tex_y;
 	int		tex_h;
 	int		color;
 
-	ren.step = 1.0 * game->textures[ren.tex_idx].height / length;
-	ren.tex_pos = (ren.draw_start - SCREEN_HEIGHT / 2 + length / 2) * ren.step;
+	ren.step = 1.0 * game->textures[ren.tex_idx].height * \
+	hit.perp_dist / SCREEN_HEIGHT;
+	ren.tex_pos = (ren.draw_start - SCREEN_HEIGHT / 2 + \
+	SCREEN_HEIGHT / (2 * hit.perp_dist)) * ren.step;
 	tex_h = game->textures[ren.tex_idx].height;
 	i = ren.draw_start;
 	while (i < ren.draw_end)

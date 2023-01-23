@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 18:03:44 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/22 21:11:35 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/23 13:45:48 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*pass_nl_first_init(t_game *game, int fd)
 	str = get_next_line(fd);
 	if (str == NULL)
 		error_handle("map format error\n");
-	while (str && str[0] == '\n')
+	while (str && check_all_white_space(str) == TRUE)
 	{
 		free(str);
 		str = get_next_line(fd);

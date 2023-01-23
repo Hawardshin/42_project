@@ -32,7 +32,8 @@ t_bool	is_valid_file_name(char *file_name)
 	int	idx;
 
 	idx = ft_strchr(file_name, '.');
-	if (idx == -1 || ft_strncmp(file_name + idx, FILE_EXTENSION, ft_strlen(file_name + idx)) != SAME_STR)
+	if (idx == -1 || ft_strncmp(file_name + idx, FILE_EXTENSION,
+			ft_strlen(file_name + idx)) != SAME_STR)
 		return (FALSE);
 	return (TRUE);
 }

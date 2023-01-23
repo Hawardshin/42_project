@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 18:02:13 by joushin           #+#    #+#             */
-/*   Updated: 2023/01/22 22:07:09 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/23 14:02:55 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	is_around_wall(t_game *g, int y, int x, t_move_arr ar)
 	while (++i < 4)
 	{
 		if (x == 0 || y == 0 || x == g->map_wid[y] -1 || y == g->map_high -1)
+			error_handle("INVALID MAP FORMAT\n");
+		if (y == 0 || x >= g->map_wid[y - 1])
 			error_handle("INVALID MAP FORMAT\n");
 		if (x + ar.dx[i] < 0 || y + ar.dy[i] < 0 || \
 		y + ar.dy[i] >= g->map_high || x + ar.dx[i] >= g->map_wid[y + ar.dy[i]])

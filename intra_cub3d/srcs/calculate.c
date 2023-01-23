@@ -31,9 +31,9 @@ t_bool	is_hit_wall(t_game *game, t_hit_point *hit_point, t_dda_values *values)
 	if (values->side_x < values->side_y)
 	{
 		if (hit_point->ray.x < 0)
-			values->map_x -= 1;
-		else
 			values->map_x += 1;
+		else
+			values->map_x -= 1;
 		values->side_x += values->delta_x;
 		hit_point->is_hit_ns = FALSE;
 		hit_point->where = values->map_x;
@@ -78,9 +78,9 @@ double	calculate_perp_dist(t_game *game, t_hit_point hit_point)
 	else
 	{
 		if (hit_point.ray.x < 0)
-			ret = (hit_point.where - game->p_info.pos.x + 1) / hit_point.ray.x;
+			ret = (game->p_info.pos.x - hit_point.where) / hit_point.ray.x;
 		else
-			ret = (hit_point.where - game->p_info.pos.x) / hit_point.ray.x;
+			ret = (game->p_info.pos.x - hit_point.where - 1) / hit_point.ray.x;
 	}
 	return (ret);
 }
@@ -92,9 +92,9 @@ void	init_dda_values(t_game *game, t_vector ray, t_dda_values *vals)
 	vals->delta_x = fabs(1 / ray.x);
 	vals->delta_y = fabs(1 / ray.y);
 	if (ray.x < 0)
-		vals->side_x = (game->p_info.pos.x - vals->map_x) * vals->delta_x;
-	else
 		vals->side_x = (vals->map_x + 1.0 - game->p_info.pos.x) * vals->delta_x;
+	else
+		vals->side_x = (game->p_info.pos.x - vals->map_x) * vals->delta_x;
 	if (ray.y < 0)
 		vals->side_y = (game->p_info.pos.y - vals->map_y) * vals->delta_y;
 	else

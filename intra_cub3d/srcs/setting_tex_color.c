@@ -20,7 +20,7 @@ void	set_textures_and_colors(t_game *game, int fd)
 	str = get_next_line_no_nl(fd);
 	while (str != NULL)
 	{
-		if (ft_strncmp(str, "", ft_strlen(str) == SAME_STR))
+		if (ft_strncmp(str, "", ft_strlen(str)) == SAME_STR)
 		{
 			free(str);
 			str = get_next_line_no_nl(fd);
@@ -56,8 +56,10 @@ void	set_texture(t_game *game, int idx, char *xpm_name)
 	int	fd;
 
 	fd = open(xpm_name, O_RDONLY);
-	if (game->textures[idx].img != NULL || fd == OPEN_FAIL)
+	if (fd == OPEN_FAIL)
 		error_handle(XPM_FILE_NAME_ERR_MES);
+	if (game->textures[idx].img != NULL)
+		error_handle(SAME_ID_ERR_MES);
 	game->textures[idx].img = mlx_xpm_file_to_image(game->mlx, xpm_name,
 			&game->textures[idx].width, &game->textures[idx].height);
 	game->textures[idx].data = (int *)mlx_get_data_addr(game->textures[idx].img,

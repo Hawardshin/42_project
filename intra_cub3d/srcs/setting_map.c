@@ -6,7 +6,7 @@
 /*   By: joushin <joushin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 15:03:50 by tson              #+#    #+#             */
-/*   Updated: 2023/01/22 22:06:59 by joushin          ###   ########.fr       */
+/*   Updated: 2023/01/23 14:20:09 by joushin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ void	init_map(t_game *g)
 		error_handle("NO PLAYER\n");
 }
 
+t_bool	check_all_white_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\n'))
+	{
+		i++;
+	}
+	if (str[i] == '\0')
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
 void	set_map(t_game *game, int fd)
 {
 	char	*str;
@@ -71,6 +86,8 @@ void	set_map(t_game *game, int fd)
 		str = get_next_line(fd);
 		if (str)
 		{
+			if (check_all_white_space(str))
+				error_handle("INVAILD MAP FORMAT\n");
 			game->map[game->map_high] = ft_strdup_no_nl(str);
 			game->map_wid[game->map_high] = \
 			ft_strlen(game->map[game->map_high]);

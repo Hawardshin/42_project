@@ -39,13 +39,13 @@ void	set_tex_x(t_game *game, t_rendering *ren, t_hit_point hit_point)
 	double	wall_x;
 
 	if (hit_point.is_hit_ns)
-		wall_x = game->p_info.pos.x + hit_point.perp_dist * hit_point.ray.x;
+		wall_x = game->p_info.pos.x - hit_point.perp_dist * hit_point.ray.x;
 	else
 		wall_x = game->p_info.pos.y + hit_point.perp_dist * hit_point.ray.y;
 	wall_x -= floor(wall_x);
 	ren->tex_x = (int)(wall_x * (double)game->textures[ren->tex_idx].width);
 	if (hit_point.is_hit_ns == FALSE && hit_point.ray.x > 0)
 		ren->tex_x = game->textures[ren->tex_idx].width - ren->tex_x - 1;
-	if (hit_point.is_hit_ns == TRUE && hit_point.ray.y < 0)
+	if (hit_point.is_hit_ns == TRUE && hit_point.ray.y > 0)
 		ren->tex_x = game->textures[ren->tex_idx].width - ren->tex_x - 1;
 }

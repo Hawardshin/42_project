@@ -31,7 +31,6 @@ int	main(int argc, char *argv[])
 
 	init_game(&game);
 	check_arg(argc, argv, &game);
-	printf("floor : %d, ceiling : %d\n", game.colors[FLOOR], game.colors[CEILING]);
 	mlx_hook(game.win, KEY_PRESS, 0, on_keyboard_press, &game);
 	mlx_hook(game.win, KEY_EXIT, 0, on_click_x_btn, NULL);
 	mlx_loop_hook(game.mlx, loop_function, &game);

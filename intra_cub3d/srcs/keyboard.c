@@ -36,10 +36,10 @@ void	move_vertical(t_game *game, t_axis axis)
 	int	x;
 	int	y;
 
-	x = (int)(game->p_info.pos.x + game->p_info.dir.x * MOVE_SPEED * axis);
+	x = (int)(game->p_info.pos.x - game->p_info.dir.x * MOVE_SPEED * axis);
 	y = (int)(game->p_info.pos.y + game->p_info.dir.y * MOVE_SPEED * axis);
 	if (game->map[(int)(game->p_info.pos.y)][x] == '0')
-		game->p_info.pos.x += game->p_info.dir.x * MOVE_SPEED * axis;
+		game->p_info.pos.x -= game->p_info.dir.x * MOVE_SPEED * axis;
 	if (game->map[y][(int)(game->p_info.pos.x)] == '0')
 		game->p_info.pos.y += game->p_info.dir.y * MOVE_SPEED * axis;
 }
@@ -54,10 +54,10 @@ void	move_horizontal(t_game *game, t_axis axis)
 		- game->p_info.dir.y * sin(M_PI / 2);
 	dir.y = game->p_info.dir.x * sin(M_PI / 2)
 		+ game->p_info.dir.y * cos(M_PI / 2);
-	x = (int)(game->p_info.pos.x + dir.x * MOVE_SPEED * axis);
+	x = (int)(game->p_info.pos.x - dir.x * MOVE_SPEED * axis);
 	y = (int)(game->p_info.pos.y + dir.y * MOVE_SPEED * axis);
 	if (game->map[(int)(game->p_info.pos.y)][x] == '0')
-		game->p_info.pos.x += dir.x * MOVE_SPEED * axis;
+		game->p_info.pos.x -= dir.x * MOVE_SPEED * axis;
 	if (game->map[y][(int)(game->p_info.pos.x)] == '0')
 		game->p_info.pos.y += dir.y * MOVE_SPEED * axis;
 }

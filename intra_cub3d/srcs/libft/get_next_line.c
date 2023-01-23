@@ -14,7 +14,7 @@
 
 void	error_handle(char *s)
 {
-	ft_eprintf("error\n");
+	ft_eprintf("Error\n");
 	ft_eprintf("%s", s);
 	exit(1);
 }
